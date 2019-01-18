@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Renkar</string>
+	<string name="internet_connectivity">Oops ! No Internet :-(</string>
+	<string name="some_thing_went_wrong">Ummm! Something went wrong :-(</string>
+</resources>
