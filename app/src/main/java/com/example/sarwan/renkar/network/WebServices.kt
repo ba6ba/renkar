@@ -4,18 +4,18 @@ package com.example.sarwan.renkar.network
 interface WebServices {
 
     /*@POST(NetworkConstants.API_VERSION+ApiEndPoints.SIGN_IN)
-    fun login(@Body body:ListerProfile ): Call<SignInResponse>  // Done
+    fun book(@Body body: BookingBody ): Call<BookingResponse>  // Done
 
     @PUT(NetworkConstants.API_VERSION+ApiEndPoints.SET_FITBIT)
-    fun sendFitBitData(@Body role : FitBit): Call<FitbitResponse> // Done
+    fun retrieveLocations(@Body role : FitBit): Call<Locations> // Done
 
     @GET(NetworkConstants.API_VERSION+ApiEndPoints.USER)
-    fun fetchProfile(@Path("id") id: Int): Call<UserProfileResponse>   // Done
+    fun fetchCars(@Path("id") id: Int): Call<CarsResponse>   // Done
 
     @DELETE(NetworkConstants.API_VERSION + ApiEndPoints.MEETING_CRUD)
-    fun cancelMeeting(@Path("id") id: Int) : Call<GeneralResponse>
+    fun cancelBooking(@Path("id") id: Int) : Call<GeneralResponse>
 
     @PATCH(NetworkConstants.API_VERSION + ApiEndPoints.MEETING_CRUD)
-    fun updateMeeting(@Body meeting: MeetingBody, @Path("id") id: Int) : Call<GeneralResponse> // Done
+    fun updateCarDetails(@Body car: CarBody, @Path("id") id: Int) : Call<GeneralResponse> // Done
     */
 }
