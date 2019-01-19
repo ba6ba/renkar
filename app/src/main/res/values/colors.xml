@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2787ca</color>
+    <color name="colorPrimary">#9c938e</color>
     <color name="colorPrimaryDark">#4d4b4a</color>
-    <color name="colorAccent">#C43936</color>
+    <color name="colorAccent">#2787ca</color>
     <color name="black">#000000</color>
     <color name="grey">#5e5e5e</color>
     <color name="blue">#0055a9</color>
     <color name="maroon">#5e0b0b</color>
+    <color name="white">#ffffff</color>
     
     <array name="progress_bar_colors">
         <item>@color/black</item>
