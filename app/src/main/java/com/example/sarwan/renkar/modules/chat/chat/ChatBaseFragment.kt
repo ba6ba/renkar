@@ -1,15 +1,15 @@
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import com.mobitribe.qulabro.extras.AlertDialogBuilder
 import com.mobitribe.qulabro.extras.DialogListener
 import com.mobitribe.qulabro.models.chat.Message
-import com.mobitribe.qulabro.modules.base.ParentActivity
+import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.models.chat.ChatRooms
 import com.mobitribe.qulabro.utils.ModelMappingUtility
 import firebase.VFirestoreQueryManager
@@ -19,11 +19,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-open class ChatBaseFragment : Fragment(), DialogListener, EventListener<QuerySnapshot> {
+open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, EventListener<QuerySnapshot> {
 
     protected var adapter: ListMessageAdapter? = null
     protected var chatModel: ChatRooms? = null
-    protected var linearLayoutManager: LinearLayoutManager? = null
+    protected var linearLayoutManager: androidx.recyclerview.widget.LinearLayoutManager? = null
     protected var roomId = ""
     protected var TAG = "ChatFragment"
     protected var group = false
@@ -61,7 +61,7 @@ open class ChatBaseFragment : Fragment(), DialogListener, EventListener<QuerySna
     private fun initializeView() {
 
         // Initialize recycler view
-        linearLayoutManager = LinearLayoutManager(pActivity)
+        linearLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(pActivity)
         recyclerChat?.layoutManager = linearLayoutManager!!
         adapter = ListMessageAdapter(pActivity, java.util.ArrayList(), pActivity.profile!!, chatModel!!)
         recyclerChat?.adapter = adapter

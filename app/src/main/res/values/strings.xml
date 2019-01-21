@@ -2,4 +2,14 @@
     <string name="app_name">Renkar</string>
 	<string name="internet_connectivity">Oops ! No Internet :-(</string>
 	<string name="some_thing_went_wrong">Ummm! Something went wrong :-(</string>
+	<string name="lister">Lister</string>
+	<string name="renter">Renter</string>
+	<string name="no_account_text">No Account? Signup here.</string>
+	<string name="sign_in_to_continue">Sign in to continue !</string>
+	<string name="welcome">Welcome</string>
+	<string name="username">Username</string>
+	<string name="password">Password</string>
+	<string name="forgot_password">Forgot Password?</string>
+	<string name="login">login</string>
+	<string name="list_a_car">Signup as a lister</string>
 </resources>

@@ -8,7 +8,7 @@ import com.mobitribe.qulabro.models.FCMMessage
 import com.mobitribe.qulabro.models.chat.ChatRooms
 import com.mobitribe.qulabro.models.chat.Message
 import com.mobitribe.qulabro.models.response.GeneralResponse
-import com.mobitribe.qulabro.modules.base.ParentActivity.Companion.currentChatUserId
+import com.example.sarwan.renkar.base.ParentActivity.Companion.currentChatUserId
 import com.mobitribe.qulabro.network.RestClient
 import firebase.VFirestoreQueryManager
 import kotlinx.android.synthetic.main.chat_fragment.*

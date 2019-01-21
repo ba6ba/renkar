@@ -1,28 +1,22 @@
-package com.mobitribe.qulabro.modules.base
+package com.example.sarwan.renkar.base
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import java.io.IOException
 import android.widget.Toast
 import com.example.sarwan.renkar.R
-import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.extras.ProgressLoader
 import com.example.sarwan.renkar.extras.SharedPreferences
-import com.example.sarwan.renkar.model.ListerProfile
-import com.example.sarwan.renkar.model.RenterProfile
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import okhttp3.ResponseBody
-import java.util.*
+import com.example.sarwan.renkar.model.User
+import com.example.sarwan.renkar.modules.authentication.LoginActivity
 
 abstract class ParentActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -34,8 +28,15 @@ abstract class ParentActivity : AppCompatActivity() {
 
 
     //was protected
-    var listerProfile: ListerProfile? = null
-    var renterProfile: RenterProfile? = null
+    var user: User? = null
+
+    fun userType(): Any? {
+        user?.let {
+            return (it.isLister?.let { b: Boolean -> if (b) user?.listerProfile  else user?.renterProfile})
+        }?:kotlin.run {
+            return User()
+        }
+    }
 
     /**
      * @usage onCreate method that will be called by all child class instances to initialize some useful objects
@@ -46,20 +47,20 @@ abstract class ParentActivity : AppCompatActivity() {
         sharedPreferences = SharedPreferences(this)
         animationNeeded = true
         forwardTransition = true
-
-        intent?.getBooleanExtra(ApplicationConstants.USER_TYPE, true)?.let {
-            if (it) listerProfile = sharedPreferences.listerProfile ?:kotlin.run { ListerProfile() }
-            else renterProfile = sharedPreferences.renterProfile ?:kotlin.run { RenterProfile() }
+        user = sharedPreferences.userProfile
+        user?.let {
+            user = User()
         }
+        /*intent?.getBooleanExtra(ApplicationConstants.LISTER, true)?.let {
+            if (it) user?.listerProfile = sharedPreferences.userProfile?.listerProfile ?:kotlin.run { ListerProfile() }
+            else user?.renterProfile = sharedPreferences.userProfile?.renterProfile ?:kotlin.run { RenterProfile() }
+        }*/
     }
 
-    private fun saveListerProfileInSharePreference(){
-        sharedPreferences.saveListerProfile(listerProfile)
+    fun saveUserInSharedPreferences(){
+        sharedPreferences.saveUserProfile(user)
     }
 
-    private fun saveRenterProfileInSharePreference(){
-        sharedPreferences.saveRenterProfile(renterProfile)
-    }
     /**
      * @purpose  Setter for animation needed parameter
      * @param value
@@ -262,26 +263,37 @@ abstract class ParentActivity : AppCompatActivity() {
 
     enum class CallStatus { OnCall, NoCall }
 
-    fun logOut(isLister : Boolean){
-        val temp_email : String
-        val temp_pswrd : String
-        if (isLister) {
-            temp_email = listerProfile?.email!!
-            temp_pswrd =  listerProfile?.password!!
-            listerProfile = ListerProfile()
-            listerProfile?.email = temp_email
-            listerProfile?.password = temp_pswrd
-            saveListerProfileInSharePreference()
+    private fun appropriateEmail() : String{
+        return if (user?.isLister!!){
+            user?.listerProfile?.email!!
         }
         else{
-            temp_email = renterProfile?.email!!
-            temp_pswrd =  renterProfile?.password!!
-            renterProfile = RenterProfile()
-            renterProfile?.email = temp_email
-            renterProfile?.password = temp_pswrd
-            saveRenterProfileInSharePreference()
+            user?.renterProfile?.email!!
         }
-        //openMainActivity(LoginActivity::class.java)
+    }
+
+    private fun appropriateEmail(email : String){
+        if (user?.isLister!!){
+            user?.listerProfile?.email = email
+        }
+        else{
+            user?.renterProfile?.email = email
+        }
+    }
+
+    fun logOut(){
+        val temp_email : String
+        val temp_isLister : Boolean
+        val temp_isFirst : Boolean
+        temp_email = appropriateEmail()
+        temp_isLister = user?.isLister!!
+        temp_isFirst = user?.isFirst!!
+        user = User()
+        user?.isLister = temp_isLister
+        user?.isFirst = temp_isFirst
+        appropriateEmail(temp_email)
+        saveUserInSharedPreferences()
+        openMainActivity(LoginActivity::class.java)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -3,14 +3,14 @@ package com.example.sarwan.renkar.extras
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import android.util.Log
 import android.view.Window
 import com.example.sarwan.renkar.R
 
 
-class ProgressLoader : DialogFragment() {
+class ProgressLoader : androidx.fragment.app.DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -30,7 +30,7 @@ class ProgressLoader : DialogFragment() {
 
     }
 
-    override fun show(manager: FragmentManager, tag: String) {
+    override fun show(manager: androidx.fragment.app.FragmentManager, tag: String) {
 
         try {
             if (this.isAdded) {

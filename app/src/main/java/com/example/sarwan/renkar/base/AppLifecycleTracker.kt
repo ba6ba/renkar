@@ -3,7 +3,7 @@ package com.example.sarwan.renkar.modules.base
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.mobitribe.qulabro.modules.base.ParentActivity
+import com.example.sarwan.renkar.base.ParentActivity
 
 class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityPaused(activity: Activity?) {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@drawable/welcome_screen_bg"
+>
+	
+	
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+	              android:orientation="vertical" android:layout_alignParentBottom="true"
+	              android:padding="@dimen/normal_padding" android:layout_margin="@dimen/normal_margin"
+	>
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+		          android:background="@drawable/white_round_corner_bg" android:text="@string/lister"
+		          android:textAllCaps="true" android:textAlignment="center"
+		          android:paddingStart="@dimen/medium_padding" android:paddingEnd="@dimen/medium_padding"
+		          android:paddingTop="@dimen/small_padding" android:paddingBottom="@dimen/small_padding"
+		          android:fontFamily="@font/proximanovascondensedbold"
+		          android:textSize="@dimen/v_v_large_text_size"
+		          android:layout_margin="@dimen/normal_margin"
+		          android:elevation="@dimen/max_elevation"
+		          android:textColor="@color/colorPrimaryDark"
+		          android:id="@+id/lister"
+		          />
+		
+		
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+		          android:background="@drawable/white_round_corner_bg" android:text="@string/renter"
+		          android:textAllCaps="true" android:textAlignment="center"
+		          android:paddingStart="@dimen/medium_padding" android:paddingEnd="@dimen/medium_padding"
+		          android:paddingTop="@dimen/small_padding" android:paddingBottom="@dimen/small_padding"
+		          android:fontFamily="@font/proximanovascondensedbold"
+		          android:textSize="@dimen/v_v_large_text_size"
+		          android:layout_margin="@dimen/normal_margin"
+		          android:elevation="@dimen/max_elevation"
+		          android:textColor="@color/colorPrimaryDark"
+		          android:id="@+id/renter"
+		/>
+	</LinearLayout>
+
+</RelativeLayout>

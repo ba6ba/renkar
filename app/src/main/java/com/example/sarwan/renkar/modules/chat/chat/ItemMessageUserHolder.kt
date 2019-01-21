@@ -1,8 +1,8 @@
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -20,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class ItemMessageUserHolder(itemView: View, private val profile: UserProfile,
                             private val activity: Context, private val listMessageAdapter: ListMessageAdapter,
-                            private val chatRoom: ChatRooms) : RecyclerView.ViewHolder(itemView) {
+                            private val chatRoom: ChatRooms) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     var messageText: TextView
     var username: TextView? = null
     var messageTime: TextView

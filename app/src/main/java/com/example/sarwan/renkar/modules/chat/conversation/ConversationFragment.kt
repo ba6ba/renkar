@@ -1,9 +1,9 @@
 package com.mobitribe.qulabro.modules.chat.conversation
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.extras.ApplicationConstants
 import com.mobitribe.qulabro.extras.BottomOffsetDecoration
 import com.mobitribe.qulabro.models.chat.ChatRooms
-import com.mobitribe.qulabro.modules.base.ParentActivity
+import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.modules.chat.ChatPushDialog
 import com.mobitribe.qulabro.modules.main.MainActivity
 import com.mobitribe.qulabro.utils.ModelMappingUtility
@@ -27,10 +27,10 @@ import java.lang.Exception
 import kotlin.collections.ArrayList
 
 
-class ConversationFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class ConversationFragment : androidx.fragment.app.Fragment(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
 
     var TAG = "Conversation"
-    private var layoutManager : LinearLayoutManager? = null
+    private var layoutManager : androidx.recyclerview.widget.LinearLayoutManager? = null
     private var contactsAdapter: ConversationAdapter? = null
     private var pActivity : MainActivity? = null
 
@@ -96,7 +96,11 @@ class ConversationFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initializeLayoutView() {
-        layoutManager  = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(
+            activity,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         contactsAdapter = ConversationAdapter(pActivity!!, ArrayList())
         contactsRecyclerView.layoutManager = layoutManager
         contactsRecyclerView.adapter = contactsAdapter

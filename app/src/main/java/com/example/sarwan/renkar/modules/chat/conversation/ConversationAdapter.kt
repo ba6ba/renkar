@@ -1,7 +1,7 @@
 package com.mobitribe.qulabro.modules.chat.conversation
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,7 @@ import android.widget.TextView
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.extras.ApplicationConstants
 import com.mobitribe.qulabro.models.chat.ChatRooms
-import com.mobitribe.qulabro.modules.base.ParentActivity
+import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.modules.chat.chat.ChatActivity
 import kotlinx.android.synthetic.main.conversation_list_item.view.*
 import org.ocpsoft.prettytime.PrettyTime
@@ -21,7 +21,7 @@ import java.util.*
 class ConversationAdapter(private val activity: ParentActivity,
                           private var contactsList: ArrayList<ChatRooms>,
                           private var filteredContactList: ArrayList<ChatRooms> = contactsList)
-    : RecyclerView.Adapter<ConversationAdapter.ViewHolder>(), Filterable {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<ConversationAdapter.ViewHolder>(), Filterable {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -83,7 +83,7 @@ class ConversationAdapter(private val activity: ParentActivity,
         }
     }
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         fun loadData(chatRoom: ChatRooms, position: Int){
 

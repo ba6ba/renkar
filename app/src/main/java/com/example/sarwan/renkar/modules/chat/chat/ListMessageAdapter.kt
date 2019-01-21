@@ -1,7 +1,7 @@
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import com.mobitribe.qulabro.models.chat.Message
 import java.util.ArrayList
 
 class ListMessageAdapter(private val context: Context, private val messages: ArrayList<Message>,
-                         private val profile: UserProfile, private val chatRooms: ChatRooms) : RecyclerView.Adapter<ItemMessageUserHolder>() {
+                         private val profile: UserProfile, private val chatRooms: ChatRooms) : androidx.recyclerview.widget.RecyclerView.Adapter<ItemMessageUserHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMessageUserHolder {
         val view: View

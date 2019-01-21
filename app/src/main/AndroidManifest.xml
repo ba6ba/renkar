@@ -19,8 +19,33 @@
             </intent-filter>
         </activity>
     
+    
         <activity
-                android:name=".modules.authentication.Login"
+                android:name=".modules.splash.SplashActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"
+        />
+        
+        <activity
+                android:name=".modules.authentication.LoginActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"
+        />
+    
+        <activity
+                android:name=".modules.welcome.WelcomeActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"
+        />
+        
+        <activity
+                android:name=".modules.authentication.SignupActivity"
                 android:theme="@style/renkarTheme"
                 android:configChanges="orientation|screenSize"
                 android:windowSoftInputMode="adjustPan"

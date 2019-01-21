@@ -10,6 +10,9 @@
 	<dimen name="a_medium_margin">30dp</dimen>
 	<dimen name="large_margin">35dp</dimen>
 	<dimen name="a_large_margin">40dp</dimen>
+	<dimen name="v_large_margin">50dp</dimen>
+	<dimen name="v_v_large_margin">60dp</dimen>
+	<dimen name="v_v_v_large_margin">80dp</dimen>
 	
 	<!--padding-->
 	<dimen name="small_padding">5dp</dimen>
@@ -20,6 +23,9 @@
 	<dimen name="a_medium_padding">30dp</dimen>
 	<dimen name="large_padding">35dp</dimen>
 	<dimen name="a_large_padding">40dp</dimen>
+	<dimen name="v_large_padding">50dp</dimen>
+	<dimen name="v_v_large_padding">60dp</dimen>
+	<dimen name="v_v_v_large_padding">80dp</dimen>
 	
 	<!--text sizes-->
 	<dimen name="small_text_size">12sp</dimen>
@@ -33,5 +39,6 @@
 	
 	<!---->
 	<dimen name="custom_shape_size">25dp</dimen>
-	
+	<dimen name="max_elevation">15dp</dimen>
+
 </resources>

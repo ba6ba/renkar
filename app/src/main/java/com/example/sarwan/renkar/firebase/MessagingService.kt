@@ -1,18 +1,9 @@
 package com.example.sarwan.renkar.firebase
 
-import android.app.*
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.os.Build
-import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.example.sarwan.renkar.extras.SharedPreferences
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MessagingService() : FirebaseMessagingService(){
@@ -37,7 +28,7 @@ class MessagingService() : FirebaseMessagingService(){
         val sharedPreference = SharedPreferences(applicationContext)
         sharedPreference.saveFirebaseToken(token!!)
 
-        var userProfile = sharedPreference.listerProfile;
+        var userProfile = sharedPreference.userProfile;
         /*if (userProfile?.token != null)
         {
             sendTokenToServer(token, userProfile.token)
