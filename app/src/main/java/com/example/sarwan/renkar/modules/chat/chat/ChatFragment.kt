@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.os.Bundle
@@ -10,7 +11,7 @@ import com.mobitribe.qulabro.models.chat.Message
 import com.mobitribe.qulabro.models.response.GeneralResponse
 import com.example.sarwan.renkar.base.ParentActivity.Companion.currentChatUserId
 import com.mobitribe.qulabro.network.RestClient
-import firebase.VFirestoreQueryManager
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import kotlinx.android.synthetic.main.chat_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,14 +65,14 @@ class ChatFragment : ChatBaseFragment(), View.OnClickListener {
 
         if (adapter?.itemCount == 0) setChatRoomFields(message)
         else {
-            VFirestoreQueryManager.setLastMessageOfConversation(roomId, message.message!! ,
+            FirestoreQueryCenter.setLastMessageOfConversation(roomId, message.message!! ,
                     pActivity.profile?.userName!!, pActivity.profile?.id!!, chatModel?.title!!, (chatModel?.chat_members?.map { it.id } as ArrayList<Int>))
         }
 
         adapter?.addItem(message)
         adapter?.updateLastMessageStatus("sending...", null)
         recyclerChat.scrollToPosition(adapter!!.itemCount - 1)
-        VFirestoreQueryManager.getMessageQuery(roomId).add(message).addOnCompleteListener {
+        FirestoreQueryCenter.getMessageQuery(roomId).add(message).addOnCompleteListener {
             if (it.isSuccessful){
                 adapter?.updateLastMessageStatus("sent",null)
             }
@@ -106,12 +107,14 @@ class ChatFragment : ChatBaseFragment(), View.OnClickListener {
         val VIEW_TYPE_USER_MESSAGE = 0
         val VIEW_TYPE_FRIEND_MESSAGE = 1
 
-        /**
+        */
+/**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
          * @return A new instance of fragment Chat Fragment.
-         */
+         *//*
+
         @JvmStatic
         fun newInstance(chatRoom : ChatRooms?) = ChatFragment().apply {
             arguments = Bundle().apply {
@@ -135,3 +138,4 @@ class ChatFragment : ChatBaseFragment(), View.OnClickListener {
     }
 }
 
+*/

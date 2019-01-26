@@ -26,17 +26,7 @@ abstract class ParentActivity : AppCompatActivity() {
     private val view: View? = null
     private val TAG = "ParentActivity"
 
-
-    //was protected
     var user: User? = null
-
-    fun userType(): Any? {
-        user?.let {
-            return (it.isLister?.let { b: Boolean -> if (b) user?.listerProfile  else user?.renterProfile})
-        }?:kotlin.run {
-            return User()
-        }
-    }
 
     /**
      * @usage onCreate method that will be called by all child class instances to initialize some useful objects
@@ -48,13 +38,8 @@ abstract class ParentActivity : AppCompatActivity() {
         animationNeeded = true
         forwardTransition = true
         user = sharedPreferences.userProfile
-        user?.let {
+        if(user == null)
             user = User()
-        }
-        /*intent?.getBooleanExtra(ApplicationConstants.LISTER, true)?.let {
-            if (it) user?.listerProfile = sharedPreferences.userProfile?.listerProfile ?:kotlin.run { ListerProfile() }
-            else user?.renterProfile = sharedPreferences.userProfile?.renterProfile ?:kotlin.run { RenterProfile() }
-        }*/
     }
 
     fun saveUserInSharedPreferences(){
@@ -263,21 +248,21 @@ abstract class ParentActivity : AppCompatActivity() {
 
     enum class CallStatus { OnCall, NoCall }
 
-    private fun appropriateEmail() : String{
+   /* private fun appropriateEmail() : String{
         return if (user?.isLister!!){
-            user?.listerProfile?.email!!
+            user?.lister?.email!!
         }
         else{
-            user?.renterProfile?.email!!
+            user?.renter?.email!!
         }
     }
 
     private fun appropriateEmail(email : String){
         if (user?.isLister!!){
-            user?.listerProfile?.email = email
+            user?.lister?.email = email
         }
         else{
-            user?.renterProfile?.email = email
+            user?.renter?.email = email
         }
     }
 
@@ -295,9 +280,10 @@ abstract class ParentActivity : AppCompatActivity() {
         saveUserInSharedPreferences()
         openMainActivity(LoginActivity::class.java)
     }
-
+*/
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
 }

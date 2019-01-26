@@ -1,9 +1,7 @@
+/*
 package com.mobitribe.qulabro.modules.chat.conversation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -20,7 +18,7 @@ import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.modules.chat.ChatPushDialog
 import com.mobitribe.qulabro.modules.main.MainActivity
 import com.mobitribe.qulabro.utils.ModelMappingUtility
-import firebase.VFirestoreQueryManager
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import kotlinx.android.synthetic.main.conversation_fragment.*
 import kotlinx.android.synthetic.main.search_view.*
 import java.lang.Exception
@@ -110,7 +108,7 @@ class ConversationFragment : androidx.fragment.app.Fragment(), androidx.swiperef
     private fun fetchConversation() {
         try {
             pActivity?.profile?.id?.let {
-                VFirestoreQueryManager.getConversationById(it).addSnapshotListener(queryListener)
+                FirestoreQueryCenter.getConversationById(it).addSnapshotListener(queryListener)
             }
         }catch (e: Exception){
             e.localizedMessage
@@ -186,12 +184,14 @@ class ConversationFragment : androidx.fragment.app.Fragment(), androidx.swiperef
     }
 
     companion object {
-        /**
+        */
+/**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
          * @return A new instance of fragment CategoriesFragment.
-         */
+         *//*
+
         @JvmStatic
         fun newInstance() = ConversationFragment()
     }
@@ -205,3 +205,4 @@ class ConversationFragment : androidx.fragment.app.Fragment(), androidx.swiperef
 
     }
 }
+*/

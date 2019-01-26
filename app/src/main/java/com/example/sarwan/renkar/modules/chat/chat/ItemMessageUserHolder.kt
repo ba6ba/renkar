@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.content.Context
@@ -180,3 +181,4 @@ class ItemMessageUserHolder(itemView: View, private val profile: UserProfile,
     }
 
 }
+*/

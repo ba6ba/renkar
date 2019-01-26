@@ -10,23 +10,21 @@
             android:supportsRtl="true"
             android:name="com.example.sarwan.renkar.modules.base.VApplication"
             tools:ignore="GoogleAppIndexingWarning"
+            android:largeHeap="true"
             android:theme="@style/AppTheme">
-        <activity android:name="com.example.sarwan.renkar.main.MainActivity">
+        <activity
+            android:name=".modules.splash.SplashActivity"
+            android:theme="@style/renkarTheme"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    
-    
-        <activity
-                android:name=".modules.splash.SplashActivity"
-                android:theme="@style/renkarTheme"
-                android:configChanges="orientation|screenSize"
-                android:windowSoftInputMode="adjustPan"
-                android:screenOrientation="userPortrait"
-        />
+        
         
         <activity
                 android:name=".modules.authentication.LoginActivity"
@@ -45,12 +43,34 @@
         />
         
         <activity
-                android:name=".modules.authentication.SignupActivity"
+                android:name=".modules.authentication.ListerSignup"
                 android:theme="@style/renkarTheme"
                 android:configChanges="orientation|screenSize"
                 android:windowSoftInputMode="adjustPan"
                 android:screenOrientation="userPortrait"
         />
+    
+        <activity
+                android:name=".modules.authentication.RenterSignup"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"
+        />
+    
+        <activity
+                android:name=".modules.lister.ListerActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"
+        /><activity
+            android:name=".modules.renter.RenterActivity"
+            android:theme="@style/renkarTheme"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="userPortrait"
+    />
     </application>
 
 </manifest>

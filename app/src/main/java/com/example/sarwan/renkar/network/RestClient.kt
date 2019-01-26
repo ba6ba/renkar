@@ -1,3 +1,4 @@
+/*
 package com.example.sarwan.renkar.network
 
 import android.app.Activity
@@ -106,3 +107,4 @@ object RestClient {
         }
     }
 }
+*/

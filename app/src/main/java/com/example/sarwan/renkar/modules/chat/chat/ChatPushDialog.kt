@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat
 
 import android.app.Activity
@@ -95,4 +96,4 @@ open class ChatPushDialog : BaseDialog(){
         super.onDetach()
         mListener = null
     }
-}
+}*/

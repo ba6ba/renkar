@@ -30,33 +30,6 @@ class ProgressLoader : androidx.fragment.app.DialogFragment() {
 
     }
 
-    override fun show(manager: androidx.fragment.app.FragmentManager, tag: String) {
-
-        try {
-            if (this.isAdded) {
-                return  //or return false/true, based on where you are calling from
-            }
-            val ft = manager.beginTransaction()
-            try {
-                ft.add(this, TAG)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            /*try catch is used to tackle the crash
-         when user close the app and some thing
-         running in indicator of app*/
-
-            ft.commitAllowingStateLoss()
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.e(TAG, e.message)
-        }
-
-    }
-
     override fun dismiss() {
         try {
             super.dismiss()

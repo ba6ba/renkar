@@ -1,11 +1,6 @@
 package firebase
 
 import com.google.firebase.database.*
-import com.mobitribe.qulabro.models.FNotifications
-import com.mobitribe.qulabro.models.UserProfile
-import com.mobitribe.qulabro.models.chat.ChatRoom
-import com.mobitribe.qulabro.models.chat.GChatRoom
-import com.mobitribe.qulabro.models.chat.GroupMember
 import kotlin.collections.HashMap
 
 /**
@@ -63,9 +58,6 @@ object VFirebaseQueryManager {
         return FirebaseDatabase.getInstance().reference.child(CHAT)
     }
 
-    fun setChatRoom(groupId: String, chatRoom: ChatRoom) {
-        FirebaseDatabase.getInstance().reference.child(CONVERSATION).child(groupId).setValue(chatRoom)
-    }
 
     fun setFirstId(groupId: String, firstId: String?) {
         FirebaseDatabase.getInstance().reference.child(CONVERSATION).child(groupId).child(FIRST_ID).setValue(firstId)
@@ -157,12 +149,6 @@ object VFirebaseQueryManager {
 
     fun getLastOnlineTimeRef(userId: Long?): DatabaseReference {
         return FirebaseDatabase.getInstance().reference.child(USER).child(userId.toString()).child(ONLINE_STAMP)
-    }
-
-    fun updatePexipInformation(userId: Long?, fNotifications: FNotifications) {
-        val map = HashMap<String, Any> ()
-        map.put(PEXIP,fNotifications)
-        FirebaseDatabase.getInstance().reference.child(USER).child(userId.toString()).updateChildren(map)
     }
 
     fun getActionReference(userId: Long): DatabaseReference {

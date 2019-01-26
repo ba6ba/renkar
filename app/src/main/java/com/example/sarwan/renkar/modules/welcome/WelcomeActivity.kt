@@ -14,6 +14,8 @@ class WelcomeActivity : ParentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.welcome_screen)
         onClickListeners()
+        user?.isFirst = false
+        saveUserInSharedPreferences()
     }
 
     private fun onClickListeners(){

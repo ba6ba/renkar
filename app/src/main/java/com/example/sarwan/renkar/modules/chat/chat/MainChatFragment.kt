@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat
 
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.mobitribe.qulabro.R
 import kotlinx.android.synthetic.main.fragment_chat.*
 
 
+*/
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -19,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_chat.*
  * Use the [MainChatFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
- */
+ *//*
+
 class MainChatFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +41,13 @@ class MainChatFragment : androidx.fragment.app.Fragment() {
     }
 
     companion object {
-        /**
+        */
+/**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          * @return A new instance of fragment MainChatFragment.
-         */
+         *//*
+
         @JvmStatic
         fun newInstance() = MainChatFragment()
     }
@@ -58,3 +63,4 @@ class MainChatFragment : androidx.fragment.app.Fragment() {
         chatViewPager.offscreenPageLimit = 1
     }
 }
+*/

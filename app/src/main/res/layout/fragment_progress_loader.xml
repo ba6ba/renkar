@@ -1,21 +1,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/color_accent_round_sqaure_corner_bg"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:backgroundTint="@color/black"
+                android:backgroundTintMode="screen"
+                android:padding="@dimen/small_padding"
                 android:layout_margin="@dimen/normal_margin">
 	
-	<com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
-			android:id="@+id/google_progress"
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:layout_gravity="center"
-			android:indeterminateDrawable="@drawable/ic_border_style_black_24dp"
-			android:indeterminateTint="@color/blue"
-			android:indeterminateDuration="@integer/progress_bar_duration"
-			android:indeterminateBehavior="cycle"
-			type="nexus_rotation_cross"
-			app:colors="@array/progress_bar_colors"
-	/>
+	<ProgressBar
+			android:id="@+id/progress_wheel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/small_margin"
+			android:layout_marginVertical="@dimen/medium_margin"
+			android:layout_centerHorizontal="true"
+			android:indeterminateTint="@color/white"/>
 	
+	<TextView android:id="@+id/please_wait"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_below="@id/progress_wheel"
+	          android:text="..."
+	          android:fontFamily="@font/proximanovalight"
+	          android:textSize="@dimen/abc_text_size_medium_material"
+	          android:layout_centerVertical="true"
+	          android:layout_centerHorizontal="true"
+	          android:paddingVertical="@dimen/medium_margin"
+	          android:layout_toRightOf="@id/progress_wheel"
+	          android:textColor="@color/white"/>
+
 </RelativeLayout>

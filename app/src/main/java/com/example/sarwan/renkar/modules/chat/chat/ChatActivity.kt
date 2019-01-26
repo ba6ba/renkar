@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.os.Bundle
@@ -15,7 +16,7 @@ import com.mobitribe.qulabro.models.chat.ChatRooms
 import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.utils.DateTimeUtility
 import firebase.VFirebaseQueryManager
-import firebase.VFirestoreQueryManager
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import kotlinx.android.synthetic.main.chat_activity.*
 import java.lang.Exception
 import java.util.*
@@ -100,13 +101,15 @@ class ChatActivity : ParentActivity()  {
         return true
     }
 
-    /**
+    */
+/**
      * @usage It checks that I have blocked the Oponent or Oponent has blocked me for the conversation
      *        If any one is blocked so it changes the view accordingly
-     */
+     *//*
+
     private fun checkIfUserBlocked() {
         chatRoom?.key?.let {
-            VFirestoreQueryManager.checkIfBlockUser(it).addSnapshotListener(documentListener)
+            FirestoreQueryCenter.checkIfBlockUser(it).addSnapshotListener(documentListener)
         }
     }
 
@@ -125,7 +128,7 @@ class ChatActivity : ParentActivity()  {
     }
 
     private fun getBlockStatus(documents: MutableMap<String, Any>, key: String) {
-        chatFragment?.blockUserId = documents[VFirestoreQueryManager.BLOCK_USER]?.toString()?.toInt()?:kotlin.run { 0 }
+        chatFragment?.blockUserId = documents[FirestoreQueryCenter.BLOCK_USER]?.toString()?.toInt()?:kotlin.run { 0 }
             if (chatFragment?.blockUserId == profile?.id)
             {
                 chatFragment?.visibleBlockUserLayout()
@@ -192,4 +195,4 @@ class ChatActivity : ParentActivity()  {
         super.onDestroy()
         goOffline()
     }
-}
+}*/

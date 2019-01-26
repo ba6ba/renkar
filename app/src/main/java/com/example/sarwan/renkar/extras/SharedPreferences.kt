@@ -17,7 +17,7 @@ class SharedPreferences(mContext: Context) {
         get() {
             val gson = Gson()
             val json = mPrefs.getString(USER_PROFILE, "")
-            val type = object : TypeToken<ListerProfile>() {}.type
+            val type = object : TypeToken<User>() {}.type
             return gson.fromJson(json, type)
         }
 

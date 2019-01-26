@@ -20,6 +20,11 @@
         <item name="android:colorPrimary">@color/colorAccent</item>
         <item name="android:colorAccent">@color/colorPrimary</item>
     </style>
+    
+    <style name="CheckBoxTheme">
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
 
 
 </resources>

@@ -8,6 +8,8 @@ import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.main.MainActivity
 import com.example.sarwan.renkar.modules.authentication.LoginActivity
+import com.example.sarwan.renkar.modules.lister.ListerActivity
+import com.example.sarwan.renkar.modules.renter.RenterActivity
 import com.example.sarwan.renkar.modules.welcome.WelcomeActivity
 
 class SplashActivity : ParentActivity() {
@@ -22,7 +24,12 @@ class SplashActivity : ParentActivity() {
         Handler().postDelayed({
             user?.let {
                 when (it.isLogin){
-                    true -> openActivityWithFinish(Intent(this, MainActivity::class.java))
+                    true ->{
+                        when(it.type){
+                            ApplicationConstants.RENTER -> openActivityWithFinish(Intent(this, RenterActivity::class.java))
+                            ApplicationConstants.LISTER -> openActivityWithFinish(Intent(this, ListerActivity::class.java))
+                        }
+                    }
                     false -> if (it.isFirst) openActivityWithFinish(Intent(this, WelcomeActivity::class.java))
                     else openActivityWithFinish(Intent(this, LoginActivity::class.java))
                 }

@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.content.Context
@@ -58,3 +59,4 @@ class ListMessageAdapter(private val context: Context, private val messages: Arr
         notifyDataSetChanged()
     }
 }
+*/

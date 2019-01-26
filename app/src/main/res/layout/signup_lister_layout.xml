@@ -24,11 +24,12 @@
 			
 			<ImageView android:layout_width="150dp" android:layout_height="150dp"
 			           android:layout_centerHorizontal="true"
-			           android:src="@drawable/renkar_logo"
+			           android:src="@drawable/renkar_logo_white"
 			           android:id="@+id/logo"
-			           android:layout_margin="@dimen/normal_margin"
+			           android:layout_marginTop="@dimen/normal_margin"
+			           android:layout_marginBottom="@dimen/normal_margin"
 			/>
-		
+			
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 		
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -39,95 +40,164 @@
 		          android:paddingTop="@dimen/small_padding"
 		          android:paddingBottom="@dimen/small_padding"
 		          android:background="@drawable/white_round_corner_bg"
-		          android:fontFamily="@font/proximanovasbold"
+		          android:fontFamily="@font/proximanovascondensedbold"
 		          android:textAllCaps="true"
 		          android:layout_gravity="end"
+		          android:layout_margin="@dimen/normal_margin"
 		/>
 	
 	</com.google.android.material.appbar.AppBarLayout>
 	
-	<LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-	              app:layout_behavior="@string/appbar_scrolling_view_behavior"
-	              android:orientation="vertical"
-	              android:layout_gravity="bottom"
+	<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+	                                       android:layout_height="wrap_content"
+	                                       app:layout_behavior="@string/appbar_scrolling_view_behavior"
 	>
 		
 		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-		              android:orientation="horizontal"
-		              android:weightSum="3"
-		
+		              android:orientation="vertical"
+		              android:paddingTop="@dimen/small_padding"
+		              android:paddingBottom="@dimen/small_padding"
 		>
 			
 			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-			              android:orientation="vertical"
-			              android:paddingTop="@dimen/a_small_padding"
-			              android:paddingBottom="@dimen/a_small_padding"
-			              android:id="@+id/fieldsLayout"
-			              android:layout_weight="0.5"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
 			>
-				
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/username" android:textSize="@dimen/medium_text_size"
-				          android:textColor="@color/colorPrimaryDark"
-				          android:fontFamily="@font/proximanovaregular"
+				          android:text="@string/email_address" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				          android:layout_marginEnd="@dimen/small_margin"
 				/>
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-				          android:backgroundTint="@color/colorPrimaryDark"
-				          android:inputType="textCapSentences" android:includeFontPadding="true"
-				          android:id="@+id/username"
+				          android:backgroundTint="@color/white" android:id="@+id/email_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionNext" android:maxLines="1"
+				          android:inputType="textEmailAddress"
+				          android:paddingTop="@dimen/normal_padding"
+				          android:paddingBottom="@dimen/normal_padding"
 				/>
-				
-				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/password" android:textSize="@dimen/medium_text_size"
-				          android:textColor="@color/colorPrimaryDark"
-				          android:fontFamily="@font/proximanovaregular"
-				/>
-				
-				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-				          android:backgroundTint="@color/colorPrimaryDark"
-				          android:inputType="textCapSentences" android:includeFontPadding="true"
-				          android:id="@+id/password"
-				/>
-				
-				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/forgot_password" android:textSize="@dimen/medium_text_size"
-				          android:textColor="@color/colorPrimary"
-				          android:layout_gravity="end"
-				          android:fontFamily="@font/proximanovaregular"
-				/>
-				
-				<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-				        android:background="@drawable/color_accent_round_corner_bg"
-				        android:layout_gravity="center"
-				        android:text="@string/login"
-				        android:paddingStart="@dimen/v_v_v_large_padding"
-				        android:layout_margin="@dimen/small_margin"
-				        android:paddingEnd="@dimen/v_v_v_large_padding"
-				        android:textSize="@dimen/medium_text_size"
-				        android:textColor="@color/white"
-				/>
-			
 			</LinearLayout>
 			
-			<ImageView android:layout_width="match_parent" android:layout_height="match_parent"
-			           android:src="@drawable/renkar_logo"
-			           android:layout_weight="2.5"
-			           android:layout_gravity="center"
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
+			              android:paddingTop="@dimen/normal_padding"
+			              android:paddingBottom="@dimen/normal_padding"
+			>
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/user_name" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/white" android:id="@+id/user_name_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionNext" android:maxLines="1"
+				          android:inputType="textCapWords"
+				          android:layout_marginEnd="@dimen/small_margin"
+				/>
+			</LinearLayout>
 			
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
+			              android:paddingTop="@dimen/normal_padding"
+			              android:paddingBottom="@dimen/normal_padding"
+			>
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/first_name" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/white" android:id="@+id/first_name_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionNext" android:maxLines="1"
+				          android:inputType="textCapWords" android:layout_marginEnd="@dimen/small_margin"
+				/>
+			</LinearLayout>
+			
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
+			              android:paddingTop="@dimen/normal_padding"
+			              android:paddingBottom="@dimen/normal_padding"
+			>
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/last_name" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/white" android:id="@+id/last_name_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionNext" android:maxLines="1"
+				          android:inputType="textCapWords" android:layout_marginEnd="@dimen/small_margin"
+				/>
+			</LinearLayout>
+			
+			
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
+			              android:paddingTop="@dimen/normal_padding"
+			              android:paddingBottom="@dimen/normal_padding"
+			>
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/phone_no" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/white" android:id="@+id/phone_no_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionNext" android:maxLines="1"
+				          android:inputType="phone" android:layout_marginEnd="@dimen/small_margin"
+				/>
+			</LinearLayout>
+			
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
+			              android:paddingTop="@dimen/normal_padding"
+			              android:paddingBottom="@dimen/normal_padding"
+			>
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/password" android:fontFamily="@font/proximanovalight"
+				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
+				          android:textStyle="bold" android:maxLines="1"
+				          android:layout_gravity="center_vertical"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/white" android:id="@+id/password_L"
+				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:imeOptions="actionDone" android:maxLines="1"
+				          android:inputType="textPassword" android:layout_marginEnd="@dimen/small_margin"
+				/>
+			</LinearLayout>
+			
+			<CheckBox android:layout_width="match_parent" android:layout_height="wrap_content"
+			          android:checked="true" android:gravity="center_vertical"
+			          android:buttonTint="@color/white" android:text="@string/agree_to_terms_and_conditions"
+			          android:textColor="@color/white" android:fontFamily="@font/proximanovalight"
+			          android:textStyle="bold" android:textSize="@dimen/medium_text_size"
+			          android:id="@+id/terms_L"
 			/>
 		
 		</LinearLayout>
-		
-		
-		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-		          android:text="@string/no_account_text" android:textColor="@color/colorAccent"
-		          android:textSize="@dimen/medium_text_size"
-		          android:padding="@dimen/a_small_padding"
-		          android:fontFamily="@font/proximanovaregular"
-		          android:id="@+id/signupFromLogin"
-		/>
 	
-	</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+	<Button
+			android:layout_width="100dp" android:layout_height="100dp"
+			android:id="@+id/signup_L" android:background="@drawable/signup_button_blue"
+			android:layout_gravity="end|bottom" android:padding="@dimen/small_padding"
+			android:elevation="@dimen/max_elevation"
+	/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

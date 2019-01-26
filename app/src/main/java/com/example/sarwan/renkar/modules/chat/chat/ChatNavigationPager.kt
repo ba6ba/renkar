@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat
 
 import android.content.Context
@@ -29,4 +30,4 @@ class ChatNavigationPager(val context: Context?, val fragmentManager: androidx.f
         override fun getPageTitle(position: Int): CharSequence? {
             return null
         }
-}
+}*/

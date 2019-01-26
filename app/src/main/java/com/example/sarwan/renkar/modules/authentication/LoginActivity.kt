@@ -1,11 +1,20 @@
 package com.example.sarwan.renkar.modules.authentication
 
-import android.content.Intent
 import android.os.Bundle
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.extras.CustomDialogs
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
+import com.example.sarwan.renkar.model.ListerProfile
+import com.example.sarwan.renkar.model.RenterProfile
+import com.example.sarwan.renkar.model.User
+import com.example.sarwan.renkar.modules.lister.ListerActivity
+import com.example.sarwan.renkar.modules.renter.RenterActivity
+import com.example.sarwan.renkar.modules.welcome.WelcomeActivity
+import com.example.sarwan.renkar.utils.ValidationUtility
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.login_layout.*
 
 class LoginActivity : ParentActivity() {
@@ -16,79 +25,101 @@ class LoginActivity : ParentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
-        mAuth = FirebaseAuth.getInstance()
-        getIntentData()
-        appropriateLayout()
+        initializeFireBaseAuth()
+        putDataInViews()
         onClickListeners()
     }
 
-    private fun onClickListeners(){
-        userLoginChoice.setOnClickListener {
-            user?.isLister = !user?.isLister!!
-            appropriateLayout()
-        }
+    private fun initializeFireBaseAuth() {
+        mAuth = FirebaseAuth.getInstance()
+    }
 
-        login.setOnClickListener {
-            makeLoginRequestOnFireBase()
-        }
-
-        signup.setOnClickListener {
-            openActivity(Intent(this, LoginActivity::class.java).putExtra(ApplicationConstants.LISTER, user?.isLister))
+    private fun putDataInViews() {
+        user?.email?.let {
+            email.setText(it)
         }
     }
 
+    private fun onClickListeners(){
+        login.setOnClickListener {
+            if (validateData())
+                makeLoginRequestOnFireBase()
+        }
+
+        signupFromLogin.setOnClickListener {
+            CustomDialogs().typeDialog(this)
+        }
+    }
+
+    private fun validateData(): Boolean {
+        return ValidationUtility.isNotEmptyField(email,password)
+    }
+
     private fun makeLoginRequestOnFireBase() {
-        mAuth?.signInWithEmailAndPassword("", "")?.addOnCompleteListener(this) { task ->
-            hideProgress()
+        showProgress()
+        mAuth?.signInWithEmailAndPassword(email.text.toString(), password.text.toString())?.addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                //we in
-                fetchUserDataFromFireBase(task.result?.user?.uid)
-            }
+                //Login successfully
+                fetchUserDataFromFireBase(email.text.toString())
+            }else
+                hideProgress()
         }
     }
 
     private fun fetchUserDataFromFireBase(uid: String?) {
         uid?.let {
-            when (it.isNotEmpty()){
-                true-> if (user?.isLister!!)
-                    makeRequestOnListerNode(uid)
-                else
-                    makeRequestOnRenterNode(uid)
-                false-> showMessage("Server error!")
+            makeRequestToFetchUser(uid)
+        }
+    }
+
+    private fun makeRequestToFetchUser(uid: String){
+        FirestoreQueryCenter.getUser(uid).addOnSuccessListener { it ->
+            it?.data?.let { data->
+                user = it.toObject(User::class.java)
+                makeAppropriateRequest(data[FirestoreQueryCenter.TYPE] as? String)
             }
         }
     }
 
-    private fun makeRequestOnRenterNode(uid: String) {
-        //TODO make query to fetch data of above uid
-
-        //when gets Data
-        val data : Any = ""
-        takeAppropriateAction(data)
+    private fun makeAppropriateRequest(type: String?){
+        when(type){
+            ApplicationConstants.LISTER -> { makeRequestOnListerNode(email.text.toString())}
+            ApplicationConstants.RENTER -> { makeRequestOnRenterNode(email.text.toString())}
+            ApplicationConstants.BOTH -> {}
+        }
+        user?.type = type
     }
 
-    private fun takeAppropriateAction(data : Any) {
-        user?.isLogin = true
-        saveUserInSharedPreferences()
-        openActivity(Intent(this, ApplicationConstants.LOGIN_USER_TYPE_ACTIVITY_MAP[user?.isLister]))
+    private fun makeRequestOnRenterNode(uid: String) {
+        FirestoreQueryCenter.getRenter(uid).addOnSuccessListener { it ->
+            it?.let { data->
+                saveRenterInSharedPreferences(data)
+            }
+        }
+        hideProgress()
     }
 
     private fun makeRequestOnListerNode(uid: String) {
-        //TODO make query to fetch data of above uid
-
-        val data : Any = ""
-        takeAppropriateAction(data)
-    }
-
-    private fun appropriateLayout() {
-        userLoginChoice.text = ApplicationConstants.LOGIN_USER_TYPE_TEXT_MAP[user?.isLister]
-
-    }
-
-    private fun getIntentData() {
-        intent?.hasExtra(ApplicationConstants.LISTER)?.let {
-            if (it)  user?.isLister = intent?.getBooleanExtra(ApplicationConstants.LISTER, false)
+        FirestoreQueryCenter.getLister(uid).addOnSuccessListener { it ->
+            it?.let { data->
+                saveListerInSharedPreferences(data)
+            }
         }
+        hideProgress()
+    }
+
+    private fun saveRenterInSharedPreferences(data: DocumentSnapshot) {
+        user?.renter = data.toObject(RenterProfile::class.java)
+        user?.isLogin = true
+        saveUserInSharedPreferences()
+        openActivityWithFinish(RenterActivity::class.java)
+    }
+
+    private fun saveListerInSharedPreferences(data: DocumentSnapshot) {
+        user?.lister = data.toObject(ListerProfile::class.java)
+        user?.isLogin = true
+        saveUserInSharedPreferences()
+        openActivityWithFinish(ListerActivity::class.java)
     }
 
     override fun onStart() {

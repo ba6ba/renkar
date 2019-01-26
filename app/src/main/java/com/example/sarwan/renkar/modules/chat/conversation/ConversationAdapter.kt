@@ -1,3 +1,4 @@
+/*
 package com.mobitribe.qulabro.modules.chat.conversation
 
 import android.os.Bundle
@@ -159,4 +160,4 @@ class ConversationAdapter(private val activity: ParentActivity,
         filteredContactList.sortByDescending { it.last_message_time }
         notifyDataSetChanged()
     }
-}
+}*/

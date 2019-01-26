@@ -1,8 +1,7 @@
+/*
 package com.mobitribe.qulabro.modules.chat.chat
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
@@ -12,7 +11,7 @@ import com.mobitribe.qulabro.models.chat.Message
 import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.models.chat.ChatRooms
 import com.mobitribe.qulabro.utils.ModelMappingUtility
-import firebase.VFirestoreQueryManager
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import kotlinx.android.synthetic.main.chat_fragment.*
 import java.lang.Exception
 import java.util.*
@@ -55,9 +54,11 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
         }
     }
 
-    /**
+    */
+/**
      * It initialize recycler view with empty objects
-     */
+     *//*
+
     private fun initializeView() {
 
         // Initialize recycler view
@@ -71,11 +72,13 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
 
     }
 
-    /**
+    */
+/**
      * @usage it checks the room exists on the firebase or we have to create it first. If exists then it load the messages data first
-     */
+     *//*
+
     private fun checkRoomExists() {
-        VFirestoreQueryManager.getMessageQuery(roomId).get().addOnSuccessListener { querySnapshot ->
+        FirestoreQueryCenter.getMessageQuery(roomId).get().addOnSuccessListener { querySnapshot ->
             val messages = java.util.ArrayList<Message>()
             querySnapshot?.let {
                 for (child in it) {
@@ -110,15 +113,17 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
             checkMembersReadStatus()
     }
 
-    /**
+    */
+/**
      * @param first
      * @usage It sets the fields on firebase and make room id on the basis of who is first and second in the openent
      *          the big one is always be a first and the small one will be called as second.
-     */
+     *//*
+
     protected fun setChatRoomFields(message: Message) {
         chatModel?.chat_members?.let { members->
             members.add(ModelMappingUtility.makeChatMember(pActivity.profile))
-            VFirestoreQueryManager.addChatRoom(roomId, ModelMappingUtility.createChatRoom(members,
+            FirestoreQueryCenter.addChatRoom(roomId, ModelMappingUtility.createChatRoom(members,
                     chatModel?.title, message.message, pActivity.profile?.userName, pActivity.profile?.id, message.timestamp))
         }
     }
@@ -132,12 +137,14 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
         return newMessage
     }
 
-    /**
+    */
+/**
     * @usage It checks the openent has been read the last message or not.
     *        If it is read or not it update the last message status accordingly
-    */
+    *//*
+
     protected fun checkMembersReadStatus() {
-        VFirestoreQueryManager.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener)
+        FirestoreQueryCenter.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener)
     }
 
     private val statusDocumentListener = EventListener<DocumentSnapshot> { documentSnapshot, fireStoreException ->
@@ -160,8 +167,8 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
             try {
                 if(data[i] !is String && data[i] !is Long && data[i]!=null && i!=pActivity.profile?.id.toString()){
                     data[i]?.let {member->
-                        val isRead = (member as HashMap<String, String>)[VFirestoreQueryManager.CHAT_USER_READ].toString().toBoolean()
-                        val memberId = (member)[VFirestoreQueryManager.CHAT_USER_ID].toString().toInt()
+                        val isRead = (member as HashMap<String, String>)[FirestoreQueryCenter.CHAT_USER_READ].toString().toBoolean()
+                        val memberId = (member)[FirestoreQueryCenter.CHAT_USER_ID].toString().toInt()
                         isRead.let { read ->
                             if (isRead)
                                 readStatus.add(memberId)
@@ -187,9 +194,11 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
 
     private fun addDataChangeListener(roomId: String) {
 
-        /* Listener for loading if new data or
-           data changed on fire base fire store*/
-        VFirestoreQueryManager.getMessageQuery(roomId).addSnapshotListener(this)
+        */
+/* Listener for loading if new data or
+           data changed on fire base fire store*//*
+
+        FirestoreQueryCenter.getMessageQuery(roomId).addSnapshotListener(this)
     }
 
     override fun onEvent(snapshot: QuerySnapshot?, p1: FirebaseFirestoreException?) {
@@ -201,15 +210,15 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     }
 
     private fun addMessageHasbeenReadByMeListener() {
-        VFirestoreQueryManager.myStatusListener(roomId).addSnapshotListener(myStatusListener)
+        FirestoreQueryCenter.myStatusListener(roomId).addSnapshotListener(myStatusListener)
     }
 
     private fun removeMessageHasbeenReadByMeListener() {
-        VFirestoreQueryManager.myStatusListener(roomId).addSnapshotListener(myStatusListener).remove()
+        FirestoreQueryCenter.myStatusListener(roomId).addSnapshotListener(myStatusListener).remove()
     }
 
     private fun removeMessageHasBeenReadByMemberStatus(){
-        VFirestoreQueryManager.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener).remove()
+        FirestoreQueryCenter.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener).remove()
     }
 
     private val myStatusListener = EventListener<DocumentSnapshot> { documentSnapshot, fireStoreException ->
@@ -218,7 +227,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
                 return@EventListener
             }?:kotlin.run {
                 documentSnapshot?.let {query->
-                    VFirestoreQueryManager.readConversation(roomId, pActivity.profile?.id!!)
+                    FirestoreQueryCenter.readConversation(roomId, pActivity.profile?.id!!)
                 }
             }
         }catch (e : Exception){
@@ -242,7 +251,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     }
 
     private fun blockTheUser() {
-        VFirestoreQueryManager.blockTheUser(roomId, getOpponentId())
+        FirestoreQueryCenter.blockTheUser(roomId, getOpponentId())
     }
 
     private fun getOpponentId(): Int? {
@@ -251,7 +260,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
 
 
     fun unBlockTheUser() {
-        VFirestoreQueryManager.blockTheUser(roomId, 0)
+        FirestoreQueryCenter.blockTheUser(roomId, 0)
     }
 
     fun showBlockWarning() {
@@ -295,3 +304,4 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
             addMessageHasbeenReadByMeListener()
     }
 }
+*/
