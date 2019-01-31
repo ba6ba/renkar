@@ -36,14 +36,14 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(CARS).document(conversationId).collection(CARS)
     }
 
-    /*fun setLastMessageOfConversation(conversationId: String, lastMessage: String, sender_name: String, senderId: Int, title: String,
+    /*fun setLastMessageOfConversation(conversationId: String, lastMessage: String, sender_name: String, senderId: Int, name: String,
                                      userIds: ArrayList<Int>) {
         val lastMessageData = HashMap<String, Any>()
         lastMessageData[LAST_MESSAGE] = lastMessage
         lastMessageData[UPDATED_TIME] = System.currentTimeMillis() / 1000
         lastMessageData[LAST_MESSAGE_SENDER] = sender_name
         lastMessageData[LAST_MESSAGE_SENDER_ID] = senderId
-        lastMessageData[TITLE] = title
+        lastMessageData[TITLE] = name
         unReadConversation(conversationId, userIds, senderId)
         FirebaseFirestore.getInstance().collection(CARS).document(conversationId).update(lastMessageData)
     }

@@ -34,19 +34,19 @@
 		<com.google.android.material.tabs.TabItem
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:icon="@drawable/plus_icon_light"
+				android:icon="@drawable/car_tyre"
 		/>
 		
 		<com.google.android.material.tabs.TabItem
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:icon="@drawable/plus_icon_blue"
+				android:icon="@drawable/add"
 		/>
 		
 		<com.google.android.material.tabs.TabItem
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:icon="@drawable/plus_icon_dark"
+				android:icon="@drawable/user"
 		/>
 	
 	

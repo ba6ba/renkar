@@ -1,0 +1,263 @@
+<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_marginHorizontal="@dimen/normal_margin"
+		app:cardBackgroundColor="@color/white"
+		app:cardCornerRadius="30dp"
+		app:cardUseCompatPadding="true"
+		android:animateLayoutChanges="true"
+		android:foregroundTint="@color/light_grey"
+		android:layout_gravity="center_vertical"
+		android:elevation="@dimen/max_elevation"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+>
+	
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="@dimen/normal_padding"
+	>
+		
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/registration_details_layout"
+		>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="REGISTRATION DETAILS"
+			          android:fontFamily="@font/proximanovaextracondensedbold"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/v_large_text_size"
+			          android:textColor="@color/black"
+			          android:id="@+id/header"
+			/>
+			
+			<View android:layout_width="match_parent" android:layout_height="1.5dp"
+			      android:background="@color/colorAccent"
+			      android:layout_below="@id/header"
+			      android:id="@+id/separator"
+			      android:layout_alignEnd="@id/header"
+			/>
+		
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/separator"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_alignParentStart="true"
+		>
+			
+			<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/edit_text_background"
+					android:hint="Registration Number"
+					android:textColorHint="@color/lightest_grey"
+					android:fontFamily="@font/proximanovabold"
+					android:textSize="@dimen/medium_text_size"
+					android:padding="@dimen/small_padding"
+					android:textColor="@color/black"
+					android:ellipsize="end"
+					android:id="@+id/registrationNumber"
+			/>
+			
+			<androidx.appcompat.widget.AppCompatSpinner
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:layout_alignParentRight="true"
+					android:layout_toRightOf="@id/registrationNumber"
+					android:id="@+id/registration_city"
+					android:spinnerMode="dropdown"
+					android:layoutMode="clipBounds"
+					android:layout_alignBottom="@id/registrationNumber"
+					android:layout_alignTop="@id/registrationNumber"
+			>
+			
+			
+			</androidx.appcompat.widget.AppCompatSpinner>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="registered in"
+			          android:layout_alignParentRight="true"
+			          android:layout_below="@id/registration_city"
+			          android:fontFamily="@font/proximanovalight"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/small_text_size"
+			          android:textColor="@color/light_grey"
+			          android:layout_marginVertical="@dimen/small_margin"
+			/>
+			
+		</RelativeLayout>
+		
+		</RelativeLayout>
+		
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/registration_details_layout"
+				android:id="@+id/driving_license_layout"
+		>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="DRIVING LICENSE"
+			          android:fontFamily="@font/proximanovaextracondensedbold"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/v_large_text_size"
+			          android:textColor="@color/black"
+			          android:id="@+id/header_license"
+			/>
+			
+			<View android:layout_width="match_parent" android:layout_height="1.5dp"
+			      android:background="@color/colorAccent"
+			      android:layout_below="@id/header_license"
+			      android:id="@+id/separator_license"
+			      android:layout_alignEnd="@id/header_license"
+			/>
+			
+			<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/separator_license"
+					android:layout_marginVertical="@dimen/small_margin"
+					android:layout_alignParentStart="true"
+			>
+				
+				<com.google.android.material.textfield.TextInputEditText
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:background="@drawable/edit_text_background"
+						android:hint="License Number"
+						android:textColorHint="@color/lightest_grey"
+						android:fontFamily="@font/proximanovabold"
+						android:textSize="@dimen/medium_text_size"
+						android:padding="@dimen/small_padding"
+						android:textColor="@color/black"
+						android:ellipsize="end"
+						android:id="@+id/driving_license_number"
+				/>
+				
+				<androidx.appcompat.widget.AppCompatSpinner
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:layout_alignParentRight="true"
+						android:layout_toRightOf="@id/driving_license_number"
+						android:id="@+id/license_expiry"
+						android:spinnerMode="dropdown"
+						android:layoutMode="clipBounds"
+						android:layout_alignBottom="@id/driving_license_number"
+						android:layout_alignTop="@id/driving_license_number"
+				>
+				
+				
+				</androidx.appcompat.widget.AppCompatSpinner>
+				
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="expires in"
+				          android:layout_alignParentRight="true"
+				          android:layout_below="@id/license_expiry"
+				          android:fontFamily="@font/proximanovalight"
+				          android:textStyle="bold"
+				          android:textSize="@dimen/small_text_size"
+				          android:textColor="@color/light_grey"
+				          android:layout_marginVertical="@dimen/small_margin"
+				/>
+			
+			</RelativeLayout>
+		
+		</RelativeLayout>
+		
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/driving_license_layout"
+		>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="PRICING"
+			          android:fontFamily="@font/proximanovaextracondensedbold"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/v_large_text_size"
+			          android:textColor="@color/black"
+			          android:id="@+id/header_price"
+			/>
+			
+			<View android:layout_width="match_parent" android:layout_height="1.5dp"
+			      android:background="@color/colorAccent"
+			      android:layout_below="@id/header_price"
+			      android:id="@+id/separator_price"
+			      android:layout_alignEnd="@id/header_price"
+			/>
+			
+			<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/separator_price"
+					android:id="@+id/daily_price_layout"
+					android:layout_marginVertical="@dimen/small_margin"
+					android:layout_alignParentStart="true"
+			>
+				
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/daily_price_heading"
+						android:layout_toStartOf="@id/daily_price"
+						android:layout_alignParentStart="true"
+						android:text="@string/pricing_text"
+						android:fontFamily="@font/proximanovaregular"
+						android:textColor="@color/black"
+						android:textSize="@dimen/medium_text_size"
+						android:layout_alignBottom="@id/daily_price"
+						android:layout_alignTop="@id/daily_price"
+				/>
+				
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/terms"
+						android:layout_alignParentStart="true"
+						android:text="@string/pricing_terms"
+						android:fontFamily="@font/proximanovaregular"
+						android:textColor="@color/light_grey"
+						android:textSize="@dimen/small_text_size"
+						android:layout_below="@id/daily_price_heading"
+						android:layout_marginVertical="@dimen/small_margin"
+				/>
+				
+				
+				<com.google.android.material.textfield.TextInputEditText
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:background="@drawable/edit_text_background_rounded"
+						android:hint="25$/hr"
+						android:id="@+id/daily_price"
+						android:textColorHint="@color/lightest_grey"
+						android:fontFamily="@font/proximanovaextracondensedbold"
+						android:textSize="@dimen/large_text_size"
+						android:paddingVertical="@dimen/normal_padding"
+						android:paddingHorizontal="@dimen/normal_padding"
+						android:textColor="@color/black"
+						android:ellipsize="end"
+						android:layout_alignParentRight="true"
+				/>
+				
+			
+			</RelativeLayout>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="HOORAYY !! YOU CAN EARN UPTO "
+			          android:fontFamily="@font/proximanovaextracondensedbold"
+			          android:textSize="@dimen/large_text_size"
+			          android:layout_centerHorizontal="true"
+			          android:textColor="@color/colorAccent"
+			          android:layout_below="@id/daily_price_layout"
+			/>
+		
+		</RelativeLayout>
+		
+	</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

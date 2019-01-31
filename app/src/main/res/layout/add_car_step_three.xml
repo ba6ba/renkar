@@ -1,0 +1,94 @@
+<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_marginHorizontal="@dimen/normal_margin"
+		app:cardBackgroundColor="@color/colorAccent"
+		app:cardCornerRadius="30dp"
+		app:cardUseCompatPadding="true"
+		android:foregroundTint="@color/light_grey"
+		android:elevation="@dimen/max_elevation"
+		android:animateLayoutChanges="true"
+		android:layout_gravity="center_vertical"
+		xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+	>
+		
+		<View android:layout_width="match_parent" android:layout_height="300dp"
+		      android:layout_alignParentTop="true"
+		      android:rotation="180"
+		      android:backgroundTint="@color/white"
+		      android:background="@drawable/half_circle_accent"
+		/>
+		
+		<View android:layout_width="220dp" android:layout_height="180dp"
+		      android:layout_alignParentBottom="true"
+		      android:backgroundTint="@color/white"
+		      android:rotation="0"
+		      android:layout_alignParentRight="true"
+		      android:background="@drawable/half_circle_accent"
+		/>
+		
+		<View android:layout_width="100dp" android:layout_height="150dp"
+		      android:layout_alignParentBottom="true"
+		      android:rotation="180"
+		      android:layout_alignParentRight="true"
+		      android:background="@drawable/renkar_dots"
+		/>
+		
+		
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/registration_details_layout"
+				android:id="@+id/driving_license_layout"
+		>
+			
+			
+			<View android:layout_width="match_parent" android:layout_height="3dp"
+			      android:background="@color/colorPrimaryDark"
+			      android:id="@+id/separator_license"
+			      android:layout_below="@id/header_address"
+			      android:layout_alignStart="@id/header_address"
+			      android:layout_alignEnd="@id/header_address"
+			/>
+			
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="ADDRESS"
+			          android:fontFamily="@font/proximanovaextracondensedbold"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/v_v_large_text_size"
+			          android:textColor="@color/colorPrimaryDark"
+			          android:id="@+id/header_address"
+			          android:padding="@dimen/small_padding"
+			          android:layout_marginHorizontal="@dimen/normal_margin"
+			/>
+			
+			<androidx.appcompat.widget.AppCompatAutoCompleteTextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/addresses"
+					android:layout_below="@id/separator_license"
+					android:background="@drawable/edit_text_background_rounded"
+					android:padding="@dimen/normal_padding"
+					android:drawableRight="@drawable/ic_add_location_black_24dp"
+					android:drawableTint="@color/light_grey"
+					android:layout_marginVertical="@dimen/normal_margin"
+					android:hint="Street 9, PECHS, Karachi"
+					android:fontFamily="@font/proximanovaregular"
+					android:textSize="@dimen/medium_text_size"
+					android:textColor="@color/black"
+					android:textColorHint="@color/light_grey"
+					android:layout_marginHorizontal="@dimen/normal_margin"
+					android:elevation="@dimen/max_elevation"
+			/>
+			
+			
+		</RelativeLayout>
+		
+	</RelativeLayout>
+	
+</androidx.cardview.widget.CardView>

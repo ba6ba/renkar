@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:gravity="center_vertical"
+              android:padding="@dimen/small_padding"
+              android:id="@+id/layout"
+              style="@style/Widget.MaterialComponents.TabLayout"
+>
+
+	<ImageView
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:id="@+id/featureIcon"
+			android:padding="@dimen/small_padding"
+			android:background="@drawable/plus_icon_light"
+	/>
+	
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/rent_a_car"
+			android:id="@+id/featureName"
+			android:padding="@dimen/small_padding"
+			android:fontFamily="@font/proximanovaregular"
+			android:textColor="@color/black"
+			android:textSize="@dimen/medium_text_size"
+	/>
+	
+	<View android:layout_width="20dp" android:layout_height="match_parent"
+	      android:background="@color/colorAccent"
+	      android:visibility="gone"
+	      android:id="@+id/indicator"
+	/>
+	
+</LinearLayout>

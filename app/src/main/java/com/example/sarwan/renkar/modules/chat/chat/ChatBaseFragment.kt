@@ -124,7 +124,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
         chatModel?.chat_members?.let { members->
             members.add(ModelMappingUtility.makeChatMember(pActivity.profile))
             FirestoreQueryCenter.addChatRoom(roomId, ModelMappingUtility.createChatRoom(members,
-                    chatModel?.title, message.message, pActivity.profile?.userName, pActivity.profile?.id, message.timestamp))
+                    chatModel?.name, message.message, pActivity.profile?.userName, pActivity.profile?.id, message.timestamp))
         }
     }
 
@@ -246,7 +246,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     }
 
     fun showBlockedDialog() {
-        val text = "Unblock " + chatModel?.title + " to send a message"
+        val text = "Unblock " + chatModel?.name + " to send a message"
         AlertDialogBuilder.create(pActivity,"CONFIRMATION",text,false,this,"UNBLOCK","CANCEL")
     }
 
@@ -264,7 +264,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     }
 
     fun showBlockWarning() {
-        val text = "Block " + chatModel?.title + "? " + "Blocked contacts will no longer be able to send you messages"
+        val text = "Block " + chatModel?.name + "? " + "Blocked contacts will no longer be able to send you messages"
         AlertDialogBuilder.create(pActivity,"CONFIRMATION",text,true,this,"BLOCK","CANCEL")
     }
 

@@ -13,7 +13,7 @@ class MessagingService() : FirebaseMessagingService(){
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         Log.d("onMessageReceived",remoteMessage?.notification?.title + " " +
                 remoteMessage?.notification?.body)
-        //sendNotification(remoteMessage?.notification?.title,remoteMessage?.notification?.body)
+        //sendNotification(remoteMessage?.notification?.name,remoteMessage?.notification?.body)
     }
 
 
@@ -50,7 +50,7 @@ class MessagingService() : FirebaseMessagingService(){
     }
 
 
-    private fun sendNotification(title : String?, messageBody: String?) {
+    private fun sendNotification(name : String?, messageBody: String?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 *//* Request code *//*, intent,
@@ -58,7 +58,7 @@ class MessagingService() : FirebaseMessagingService(){
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(title)
+                .setContentTitle(name)
                 .setBadgeIconType(R.mipmap.ic_launcher_round)
                 .setContentText(messageBody)
                 .setAutoCancel(true)

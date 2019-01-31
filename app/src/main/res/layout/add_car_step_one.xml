@@ -1,0 +1,381 @@
+<androidx.appcompat.widget.LinearLayoutCompat
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_marginHorizontal="@dimen/normal_margin"
+		android:orientation="vertical"
+		android:animateLayoutChanges="true"
+		android:layout_gravity="center"
+		xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/edit_text_background"
+			android:hint="CIVIC XR"
+			android:textColorHint="@color/lightest_grey"
+			android:fontFamily="@font/proximanovasbold"
+			android:textSize="@dimen/v_large_text_size"
+			android:paddingStart="@dimen/small_padding"
+			android:paddingEnd="@dimen/medium_padding"
+			android:paddingTop="@dimen/small_padding"
+			android:paddingBottom="@dimen/small_padding"
+			android:textColor="@color/black"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:layout_marginVertical="@dimen/small_margin"
+			android:id="@+id/name"
+	/>
+	
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:gravity="center_vertical"
+	>
+		<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/edit_text_background"
+				android:hint="HONDA"
+				android:textColorHint="@color/lightest_grey"
+				android:fontFamily="@font/proximanovaregular"
+				android:textSize="@dimen/medium_text_size"
+				android:padding="@dimen/small_padding"
+				android:textColor="@color/black"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_marginEnd="@dimen/small_margin"
+				android:maxLines="1"
+				android:ellipsize="end"
+				android:id="@+id/manufactured_by"
+				android:layout_alignParentStart="true"
+		/>
+		
+		<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/edit_text_background"
+				android:hint="2019"
+				android:textColorHint="@color/lightest_grey"
+				android:textSize="@dimen/medium_text_size"
+				android:fontFamily="@font/proximanovaregular"
+				android:padding="@dimen/small_padding"
+				android:textColor="@color/black"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_marginEnd="@dimen/small_margin"
+				android:maxLines="1"
+				android:id="@+id/model"
+				android:ellipsize="end"
+				android:layout_toRightOf="@id/manufactured_by"
+		
+		/>
+		
+		<ImageView android:layout_width="50dp" android:layout_height="15dp"
+		           android:layout_centerVertical="true"
+		           android:layout_toLeftOf="@id/colorPickerView"
+		           android:layout_marginEnd="@dimen/medium_margin"
+		           android:background="@color/colorAccent"
+		           android:id="@+id/selectedColor"
+		/>
+		
+		<com.skydoves.colorpickerpreference.ColorPickerView
+				android:id="@+id/colorPickerView"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				app:palette="@drawable/palette"
+				app:selector="@drawable/wheel"
+				android:layout_alignParentRight="true"
+		/>
+	
+	
+	</RelativeLayout>
+	
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+		
+		<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/edit_text_background"
+				android:hint="AOK - 00009"
+				android:textColorHint="@color/lightest_grey"
+				android:fontFamily="@font/proximanovaregular"
+				android:textSize="@dimen/medium_text_size"
+				android:padding="@dimen/small_padding"
+				android:textColor="@color/black"
+				android:layout_gravity="center_vertical"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_marginEnd="@dimen/small_margin"
+				android:maxLines="1"
+				android:ellipsize="end"
+				android:id="@+id/number"
+		/>
+		
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+		              android:orientation="horizontal"
+		              android:layout_gravity="center_vertical"
+		>
+			<com.google.android.material.checkbox.MaterialCheckBox
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Instant Book"
+					android:textColor="@color/colorPrimaryDark"
+					android:fontFamily="@font/proximanovaregular"
+					android:textAllCaps="true"
+					android:textSize="@dimen/medium_text_size"
+					android:checked="true"
+					app:useMaterialThemeColors="true"
+					android:id="@+id/instantBook"
+					style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+			/>
+			
+			<ImageView android:layout_width="24dp" android:layout_height="24dp"
+			           android:background="@drawable/question_mark_black"
+			           android:backgroundTint="@color/lightest_grey"
+			           android:layout_gravity="center_vertical"
+			           android:layout_margin="@dimen/small_margin"
+			           android:id="@+id/instantBookDesc"
+			/>
+		</LinearLayout>
+		
+	</LinearLayout>
+	
+	<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+	
+	>
+		<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/edit_text_background"
+				android:hint="Description"
+				android:textColorHint="@color/lightest_grey"
+				android:fontFamily="@font/proximanovaregular"
+				android:textSize="@dimen/small_text_size"
+				android:padding="@dimen/small_padding"
+				android:textColor="@color/black"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_marginEnd="@dimen/small_margin"
+				android:maxLines="3"
+				android:ellipsize="end"
+				android:id="@+id/description"
+				android:minHeight="70dp"
+				android:gravity="top"
+				android:layout_alignParentStart="true"
+		/>
+	
+	
+	</RelativeLayout>
+	
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_marginVertical="@dimen/small_margin"
+	>
+		
+		<RelativeLayout
+				android:orientation="horizontal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:gravity="center"
+		
+		>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Fuel Type"
+					android:padding="@dimen/small_padding"
+					android:fontFamily="@font/proximanovaregular"
+					android:textColor="@color/black"
+					android:textSize="@dimen/medium_text_size"
+					android:layout_centerVertical="true"
+					android:layout_alignParentStart="true"
+			/>
+			
+			
+			<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+					android:src="@drawable/ic_fuel_type"
+					android:padding="@dimen/small_padding"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentTop="true"
+			/>
+		
+		
+		</RelativeLayout>
+		
+		<com.google.android.material.chip.ChipGroup
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/small_padding"
+				android:layout_gravity="center"
+		>
+			<com.google.android.material.chip.Chip
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:chipBackgroundColor="@color/colorAccent"
+					app:chipCornerRadius="20dp"
+					android:text="CNG"
+					android:id="@+id/gas"
+					android:textColor="@color/white"
+					android:fontFamily="@font/proximanovaregular"
+					app:rippleColor="@color/light_grey"
+					android:textAllCaps="false"
+			/>
+			
+			<com.google.android.material.chip.Chip
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:chipBackgroundColor="@color/colorAccent"
+					app:chipCornerRadius="20dp"
+					android:textAllCaps="false"
+					android:text="Petrol"
+					android:id="@+id/petrol"
+					android:textColor="@color/white"
+					android:fontFamily="@font/proximanovaregular"
+					app:rippleColor="@color/light_grey"
+			/>
+			
+			<com.google.android.material.chip.Chip
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:chipBackgroundColor="@color/colorAccent"
+					android:text="High Octance"
+					android:id="@+id/diesel"
+					android:textAllCaps="false"
+					android:textColor="@color/white"
+					android:fontFamily="@font/proximanovaregular"
+					app:rippleColor="@color/light_grey"
+			/>
+		
+		</com.google.android.material.chip.ChipGroup>
+	</LinearLayout>
+	
+	<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+		
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_gravity="start"
+				android:layout_alignParentStart="true"
+				android:id="@+id/capacityLayout"
+				android:layout_marginVertical="@dimen/small_margin"
+		>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Capacity"
+					android:padding="@dimen/small_padding"
+					android:fontFamily="@font/proximanovaregular"
+					android:textColor="@color/black"
+					android:textSize="@dimen/medium_text_size"
+					android:layout_alignParentStart="true"
+					android:layout_centerVertical="true"
+			/>
+			<LinearLayout android:layout_width="140dp"
+			              android:layout_height="wrap_content"
+			              android:orientation="horizontal"
+			              android:weightSum="3"
+			              android:layout_gravity="center_vertical"
+			>
+				<TextView android:layout_width="0dp" android:layout_height="match_parent"
+				          android:text="2"
+				          android:layout_weight="1"
+				          android:textColor="@color/white"
+				          android:fontFamily="@font/proximanovaregular"
+				          android:textAlignment="center"
+				          android:textStyle="bold"
+				          android:textSize="@dimen/normal_text_size"
+				          android:background="@drawable/circle_bg_with_accent_color"
+				          android:padding="@dimen/small_padding"
+				          android:layout_margin="@dimen/small_margin"
+				          android:gravity="center"
+				/>
+				
+				<TextView android:layout_width="0dp" android:layout_height="match_parent"
+				          android:text="4"
+				          android:layout_weight="1"
+				          android:textColor="@color/white"
+				          android:fontFamily="@font/proximanovaregular"
+				          android:textAlignment="center"
+				          android:textStyle="bold"
+				          android:textSize="@dimen/normal_text_size"
+				          android:background="@drawable/circle_bg_with_accent_color"
+				          android:gravity="center"
+				          android:padding="@dimen/small_padding"
+				          android:layout_margin="@dimen/small_margin"
+				/>
+				
+				<TextView android:layout_width="0dp" android:layout_height="match_parent"
+				          android:text="5"
+				          android:layout_weight="1"
+				          android:textColor="@color/white"
+				          android:fontFamily="@font/proximanovaregular"
+				          android:textAlignment="center"
+				          android:textStyle="bold"
+				          android:gravity="center"
+				          android:textSize="@dimen/normal_text_size"
+				          android:background="@drawable/circle_bg_with_accent_color"
+				          android:padding="@dimen/small_padding"
+				          android:layout_margin="@dimen/small_margin"
+				/>
+			
+			</LinearLayout>
+		
+		</LinearLayout>
+		
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_alignParentEnd="true"
+				android:layout_alignBottom="@id/capacityLayout"
+				android:layout_alignTop="@+id/capacityLayout"
+		>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Distance Covered"
+					android:padding="@dimen/small_padding"
+					android:fontFamily="@font/proximanovaregular"
+					android:textColor="@color/black"
+					android:textSize="@dimen/medium_text_size"
+					android:layout_gravity="end"
+			/>
+			
+			<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/edit_text_background"
+					android:hint="16000 KM"
+					android:textColorHint="@color/lightest_grey"
+					android:fontFamily="@font/proximanovaregular"
+					android:textSize="@dimen/medium_text_size"
+					android:textColor="@color/black"
+					android:layout_gravity="bottom"
+					android:gravity="end"
+					android:paddingTop="@dimen/small_padding"
+					android:paddingBottom="@dimen/small_padding"
+					android:maxLines="1"
+					android:ellipsize="end"
+					android:id="@+id/miles"
+			/>
+		
+		</LinearLayout>
+		
+	</RelativeLayout>
+	
+	<fragment
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/daysFragment"
+			android:name="com.example.sarwan.renkar.modules.days.DaysFragment"
+	/>
+	
+	<fragment
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/featuresFragment"
+			android:name="com.example.sarwan.renkar.modules.features.FeaturesFragment"
+	/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

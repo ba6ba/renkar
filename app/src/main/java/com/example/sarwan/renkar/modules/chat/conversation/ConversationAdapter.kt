@@ -60,9 +60,9 @@ class ConversationAdapter(private val activity: ParentActivity,
                     val filteredList = ArrayList<ChatRooms>()
                     for (row in contactsList) {
 
-                        // title match condition. this might differ depending on your requirement
-                        // here we are looking for title or phone number match
-                        row.title?.let {
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        row.name?.let {
                             if (it.toLowerCase().contains(charString.toLowerCase())) {
                                 filteredList.add(row)
                             }
@@ -88,8 +88,8 @@ class ConversationAdapter(private val activity: ParentActivity,
 
         fun loadData(chatRoom: ChatRooms, position: Int){
 
-            itemView.contactName.text = if (chatRoom.group) chatRoom.title ?:kotlin.run { "" } else chatRoom.chat_members.find { it.id!=activity.profile?.id }?.name
-            makeContactIcon(itemView.contactIcon, if (chatRoom.group) chatRoom.title ?:kotlin.run { "" } else chatRoom.chat_members.find { it.id!=activity.profile?.id }?.name)
+            itemView.contactName.text = if (chatRoom.group) chatRoom.name ?:kotlin.run { "" } else chatRoom.chat_members.find { it.id!=activity.profile?.id }?.name
+            makeContactIcon(itemView.contactIcon, if (chatRoom.group) chatRoom.name ?:kotlin.run { "" } else chatRoom.chat_members.find { it.id!=activity.profile?.id }?.name)
             checkIfReadMessage(chatRoom)
             itemView.tag = position
             itemView.setOnClickListener {

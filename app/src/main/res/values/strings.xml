@@ -21,4 +21,14 @@
 	<string name="check_mark">\u2713</string>
 	<string name="agree_to_terms_and_conditions">Agree to terms and conditions</string>
 	<string name="rent_a_car">Signup as a Renter</string>
+	<string name="pricing_text">Enter your desired amount for daily rent of your car</string>
+	<string name="pricing_terms">Team Renkar will work on this choice to make a better decision to make your earning
+		better
+	</string>
+	<string name="air_conditioned">Air Condition</string>
+	<string name="alloy_rim">Alloy rims</string>
+	<string name="auto">Automatic</string>
+	<string name="convertible">Convertible</string>
+	<string name="blue_tooth">Bluetooth</string>
+	<string name="gps">GPS</string>
 </resources>

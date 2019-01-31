@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:padding="@dimen/medium_padding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+	<com.google.android.material.card.MaterialCardView
+			android:layout_width="match_parent"
+			android:layout_height="200dp"
+			app:cardCornerRadius="30dp"
+			app:cardBackgroundColor="@color/colorAccent"
+			android:background="@color/colorAccent"
+			android:id="@+id/coverFrame"
+			app:cardElevation="@dimen/max_elevation"
+	>
+	
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:id="@+id/cover"
+				android:src="@drawable/car"
+		/>
+		
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:background="@drawable/light_shade"
+				android:backgroundTint="@color/dark_grey"
+				android:backgroundTintMode="src_atop"
+		/>
+		
+	</com.google.android.material.card.MaterialCardView>
+	
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+	          android:background="@drawable/rounded_shape"
+	          android:text="15$/hr"
+	          android:backgroundTint="@color/white"
+	          android:layout_alignParentEnd="true"
+	          android:layout_alignBottom="@id/coverFrame"
+	          android:textSize="@dimen/v_large_text_size"
+	          android:fontFamily="@font/proximanovaextracondensedbold"
+	          android:paddingTop="@dimen/small_padding"
+	          android:paddingBottom="@dimen/small_padding"
+	          android:paddingStart="@dimen/medium_padding"
+	          android:gravity="bottom"
+	          android:paddingEnd="@dimen/medium_padding"
+	          android:textColor="@color/colorAccent"
+	/>
+	
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+	              android:weightSum="2"
+	              android:layout_below="@id/coverFrame"
+	>
+		<RelativeLayout android:layout_width="0dp"
+		                android:layout_height="wrap_content"
+		                android:layout_below="@id/coverFrame"
+		                android:gravity="center_vertical"
+		                android:id="@+id/carLayout"
+		                android:layout_weight="1.2"
+		                android:layout_gravity="center_vertical"
+		
+		
+		>
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="MUSTANG"
+			          android:textSize="@dimen/large_text_size"
+			          android:fontFamily="@font/proximanovasbold"
+			          android:textColor="@color/colorPrimaryDark"
+			          android:id="@+id/car_name"
+			          android:paddingTop="@dimen/small_padding"
+			          android:paddingBottom="@dimen/small_padding"
+			          android:layout_marginEnd="@dimen/small_margin"
+			/>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="1969"
+			          android:textSize="@dimen/medium_text_size"
+			          android:fontFamily="@font/proximanovaregular"
+			          android:textColor="@color/light_grey"
+			          android:id="@+id/car_model"
+			          android:layout_toEndOf="@id/car_name"
+			          android:textAlignment="textEnd"
+			          android:layout_alignEnd="@id/car_manufacturer"
+			          android:layout_alignBottom="@id/ratingBar"
+			          android:layout_marginStart="@dimen/small_margin"
+			/>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="FORD"
+			          android:textSize="@dimen/medium_text_size"
+			          android:fontFamily="@font/proximanovaregular"
+			          android:textStyle="bold"
+			          android:textColor="@color/light_grey"
+			          android:id="@+id/car_manufacturer"
+			          android:layout_toEndOf="@id/car_name"
+			          android:layout_above="@id/car_model"
+			          android:textAlignment="textEnd"
+			          android:layout_marginStart="@dimen/small_margin"
+			/>
+			
+			
+			<androidx.appcompat.widget.AppCompatRatingBar
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/ratingBar"
+					android:layout_below="@id/car_name"
+					android:layout_alignEnd="@id/car_name"
+					style="@style/Base.Widget.AppCompat.RatingBar.Small"
+					android:isIndicator="true"
+					android:numStars="5"
+					android:rating="5"
+					android:layout_alignStart="@id/car_name"
+			
+			/>
+		
+		</RelativeLayout>
+		
+		<RelativeLayout android:layout_width="0dp" android:layout_height="wrap_content"
+		                android:id="@+id/personLayout"
+		                android:layout_weight="0.8"
+		                android:layout_gravity="center_vertical"
+		>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="by"
+			          android:textSize="@dimen/medium_text_size"
+			          android:fontFamily="@font/fondy"
+			          android:textColor="@color/colorAccent"
+			          android:layout_alignParentEnd="true"
+			          android:id="@+id/of"
+			          android:layout_alignParentTop="true"
+			/>
+			
+			
+			<de.hdodenhof.circleimageview.CircleImageView
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+					android:src="@drawable/ic_boy"
+					android:id="@+id/person_icon"
+					android:layout_alignBottom="@id/person_name"
+					android:layout_alignTop="@id/of"
+			/>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="ABDUL BASIT"
+			          android:textSize="@dimen/medium_text_size"
+			          android:fontFamily="@font/proximanovaregular"
+			          android:textStyle="bold"
+			          android:ellipsize="end"
+			          android:textColor="@color/light_grey"
+			          android:layout_gravity="bottom"
+			          android:id="@+id/person_name"
+			          android:maxLength="15"
+			          android:layout_alignParentEnd="true"
+			          android:layout_below="@id/of"
+			          
+			/>
+		
+		</RelativeLayout>
+		
+	</LinearLayout>
+	
+</RelativeLayout>

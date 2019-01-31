@@ -58,7 +58,7 @@ class ChatActivity : ParentActivity()  {
     }
 
     private fun setToolbarTitle() {
-        supportActionBar?.title = if (chatRoom?.group!!) chatRoom?.title?.capitalize() else chatRoom?.chat_members?.find { it.id!=profile?.id }?.name?.capitalize()
+        supportActionBar?.name = if (chatRoom?.group!!) chatRoom?.name?.capitalize() else chatRoom?.chat_members?.find { it.id!=profile?.id }?.name?.capitalize()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -135,14 +135,14 @@ class ChatActivity : ParentActivity()  {
                 chatToolbar.menu.getItem(0).isVisible = false
             } else if (chatRoom?.chat_members?.any { member-> member.id == chatFragment?.blockUserId }!!) {
                 try {
-                    chatToolbar.menu.getItem(0).title = "Unblock"
+                    chatToolbar.menu.getItem(0).name = "Unblock"
                 } catch (e:Exception){
                     Log.d("","")
                 }
             } else {
                 checkOpponentOnlineStatus()
                 chatFragment?.invisibleBlockUserLayout()
-                chatToolbar.menu.getItem(0).title = "Block"
+                chatToolbar.menu.getItem(0).name = "Block"
             }
         hideProgress()
     }

@@ -66,7 +66,7 @@ class ChatFragment : ChatBaseFragment(), View.OnClickListener {
         if (adapter?.itemCount == 0) setChatRoomFields(message)
         else {
             FirestoreQueryCenter.setLastMessageOfConversation(roomId, message.message!! ,
-                    pActivity.profile?.userName!!, pActivity.profile?.id!!, chatModel?.title!!, (chatModel?.chat_members?.map { it.id } as ArrayList<Int>))
+                    pActivity.profile?.userName!!, pActivity.profile?.id!!, chatModel?.name!!, (chatModel?.chat_members?.map { it.id } as ArrayList<Int>))
         }
 
         adapter?.addItem(message)
@@ -85,7 +85,7 @@ class ChatFragment : ChatBaseFragment(), View.OnClickListener {
     private fun sendNotification(myMessage: Message) {
         val message = FCMMessage()
         message.body = myMessage.message
-        message.title = pActivity.profile?.userName
+        message.name = pActivity.profile?.userName
         val members = chatModel?.chat_members?.filter { it.id!=pActivity.profile?.id }?.let {
             for (i in it){
                 message.user_ids?.add(i.id!!)
