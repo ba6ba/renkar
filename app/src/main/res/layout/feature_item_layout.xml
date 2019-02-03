@@ -11,8 +11,8 @@
 >
 
 	<ImageView
-			android:layout_width="40dp"
-			android:layout_height="40dp"
+			android:layout_width="20dp"
+			android:layout_height="20dp"
 			android:id="@+id/featureIcon"
 			android:padding="@dimen/small_padding"
 			android:background="@drawable/plus_icon_light"
@@ -26,7 +26,7 @@
 			android:padding="@dimen/small_padding"
 			android:fontFamily="@font/proximanovaregular"
 			android:textColor="@color/black"
-			android:textSize="@dimen/medium_text_size"
+			android:textSize="@dimen/small_text_size"
 	/>
 	
 	<View android:layout_width="20dp" android:layout_height="match_parent"

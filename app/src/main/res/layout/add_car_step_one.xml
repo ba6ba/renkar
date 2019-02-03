@@ -368,14 +368,17 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:id="@+id/daysFragment"
-			android:name="com.example.sarwan.renkar.modules.days.DaysFragment"
+			android:name="com.example.sarwan.renkar.modules.days.DayFragment"
+			android:layout_margin="@dimen/small_margin"
 	/>
+	
 	
 	<fragment
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:id="@+id/featuresFragment"
-			android:name="com.example.sarwan.renkar.modules.features.FeaturesFragment"
+			class="com.example.sarwan.renkar.modules.features.FeaturesFragment"
+			android:layout_margin="@dimen/small_margin"
 	/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

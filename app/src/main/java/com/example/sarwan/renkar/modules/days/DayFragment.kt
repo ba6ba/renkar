@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.model.Days
+import com.example.sarwan.renkar.model.Features
+import com.example.sarwan.renkar.modules.features.FeaturesAdapter
 import com.example.sarwan.renkar.modules.features.FeaturesData
-import com.example.sarwan.renkar.modules.lister.ListerAddCarFragment
+import com.example.sarwan.renkar.modules.features.FeaturesFragment
 import kotlinx.android.synthetic.main.days_layout.*
 
 /**
@@ -17,15 +22,14 @@ import kotlinx.android.synthetic.main.days_layout.*
  * Activities that contain this fragment must implement the
  * [ContactFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ContactFragment.newInstance] factory method to
+ * Use the [DayFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class DaysFragment : Fragment(), DaysAdapter.DaysSelected{
+class DayFragment : Fragment(), DaysAdapter.DaysSelected {
 
-    private var layoutManager : androidx.recyclerview.widget.LinearLayoutManager? = null
     private var adapter: DaysAdapter? = null
-    private var selectedDays : ArrayList<String> ? = null
+    private var selectedDays : ArrayList<String> ? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +38,7 @@ class DaysFragment : Fragment(), DaysAdapter.DaysSelected{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.days_fragment, container, false)
+        return inflater.inflate(R.layout.features_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,21 +47,20 @@ class DaysFragment : Fragment(), DaysAdapter.DaysSelected{
     }
 
     private fun initializeViews() {
-        layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        adapter = DaysAdapter(activity, FeaturesData.populateDays(),this)
-        recyclerView.layoutManager = layoutManager
+        adapter = DaysAdapter(activity, DaysData.populateDays(), this)
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
     }
 
-    fun initDays(days : ArrayList<Days>){
+    fun initFeatures(days : ArrayList<Days>){
         adapter?.swap(days)
     }
 
 
-    override fun onSelect(selectedDay: String?, flag: DaysFragment.Action) {
+    override fun onSelect(selectedDay: String?, flag: Action) {
         when(flag){
-            Action.ADDED-> selectedDay?.let { selectedDays?.add(it) }
-            Action.REMOVED-> selectedDay?.let { selectedDays?.remove(it) }
+            Action.ADDED -> selectedDay?.let { selectedDays?.add(it) }
+            Action.REMOVED -> selectedDay?.let { selectedDays?.remove(it) }
         }
     }
 
@@ -69,7 +72,7 @@ class DaysFragment : Fragment(), DaysAdapter.DaysSelected{
          * @return A new instance of fragment ListerProfileFragment.
          */
         @JvmStatic
-        fun newInstance() = DaysFragment()
+        fun newInstance() = DayFragment()
     }
 
     enum class Action {

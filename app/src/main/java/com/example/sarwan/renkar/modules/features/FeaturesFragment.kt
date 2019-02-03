@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
-import com.example.sarwan.renkar.model.Days
 import com.example.sarwan.renkar.model.Features
-import com.example.sarwan.renkar.modules.lister.ListerAddCarFragment
+import com.example.sarwan.renkar.modules.days.DayFragment
 import kotlinx.android.synthetic.main.days_layout.*
 
 /**
@@ -26,7 +24,7 @@ import kotlinx.android.synthetic.main.days_layout.*
 class FeaturesFragment : Fragment(), FeaturesAdapter.FeaturesSelected {
 
     private var adapter: FeaturesAdapter? = null
-    private var selectedFeatures : ArrayList<String> ? = null
+    private var selectedFeatures : ArrayList<String> ? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

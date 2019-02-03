@@ -1,13 +1,17 @@
-package com.example.sarwan.renkar.modules.lister
+package com.example.sarwan.renkar.modules.lister.add
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.AppBarStateChangeListener
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.android.synthetic.main.add_car_step_three.*
 import kotlinx.android.synthetic.main.lister_add_car_fragment.*
 
 /**
@@ -19,9 +23,8 @@ import kotlinx.android.synthetic.main.lister_add_car_fragment.*
  * create an instance of this fragment.
  *
  */
-class ListerAddCarFragment : Fragment(){
+class ListerAddCarFragment : ListerAddCarBaseFragment(){
 
-    private var onStep : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,24 @@ class ListerAddCarFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClickListeners()
+        viewChangeListeners()
+    }
+
+    private fun viewChangeListeners(){
+        address_view.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                (s?.length!! >= 3).let {
+                    if (it)
+                        queryForAddress(s.toString())
+                }
+            }
+        })
     }
 
     private fun onClickListeners() {
@@ -48,6 +69,12 @@ class ListerAddCarFragment : Fragment(){
         }
 
         appbar.addOnOffsetChangedListener(appBarChangeListener)
+
+        address_view.onItemClickListener = autoCompleteItemClickListener
+        address_view.setOnClickListener {
+            if (autoCompleteModelList.isNotEmpty())
+                (it as AutoCompleteTextView).showDropDown()
+        }
     }
 
     private val appBarChangeListener = object : AppBarStateChangeListener(){
@@ -58,48 +85,6 @@ class ListerAddCarFragment : Fragment(){
                 AppBarStateChangeListener.State.IDLE -> addCarBar.visibility = View.GONE
             }
         }
-    }
-
-    private fun layoutTransitionOnNextButton() {
-        when(onStep){
-            1-> {
-                step_one.visibility = View.GONE
-                step_two.visibility = View.VISIBLE
-                previous.visibility = View.VISIBLE
-                onStep+=1
-            }
-            2-> {
-                step_two.visibility = View.GONE
-                step_three.visibility = View.VISIBLE
-                next.setImageResource(R.drawable.ic_check_black_24dp)
-                onStep+=1
-            }
-            3-> {
-                showSummaryDialog()
-            }
-        }
-    }
-
-
-    private fun layoutTransitionOnPreviousButton() {
-        when(onStep){
-            2-> {
-                step_two.visibility = View.GONE
-                step_one.visibility = View.VISIBLE
-                previous.visibility = View.GONE
-                onStep=-1
-            }
-            3-> {
-                step_two.visibility = View.VISIBLE
-                step_three.visibility = View.GONE
-                next.setImageResource(R.drawable.next)
-                onStep-=1
-            }
-        }
-    }
-
-    private fun showSummaryDialog() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     companion object {

@@ -11,14 +11,27 @@ class DaysData{
 
         fun populateDays() : ArrayList<Days>{
             val days :ArrayList<Days> = ArrayList()
-            val calendar = Calendar.getInstance()
-            calendar.firstDayOfWeek = Calendar.MONDAY
-            calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-
-            for (i in 0 until 7){
-                days[i].name = DateTimeUtility.format.format(calendar.time)
-                calendar.add(Calendar.DAY_OF_MONTH, 1)
-            }
+            val day1 = Days()
+            day1.name = "MONDAY"
+            days.add(day1)
+            val day2 = Days()
+            day2.name = "TUESDAY"
+            days.add(day2)
+            val day3 = Days()
+            day3.name = "WEDNESDAY"
+            days.add(day3)
+            val day4 = Days()
+            day4.name = "THURSDAY"
+            days.add(day4)
+            val day5 = Days()
+            day5.name = "FRIDAY"
+            days.add(day5)
+            val day6 = Days()
+            day6.name = "SATURDAY"
+            days.add(day6)
+            val day7 = Days()
+            day7.name = "SUNDAY"
+            days.add(day7)
             return days
         }
     }

@@ -31,4 +31,5 @@
 	<string name="convertible">Convertible</string>
 	<string name="blue_tooth">Bluetooth</string>
 	<string name="gps">GPS</string>
+	<string name="show_map"><u>Show Map</u></string>
 </resources>

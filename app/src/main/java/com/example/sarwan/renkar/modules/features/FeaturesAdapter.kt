@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.example.sarwan.renkar.R
-import com.example.sarwan.renkar.model.Days
 import com.example.sarwan.renkar.model.Features
+import com.example.sarwan.renkar.modules.days.DayFragment
 import kotlinx.android.synthetic.main.feature_item_layout.view.*
 import kotlin.collections.ArrayList
 
@@ -47,7 +47,7 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
         }
 
         private fun setOnClickListener(position: Int) {
-            itemView.layout.tag = position
+            itemView.tag = position
             itemView.setOnClickListener {
                 changeState(it.tag as Int)
             }

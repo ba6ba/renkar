@@ -79,7 +79,6 @@
 		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
 		          android:text="Add your Car"
 		          android:background="@drawable/bottom_curve_rectangle"
-		          android:backgroundTint="@color/colorAccent"
 		          android:padding="@dimen/normal_padding"
 		          android:textSize="@dimen/medium_text_size"
 		          android:textAlignment="center"

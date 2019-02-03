@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-          android:text="M"
-          android:id="@+id/day"
-          android:textColor="@color/white"
-          android:layout_gravity="center"
-          android:textSize="@dimen/normal_text_size"
-          android:fontFamily="@font/proximanovaregular"
-          android:textStyle="bold"
-          android:gravity="center"
-          android:background="@drawable/circle_drawable"
-          android:backgroundTint="@color/dark_grey"
-          xmlns:android="http://schemas.android.com/apk/res/android"/>
+<LinearLayout
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_gravity="center"
+		android:gravity="center"
+>
+	
+	<TextView android:layout_width="30dp" android:layout_height="30dp"
+	          android:text="M"
+	          android:id="@+id/day"
+	          android:textColor="@color/white"
+	          android:textSize="@dimen/small_text_size"
+	          android:fontFamily="@font/proximanovaslight"
+	          android:gravity="center"
+	          android:background="@drawable/circle_drawable"
+	          android:layout_margin="@dimen/small_margin"
+	          xmlns:android="http://schemas.android.com/apk/res/android"/>
+	
+</LinearLayout>

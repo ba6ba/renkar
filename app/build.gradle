@@ -85,8 +85,23 @@ dependencies {
     implementation 'com.github.skydoves:colorpickerpreference:1.0.2'
 }
 
-apply plugin: 'com.google.gms.google-services'
+/*Google places library*/
+dependencies {
+    implementation 'com.google.android.libraries.places:places:1.0.0'
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation(name:'HERE-sdk', ext:'aar')
+    implementation 'com.google.code.gson:gson:2.8.5'
+}
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

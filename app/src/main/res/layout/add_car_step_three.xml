@@ -67,16 +67,29 @@
 			          android:layout_marginHorizontal="@dimen/normal_margin"
 			/>
 			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="@string/show_map"
+			          android:fontFamily="@font/proximanovaregular"
+			          android:textStyle="bold"
+			          android:textSize="@dimen/small_text_size"
+			          android:textColor="@color/colorAccent"
+			          android:id="@+id/show_map"
+			          android:padding="@dimen/small_padding"
+			          android:layout_alignEnd="@id/address_view"
+			          android:layout_above="@id/address_view"
+			/>
+			
 			<androidx.appcompat.widget.AppCompatAutoCompleteTextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:id="@+id/addresses"
+					android:id="@+id/address_view"
 					android:layout_below="@id/separator_license"
 					android:background="@drawable/edit_text_background_rounded"
 					android:padding="@dimen/normal_padding"
 					android:drawableRight="@drawable/ic_add_location_black_24dp"
 					android:drawableTint="@color/light_grey"
 					android:layout_marginVertical="@dimen/normal_margin"
+					android:maxLines="2"
 					android:hint="Street 9, PECHS, Karachi"
 					android:fontFamily="@font/proximanovaregular"
 					android:textSize="@dimen/medium_text_size"
@@ -84,8 +97,20 @@
 					android:textColorHint="@color/light_grey"
 					android:layout_marginHorizontal="@dimen/normal_margin"
 					android:elevation="@dimen/max_elevation"
+					android:dropDownHeight="150dp"
 			/>
 			
+			<com.google.android.material.chip.ChipGroup
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="@dimen/small_padding"
+					android:layout_gravity="center"
+					android:id="@+id/address_chip_group"
+					android:layout_below="@id/address_view"
+					android:layout_marginHorizontal="@dimen/normal_margin"
+			>
+
+			</com.google.android.material.chip.ChipGroup>
 			
 		</RelativeLayout>
 		

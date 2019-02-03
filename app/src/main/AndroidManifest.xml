@@ -64,13 +64,25 @@
                 android:configChanges="orientation|screenSize"
                 android:windowSoftInputMode="adjustPan"
                 android:screenOrientation="userPortrait"
-        /><activity
+        />
+        
+        <activity
             android:name=".modules.renter.RenterActivity"
             android:theme="@style/renkarTheme"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="userPortrait"
     />
+        
+        <meta-data android:name="com.here.android.maps.appid"
+                   android:value="FqGVJ21W8L500333LtfX"/>
+        
+        <meta-data android:name="com.here.android.maps.apptoken"
+                   android:value="cjal5HUbu1_N97oyWocJ1g"/>
+        
+        <meta-data
+                android:name="access_token"
+                android:value="pk.eyJ1IjoiYmE2YmEiLCJhIjoiY2pyb293OWtiMTM0dzQ5bXNzY3k2OXdldyJ9.SHjjucqDgGUkogES2nPXLg"
+        />
     </application>
-
 </manifest>
