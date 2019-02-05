@@ -12,6 +12,8 @@
     <color name="dark_grey">#545454</color>
     <color name="light_grey">#9c9c9c</color>
     <color name="lightest_grey">#cacaca</color>
+    <color name="v_lightest_grey">#f9f9f9</color>
+    
     <color name="transparent">#00ffffff</color>
     <color name="darkest_grey">#262626</color>
     

@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.modules.features
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.model.Features
-import com.example.sarwan.renkar.modules.days.DayFragment
 import kotlinx.android.synthetic.main.days_layout.*
 
 /**
@@ -21,10 +21,14 @@ import kotlinx.android.synthetic.main.days_layout.*
  * create an instance of this fragment.
  *
  */
-class FeaturesFragment : Fragment(), FeaturesAdapter.FeaturesSelected {
+class FeaturesFragment : Fragment(){
 
     private var adapter: FeaturesAdapter? = null
-    private var selectedFeatures : ArrayList<String> ? = ArrayList()
+    var interactionListener : FeaturesInteractionListener ? = null
+
+    interface FeaturesInteractionListener{
+        fun onSelect(selectedFeature: Features, flag: Action)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +55,12 @@ class FeaturesFragment : Fragment(), FeaturesAdapter.FeaturesSelected {
         adapter?.swap(features)
     }
 
-
-    override fun onSelect(selectedFeature: String?, flag: Action) {
-        when(flag){
-            Action.ADDED -> selectedFeature?.let { selectedFeatures?.add(it) }
-            Action.REMOVED -> selectedFeature?.let { selectedFeatures?.remove(it) }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FeaturesInteractionListener) {
+            interactionListener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement FeaturesInteractionListener")
         }
     }
 

@@ -3,19 +3,17 @@
         android:color="@color/colorPrimaryDark">
 	<item android:id="@android:id/mask">
 		<shape android:shape="oval">
-			<stroke
-					android:color="@color/colorAccent"
-					android:width="2dp"
-			/>
+			<solid android:color="@color/colorAccent" />
 		</shape>
 	</item>
 	
 	<item android:id="@android:id/background">
 		<shape android:shape="oval">
-			<stroke
-					android:color="@color/colorAccent"
-					android:width="2dp"
-			/>
+			<gradient
+					android:angle="90"
+					android:endColor="@color/colorAccent"
+					android:startColor="@color/colorAccent_50"
+					android:type="linear" />
 		</shape>
 	</item>
 </ripple>

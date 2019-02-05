@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.model.Features
-import com.example.sarwan.renkar.modules.days.DayFragment
 import kotlinx.android.synthetic.main.feature_item_layout.view.*
 import kotlin.collections.ArrayList
 
 class FeaturesAdapter(private val activity : FragmentActivity?, private var featuresList: ArrayList<Features>,
-                      private var featuresSelected : FeaturesSelected
+                      private var fragment : FeaturesFragment
 )
     : androidx.recyclerview.widget.RecyclerView.Adapter<FeaturesAdapter.ViewHolder>() {
 
@@ -61,16 +60,12 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
         private fun changeViewsAccordingly(pos: Int) {
             if (featuresList[pos].selected){
                 itemView.indicator.visibility = View.VISIBLE
-                featuresSelected.onSelect(featuresList[pos].name, FeaturesFragment.Action.ADDED)
+                fragment.interactionListener?.onSelect(featuresList[pos], FeaturesFragment.Action.ADDED)
             }else{
                 itemView.indicator.visibility = View.GONE
-                featuresSelected.onSelect(featuresList[pos].name, FeaturesFragment.Action.REMOVED)
+                fragment.interactionListener?.onSelect(featuresList[pos], FeaturesFragment.Action.REMOVED)
             }
             notifyDataSetChanged()
         }
-    }
-
-    interface FeaturesSelected{
-        fun onSelect(selectedFeature : String?, flag : FeaturesFragment.Action)
     }
 }

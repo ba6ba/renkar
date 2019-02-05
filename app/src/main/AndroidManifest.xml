@@ -71,8 +71,14 @@
             android:theme="@style/renkarTheme"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="userPortrait"
-    />
+            android:screenOrientation="userPortrait"/>
+    
+        <activity
+                android:name=".modules.lister.add.ListerAddCarActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="userPortrait"/>
         
         <meta-data android:name="com.here.android.maps.appid"
                    android:value="FqGVJ21W8L500333LtfX"/>

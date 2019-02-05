@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.days_list_item.view.*
 import kotlin.collections.ArrayList
 
 class DaysAdapter(private val activity : FragmentActivity? , private var daysList: ArrayList<Days>,
-                  private var daysSelected : DaysAdapter.DaysSelected)
+                  private var fragment : DayFragment)
     : androidx.recyclerview.widget.RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
 
 
@@ -58,17 +58,13 @@ class DaysAdapter(private val activity : FragmentActivity? , private var daysLis
         private fun changeViewsAccordingly(pos: Int) {
             if (daysList[pos].selected){
                 itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.colorAccent)
-                daysSelected.onSelect(daysList[pos].name, DayFragment.Action.ADDED)
+                fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.ADDED)
             }else{
                 itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.black)
-                daysSelected.onSelect(daysList[pos].name, DayFragment.Action.REMOVED)
+                fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.REMOVED)
             }
             notifyDataSetChanged()
 
         }
-    }
-
-    interface DaysSelected{
-        fun onSelect(selectedDay : String?, flag : DayFragment.Action)
     }
 }

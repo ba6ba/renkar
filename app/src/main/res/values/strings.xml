@@ -32,4 +32,13 @@
 	<string name="blue_tooth">Bluetooth</string>
 	<string name="gps">GPS</string>
 	<string name="show_map"><u>Show Map</u></string>
+	<string name="add_your_car">Add your Car</string>
+	<string name="instant_book_desc">Instant book allows renters to rent you car immediately without asking you for
+		availability, instead lister and renter will have a chat about renting a car.
+	</string>
+	<string name="must_not_be_empty">Fields must not be empty</string>
+	<string name="hooray">HOORAYY !! YOU CAN EARN UPTO</string>
+	<string name="renkar_cut">After <b>Renkar cut</b> you will earn up to</string>
+	<string name="per_week">per week</string>
+	<string name="per_day">per day</string>
 </resources>

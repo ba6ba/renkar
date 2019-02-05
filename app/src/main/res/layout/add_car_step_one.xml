@@ -1,5 +1,5 @@
 <androidx.appcompat.widget.LinearLayoutCompat
-		android:layout_width="match_parent"
+		xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
 		android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_marginHorizontal="@dimen/normal_margin"
 		android:orientation="vertical"
@@ -11,9 +11,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/edit_text_background"
-			android:hint="CIVIC XR"
+			android:hint="MUSTANG"
 			android:textColorHint="@color/lightest_grey"
-			android:fontFamily="@font/proximanovasbold"
+			android:fontFamily="@font/proximanovaslight"
+			android:textStyle="bold"
 			android:textSize="@dimen/v_large_text_size"
 			android:paddingStart="@dimen/small_padding"
 			android:paddingEnd="@dimen/medium_padding"
@@ -21,6 +22,7 @@
 			android:paddingBottom="@dimen/small_padding"
 			android:textColor="@color/black"
 			android:maxLines="1"
+			android:maxLength="15"
 			android:ellipsize="end"
 			android:layout_marginVertical="@dimen/small_margin"
 			android:id="@+id/name"
@@ -30,19 +32,24 @@
 	                android:layout_height="wrap_content"
 	                android:gravity="center_vertical"
 	>
+		
 		<com.google.android.material.textfield.TextInputEditText
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="@drawable/edit_text_background"
-				android:hint="HONDA"
+				android:hint="FORD"
 				android:textColorHint="@color/lightest_grey"
 				android:fontFamily="@font/proximanovaregular"
 				android:textSize="@dimen/medium_text_size"
-				android:padding="@dimen/small_padding"
+				android:paddingStart="@dimen/small_padding"
+				android:paddingEnd="@dimen/large_padding"
+				android:paddingTop="@dimen/small_padding"
+				android:paddingBottom="@dimen/small_padding"
 				android:textColor="@color/black"
 				android:layout_marginVertical="@dimen/small_margin"
 				android:layout_marginEnd="@dimen/small_margin"
 				android:maxLines="1"
+				android:maxLength="12"
 				android:ellipsize="end"
 				android:id="@+id/manufactured_by"
 				android:layout_alignParentStart="true"
@@ -52,7 +59,31 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="@drawable/edit_text_background"
-				android:hint="2019"
+				android:hint="SEDAN"
+				android:textColorHint="@color/lightest_grey"
+				android:textSize="@dimen/medium_text_size"
+				android:fontFamily="@font/proximanovaregular"
+				android:padding="@dimen/small_padding"
+				android:textColor="@color/black"
+				android:layout_marginVertical="@dimen/small_margin"
+				android:layout_marginEnd="@dimen/small_margin"
+				android:maxLines="1"
+				android:id="@+id/vehicle_type"
+				android:paddingStart="@dimen/small_padding"
+				android:paddingEnd="@dimen/large_padding"
+				android:paddingTop="@dimen/small_padding"
+				android:paddingBottom="@dimen/small_padding"
+				android:maxLength="10"
+				android:ellipsize="end"
+				android:layout_toRightOf="@id/manufactured_by"
+		/>
+		
+		
+		<com.google.android.material.textfield.TextInputEditText
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/edit_text_background"
+				android:hint="1989"
 				android:textColorHint="@color/lightest_grey"
 				android:textSize="@dimen/medium_text_size"
 				android:fontFamily="@font/proximanovaregular"
@@ -62,21 +93,27 @@
 				android:layout_marginEnd="@dimen/small_margin"
 				android:maxLines="1"
 				android:id="@+id/model"
+				android:paddingStart="@dimen/small_padding"
+				android:paddingEnd="@dimen/large_padding"
+				android:paddingTop="@dimen/small_padding"
+				android:paddingBottom="@dimen/small_padding"
+				android:maxLength="6"
 				android:ellipsize="end"
-				android:layout_toRightOf="@id/manufactured_by"
+				android:layout_toLeftOf="@id/selectedColor"
+				android:layout_toRightOf="@id/vehicle_type"
 		
 		/>
 		
 		<ImageView android:layout_width="50dp" android:layout_height="15dp"
 		           android:layout_centerVertical="true"
-		           android:layout_toLeftOf="@id/colorPickerView"
+		           android:layout_toLeftOf="@id/color_picker_view"
 		           android:layout_marginEnd="@dimen/medium_margin"
 		           android:background="@color/colorAccent"
 		           android:id="@+id/selectedColor"
 		/>
 		
 		<com.skydoves.colorpickerpreference.ColorPickerView
-				android:id="@+id/colorPickerView"
+				android:id="@+id/color_picker_view"
 				android:layout_width="40dp"
 				android:layout_height="40dp"
 				app:palette="@drawable/palette"
@@ -120,9 +157,7 @@
 					android:textAllCaps="true"
 					android:textSize="@dimen/medium_text_size"
 					android:checked="true"
-					app:useMaterialThemeColors="true"
 					android:id="@+id/instantBook"
-					style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
 			/>
 			
 			<ImageView android:layout_width="24dp" android:layout_height="24dp"
@@ -191,27 +226,29 @@
 			
 			
 			<androidx.appcompat.widget.AppCompatImageView
-					android:layout_width="40dp"
-					android:layout_height="40dp"
+					android:layout_width="25dp"
+					android:layout_height="25dp"
 					android:src="@drawable/ic_fuel_type"
 					android:padding="@dimen/small_padding"
-					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
 					android:layout_alignParentTop="true"
+					android:layout_centerVertical="true"
 			/>
 		
 		
 		</RelativeLayout>
 		
 		<com.google.android.material.chip.ChipGroup
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:padding="@dimen/small_padding"
 				android:layout_gravity="center"
+				android:id="@+id/chip_group"
 		>
 			<com.google.android.material.chip.Chip
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					app:chipBackgroundColor="@color/colorAccent"
+					app:chipBackgroundColor="@color/light_grey"
 					app:chipCornerRadius="20dp"
 					android:text="CNG"
 					android:id="@+id/gas"
@@ -224,7 +261,7 @@
 			<com.google.android.material.chip.Chip
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					app:chipBackgroundColor="@color/colorAccent"
+					app:chipBackgroundColor="@color/light_grey"
 					app:chipCornerRadius="20dp"
 					android:textAllCaps="false"
 					android:text="Petrol"
@@ -237,7 +274,7 @@
 			<com.google.android.material.chip.Chip
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					app:chipBackgroundColor="@color/colorAccent"
+					app:chipBackgroundColor="@color/light_grey"
 					android:text="High Octance"
 					android:id="@+id/diesel"
 					android:textAllCaps="false"
@@ -280,7 +317,7 @@
 				<TextView android:layout_width="0dp" android:layout_height="match_parent"
 				          android:text="2"
 				          android:layout_weight="1"
-				          android:textColor="@color/white"
+				          android:textColor="@color/colorAccent"
 				          android:fontFamily="@font/proximanovaregular"
 				          android:textAlignment="center"
 				          android:textStyle="bold"
@@ -289,12 +326,13 @@
 				          android:padding="@dimen/small_padding"
 				          android:layout_margin="@dimen/small_margin"
 				          android:gravity="center"
+				          android:id="@+id/capacity_two"
 				/>
 				
 				<TextView android:layout_width="0dp" android:layout_height="match_parent"
 				          android:text="4"
 				          android:layout_weight="1"
-				          android:textColor="@color/white"
+				          android:textColor="@color/colorAccent"
 				          android:fontFamily="@font/proximanovaregular"
 				          android:textAlignment="center"
 				          android:textStyle="bold"
@@ -303,12 +341,13 @@
 				          android:gravity="center"
 				          android:padding="@dimen/small_padding"
 				          android:layout_margin="@dimen/small_margin"
+				          android:id="@+id/capacity_four"
 				/>
 				
 				<TextView android:layout_width="0dp" android:layout_height="match_parent"
 				          android:text="5"
 				          android:layout_weight="1"
-				          android:textColor="@color/white"
+				          android:textColor="@color/colorAccent"
 				          android:fontFamily="@font/proximanovaregular"
 				          android:textAlignment="center"
 				          android:textStyle="bold"
@@ -317,6 +356,7 @@
 				          android:background="@drawable/circle_bg_with_accent_color"
 				          android:padding="@dimen/small_padding"
 				          android:layout_margin="@dimen/small_margin"
+				          android:id="@+id/capacity_five"
 				/>
 			
 			</LinearLayout>
@@ -357,6 +397,7 @@
 					android:paddingBottom="@dimen/small_padding"
 					android:maxLines="1"
 					android:ellipsize="end"
+					android:paddingEnd="@dimen/a_small_padding"
 					android:id="@+id/miles"
 			/>
 		

@@ -5,7 +5,6 @@
 		app:cardBackgroundColor="@color/colorAccent"
 		app:cardCornerRadius="30dp"
 		app:cardUseCompatPadding="true"
-		android:foregroundTint="@color/light_grey"
 		android:elevation="@dimen/max_elevation"
 		android:animateLayoutChanges="true"
 		android:layout_gravity="center_vertical"
@@ -97,7 +96,6 @@
 					android:textColorHint="@color/light_grey"
 					android:layout_marginHorizontal="@dimen/normal_margin"
 					android:elevation="@dimen/max_elevation"
-					android:dropDownHeight="150dp"
 			/>
 			
 			<com.google.android.material.chip.ChipGroup

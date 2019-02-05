@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.modules.days
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +27,14 @@ import kotlinx.android.synthetic.main.days_layout.*
  * create an instance of this fragment.
  *
  */
-class DayFragment : Fragment(), DaysAdapter.DaysSelected {
+class DayFragment : Fragment() {
 
     private var adapter: DaysAdapter? = null
-    private var selectedDays : ArrayList<String> ? = ArrayList()
+    var interactionListener : DayFragment.DaysInteractionListener? = null
+
+    interface DaysInteractionListener{
+        fun onSelect(selectedDay : String?, flag : DayFragment.Action)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,12 +60,12 @@ class DayFragment : Fragment(), DaysAdapter.DaysSelected {
     fun initFeatures(days : ArrayList<Days>){
         adapter?.swap(days)
     }
-
-
-    override fun onSelect(selectedDay: String?, flag: Action) {
-        when(flag){
-            Action.ADDED -> selectedDay?.let { selectedDays?.add(it) }
-            Action.REMOVED -> selectedDay?.let { selectedDays?.remove(it) }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is DaysInteractionListener) {
+            interactionListener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement DaysInteractionListener")
         }
     }
 

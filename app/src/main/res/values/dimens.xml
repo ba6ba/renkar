@@ -36,9 +36,13 @@
 	<dimen name="v_v_large_text_size">32sp</dimen>
 	<dimen name="sub_heading_text_size">36sp</dimen>
 	<dimen name="heading_text_size">40sp</dimen>
+	<dimen name="v_small_text_size">10sp</dimen>
+	
 	
 	<!---->
 	<dimen name="custom_shape_size">25dp</dimen>
 	<dimen name="max_elevation">15dp</dimen>
+	<dimen name="normal_elevation">10dp</dimen>
+	<dimen name="small_elevation">5dp</dimen>
 
 </resources>
