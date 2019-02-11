@@ -36,43 +36,22 @@
 				android:fitsSystemWindows="true"
 				app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 			
-			<androidx.appcompat.widget.LinearLayoutCompat
+			<com.facebook.drawee.view.SimpleDraweeView
+					android:id="@+id/carImage"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:id="@+id/addImageLayout"
-			>
-				<com.google.android.material.card.MaterialCardView
-						android:layout_width="match_parent"
-						android:layout_height="200dp"
-						app:cardCornerRadius="25dp"
-						app:cardBackgroundColor="@color/colorPrimaryDark"
-						app:cardElevation="@dimen/max_elevation"
-						android:background="@color/colorPrimaryDark"
-						android:layout_margin="@dimen/normal_margin"
-						style="@style/Widget.MaterialComponents.CardView"
-				>
-					
-					<ImageView android:layout_width="match_parent"
-					           android:layout_height="match_parent"
-					           android:id="@+id/images"
-					>
-					
-					
-					</ImageView>
-					
-					<androidx.appcompat.widget.AppCompatImageView
-							android:layout_width="70dp"
-							android:layout_height="70dp"
-							app:srcCompat="@drawable/plus_icon_light"
-							android:layout_gravity="center"
-							android:id="@+id/addImage"
-					/>
-				
-				
-				</com.google.android.material.card.MaterialCardView>
+					android:layout_height="200dp"
+					android:elevation="@dimen/normal_elevation"
+					app:placeholderImage="@drawable/plus_icon_light"
+					app:placeholderImageScaleType="centerInside"
+					android:scaleType="centerCrop"
+					app:roundedCornerRadius="25dp"
+					app:failureImage="@drawable/renkar_dots"
+					app:progressBarImage="@drawable/renkar_logo_login"
+					app:overlayImage="@drawable/light_shade"
+					app:roundingBorderColor="@color/white"
+					android:layout_margin="@dimen/normal_margin"
+					app:roundingBorderWidth="10dp" />
 			
-			
-			</androidx.appcompat.widget.LinearLayoutCompat>
 		</com.google.android.material.appbar.CollapsingToolbarLayout>
 		
 		
@@ -86,6 +65,7 @@
 		          android:textColor="@color/white"
 		          android:fontFamily="@font/proximanovalight"
 		          android:textAllCaps="true"
+		          android:visibility="gone"
 		/>
 	
 	
@@ -93,7 +73,6 @@
 	
 	<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_marginTop="@dimen/normal_margin"
 	            app:layout_behavior="@string/appbar_scrolling_view_behavior"
 	
 	>
@@ -105,19 +84,33 @@
 	
 </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 	
-	<include
+	<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:id="@+id/step_two"
-			layout="@layout/add_car_step_two"
 			android:visibility="gone"
+	
+	>
+	
+	<include
+			layout="@layout/add_car_step_two"
 			
 	/>
 	
-	<include
+	</androidx.core.widget.NestedScrollView>
+	
+	<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:id="@+id/step_three"
-			layout="@layout/add_car_step_three"
 			android:visibility="gone"
+	>
+	<include
+			layout="@layout/add_car_step_three"
 			
 	/>
+
+</androidx.core.widget.NestedScrollView>
 	
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -131,15 +124,11 @@
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:id="@+id/previous"
-			app:backgroundTint="@color/white"
 			android:rotation="180"
 			android:layout_margin="@dimen/normal_margin"
 			android:src="@drawable/ic_next"
-			android:layout_gravity="bottom|start"
+			android:layout_gravity="top|start"
 			android:visibility="gone"
 	/>
-
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

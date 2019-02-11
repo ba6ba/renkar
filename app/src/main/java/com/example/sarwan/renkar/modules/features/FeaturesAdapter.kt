@@ -42,6 +42,7 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
         fun loadData(feature: Features, position: Int){
             itemView.featureIcon.background = feature.icon?.let { activity?.resources?.getDrawable(it) }
             itemView.featureName.text = feature.name?.capitalize()
+            itemView.indicator.visibility = if (feature.selected) View.VISIBLE else View.GONE
             setOnClickListener(position)
         }
 
@@ -53,19 +54,23 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
         }
 
         private fun changeState(pos: Int) {
-            featuresList[pos].selected = !featuresList[pos].selected
+            for (i in featuresList.indices){
+                featuresList[i].selected.run {
+                    if (i==pos)
+                        featuresList[i].selected = !featuresList[i].selected
+                }
+            }
+            notifyDataSetChanged()
             changeViewsAccordingly(pos)
         }
 
         private fun changeViewsAccordingly(pos: Int) {
             if (featuresList[pos].selected){
-                itemView.indicator.visibility = View.VISIBLE
                 fragment.interactionListener?.onSelect(featuresList[pos], FeaturesFragment.Action.ADDED)
             }else{
-                itemView.indicator.visibility = View.GONE
                 fragment.interactionListener?.onSelect(featuresList[pos], FeaturesFragment.Action.REMOVED)
             }
-            notifyDataSetChanged()
+
         }
     }
 }

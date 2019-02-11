@@ -1,9 +1,12 @@
 package com.example.sarwan.renkar.base
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +15,15 @@ import android.view.View
 import android.view.WindowManager
 import java.io.IOException
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.extras.MyLocation
 import com.example.sarwan.renkar.extras.ProgressLoader
 import com.example.sarwan.renkar.extras.SharedPreferences
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.authentication.LoginActivity
+import com.example.sarwan.renkar.utils.LocationUtility
 
 abstract class ParentActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -130,6 +137,14 @@ abstract class ParentActivity : AppCompatActivity() {
 
 
     /**
+     * @usage It opens the activity for result
+     * @param activity
+     */
+    fun openActivityForResults(intent: Intent, requestCode: Int) {
+        startActivityForResult(intent, requestCode)
+    }
+
+    /**
      * @usage Making notification bar transparent
      */
     fun changeStatusBarColor() {
@@ -201,6 +216,20 @@ abstract class ParentActivity : AppCompatActivity() {
         }
     }
 
+    fun show(vararg views: View){
+        for (view in views){
+            view.animate()
+            view.visibility = View.VISIBLE
+        }
+    }
+
+    fun hide(vararg views: View){
+        for (view in views){
+            view.animate()
+            view.visibility = View.GONE
+        }
+    }
+
     fun onBackPressed(v: View) {
         super.onBackPressed()
     }
@@ -216,6 +245,10 @@ abstract class ParentActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        getPermissions()
+    }
 
 
     override fun onBackPressed() {
@@ -243,7 +276,6 @@ abstract class ParentActivity : AppCompatActivity() {
             }
         }
 
-        var currentChatUserId : Int = -1
     }
 
     enum class CallStatus { OnCall, NoCall }
@@ -284,6 +316,41 @@ abstract class ParentActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+
+    fun getPermissions() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+        )
+        {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION ,
+                    Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                ApplicationConstants.PERMISSION_CODE)
+        }
+
+        else {
+            MyLocation().getLocation(this, locationResult)
+        }
+    }
+
+    private var locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
+        override fun gotLocation(location: Location?) {
+            //Got the location!
+            location?.let {
+                user?.latitude = location.latitude
+                user?.longitude = location.longitude
+                user?.address = LocationUtility.getAddress(this@ParentActivity, location.latitude, location.longitude)
+            }
+        }
     }
 
 }

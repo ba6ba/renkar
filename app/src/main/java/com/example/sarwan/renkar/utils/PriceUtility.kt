@@ -1,5 +1,7 @@
 package com.example.sarwan.renkar.utils
 
+import java.util.*
+
 class PriceUtility {
     companion object {
         var RENKAR_CUT = 10
@@ -10,11 +12,11 @@ class PriceUtility {
         }
 
         fun weeklyEarning(price: String, count: Int?) : String{
-            return afterRenkarCut(price).toInt().times(count?.let { it }?:kotlin.run { 7 }).toString()
+            return "${afterRenkarCut(price).toInt().times(count?.let { it }?:kotlin.run { 7 })}/- PKR"
         }
 
         fun dailyEarning(price: String) : String{
-            return afterRenkarCut(price)
+            return "${afterRenkarCut(price)}/- PKR"
         }
     }
 }

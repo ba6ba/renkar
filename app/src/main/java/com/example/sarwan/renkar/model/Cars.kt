@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.model
 
+import android.net.Uri
 import com.example.sarwan.renkar.modules.days.DaysData
 import java.io.Serializable
 import java.util.*
@@ -24,7 +25,8 @@ class Cars : Serializable {
     var listerAmount : String ? = null
     var listedBy : String ? = null
     var rentedBy : ArrayList<String> ? = null
-
+    var nearestKms : Long ? = null
+    var coverImagePath : Uri? = null
     class Registration {
         var registeredIn : String ? = Calendar.getInstance().get(Calendar.YEAR).toString()
         var registerationNumber : String ? = null

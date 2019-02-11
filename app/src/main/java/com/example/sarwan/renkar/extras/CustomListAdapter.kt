@@ -27,12 +27,11 @@ class CustomListAdapter(private val mContext: Context, private val itemLayout: I
         return dataList[position]
     }
 
-    override fun getView(position: Int, view: View?, @NonNull parent: ViewGroup): View {
+    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         var localView = view
 
         if (view == null) {
-            localView = LayoutInflater.from(parent.context)
-                .inflate(itemLayout, parent, false)
+            localView = LayoutInflater.from(parent.context).inflate(itemLayout, parent, false)
         }
 
         val strName = view?.findViewById<TextView>(R.id.autoComplete)
@@ -51,7 +50,6 @@ class CustomListAdapter(private val mContext: Context, private val itemLayout: I
         notifyDataSetChanged()
     }
 
-    @NonNull
     override fun getFilter(): Filter {
         return listFilter
     }
@@ -70,7 +68,7 @@ class CustomListAdapter(private val mContext: Context, private val itemLayout: I
             if (prefix == null || prefix.isEmpty()) {
                 synchronized(lock) {
                     results.values = dataListAllItems
-                    results.count = dataListAllItems!!.size
+                    dataListAllItems?.let { results.count = it.size }
                 }
             }
             else {
@@ -78,12 +76,15 @@ class CustomListAdapter(private val mContext: Context, private val itemLayout: I
 
                 val matchValues = ArrayList<AutoCompleteModel>()
 
-                for (dataItem in dataListAllItems?.let { it } ?:kotlin.run { arrayListOf<AutoCompleteModel>() }) {
-                    dataItem.title?.let {
-                        if (it.toLowerCase().startsWith(searchStrLowerCase)) {
-                            matchValues.add(dataItem)
+                dataListAllItems?.let {
+                    for (dataItem in it) {
+                        dataItem.title?.let {string->
+                            if (string.toLowerCase().startsWith(searchStrLowerCase)) {
+                                matchValues.add(dataItem)
+                            }
                         }
                     }
+
                 }
 
                 results.values = matchValues
@@ -93,18 +94,18 @@ class CustomListAdapter(private val mContext: Context, private val itemLayout: I
             return results
         }
 
-        override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
-            dataList = if (results.values != null) {
+        override fun publishResults(constraint: CharSequence?, results: Filter.FilterResults?) {
+
+            dataList = results?.let {
                 results.values as ArrayList<AutoCompleteModel>
+            } ?:kotlin.run {
+                ArrayList<AutoCompleteModel>()
             }
-            else {
-                arrayListOf()
-            }
-            if (results.count > 0) {
-                notifyDataSetChanged()
-            }
-            else {
-                notifyDataSetInvalidated()
+            results?.let {
+                if(count>0)
+                    notifyDataSetChanged()
+                else
+                    notifyDataSetInvalidated()
             }
         }
 

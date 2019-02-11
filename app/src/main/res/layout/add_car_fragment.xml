@@ -2,53 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/white"
                 android:layout_height="match_parent">
 	
-	<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
-	                android:background="@color/white"
-	                android:layout_margin="@dimen/a_small_margin"
-	>
 		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
 		           android:background="@drawable/ic_add_car_shape"
 		           android:src="@drawable/car_illustrative_1"
 		           android:id="@+id/image"
+		           android:layout_margin="@dimen/normal_margin"
+		           android:layout_alignParentBottom="true"
 		/>
-		<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-		                android:layout_alignParentBottom="true"
-		                android:layout_marginBottom="@dimen/normal_margin"
-		                android:id="@+id/add_car"
-		>
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="2dp"
-					android:layout_alignStart="@id/addACar"
-					android:layout_alignEnd="@id/addACar"
-					android:background="@color/colorPrimaryDark"
-					android:id="@+id/separator_top"
-			/>
-			
-			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-			          android:text="@string/add_your_car"
-			          android:textSize="@dimen/large_text_size"
-			          android:textAllCaps="true"
-			          android:fontFamily="@font/proximanovaslight"
-			          android:textAlignment="center"
-			          android:textColor="@color/colorAccent"
-			          android:layout_centerHorizontal="true"
-			          android:padding="@dimen/a_small_padding"
-			          android:id="@+id/addACar"
-			/>
-			
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="2dp"
-					android:layout_alignStart="@id/addACar"
-					android:layout_alignEnd="@id/addACar"
-					android:layout_below="@id/addACar"
-					android:background="@color/colorPrimaryDark"
-					android:id="@+id/separator"
-			/>
-		</RelativeLayout>
-	</RelativeLayout>
+	
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+	          android:text="@string/add_your_car"
+	          android:textAllCaps="true"
+	          android:textSize="@dimen/large_text_size"
+	          android:fontFamily="@font/proximanovaslight"
+	          android:textAlignment="center"
+	          android:textColor="@color/colorAccent"
+	          android:layout_centerHorizontal="true"
+	          android:padding="@dimen/a_small_padding"
+	          android:id="@+id/addACar"
+	/>
 </RelativeLayout>

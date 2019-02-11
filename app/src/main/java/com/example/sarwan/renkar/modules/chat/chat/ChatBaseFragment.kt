@@ -196,7 +196,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
 
         */
 /* Listener for loading if new data or
-           data changed on fire base fire store*//*
+           data changed on fire base fire uploadFile*//*
 
         FirestoreQueryCenter.getMessageQuery(roomId).addSnapshotListener(this)
     }

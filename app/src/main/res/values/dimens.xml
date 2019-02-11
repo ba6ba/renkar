@@ -44,5 +44,7 @@
 	<dimen name="max_elevation">15dp</dimen>
 	<dimen name="normal_elevation">10dp</dimen>
 	<dimen name="small_elevation">5dp</dimen>
+	<dimen name="et_corner_radius">20dp</dimen>
+	<dimen name="cover_image_height">200dp</dimen>
 
 </resources>

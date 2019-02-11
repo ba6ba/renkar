@@ -39,7 +39,9 @@ class DaysAdapter(private val activity : FragmentActivity? , private var daysLis
     inner class ViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         fun loadData(day: Days, position: Int){
-            itemView.day.text = StringUtility.makeInitials(day.name)
+            itemView.day.text = StringUtility.getFirstTwoChars(day.name)
+            if (day.selected) itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.colorAccent)
+            else itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.dark_grey)
             setOnClickListener(position)
         }
 
@@ -51,19 +53,22 @@ class DaysAdapter(private val activity : FragmentActivity? , private var daysLis
         }
 
         private fun changeState(pos: Int) {
-            daysList[pos].selected = !daysList[pos].selected
+            for (i in daysList.indices){
+                daysList[i].selected.run {
+                    if (i==pos)
+                        daysList[i].selected = !daysList[i].selected
+                }
+            }
+            notifyDataSetChanged()
             changeViewsAccordingly(pos)
         }
 
         private fun changeViewsAccordingly(pos: Int) {
             if (daysList[pos].selected){
-                itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.colorAccent)
                 fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.ADDED)
             }else{
-                itemView.day.backgroundTintList = activity?.resources?.getColorStateList(R.color.black)
                 fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.REMOVED)
             }
-            notifyDataSetChanged()
 
         }
     }

@@ -9,6 +9,7 @@ class Locations {
     var name : String ? = null
     var lat : Double ? = null
     var lng : Double ? = null
+    var fkey : Long ? = null
     var additional_properties = HashMap<String, Any>()
 }
 

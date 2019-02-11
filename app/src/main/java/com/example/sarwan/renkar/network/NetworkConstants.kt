@@ -17,6 +17,6 @@ class NetworkConstants {
         //TPL config
         const val TPL_MAPS_BASE_URL = "https://api1.tplmaps.com:8888/"
         const val TPL_API_KEY = "$2a$10\$fpXYv71L5pWJ7OuElYfDnD19UHpZq5ndA3Y37K9FtPAnOomNtoSyG"
-        const val OUTPUT_KEYS = "compound_address_parents,subcat_name,lat,lng,name"
+        const val OUTPUT_KEYS = "compound_address_parents,subcat_name,lat,lng,name,fkey"
     }
 }

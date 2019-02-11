@@ -33,4 +33,7 @@ class User : Serializable {
     var phone_no: String? = null
     var city : String ? = null
     var type : String ? = null
+    var address : String ? = null
+    var latitude : Double ? = null
+    var longitude : Double ? = null
 }

@@ -22,22 +22,18 @@
 	<androidx.appcompat.widget.AppCompatTextView
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/spinnerText"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
 			android:gravity="center_vertical"
 			android:fontFamily="@font/proximanovaregular"
 			android:textSize="@dimen/small_text_size"
 			android:textColor="@color/black"
-			android:maxLines="2"
 			android:maxLength="5"
-			android:text="1980"
-			android:maxHeight="80dp"
-			android:ellipsize="end"
+			android:padding="@dimen/small_padding"
 			android:background="@color/white"
-			android:padding="@dimen/a_small_padding"
-			android:layout_margin="@dimen/small_margin"
-			android:drawablePadding="@dimen/normal_padding"
-			android:elevation="@dimen/small_elevation"
+			android:singleLine="true"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:ellipsize="marquee"
+			android:textAlignment="inherit"
 	/>
 
 </LinearLayout>

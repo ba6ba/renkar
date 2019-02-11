@@ -37,8 +37,11 @@
 		availability, instead lister and renter will have a chat about renting a car.
 	</string>
 	<string name="must_not_be_empty">Fields must not be empty</string>
-	<string name="hooray">HOORAYY !! YOU CAN EARN UPTO</string>
+	<string name="hooray"><b>HOORAYY !!</b>\nYou can earn up to</string>
 	<string name="renkar_cut">After <b>Renkar cut</b> you will earn up to</string>
 	<string name="per_week">per week</string>
 	<string name="per_day">per day</string>
+	<string name="registered_in">registered in</string>
+	<string name="expires_in">expires in</string>
+	<string name="car_add_successfully">Car has been listed successfully</string>
 </resources>

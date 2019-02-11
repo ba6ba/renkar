@@ -79,6 +79,13 @@
                 android:configChanges="orientation|screenSize"
                 android:windowSoftInputMode="adjustPan"
                 android:screenOrientation="userPortrait"/>
+    
+        <activity
+                android:name=".modules.camera.CameraActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:screenOrientation="landscape"/>
+    
         
         <meta-data android:name="com.here.android.maps.appid"
                    android:value="FqGVJ21W8L500333LtfX"/>

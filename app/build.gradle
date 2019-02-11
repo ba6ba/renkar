@@ -58,6 +58,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-vision:18.0.2'
 }
 
+//fresco
+
+dependencies {
+    implementation 'com.facebook.fresco:fresco:1.11.0'
+}
 
 //air bnb animmation library
 dependencies {

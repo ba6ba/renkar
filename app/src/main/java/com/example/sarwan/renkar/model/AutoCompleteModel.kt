@@ -4,5 +4,5 @@ import java.io.Serializable
 
 class AutoCompleteModel : Serializable {
     var title : String ? = null
-    var id: String? = null
+    var id: Long? = null
 }

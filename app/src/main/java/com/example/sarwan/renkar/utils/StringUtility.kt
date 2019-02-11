@@ -18,5 +18,11 @@ class StringUtility {
             }
             return iconName
         }
+
+        fun getFirstTwoChars(text: String?) : String{
+            text?.length?.let {
+                    return if (it>2) "${text[0]}${text[1]}" else ""
+            }?:kotlin.run { return "" }
+        }
     }
 }

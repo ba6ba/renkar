@@ -1,19 +1,16 @@
 package com.example.sarwan.renkar.modules.lister.add
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.widget.PopupMenu
+import android.widget.*
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.AppBarStateChangeListener
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.add_car_step_three.*
 import kotlinx.android.synthetic.main.lister_add_car_fragment.*
 import kotlinx.android.synthetic.main.add_car_step_one.*
@@ -27,6 +24,7 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
         setContentView(R.layout.lister_add_car_fragment)
         onClickListeners()
         viewChangeListeners()
+        initializeListeners()
     }
 
     private fun viewChangeListeners(){
@@ -38,8 +36,8 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                (s?.length!! >= 3).let {
-                    if (it)
+                s?.length?.let {
+                    if (it>=3)
                         queryForAddress(s.toString())
                 }
             }
@@ -49,7 +47,7 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
             saveSelectedColor(colorEnvelope)
         }
 
-        appbar.addOnOffsetChangedListener(appBarChangeListener)
+        //appbar.addOnOffsetChangedListener(appBarChangeListener)
 
         daily_price.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_DONE){
@@ -66,9 +64,11 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                (s?.length!! < 4).let {
-                    if (it)
+                s?.let {
+                    if (it.length < 4)
                         hidePriceEstimationLayouts()
+                    else if (it.length == 4)
+                        showPriceEstimation()
                 }
             }
         })
@@ -93,39 +93,57 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
             showPopupMenu(it)
         }
 
-        capacity_two?.setOnClickListener {
+        two?.setOnClickListener {
             makeCapacity(it)
-            changeCapacityOtherViews(capacity_four, capacity_five)
+            changeOtherView(four, five)
         }
 
-        capacity_four?.setOnClickListener {
+        four?.setOnClickListener {
             makeCapacity(it)
+            changeOtherView(two, five)
         }
 
-        capacity_five?.setOnClickListener {
+        five?.setOnClickListener {
             makeCapacity(it)
+            changeOtherView(four, two)
         }
-        chip_group.setOnCheckedChangeListener { group, checkedId ->
-            getCheckedChip(group, checkedId)
+
+        gas?.setOnClickListener {
+            makeFuelType(gasImage, it)
+            changeOtherView(petrolImage, dieselImage)
+        }
+
+        petrolImage?.setOnClickListener {
+            makeFuelType(petrolImage, it)
+            changeOtherView(gasImage, dieselImage)
+        }
+
+        dieselImage?.setOnClickListener {
+            makeFuelType(dieselImage, it)
+            changeOtherView(gasImage, petrolImage)
+        }
+
+        carImage.setOnClickListener {
+            showOptionsForImage()
         }
     }
 
-    private fun getCheckedChip(group: ChipGroup?, checkedId: Int) {
-        val selectedChip = (group?.findViewById<View>(checkedId) as Chip)
-        selectedChip.chipBackgroundColor = resources.getColorStateList(R.color.colorAccent)
-        car?.fuelType = (selectedChip).text.toString()
+    private fun makeFuelType(imageView: ImageView, it: View) {
+        imageView.background = resources.getDrawable(R.drawable.ic_check_selected)
+        car?.fuelType = (it as TextView).text.toString()
     }
 
-    private fun changeCapacityOtherViews(vararg otherViews: TextView) = this.run {
+    private fun changeOtherView(vararg otherViews: View) = this.run {
         for (otherView in otherViews){
-            otherView.setTextColor(resources.getColor(R.color.colorAccent))
-            otherView.background =  (resources.getDrawable(R.drawable.circle_bg_with_accent_color))
+            if(otherView is LinearLayout)
+                otherView.background =  (resources.getDrawable(R.drawable.capacity_bg))
+            else if (otherView is ImageView)
+                otherView.background =  (resources.getDrawable(R.drawable.ic_check))
         }
     }
     private fun makeCapacity(it: View) {
-        it.background = resources.getDrawable(R.drawable.selected_circle_bg_with_accent_color)
-        (it as TextView).setTextColor(resources.getColor(R.color.white))
-        car?.capacity = it.text.toString()
+        it.background = resources.getDrawable(R.drawable.capacity_bg_selected)
+        car?.capacity = (it as TextView).text.toString()
     }
 
 
@@ -139,4 +157,19 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.let { it ->
+            if (resultCode == RESULT_OK) {
+                if (requestCode == ApplicationConstants.WRITE_EXTERNAL_STORAGE_CODE) {
+                    it.data?.let { data->
+                        selectedImage = imageUpload?.makeImageURLWithExternalStorage(data)?.let { it }?:kotlin.run { null }
+                    }
+                }
+                else if (requestCode == ApplicationConstants.CAPTURE_IMAGE_STORAGE_CODE) {
+                    setImageToLayout(it)
+                }
+            }
+        }
+    }
 }

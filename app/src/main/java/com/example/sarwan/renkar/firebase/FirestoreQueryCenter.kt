@@ -93,6 +93,10 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(CARS).document(chatRoom)
     }
 
+    fun addCar(carNumber: String, data: Any) : Task<Void>{
+        return FirebaseFirestore.getInstance().collection(CARS).document(carNumber).set(data, SetOptions.merge())
+    }
+
     fun addDataToListerNode(email: String, data: Any) : Task<Void>{
         return FirebaseFirestore.getInstance().collection(LISTER).document(email).set(data, SetOptions.merge())
     }
