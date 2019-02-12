@@ -55,6 +55,12 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     private var toFirebaseStorage : ToFirebaseStorage ? = null
     protected var car : Cars? = null
 
+    protected fun initializeClasses(){
+        car = Cars()
+        toFirebaseStorage = ToFirebaseStorage()
+        imageUpload = ImageUpload(this)
+    }
+
     protected fun initializeListeners() {
         imageUpload?.imageUploadResponse = this
         toFirebaseStorage?.listener = this
@@ -148,7 +154,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
             it.name?.run {
                 let {name->
                     address.address = name + "," +it.compound_address_parents
-                    addAddressChip(name)
+                    addAddressChip(name + "," +it.compound_address_parents)
                 }
             }
             this.address = address
@@ -176,14 +182,13 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     private fun chipAttributes(chip: Chip) {
         chip.isCloseIconEnabled = true
         chip.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        chip.minHeight = 80
+        chip.minHeight = 100
         chip.setTextColor(resources.getColor(R.color.lightest_grey))
         chip.chipBackgroundColor = resources.getColorStateList(R.color.white)
         chip.closeIconTint = resources?.getColorStateList(R.color.colorAccent)
         chip.chipStrokeColor = resources.getColorStateList(R.color.lightest_grey)
         chip.setTextColor(resources.getColor(R.color.dark_grey))
-        chip.elevation = resources.getDimension(R.dimen.normal_elevation)
-        chip.chipStrokeWidth = 1.5f
+        chip.chipStrokeWidth = 2.5f
         chip.chipCornerRadius = resources.getDimension(R.dimen.et_corner_radius)
         // necessary to get single selection working
         chip.isClickable = true
@@ -208,14 +213,13 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     protected fun hidePriceEstimationLayouts() {
         priceEstimation.visibility = View.GONE
-        renkar_cut.visibility = View.GONE
     }
 
     protected fun showPriceEstimation(){
         priceEstimation.visibility = View.VISIBLE
-        renkar_cut.visibility = View.VISIBLE
-        priceEstimation.text = "${getString(R.string.hooray)} ${PriceUtility.weeklyEarning(daily_price.text.toString(), selectedDays?.count())} ${getString(R.string.per_week)}"
-        renkar_cut.text = "${getString(R.string.renkar_cut)} ${PriceUtility.dailyEarning(daily_price.text.toString()) + getString(R.string.per_day)}"
+        priceEstimation.text = "${getString(R.string.hooray)}" +
+                "${PriceUtility.weeklyEarning(daily_price.text.toString(), selectedDays?.count())} ${getString(R.string.per_week)}\n" +
+                "${PriceUtility.dailyEarning(daily_price.text.toString())} ${getString(R.string.per_day)}"
     }
 
     private fun makeStepOneFields(){
@@ -229,7 +233,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         car?.miles = miles?.text?.toString()
         selectedDays?.let { car?.days = it }
         selectedFeatures?.let { car?.features = it }
-        car?.listedBy = user?.name
+        car?.listedBy = user?.email
     }
 
     private fun makeStepTwoFields(){
@@ -304,12 +308,16 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun showSummaryDialog() {
-        address?.latitude?.let {lat->
-            address?.longitude?.let { lon->
-                car?.nearestKms = LocationUtility.getNearest(lat,lon)
-                Toast.makeText(this, car?.nearestKms.toString(), Toast.LENGTH_LONG).show()
-                uploadImageToFirebase()
+        try {
+            address?.latitude?.let {lat->
+                address?.longitude?.let { lon->
+                    car?.nearestKms = LocationUtility.getNearest(lat,lon)
+                    Toast.makeText(this, car?.nearestKms.toString(), Toast.LENGTH_LONG).show()
+                    uploadImageToFirebase()
+                }
             }
+        }catch (e: Exception){
+            e.localizedMessage
         }
     }
 
@@ -329,7 +337,6 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     private fun uploadImageToFirebase(){
         selectedImage?.let {
             toFirebaseStorage?.uploadFile(it)
-            addCarOnFirestore()
         }
     }
 
@@ -379,6 +386,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     override fun uploadDone(filePath: Uri) {
         car?.coverImagePath = filePath
+        addCarOnFirestore()
     }
 
     override fun onSelect(selectedFeature: Features, flag: FeaturesFragment.Action) {
@@ -396,7 +404,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     override fun doUpload(path: Uri?) {
-        carImage.setImageURI(path)
+        carImage.setImageURI(path.toString())
     }
 
     override fun doUpload(bitmap: Bitmap?) {

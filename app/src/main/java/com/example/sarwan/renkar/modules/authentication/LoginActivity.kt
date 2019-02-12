@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.modules.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
@@ -12,6 +13,8 @@ import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.modules.renter.RenterActivity
 import com.example.sarwan.renkar.modules.welcome.WelcomeActivity
+import com.example.sarwan.renkar.permissions.PermissionActivity
+import com.example.sarwan.renkar.permissions.Permissions
 import com.example.sarwan.renkar.utils.ValidationUtility
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
@@ -112,14 +115,30 @@ class LoginActivity : ParentActivity() {
         user?.renter = data.toObject(RenterProfile::class.java)
         user?.isLogin = true
         saveUserInSharedPreferences()
-        openActivityWithFinish(RenterActivity::class.java)
+        openActivityIfPermissible()
     }
 
     private fun saveListerInSharedPreferences(data: DocumentSnapshot) {
         user?.lister = data.toObject(ListerProfile::class.java)
         user?.isLogin = true
         saveUserInSharedPreferences()
-        openActivityWithFinish(ListerActivity::class.java)
+        openActivityIfPermissible()
+    }
+
+    private fun openActivityIfPermissible(){
+        Permissions.getNotGranted(this).run {
+            if (this.isEmpty()){
+                when(user?.type){
+                    ApplicationConstants.RENTER -> openActivityWithFinish(Intent(this@LoginActivity, RenterActivity::class.java))
+                    ApplicationConstants.LISTER -> openActivityWithFinish(Intent(this@LoginActivity, ListerActivity::class.java))
+                }
+            }
+            else {
+                openActivityWithFinish(
+                    Intent(this@LoginActivity, PermissionActivity::class.java).
+                        putExtra(ApplicationConstants.PERMISSIONS, this))
+            }
+        }
     }
 
     override fun onStart() {

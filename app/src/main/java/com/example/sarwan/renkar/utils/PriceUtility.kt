@@ -12,11 +12,11 @@ class PriceUtility {
         }
 
         fun weeklyEarning(price: String, count: Int?) : String{
-            return "${afterRenkarCut(price).toInt().times(count?.let { it }?:kotlin.run { 7 })}/- PKR"
+            return "${afterRenkarCut(price).toInt().times(count?.let { it }?:kotlin.run { 7 })}/- pkr"
         }
 
         fun dailyEarning(price: String) : String{
-            return "${afterRenkarCut(price)}/- PKR"
+            return "${afterRenkarCut(price)}/- pkr"
         }
     }
 }

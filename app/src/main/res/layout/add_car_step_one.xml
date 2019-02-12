@@ -259,6 +259,7 @@
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
 			          android:textAllCaps="true"
+			          android:id="@+id/gasText"
 			/>
 			
 		</LinearLayout>
@@ -281,6 +282,8 @@
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
 			          android:textAllCaps="true"
+			          android:id="@+id/petrolText"
+			
 			/>
 		
 		</LinearLayout>
@@ -303,6 +306,8 @@
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
 			          android:textAllCaps="true"
+			          android:id="@+id/dieselText"
+			
 			/>
 		
 		</LinearLayout>

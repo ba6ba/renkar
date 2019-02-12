@@ -24,6 +24,7 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
         setContentView(R.layout.lister_add_car_fragment)
         onClickListeners()
         viewChangeListeners()
+        initializeClasses()
         initializeListeners()
     }
 
@@ -37,7 +38,7 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 s?.length?.let {
-                    if (it>=3)
+                    if (it>=2)
                         queryForAddress(s.toString())
                 }
             }
@@ -94,33 +95,36 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
         }
 
         two?.setOnClickListener {
-            makeCapacity(it)
-            changeOtherView(four, five)
+            makeCapacity(it, getString(R.string.two))
+            changeBackgrounds(four, five)
         }
 
         four?.setOnClickListener {
-            makeCapacity(it)
-            changeOtherView(two, five)
+            makeCapacity(it, getString(R.string.four))
+            changeBackgrounds(two, five)
         }
 
         five?.setOnClickListener {
-            makeCapacity(it)
-            changeOtherView(four, two)
+            makeCapacity(it, getString(R.string.five))
+            changeBackgrounds(four, two)
         }
 
         gas?.setOnClickListener {
-            makeFuelType(gasImage, it)
-            changeOtherView(petrolImage, dieselImage)
+            makeFuelType(gasImage, gasText)
+            changeBackgrounds(petrolImage, dieselImage)
+            changeTextColors(dieselText, petrolText)
         }
 
         petrolImage?.setOnClickListener {
-            makeFuelType(petrolImage, it)
-            changeOtherView(gasImage, dieselImage)
+            makeFuelType(petrolImage, petrolText)
+            changeBackgrounds(gasImage, dieselImage)
+            changeTextColors(gasText, dieselText)
         }
 
         dieselImage?.setOnClickListener {
-            makeFuelType(dieselImage, it)
-            changeOtherView(gasImage, petrolImage)
+            makeFuelType(dieselImage, dieselText)
+            changeBackgrounds(gasImage, petrolImage)
+            changeTextColors(gasText, petrolText)
         }
 
         carImage.setOnClickListener {
@@ -128,12 +132,19 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
         }
     }
 
-    private fun makeFuelType(imageView: ImageView, it: View) {
+    private fun makeFuelType(imageView: ImageView, textView: TextView) {
         imageView.background = resources.getDrawable(R.drawable.ic_check_selected)
-        car?.fuelType = (it as TextView).text.toString()
+        textView.setTextColor(resources.getColor(R.color.colorAccent))
+        car?.fuelType = textView.text.toString()
     }
 
-    private fun changeOtherView(vararg otherViews: View) = this.run {
+    private fun changeTextColors(vararg textViews: TextView) = this.run {
+        for (textView in textViews){
+            textView.setTextColor(resources.getColor(R.color.dark_grey))
+        }
+    }
+
+    private fun changeBackgrounds(vararg otherViews: View) = this.run {
         for (otherView in otherViews){
             if(otherView is LinearLayout)
                 otherView.background =  (resources.getDrawable(R.drawable.capacity_bg))
@@ -141,9 +152,10 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
                 otherView.background =  (resources.getDrawable(R.drawable.ic_check))
         }
     }
-    private fun makeCapacity(it: View) {
+
+    private fun makeCapacity(it: View , value: String) {
         it.background = resources.getDrawable(R.drawable.capacity_bg_selected)
-        car?.capacity = (it as TextView).text.toString()
+        car?.capacity = value
     }
 
 

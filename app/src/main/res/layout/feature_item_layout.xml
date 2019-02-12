@@ -14,7 +14,7 @@
 			android:layout_height="20dp"
 			android:id="@+id/featureIcon"
 			android:padding="@dimen/small_padding"
-			android:background="@drawable/plus_icon_light"
+			android:background="@drawable/ic_alloy_rim"
 	/>
 	
 	<TextView
@@ -26,12 +26,6 @@
 			android:fontFamily="@font/proximanovaregular"
 			android:textColor="@color/black"
 			android:textSize="@dimen/small_text_size"
-	/>
-	
-	<View android:layout_width="20dp" android:layout_height="match_parent"
-	      android:background="@color/colorAccent"
-	      android:visibility="gone"
-	      android:id="@+id/indicator"
 	/>
 	
 </LinearLayout>

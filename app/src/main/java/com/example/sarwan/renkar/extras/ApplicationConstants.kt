@@ -12,5 +12,6 @@ open class ApplicationConstants {
         const val WRITE_EXTERNAL_STORAGE_CODE : Int = 100
         const val CAPTURE_IMAGE_STORAGE_CODE : Int = 101
         const val RESOURCE_KEY: String = "RESOURCE_KEY"
+        const val PERMISSIONS: String = "PERMISSIONS"
     }
 }

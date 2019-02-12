@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
           package="com.example.sarwan.renkar">
-
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -10,7 +17,6 @@
             android:supportsRtl="true"
             android:name="com.example.sarwan.renkar.modules.base.VApplication"
             tools:ignore="GoogleAppIndexingWarning"
-            android:largeHeap="true"
             android:theme="@style/AppTheme">
         <activity
             android:name=".modules.splash.SplashActivity"
@@ -86,6 +92,12 @@
                 android:configChanges="orientation|screenSize"
                 android:screenOrientation="landscape"/>
     
+    
+        <activity
+                android:name=".permissions.PermissionActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:screenOrientation="sensorPortrait"/>
         
         <meta-data android:name="com.here.android.maps.appid"
                    android:value="FqGVJ21W8L500333LtfX"/>
@@ -97,5 +109,17 @@
                 android:name="access_token"
                 android:value="pk.eyJ1IjoiYmE2YmEiLCJhIjoiY2pyb293OWtiMTM0dzQ5bXNzY3k2OXdldyJ9.SHjjucqDgGUkogES2nPXLg"
         />
+    
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/provider_paths" />
+        </provider>
+
+        
     </application>
 </manifest>

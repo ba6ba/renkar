@@ -20,19 +20,20 @@ class Cars : Serializable {
     var color : String ? = "#000000"
     var number  : String ? = null
     var rating : Float ? = null
-    var registration : Registration ? = null
-    var license : License ? = null
+    var registration : Registration ? = Registration()
+    var license : License ? = License()
     var listerAmount : String ? = null
     var listedBy : String ? = null
     var rentedBy : ArrayList<String> ? = null
     var nearestKms : Long ? = null
     var coverImagePath : Uri? = null
-    class Registration {
+
+    inner class Registration {
         var registeredIn : String ? = Calendar.getInstance().get(Calendar.YEAR).toString()
         var registerationNumber : String ? = null
     }
 
-    class License {
+    inner class License {
         var license : String ? = null
         var expiry : String ? = Calendar.getInstance().get(Calendar.YEAR).toString()
     }

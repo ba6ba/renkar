@@ -28,6 +28,7 @@
 			android:textColor="@color/black"
 			android:maxLength="5"
 			android:padding="@dimen/small_padding"
+			android:layout_margin="@dimen/small_margin"
 			android:background="@color/white"
 			android:singleLine="true"
 			android:layout_width="match_parent"

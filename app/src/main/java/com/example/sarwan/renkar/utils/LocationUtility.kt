@@ -10,6 +10,7 @@ import kotlin.math.roundToLong
 class LocationUtility {
 
     companion object {
+
         fun getAddress(activity: Activity , lat : Double, lon : Double) : String {
             val gcd = Geocoder(activity, Locale.getDefault())
             val addresses = gcd.getFromLocation(lat, lon, 1)

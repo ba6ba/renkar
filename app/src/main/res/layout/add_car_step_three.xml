@@ -1,18 +1,26 @@
+<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+	
 <androidx.cardview.widget.CardView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_marginHorizontal="@dimen/normal_margin"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/normal_margin"
+		android:layout_marginEnd="@dimen/normal_margin"
 		app:cardCornerRadius="30dp"
 		app:cardUseCompatPadding="true"
 		android:elevation="@dimen/max_elevation"
 		app:contentPadding="@dimen/small_padding"
 		android:animateLayoutChanges="true"
-		android:layout_gravity="center_vertical"
-		xmlns:android="http://schemas.android.com/apk/res/android">
+		android:layout_gravity="center"
+		>
 	
 	<RelativeLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="500dp"
 	>
 		
 		<View android:layout_width="match_parent" android:layout_height="300dp"
@@ -101,6 +109,7 @@
 					android:elevation="@dimen/small_elevation"
 			/>
 			
+			
 			<com.google.android.material.chip.ChipGroup
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -118,3 +127,4 @@
 	</RelativeLayout>
 	
 </androidx.cardview.widget.CardView>
+</ScrollView>

@@ -11,6 +11,8 @@ import com.example.sarwan.renkar.modules.authentication.LoginActivity
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.modules.renter.RenterActivity
 import com.example.sarwan.renkar.modules.welcome.WelcomeActivity
+import com.example.sarwan.renkar.permissions.PermissionActivity
+import com.example.sarwan.renkar.permissions.Permissions
 
 class SplashActivity : ParentActivity() {
 
@@ -25,9 +27,17 @@ class SplashActivity : ParentActivity() {
             user?.let {
                 when (it.isLogin){
                     true ->{
-                        when(it.type){
-                            ApplicationConstants.RENTER -> openActivityWithFinish(Intent(this, RenterActivity::class.java))
-                            ApplicationConstants.LISTER -> openActivityWithFinish(Intent(this, ListerActivity::class.java))
+                        Permissions.getNotGranted(this).run {
+                            if (this.isEmpty()){
+                            when(it.type){
+                                ApplicationConstants.RENTER -> openActivityWithFinish(Intent(this@SplashActivity, RenterActivity::class.java))
+                                ApplicationConstants.LISTER -> openActivityWithFinish(Intent(this@SplashActivity, ListerActivity::class.java))
+                            }
+                        }
+                            else {
+                            openActivityWithFinish(Intent(this@SplashActivity, PermissionActivity::class.java).
+                                putExtra(ApplicationConstants.PERMISSIONS, this))
+                            }
                         }
                     }
                     false -> if (it.isFirst) openActivityWithFinish(Intent(this, WelcomeActivity::class.java))

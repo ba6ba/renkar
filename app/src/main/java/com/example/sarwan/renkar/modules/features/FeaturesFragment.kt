@@ -46,7 +46,12 @@ class FeaturesFragment : Fragment(){
     }
 
     private fun initializeViews() {
-        adapter = FeaturesAdapter(activity, FeaturesData.populateFeatures(activity?.parent?.let { it }?:kotlin.run { activity as ParentActivity }),this)
+        adapter = FeaturesAdapter(
+            activity,
+            FeaturesData.populateFeatures(activity?.parent?.let { it }
+                ?: kotlin.run { activity as ParentActivity }),
+            this
+        )
         recyclerView.layoutManager = GridLayoutManager(activity,2)
         recyclerView.adapter = adapter
     }

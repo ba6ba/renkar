@@ -44,7 +44,7 @@ class WriteIntoStorage(val activity : Activity, val imageUri : Uri) : AppCompatA
             if (it.isNotEmpty()){
                 mImageBitmap = BitmapFactory.decodeFile(it, bmOptions)
                 mImageBitmap = ImageUtility.rotateBitmap(it, mImageBitmap)
-                imageUpload?.doUpload(mImageBitmap)
+//                imageUpload?.doUpload(mImageBitmap)
             }
         }
     }
@@ -83,6 +83,7 @@ class WriteIntoStorage(val activity : Activity, val imageUri : Uri) : AppCompatA
             }
 
         }
+        imageUpload?.doUpload(Uri.fromFile(myPath))
         return Uri.fromFile(myPath)
     }
 }
