@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.model
 
 import android.net.Uri
 import com.example.sarwan.renkar.modules.days.DaysData
+import com.google.firebase.Timestamp
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,7 +20,7 @@ class Cars : Serializable {
     var rentedBy : ArrayList<String> ? = null
     var nearestFrom : String ? = null
     @ServerTimestamp
-    var createdAt = com.google.firebase.firestore.FieldValue.serverTimestamp()
+    var createdAt = Timestamp(Date())
 
 
      class Basic : Serializable {
