@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+		app:cardCornerRadius="30dp"
+		android:padding="@dimen/normal_padding"
+		android:layout_margin="@dimen/normal_margin"
+		app:cardMaxElevation="10dp"
+>
+
+	<LinearLayout
+	              android:orientation="vertical"
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent"
+	              android:weightSum="2"
+	>
+		
+		<RelativeLayout android:layout_width="match_parent" android:layout_height="0dp"
+		              android:layout_weight="1" android:background="@color/colorAccent"
+		                android:id="@+id/renter"
+		              
+		>
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="@string/rent_a_car"
+			          android:textSize="@dimen/large_text_size"
+			          android:textAllCaps="true"
+			          android:fontFamily="@font/proximanovascondensedbold"
+			          android:textColor="@color/white"
+			          android:layout_centerInParent="true"
+			          android:padding="@dimen/v_v_v_large_padding"
+			/>
+			
+		</RelativeLayout>
+		
+		
+		<RelativeLayout android:layout_width="match_parent" android:layout_height="0dp"
+		                android:layout_weight="1" android:background="@color/colorPrimaryDark"
+		                android:id="@+id/lister"
+		>
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="@string/list_a_car"
+			          android:textSize="@dimen/large_text_size"
+			          android:textAllCaps="true"
+			          android:fontFamily="@font/proximanovascondensedbold"
+			          android:textColor="@color/white"
+			          android:layout_centerInParent="true"
+			          android:padding="@dimen/v_v_v_large_padding"
+			/>
+		
+		</RelativeLayout>
+	
+	
+	</LinearLayout>
+</androidx.cardview.widget.CardView>

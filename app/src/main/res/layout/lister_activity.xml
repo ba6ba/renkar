@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+>
+
+	
+	<androidx.viewpager.widget.ViewPager
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/viewPager"
+	>
+	
+	
+	</androidx.viewpager.widget.ViewPager>
+	
+	<com.google.android.material.tabs.TabLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:tabRippleColor="@color/colorAccent"
+			android:layout_alignParentBottom="true"
+			app:tabMode="scrollable"
+			android:background="@drawable/lister_tab_background"
+			android:layout_centerHorizontal="true"
+			app:tabIndicator="@null"
+			app:tabUnboundedRipple="true"
+			app:tabPaddingStart="@dimen/medium_padding"
+			app:tabPaddingEnd="@dimen/medium_padding"
+			android:elevation="@dimen/max_elevation"
+			android:id="@+id/tabLayout"
+			android:layout_margin="@dimen/normal_padding"
+	>
+		<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:icon="@drawable/car_tyre_selector"
+		/>
+		
+		<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:icon="@drawable/add_selector"
+		/>
+		
+		<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:icon="@drawable/user_selector"
+		/>
+	
+	
+	</com.google.android.material.tabs.TabLayout>
+	
+</RelativeLayout>

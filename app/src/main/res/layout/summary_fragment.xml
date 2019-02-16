@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+		xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:cardElevation="@dimen/small_elevation"
+		app:cardCornerRadius="25dp"
+		app:cardUseCompatPadding="true"
+		android:layout_marginStart="@dimen/medium_margin"
+		android:layout_marginEnd="@dimen/medium_margin"
+>
+	
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+		
+		
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		           android:src="@drawable/summary_banner"
+		           android:layout_alignParentTop="true"
+		/>
+		
+		
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+		          android:text="READY TO GO!"
+		          android:fontFamily="@font/proximanovascondensedlight"
+		          android:textColor="@color/white"
+		          android:textSize="@dimen/large_text_size"
+		          android:layout_centerHorizontal="true"
+		          android:background="@color/colorAccent"
+		          android:paddingTop="@dimen/normal_padding"
+		          android:paddingBottom="@dimen/normal_padding"
+		          android:paddingStart="@dimen/medium_padding"
+		          android:paddingEnd="@dimen/medium_padding"
+		          android:textAlignment="center"
+		          android:elevation="@dimen/small_elevation"
+		          android:id="@+id/toGo"
+		          android:layout_alignParentBottom="true"
+		/>
+		
+		
+		
+	</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

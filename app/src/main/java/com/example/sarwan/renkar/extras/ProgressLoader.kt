@@ -2,57 +2,39 @@ package com.example.sarwan.renkar.extras
 
 
 import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import android.util.Log
-import android.view.Window
+import android.view.*
 import com.example.sarwan.renkar.R
 
 
-class ProgressLoader : DialogFragment() {
+class ProgressLoader : androidx.fragment.app.DialogFragment() {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        return inflater.inflate(R.layout.fragment_progress_loader, container, false)
+    }
 
-        val dialog = Dialog(activity!!)
-
-        // request a window without the designation
-        dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-
-        val inflater = activity!!.layoutInflater
-        val parent = inflater.inflate(R.layout.fragment_progress_loader, null)
-        dialog.setContentView(parent)
-        dialog.setCanceledOnTouchOutside(false)
-        //Set the dialog to immersive
-        dialog.window!!.decorView.systemUiVisibility = activity!!.window.decorView.systemUiVisibility
-
-        return dialog
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.window?.decorView?.systemUiVisibility?.let { dialog?.window?.decorView?.systemUiVisibility = it }
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(0))
+        dialog?.setCancelable(false)
+        dialog?.setCanceledOnTouchOutside(false)
 
     }
 
-    override fun show(manager: FragmentManager, tag: String) {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        try {
-            if (this.isAdded) {
-                return  //or return false/true, based on where you are calling from
-            }
-            val ft = manager.beginTransaction()
-            try {
-                ft.add(this, TAG)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            /*try catch is used to tackle the crash
-         when user close the app and some thing
-         running in indicator of app*/
-
-            ft.commitAllowingStateLoss()
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.e(TAG, e.message)
+        super.onCreateDialog(savedInstanceState).run {
+            window?.attributes?.windowAnimations = R.style.ProgressLoader_Animation_Window
+            window?.setGravity(Gravity.CENTER)
+            window?.attributes?.x = activity?.resources?.getDimensionPixelSize(R.dimen.small_margin)
+            window?.attributes?.y = activity?.resources?.getDimensionPixelSize(R.dimen.small_margin)
+            return this
         }
 
     }

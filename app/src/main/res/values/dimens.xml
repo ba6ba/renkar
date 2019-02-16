@@ -2,6 +2,7 @@
 <resources>
 	
 	<!--margins-->
+	<dimen name="v_small_margin">3dp</dimen>
 	<dimen name="small_margin">5dp</dimen>
 	<dimen name="a_small_margin">10dp</dimen>
 	<dimen name="normal_margin">15dp</dimen>
@@ -10,6 +11,9 @@
 	<dimen name="a_medium_margin">30dp</dimen>
 	<dimen name="large_margin">35dp</dimen>
 	<dimen name="a_large_margin">40dp</dimen>
+	<dimen name="v_large_margin">50dp</dimen>
+	<dimen name="v_v_large_margin">60dp</dimen>
+	<dimen name="v_v_v_large_margin">80dp</dimen>
 	
 	<!--padding-->
 	<dimen name="small_padding">5dp</dimen>
@@ -20,6 +24,9 @@
 	<dimen name="a_medium_padding">30dp</dimen>
 	<dimen name="large_padding">35dp</dimen>
 	<dimen name="a_large_padding">40dp</dimen>
+	<dimen name="v_large_padding">50dp</dimen>
+	<dimen name="v_v_large_padding">60dp</dimen>
+	<dimen name="v_v_v_large_padding">80dp</dimen>
 	
 	<!--text sizes-->
 	<dimen name="small_text_size">12sp</dimen>
@@ -30,4 +37,15 @@
 	<dimen name="v_v_large_text_size">32sp</dimen>
 	<dimen name="sub_heading_text_size">36sp</dimen>
 	<dimen name="heading_text_size">40sp</dimen>
+	<dimen name="v_small_text_size">10sp</dimen>
+	
+	
+	<!---->
+	<dimen name="custom_shape_size">25dp</dimen>
+	<dimen name="max_elevation">15dp</dimen>
+	<dimen name="normal_elevation">10dp</dimen>
+	<dimen name="small_elevation">5dp</dimen>
+	<dimen name="et_corner_radius">14dp</dimen>
+	<dimen name="cover_image_height">200dp</dimen>
+
 </resources>

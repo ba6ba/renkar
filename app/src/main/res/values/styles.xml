@@ -7,5 +7,34 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="renkarTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+    
+    <style name="AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="android:colorPrimary">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorPrimary</item>
+    </style>
+    
+    <style name="CheckBoxTheme">
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
+    
+    <style name="Animation.DialogMessage.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/anim_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_out</item>
+    </style>
+    
+    <style name="ProgressLoader.Animation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 
 </resources>

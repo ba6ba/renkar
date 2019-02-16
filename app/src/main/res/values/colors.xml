@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2787ca</color>
-    <color name="colorPrimaryDark">#4d4b4a</color>
-    <color name="colorAccent">#C43936</color>
+    <color name="colorPrimary">#5b5a5a</color>
+    <color name="colorPrimaryDark">#373434</color>
+    <color name="colorAccent">#3162E9</color>
+    <color name="colorAccent_50">#7d3162e9</color>
     <color name="black">#000000</color>
     <color name="grey">#5e5e5e</color>
     <color name="blue">#0055a9</color>
     <color name="maroon">#5e0b0b</color>
+    <color name="white">#ffffff</color>
+    <color name="dark_grey">#545454</color>
+    <color name="light_grey">#9c9c9c</color>
+    <color name="lightest_grey">#cacaca</color>
+    <color name="v_lightest_grey">#f9f9f9</color>
+    
+    <color name="transparent">#00ffffff</color>
+    <color name="darkest_grey">#262626</color>
+    
     
     <array name="progress_bar_colors">
         <item>@color/black</item>

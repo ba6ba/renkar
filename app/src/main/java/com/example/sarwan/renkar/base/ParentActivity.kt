@@ -1,28 +1,32 @@
-package com.mobitribe.qulabro.modules.base
+package com.example.sarwan.renkar.base
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import java.io.IOException
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.extras.MyLocation
 import com.example.sarwan.renkar.extras.ProgressLoader
 import com.example.sarwan.renkar.extras.SharedPreferences
-import com.example.sarwan.renkar.model.ListerProfile
-import com.example.sarwan.renkar.model.RenterProfile
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import okhttp3.ResponseBody
-import java.util.*
+import com.example.sarwan.renkar.model.User
+import com.example.sarwan.renkar.modules.authentication.LoginActivity
+import com.example.sarwan.renkar.permissions.Permissions
+import com.example.sarwan.renkar.utils.LocationUtility
 
 abstract class ParentActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -32,10 +36,7 @@ abstract class ParentActivity : AppCompatActivity() {
     private val view: View? = null
     private val TAG = "ParentActivity"
 
-
-    //was protected
-    var listerProfile: ListerProfile? = null
-    var renterProfile: RenterProfile? = null
+    var user: User? = null
 
     /**
      * @usage onCreate method that will be called by all child class instances to initialize some useful objects
@@ -46,20 +47,15 @@ abstract class ParentActivity : AppCompatActivity() {
         sharedPreferences = SharedPreferences(this)
         animationNeeded = true
         forwardTransition = true
-
-        intent?.getBooleanExtra(ApplicationConstants.USER_TYPE, true)?.let {
-            if (it) listerProfile = sharedPreferences.listerProfile ?:kotlin.run { ListerProfile() }
-            else renterProfile = sharedPreferences.renterProfile ?:kotlin.run { RenterProfile() }
-        }
+        user = sharedPreferences.userProfile
+        if(user == null)
+            user = User()
     }
 
-    private fun saveListerProfileInSharePreference(){
-        sharedPreferences.saveListerProfile(listerProfile)
+    fun saveUserInSharedPreferences(){
+        sharedPreferences.saveUserProfile(user)
     }
 
-    private fun saveRenterProfileInSharePreference(){
-        sharedPreferences.saveRenterProfile(renterProfile)
-    }
     /**
      * @purpose  Setter for animation needed parameter
      * @param value
@@ -144,6 +140,14 @@ abstract class ParentActivity : AppCompatActivity() {
 
 
     /**
+     * @usage It opens the activity for result
+     * @param activity
+     */
+    fun openActivityForResults(intent: Intent, requestCode: Int) {
+        startActivityForResult(intent, requestCode)
+    }
+
+    /**
      * @usage Making notification bar transparent
      */
     fun changeStatusBarColor() {
@@ -215,6 +219,25 @@ abstract class ParentActivity : AppCompatActivity() {
         }
     }
 
+    fun show(vararg views: View){
+        for (view in views){
+            view.animate()
+            view.visibility = View.VISIBLE
+        }
+    }
+
+    fun hide(vararg views: View){
+        for (view in views){
+            view.animate()
+            view.visibility = View.GONE
+        }
+    }
+
+    fun hideKeyboard(view : View, context: Context = this){
+        val imm =  context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     fun onBackPressed(v: View) {
         super.onBackPressed()
     }
@@ -230,6 +253,9 @@ abstract class ParentActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 
 
     override fun onBackPressed() {
@@ -257,33 +283,43 @@ abstract class ParentActivity : AppCompatActivity() {
             }
         }
 
-        var currentChatUserId : Int = -1
     }
 
     enum class CallStatus { OnCall, NoCall }
 
-    fun logOut(isLister : Boolean){
-        val temp_email : String
-        val temp_pswrd : String
-        if (isLister) {
-            temp_email = listerProfile?.email!!
-            temp_pswrd =  listerProfile?.password!!
-            listerProfile = ListerProfile()
-            listerProfile?.email = temp_email
-            listerProfile?.password = temp_pswrd
-            saveListerProfileInSharePreference()
+   /* private fun appropriateEmail() : String{
+        return if (user?.isLister!!){
+            user?.lister?.email!!
         }
         else{
-            temp_email = renterProfile?.email!!
-            temp_pswrd =  renterProfile?.password!!
-            renterProfile = RenterProfile()
-            renterProfile?.email = temp_email
-            renterProfile?.password = temp_pswrd
-            saveRenterProfileInSharePreference()
+            user?.renter?.email!!
         }
-        //openMainActivity(LoginActivity::class.java)
     }
 
+    private fun appropriateEmail(email : String){
+        if (user?.isLister!!){
+            user?.lister?.email = email
+        }
+        else{
+            user?.renter?.email = email
+        }
+    }
+
+    fun logOut(){
+        val temp_email : String
+        val temp_isLister : Boolean
+        val temp_isFirst : Boolean
+        temp_email = appropriateEmail()
+        temp_isLister = user?.isLister!!
+        temp_isFirst = user?.isFirst!!
+        user = User()
+        user?.isLister = temp_isLister
+        user?.isFirst = temp_isFirst
+        appropriateEmail(temp_email)
+        saveUserInSharedPreferences()
+        openMainActivity(LoginActivity::class.java)
+    }
+*/
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

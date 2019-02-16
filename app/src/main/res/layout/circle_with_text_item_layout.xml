@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@color/colorAccent"
+		android:text="Wednesday"
+		android:textColor="@color/white"
+		android:paddingHorizontal="@dimen/normal_padding"
+		android:paddingVertical="@dimen/small_padding"
+		android:fontFamily="@font/proximanovaregular"
+		android:layout_gravity="center"
+		android:textSize="@dimen/medium_text_size"
+		android:id="@+id/textView"
+>
+
+</TextView>

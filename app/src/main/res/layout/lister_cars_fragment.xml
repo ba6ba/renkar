@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     android:orientation="vertical"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+>
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/swipeRefreshLayout"
+			android:animateLayoutChanges="true"
+	>
+		<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+		
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/normal_margin"
+				android:padding="@dimen/small_padding"
+				android:background="@drawable/white_background_with_border"
+				android:id="@+id/person_icon"
+				android:text="AB"
+				android:textAlignment="center"
+				android:gravity="center"
+				android:textSize="@dimen/normal_text_size"
+				android:fontFamily="@font/proximanovaextracondensedbold"
+				android:textColor="@color/colorPrimaryDark"
+		/>
+		
+		<androidx.recyclerview.widget.RecyclerView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+		        android:id="@+id/lister_cars_recycler_view"
+				android:scrollbars="vertical"
+				android:scrollbarFadeDuration="@integer/progress_bar_duration"
+				android:scrollbarSize="3dp"
+				android:scrollbarStyle="outsideInset"
+				android:layout_below="@id/person_icon"
+		>
+		
+		
+		</androidx.recyclerview.widget.RecyclerView>
+		
+		</RelativeLayout>
+		
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+	
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/swipeRefreshLayoutEmpty"
+			android:animateLayoutChanges="true"
+			android:visibility="gone"
+	>
+		
+		<include
+				layout="@layout/empty_layout"
+		/>
+		
+	
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+	
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:layout_width="wrap_content"
+			android:src="@drawable/add"
+			app:backgroundTint="@color/colorPrimaryDark"
+			android:layout_height="wrap_content"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentBottom="true"
+			android:layout_margin="@dimen/normal_margin"
+	/>
+
+</RelativeLayout>
