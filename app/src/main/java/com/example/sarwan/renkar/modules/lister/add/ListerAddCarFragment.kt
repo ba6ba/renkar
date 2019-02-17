@@ -1,40 +1,52 @@
-package com.example.sarwan.renkar.modules.lister
+package com.example.sarwan.renkar.modules.lister.add
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.sarwan.renkar.R
-import com.here.android.mpa.search.Place
+import com.example.sarwan.renkar.base.ParentActivity
+import kotlinx.android.synthetic.main.add_car_fragment.*
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
  * [ContactFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ContactFragment.newInstance] factory method to
+ * Use the [ListerAddCarFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class ListerCarsFragment : Fragment(){
+class ListerAddCarFragment : Fragment(){
 
+    private lateinit var pActivity : ParentActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pActivity = activity as ParentActivity
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.lister_cars_fragment, container, false)
+        return inflater.inflate(R.layout.add_car_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onClickListeners()
+    }
 
+    private fun onClickListeners() {
+        addACar.setOnClickListener {
+            openAddActivity()
+        }
+    }
+
+    private fun openAddActivity() {
+        pActivity.openActivity(Intent(pActivity,ListerAddCarActivity::class.java))
     }
 
     companion object {
@@ -45,6 +57,6 @@ class ListerCarsFragment : Fragment(){
          * @return A new instance of fragment ListerProfileFragment.
          */
         @JvmStatic
-        fun newInstance() = ListerCarsFragment()
+        fun newInstance() = ListerAddCarFragment()
     }
 }

@@ -16,22 +16,15 @@
 			app:cardElevation="@dimen/max_elevation"
 	>
 	
-		<ImageView
+		<com.facebook.drawee.view.SimpleDraweeView
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:scaleType="centerCrop"
 				android:id="@+id/cover"
-				android:src="@drawable/car"
+				app:backgroundImage="@drawable/car"
+				app:overlayImage="@drawable/light_shade"
 		/>
-		
-		<ImageView
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:scaleType="centerCrop"
-				android:background="@drawable/light_shade"
-				android:backgroundTint="@color/dark_grey"
-				android:backgroundTintMode="src_atop"
-		/>
+
 		
 	</com.google.android.material.card.MaterialCardView>
 	
@@ -47,6 +40,7 @@
 	          android:paddingBottom="@dimen/small_padding"
 	          android:paddingStart="@dimen/medium_padding"
 	          android:gravity="top"
+			  android:id="@+id/price"
 	          android:paddingEnd="@dimen/medium_padding"
 	          android:textColor="@color/colorAccent"
 	          android:layout_marginEnd="@dimen/small_margin"

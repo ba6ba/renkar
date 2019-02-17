@@ -2,6 +2,8 @@ package com.example.sarwan.renkar.modules.lister
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.sarwan.renkar.modules.lister.add.ListerAddCarFragment
+import com.example.sarwan.renkar.modules.lister.listing.ListerCarsFragment
 
 class ListerNavigationPager(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 

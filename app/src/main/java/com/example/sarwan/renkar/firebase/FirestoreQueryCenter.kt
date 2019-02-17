@@ -70,6 +70,9 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
+    fun getCarById(email: String): com.google.firebase.firestore.Query {
+        return FirebaseFirestore.getInstance().collection(CARS).whereEqualTo("email", email)
+    }
 
     fun checkIfCarExists(carNumber: String, callBack: FirebaseExtras.Companion.PutObjectCallBack){
         this.callBack = callBack
