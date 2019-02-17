@@ -175,8 +175,10 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (onStep==2)
+        if (onStep==2){
             onStep-=1
+            layoutTransitionOnPreviousButton()
+        }
         else
             super.onBackPressed()
     }

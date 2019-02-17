@@ -1,8 +1,6 @@
 package com.example.sarwan.renkar.firebase
 
 import com.example.sarwan.renkar.model.Cars
-import com.example.sarwan.renkar.model.PaymentMethod
-import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import kotlin.collections.HashMap
@@ -81,20 +79,47 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(CARS).document(chatRoom)
     }
 
-    fun checkIfCarExists(carNumber: String) : Boolean {
-        return FirebaseFirestore.getInstance().runTransaction {
-            it.get(FirebaseFirestore.getInstance().collection(CARS).document(carNumber)).exists()
+
+    fun checkIfCarExists(carNumber: String, callBack : FirebaseExtras.Companion.PutObjectCallBack) {
+        FirebaseFirestore.getInstance().runTransaction {
+            if (!it.get(FirebaseFirestore.getInstance().collection(CARS).document(carNumber)).exists()){
+                callBack.onPutSuccess(FirebaseExtras.CAR_EXISTS_SUCCESS)
+            }
+            else {
+                callBack.onPutFailure(FirebaseExtras.CAR_EXISTS_FAILURE)
+            }
             null
-        }.isSuccessful
+        }
     }
 
-    fun addCarData(carNumber: String, data: Any) : Task<Void>{
-        return FirebaseFirestore.getInstance().collection(CARS).document(carNumber).set(data, SetOptions.merge())
+     fun batchWrite(
+        carNumber: String,
+        data: Cars,
+        callBack: FirebaseExtras.Companion.PutObjectCallBack
+    ) {
+        val ref = FirebaseFirestore.getInstance().batch()
+        ref.set(addCarData(carNumber), data , SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, REGISTRATION), data.carReg, SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, SPECS), data.carSpecs, SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, BASIC), data.carBasic, SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, PRICE), data.carPrice, SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, OWNER), data.carOwner, SetOptions.merge())
+        ref.set(addNestedCarData(carNumber, ADDRESS), data.carAddress as Any, SetOptions.merge())
+        ref.commit().addOnSuccessListener {
+            callBack.onPutSuccess(FirebaseExtras.UPLOAD_SUCCESS)
+        }.addOnFailureListener {
+            callBack.onPutFailure(FirebaseExtras.UPLOAD_FAILURE)
+        }
     }
 
-    fun addNestedCarData(carNumber: String, data: Any, subCollection : String) : Task<Void>{
-        return FirebaseFirestore.getInstance().collection(CARS).document(carNumber).collection(subCollection).document().set(data)
+    fun addCarData(carNumber: String) : DocumentReference {
+        return FirebaseFirestore.getInstance().collection(CARS).document(carNumber)
     }
+
+    fun addNestedCarData(carNumber: String, subCollection : String) : DocumentReference {
+        return FirebaseFirestore.getInstance().collection(CARS).document(carNumber).collection(subCollection).document()
+    }
+
 
     fun addDataToListerNode(email: String, data: Any) : Task<Void>{
         return FirebaseFirestore.getInstance().collection(LISTER).document(email).set(data, SetOptions.merge())

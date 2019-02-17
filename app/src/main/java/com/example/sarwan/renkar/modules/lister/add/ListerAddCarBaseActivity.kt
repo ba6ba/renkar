@@ -14,6 +14,7 @@ import androidx.appcompat.widget.PopupMenu
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.*
+import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.AutoCompleteModel
 import com.example.sarwan.renkar.model.Cars
@@ -41,10 +42,11 @@ import retrofit2.Response
 
 open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.FeaturesInteractionListener,
     DayFragment.DaysInteractionListener, ImageUpload.ImageUploadResponse,
-        ToFirebaseStorage.ToFirebaseStorageListener, CustomTextWatcher.TextWatcherListener {
+        ToFirebaseStorage.ToFirebaseStorageListener, CustomTextWatcher.TextWatcherListener,
+    FirebaseExtras.Companion.PutObjectCallBack
+{
 
     protected var onStep : Int = 1
-    private var address: com.example.sarwan.renkar.model.location.Address? = null
     private var tplMapsLocations: ArrayList<Locations> ? = null
     protected var adapter: CustomListAdapter? = null
     protected var autoCompleteModelList : ArrayList<AutoCompleteModel> = ArrayList()
@@ -54,20 +56,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     protected var imageUpload : ImageUpload? = null
     private var toFirebaseStorage : ToFirebaseStorage ? = null
     protected var car : Cars? = null
-    private var carBasic : Cars.Basic? = null
-    private var carSpecs : Cars.Specifications? = null
-    private var carPrice : Cars.Price? = null
-    private var carOwner : Cars.Owner? = null
-    private var carReg : Cars.Registration? = null
+    
     private var summaryFragment : SummaryFragment ? = null
 
     protected fun initializeClasses(){
         car = Cars()
-        carSpecs = Cars.Specifications()
-        carBasic = Cars.Basic()
-        carPrice = Cars.Price()
-        carOwner = Cars.Owner()
-        carReg = Cars.Registration()
         toFirebaseStorage = ToFirebaseStorage()
         imageUpload = ImageUpload(this)
     }
@@ -149,7 +142,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                     addAddressChip(name + "," +it.compound_address_parents)
                 }
             }
-            this.address = address
+            car?.carAddress = address
         }
     }
 
@@ -166,7 +159,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         chip.setOnCloseIconClickListener {
             val chipItem = it as Chip
             address_chip_group.removeView(chipItem)
-            address = null
+            car?.carAddress = null
             show(address_text_view)
         }
     }
@@ -224,18 +217,18 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarBasicData() {
-        carBasic?.name = name.text.toString()
-        carBasic?.manufacturedBy = manufactured_by?.text?.toString()
-        carBasic?.model = model?.text?.toString()
-        carBasic?.description = description?.text?.toString()
-        carBasic?.number = number?.text?.toString()
-        carBasic?.miles = miles?.text?.toString()
+        car?.carBasic?.name = name.text.toString()
+        car?.carBasic?.manufacturedBy = manufactured_by?.text?.toString()
+        car?.carBasic?.model = model?.text?.toString()
+        car?.carBasic?.description = description?.text?.toString()
+        car?.carBasic?.number = number?.text?.toString()
+        car?.carBasic?.miles = miles?.text?.toString()
     }
 
     private fun makeCarSpecifications() {
-        carSpecs?.vehicleType = vehicle_type?.text?.toString()
-        carSpecs?.instantBook = instantBook.isChecked
-        carSpecs?.delivery = delivery.isChecked
+        car?.carSpecs?.vehicleType = vehicle_type?.text?.toString()
+        car?.carSpecs?.instantBook = instantBook.isChecked
+        car?.carSpecs?.delivery = delivery.isChecked
     }
 
     private fun makeCarAvailabilityDays() {
@@ -247,16 +240,16 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     protected fun makeCarCapacity(value: String) {
-        carSpecs?.capacity = value
+        car?.carSpecs?.capacity = value
     }
 
     private fun makeOwnerData() {
-        carOwner?.email = user?.email
-        carOwner?.name = user?.name
+        car?.carOwner?.email = user?.email
+        car?.carOwner?.name = user?.name
     }
 
     protected fun makeCarFuel(fuel: String) {
-        carSpecs?.fuelType = fuel
+        car?.carSpecs?.fuelType = fuel
     }
 
     private fun makeStepTwoFields(){
@@ -265,15 +258,15 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarRegYear(year : String){
-        carReg?.registeredIn = year
+        car?.carReg?.registeredIn = year
     }
 
     private fun makeCarRegNumber(number : String?) {
-        carReg?.number = number
+        car?.carReg?.number = number
     }
 
     private fun makeCarPrice() {
-        carPrice?.listerAmount = daily_price.text?.toString()
+        car?.carPrice?.listerAmount = daily_price.text?.toString()
     }
 
     private var years = DateTimeUtility.getYears()
@@ -328,11 +321,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeDataNodes() {
-        if(validateStepTwo() && address!=null){
+        if(validateStepTwo() && car?.carAddress!=null){
             makeStepTwoFields()
             try {
-                address?.latitude?.let {lat->
-                    address?.longitude?.let { lon->
+                car?.carAddress?.latitude?.let { lat->
+                    car?.carAddress?.longitude?.let { lon->
                         makeNearestKms(lat, lon)
                     }
                 }
@@ -351,17 +344,16 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun checkForCarAvailability() {
-        carBasic?.number?.let {
-            if(!FirestoreQueryCenter.checkIfCarExists(it))
-                uploadImageToFirebase(it)
-            else{
-                carAlreadyExists()
+        car?.let {
+            it.carBasic.number?.let {number->
+                showProgress()
+                FirestoreQueryCenter.checkIfCarExists(number, this)
             }
         }
+        
     }
 
     private fun carAlreadyExists() {
-        hideProgress()
         Toast.makeText(this, getString(R.string.car_already_exists),Toast.LENGTH_LONG).show()
         finish()
     }
@@ -382,36 +374,17 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarColor(colorHtml: String) {
-        carSpecs?.color = colorHtml
+        car?.carSpecs?.color = colorHtml
     }
 
-    private fun uploadImageToFirebase(number: String) {
-        showProgress()
+    private fun uploadImageToFirebase() {
         selectedImage?.let {
             toFirebaseStorage?.uploadFile(it)
         }?:kotlin.run {
-            addCarOnFirestore(number)
+            uploadCar()
         }
     }
 
-    private fun addCarOnFirestore(number: String){
-        FirestoreQueryCenter.addCarData(number, car as Any).addOnSuccessListener{result->
-            addSubCollections(number)
-            Toast.makeText(this,getString(R.string.car_add_successfully),Toast.LENGTH_LONG).show()
-        }.addOnFailureListener {ex->
-            Toast.makeText(this,ex.localizedMessage,Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun addSubCollections(number: String) {
-        FirestoreQueryCenter.addNestedCarData(number, carReg as Any, FirestoreQueryCenter.REGISTRATION)
-        FirestoreQueryCenter.addNestedCarData(number, carSpecs as Any, FirestoreQueryCenter.SPECS)
-        FirestoreQueryCenter.addNestedCarData(number, carBasic as Any, FirestoreQueryCenter.BASIC)
-        FirestoreQueryCenter.addNestedCarData(number, carPrice as Any, FirestoreQueryCenter.PRICE)
-        FirestoreQueryCenter.addNestedCarData(number, carOwner as Any, FirestoreQueryCenter.OWNER)
-        FirestoreQueryCenter.addNestedCarData(number, address as Any, FirestoreQueryCenter.ADDRESS)
-        showSummaryDialog()
-    }
 
     private fun showSummaryDialog() {
         hideProgress()
@@ -469,10 +442,8 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     override fun uploadDone(filePath: Uri) {
-        carBasic?.coverImagePath = filePath.toString()
-        carBasic?.number?.let {
-            addCarOnFirestore(it)
-        }
+        car?.carBasic?.coverImagePath = filePath.toString()
+        uploadCar()
     }
 
     override fun onSelect(selectedFeature: Features, flag: FeaturesFragment.Action) {
@@ -570,6 +541,36 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         }
     }
 
+    override fun onPutSuccess(code: Int) {
+        when(code){
+            FirebaseExtras.CAR_EXISTS_SUCCESS->{
+                uploadImageToFirebase()
+            }
+            FirebaseExtras.UPLOAD_SUCCESS->{
+                showSummaryDialog()
+            }
+        }
+    }
+
+    private fun uploadCar() {
+        car?.let {car->
+            car.carBasic.number?.let {
+                FirestoreQueryCenter.batchWrite(it,car, this)
+            }
+        }
+    }
+
+    override fun onPutFailure(code: Int) {
+        hideProgress()
+        when(code){
+            FirebaseExtras.CAR_EXISTS_FAILURE ->{
+                carAlreadyExists()
+            }
+            FirebaseExtras.UPLOAD_FAILURE -> {
+                Toast.makeText(this, getString(R.string.some_thing_went_wrong),Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 
 
     companion object {

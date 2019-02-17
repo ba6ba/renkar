@@ -21,7 +21,12 @@ class Cars : Serializable {
     var nearestFrom : String ? = null
     @ServerTimestamp
     var createdAt = Timestamp(Date())
-
+    var carBasic = Cars.Basic()
+    var carSpecs = Cars.Specifications()
+    var carPrice = Cars.Price()
+    var carOwner = Cars.Owner()
+    var carReg = Cars.Registration()
+    var carAddress : com.example.sarwan.renkar.model.location.Address ? = com.example.sarwan.renkar.model.location.Address()
 
      class Basic : Serializable {
          var name : String ? = null
