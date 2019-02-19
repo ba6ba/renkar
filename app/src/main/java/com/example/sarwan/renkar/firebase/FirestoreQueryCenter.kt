@@ -103,7 +103,6 @@ object FirestoreQueryCenter {
         ref.set(addNestedCarData(carNumber, SPECS), data.carSpecs, SetOptions.merge())
         ref.set(addNestedCarData(carNumber, BASIC), data.carBasic, SetOptions.merge())
         ref.set(addNestedCarData(carNumber, PRICE), data.carPrice, SetOptions.merge())
-        ref.set(addNestedCarData(carNumber, OWNER), data.carOwner, SetOptions.merge())
         ref.set(addNestedCarData(carNumber, ADDRESS), data.carAddress as Any, SetOptions.merge())
         ref.commit().addOnSuccessListener {
             callBack.onPutSuccess(FirebaseExtras.UPLOAD_SUCCESS)

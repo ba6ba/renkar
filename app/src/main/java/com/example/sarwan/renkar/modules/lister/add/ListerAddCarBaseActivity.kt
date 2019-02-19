@@ -56,11 +56,18 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     protected var imageUpload : ImageUpload? = null
     private var toFirebaseStorage : ToFirebaseStorage ? = null
     protected var car : Cars? = null
-    
+    private var carBasic : Cars.Basic? = null
+    private var carSpecs : Cars.Specifications? = null
+    private var carPrice : Cars.Price? = null
+    private var carReg : Cars.Registration? = null
     private var summaryFragment : SummaryFragment ? = null
 
     protected fun initializeClasses(){
         car = Cars()
+        carSpecs = Cars.Specifications()
+        carBasic = Cars.Basic()
+        carPrice = Cars.Price()
+        carReg = Cars.Registration()
         toFirebaseStorage = ToFirebaseStorage()
         imageUpload = ImageUpload(this)
     }
@@ -244,8 +251,12 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeOwnerData() {
-        car?.carOwner?.email = user?.email
-        car?.carOwner?.name = user?.name
+        car?.owner?.let {
+            it.apply {
+                this["email"] = user?.email as Any
+                this["name"] = user?.name as Any
+            }
+        }
     }
 
     protected fun makeCarFuel(fuel: String) {

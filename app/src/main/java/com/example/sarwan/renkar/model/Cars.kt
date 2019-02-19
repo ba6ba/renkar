@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ServerTimestamp
 import com.google.firebase.firestore.model.value.FieldValue
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.HashMap
 
 class Cars : Serializable {
 
@@ -24,9 +25,9 @@ class Cars : Serializable {
     var carBasic = Cars.Basic()
     var carSpecs = Cars.Specifications()
     var carPrice = Cars.Price()
-    var carOwner = Cars.Owner()
     var carReg = Cars.Registration()
     var carAddress : com.example.sarwan.renkar.model.location.Address ? = com.example.sarwan.renkar.model.location.Address()
+    var owner : HashMap<String, Any> = hashMapOf()
 
      class Basic : Serializable {
          var name : String ? = null
@@ -52,11 +53,6 @@ class Cars : Serializable {
 
      class Price : Serializable {
         var listerAmount : String ? = null
-    }
-
-     class Owner : Serializable {
-        var email : String ? = null
-        var name : String ? = null
     }
 
      class Registration : Serializable{
