@@ -13,9 +13,14 @@ import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.lister_cars_fragment.*
+import com.amazonaws.auth.policy.Policy.fromJson
+import com.google.gson.Gson
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -104,9 +109,9 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
             }?:kotlin.run {
                 querySnapshot?.let {query->
                     when {
-                        listerCarsAdapter?.itemCount!! == 0 -> getCars(query.toObjects(Cars::class.java))
+                        listerCarsAdapter?.itemCount!! == 0 -> getCars(query.documents)
                         query.documentChanges.last().type == DocumentChange.Type.ADDED -> getNewCar(query.toObjects(Cars::class.java))
-                        query.documentChanges.last().type == DocumentChange.Type.REMOVED -> getCars(query.toObjects(Cars::class.java))
+                        //query.documentChanges.last().type == DocumentChange.Type.REMOVED -> getCars(query.toObjects(Cars::class.java))
                         query.documentChanges.last().type == DocumentChange.Type.MODIFIED -> getUpdatedCar(query.toObjects(Cars::class.java))
                     }
                 }
@@ -116,7 +121,9 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         }
     }
 
-    private fun getCars(cars: MutableList<Cars>) {
+    private fun getCars(cars: MutableList<DocumentSnapshot>) {
+        val gson = Gson()
+        val objectName = gson.fromJson<Cars>(gson.toJsonTree(cars),Cars::class.java)
         listerCarsAdapter?.swap(cars as java.util.ArrayList<Cars>)
         checkEmptyRecyclerView()
     }
