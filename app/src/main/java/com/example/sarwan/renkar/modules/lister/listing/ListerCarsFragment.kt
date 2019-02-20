@@ -95,7 +95,11 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private fun fetchCars() {
         try {
             pActivity?.user?.email?.let {
-                FirestoreQueryCenter.getCarById(it).addSnapshotListener(queryListener)
+                FirestoreQueryCenter.getCarById(it).addOnSuccessListener {querySnapshot ->
+                    val obje = querySnapshot.toObjects(Cars::class.java)
+                    obje.get(0)
+
+                }/*(queryListener)*/
             }
         }catch (e: Exception){
             e.localizedMessage
@@ -122,8 +126,6 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun getCars(cars: MutableList<DocumentSnapshot>) {
-        val gson = Gson()
-        val objectName = gson.fromJson<Cars>(gson.toJsonTree(cars),Cars::class.java)
         listerCarsAdapter?.swap(cars as java.util.ArrayList<Cars>)
         checkEmptyRecyclerView()
     }

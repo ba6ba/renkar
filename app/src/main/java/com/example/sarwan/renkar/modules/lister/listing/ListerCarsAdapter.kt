@@ -50,7 +50,7 @@ class ListerCarsAdapter(private val activity: ParentActivity,
         }
 
         private fun setRating(position: Int) {
-            itemView.ratingBar.visibility = if (carsList[position].carOwner.email!=activity.user?.email) View.VISIBLE else View.GONE
+            itemView.ratingBar.visibility = if (carsList[position].owner["email"]!=activity.user?.email) View.VISIBLE else View.GONE
             itemView.ratingBar.rating = carsList[position].rating?.let { it }?:kotlin.run { 3f }
         }
 
@@ -70,8 +70,8 @@ class ListerCarsAdapter(private val activity: ParentActivity,
         }
 
         private fun setListedByDetails(position: Int) {
-            itemView.personLayout.visibility = if (carsList[position].carOwner.email!=activity.user?.email) View.VISIBLE else View.GONE
-            itemView.person_name.text = carsList[position].carOwner.name
+            itemView.personLayout.visibility = if (carsList[position].owner["email"]!=activity.user?.email) View.VISIBLE else View.GONE
+            itemView.person_name.text = carsList[position].owner["name"].toString()
         }
 
         fun makeContactIcon(textView: TextView, text: String?){
