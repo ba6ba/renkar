@@ -4,14 +4,6 @@ import java.io.Serializable
 
 class RenterProfile : Serializable {
 
-    var email: String? = null
-    var id: Int? = null
-    var password: String? = null
-    var first_name: String? = null
-    var last_name: String? = null
-    var userName: String ? = null
-        get() {
-            return if (field == null) first_name?.capitalize() + " " + last_name?.capitalize() else
-                field
-        }
+    var cars  : ArrayList<String> ? = null
+    var paymentMethod : PaymentMethod ? = null
 }

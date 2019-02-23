@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:padding="@dimen/normal_padding" android:background="@color/white"
+>
+	
+	<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/appbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white"
+			android:fitsSystemWindows="true"
+			android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+		
+		
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+				android:id="@+id/collapsing_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:title="Nearby Restaurants"
+				app:titleEnabled="false"
+				android:background="@color/white"
+				android:fitsSystemWindows="true"
+				app:layout_scrollFlags="scroll|exitUntilCollapsed">
+			
+			<ImageView android:layout_width="200dp" android:layout_height="200dp"
+			           android:layout_centerHorizontal="true"
+			           android:src="@drawable/renkar_logo"
+			           android:id="@+id/logo"
+			           android:layout_gravity="center"
+			           android:layout_margin="@dimen/normal_margin"
+			/>
+		
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+		
+		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+		              android:orientation="vertical"
+		              android:id="@+id/upperHeadingLayout"
+		              android:layout_marginTop="@dimen/medium_margin"
+		              android:layout_marginBottom="@dimen/medium_margin"
+		>
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="@string/welcome" android:textColor="@color/colorPrimaryDark"
+			          android:textSize="@dimen/v_v_large_text_size"
+			          android:fontFamily="@font/gothamultra"
+			/>
+			
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			          android:text="@string/sign_in_to_continue" android:textColor="@color/colorAccent"
+			          android:textSize="@dimen/normal_text_size"
+			          android:fontFamily="@font/gothambook"
+			/>
+		
+		</LinearLayout>
+	
+	
+	</com.google.android.material.appbar.AppBarLayout>
+	
+	<LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+	              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	              android:orientation="vertical"
+	>
+		
+		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+		              android:orientation="horizontal"
+		              android:weightSum="3"
+		              
+		>
+			
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+			              android:orientation="vertical"
+			              android:paddingTop="@dimen/a_normal_padding"
+			              android:paddingBottom="@dimen/a_normal_padding"
+			              android:id="@+id/fieldsLayout"
+			              android:layout_weight="0.5"
+			>
+				
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/email_address" android:textSize="@dimen/medium_text_size"
+				          android:textColor="@color/colorPrimaryDark"
+				          android:fontFamily="@font/gothambook"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/colorPrimaryDark"
+				          android:inputType="textEmailAddress" android:includeFontPadding="true"
+				          android:id="@+id/email"
+				/>
+				
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/password" android:textSize="@dimen/medium_text_size"
+				          android:textColor="@color/colorPrimaryDark"
+				          android:fontFamily="@font/gothambook"
+				/>
+				
+				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+				          android:backgroundTint="@color/colorPrimaryDark"
+				          android:inputType="textPassword" android:includeFontPadding="true"
+				          android:id="@+id/password"
+				/>
+				
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="@string/forgot_password" android:textSize="@dimen/medium_text_size"
+				          android:textColor="@color/colorPrimary"
+				          android:layout_gravity="end"
+				          android:id="@+id/forgotPassword"
+				          android:fontFamily="@font/gothambook"
+				/>
+				
+				<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+				        android:background="@drawable/color_accent_round_corner_bg"
+				        android:layout_gravity="center"
+				        android:text="@string/login"
+				        android:paddingStart="@dimen/v_v_v_large_padding"
+				        android:layout_margin="@dimen/medium_margin"
+				        android:paddingEnd="@dimen/v_v_v_large_padding"
+				        android:id="@+id/login"
+				        android:textSize="@dimen/medium_text_size"
+				        android:textColor="@color/white"
+				/>
+			
+			</LinearLayout>
+			
+			<ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+			           android:src="@drawable/renkar_dots"
+			           android:layout_weight="2.5"
+			           android:layout_gravity="center"
+			
+			/>
+		
+		</LinearLayout>
+		
+		
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+		          android:text="@string/no_account_text" android:textColor="@color/colorAccent"
+		          android:textSize="@dimen/medium_text_size"
+		          android:padding="@dimen/a_small_padding"
+		          android:fontFamily="@font/gothambook"
+		          android:id="@+id/signupFromLogin"
+		/>
+		
+	</LinearLayout>
+	
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

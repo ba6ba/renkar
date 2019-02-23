@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+				android:padding="@dimen/normal_padding"
+                android:layout_height="match_parent">
+	
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		           android:background="@drawable/ic_add_car_shape"
+		           android:src="@drawable/car_illustrative_1"
+		           android:id="@+id/image"
+				   android:layout_above="@id/addACar"
+				   android:layout_alignParentTop="true"
+		/>
+
+
+	<View android:layout_width="25dp" android:layout_height="wrap_content"
+		  android:layout_alignParentStart="true"
+		  android:layout_alignTop="@id/addACar"
+		  android:id="@+id/separator"
+		  android:background="@drawable/white_round_corner_bg"
+		  android:backgroundTint="@color/colorAccent"
+		  android:layout_alignBottom="@id/addACar"
+
+
+	/>
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  android:layout_alignParentBottom="true"
+				  android:id="@+id/addACar"
+				  android:paddingTop="@dimen/normal_padding"
+				  android:paddingBottom="@dimen/normal_padding"
+				  android:layout_marginBottom="@dimen/large_margin"
+	>
+
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:text="ADD"
+				  android:textAllCaps="true"
+				  android:textSize="@dimen/sub_heading_text_size"
+				  android:fontFamily="@font/gothambold"
+				  android:textAlignment="center"
+				  android:textColor="@color/colorPrimaryDark"
+				  android:paddingStart="@dimen/large_padding"
+				  android:paddingEnd="@dimen/large_padding"
+		/>
+
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="YOUR"
+				  android:textAllCaps="true"
+				  android:textSize="@dimen/heading_text_size"
+				  android:fontFamily="@font/gothamultraitalic"
+				  android:textAlignment="textStart"
+				  android:textColor="@color/white"
+				  android:background="@drawable/white_round_corner_bg"
+				  android:backgroundTint="@color/colorAccent"
+				  android:paddingStart="@dimen/large_padding"
+				  android:paddingEnd="@dimen/large_padding"
+				  android:visibility="visible"
+				  android:id="@+id/your_fill"
+		/>
+
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:text="CAR"
+				  android:textAllCaps="true"
+				  android:textSize="@dimen/sub_heading_text_size"
+				  android:fontFamily="@font/gothambold"
+				  android:textAlignment="center"
+				  android:textColor="@color/colorPrimaryDark"
+				  android:paddingStart="@dimen/large_padding"
+				  android:paddingEnd="@dimen/large_padding"
+		/>
+
+	</LinearLayout>
+
+</RelativeLayout>

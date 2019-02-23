@@ -3,7 +3,7 @@ package com.example.sarwan.renkar.modules.base
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.mobitribe.qulabro.modules.base.ParentActivity
+import com.example.sarwan.renkar.base.ParentActivity
 
 class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityPaused(activity: Activity?) {
@@ -27,7 +27,7 @@ class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityStarted(activity: Activity?) {
     if (numStarted == 0) {
       // app went to foreground
-      (activity as? ParentActivity)?.goOnline()
+      //(activity as? ParentActivity)?.goOnline()
     }
     numStarted++
   }
@@ -35,7 +35,7 @@ class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityStopped(activity: Activity?) {
     numStarted--
     if (numStarted == 0) {
-      (activity as? ParentActivity)?.goOffline()
+      //(activity as? ParentActivity)?.goOffline()
     }
   }
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/parentView"
+		android:layout_height="match_parent"
+>
+	
+	<RelativeLayout
+			android:id="@+id/cameraPreview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+	
+	<RelativeLayout
+			android:id="@+id/cameraOverlay"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+		
+		<com.facebook.drawee.view.SimpleDraweeView
+				android:id="@+id/overlayLogo"
+				android:layout_width="60dp"
+				android:layout_height="100dp"
+				app:placeholderImage="@drawable/renkar_logo_white"
+				android:layout_margin="@dimen/normal_margin"
+				android:layout_alignParentBottom="true"
+				android:layout_alignParentStart="true"/>
+		
+	
+	</RelativeLayout>
+	
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_margin="@dimen/large_margin">
+		
+		<ImageButton
+				android:id="@+id/imageCapture"
+				android:layout_width="80dp"
+				android:layout_height="80dp"
+				android:background="@drawable/capture"
+				android:layout_alignParentEnd="true"
+				android:layout_centerVertical="true"
+		/>
+	
+	</RelativeLayout>
+
+</RelativeLayout>

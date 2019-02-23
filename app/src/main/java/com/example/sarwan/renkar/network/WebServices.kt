@@ -1,21 +1,29 @@
 package com.example.sarwan.renkar.network
 
+import com.example.sarwan.renkar.model.HERE.Suggesstion
+import com.example.sarwan.renkar.model.MAPBOX.Addresses
+import com.example.sarwan.renkar.model.TPL.Locations
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface WebServices {
 
-    /*@POST(NetworkConstants.API_VERSION+ApiEndPoints.SIGN_IN)
-    fun book(@Body body: BookingBody ): Call<BookingResponse>  // Done
+    @GET(NetworkConstants.HERE_API_VERSION+ApiEndPoints.SUGGEST)
+    fun getSuggesstions(@QueryMap suggest : Suggesstion): Call<ArrayList<String>>
 
-    @PUT(NetworkConstants.API_VERSION+ApiEndPoints.SET_FITBIT)
-    fun retrieveLocations(@Body role : FitBit): Call<Locations> // Done
+    @GET(NetworkConstants.MAP_BOX_API_VERSION+ApiEndPoints.PLACES)
+    fun getLocations(@Path("query") query: String , @Query("countryCode") countryCode: String = "PK",
+                     @Query("limit") limit: Int = 6, @Query("access_token") access_token: String = NetworkConstants.MAP_BOX_ACCESS_TOKEN)
+            : Call<Addresses>
 
-    @GET(NetworkConstants.API_VERSION+ApiEndPoints.USER)
-    fun fetchCars(@Path("id") id: Int): Call<CarsResponse>   // Done
 
-    @DELETE(NetworkConstants.API_VERSION + ApiEndPoints.MEETING_CRUD)
-    fun cancelBooking(@Path("id") id: Int) : Call<GeneralResponse>
-
-    @PATCH(NetworkConstants.API_VERSION + ApiEndPoints.MEETING_CRUD)
-    fun updateCarDetails(@Body car: CarBody, @Path("id") id: Int) : Call<GeneralResponse> // Done
-    */
+    @GET(ApiEndPoints.SEARCH)
+    fun getAddresses(@Query("name") name: String,
+                     @Query("apikey") apikey: String = NetworkConstants.TPL_API_KEY,
+                     @Query("limit") limit: Int = 6,
+                     @Query("city") city: String = "Karachi", @Query("output") output: String = NetworkConstants.OUTPUT_KEYS)
+            : Call<ArrayList<Locations>>
 }

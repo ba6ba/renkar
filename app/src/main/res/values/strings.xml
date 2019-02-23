@@ -2,4 +2,58 @@
     <string name="app_name">Renkar</string>
 	<string name="internet_connectivity">Oops ! No Internet :-(</string>
 	<string name="some_thing_went_wrong">Ummm! Something went wrong :-(</string>
+	<string name="lister">Lister</string>
+	<string name="renter">Renter</string>
+	<string name="no_account_text">No Account? Signup here.</string>
+	<string name="sign_in_to_continue">Sign in to continue !</string>
+	<string name="welcome">Welcome</string>
+	<string name="username">Username</string>
+	<string name="password">Password</string>
+	<string name="forgot_password">Forgot Password?</string>
+	<string name="login">login</string>
+	<string name="list_a_car">Signup as a lister</string>
+	<string name="last_name">Last Name</string>
+	<string name="first_name">First Name</string>
+	<string name="phone_no">Phone No</string>
+	<string name="date_of_birth">Date of Birth</string>
+	<string name="email_address">Email</string>
+	<string name="user_name">Username</string>
+	<string name="check_mark">\u2713</string>
+	<string name="agree_to_terms_and_conditions">Agree to terms and conditions</string>
+	<string name="rent_a_car">Signup as a Renter</string>
+	<string name="pricing_text">Enter your desired amount for daily rent of your car</string>
+	<string name="pricing_terms">Team Renkar will work on this choice to make a better decision to make your earning
+		better
+	</string>
+	<string name="air_conditioned">Air Condition</string>
+	<string name="alloy_rim">Alloy rims</string>
+	<string name="auto">Automatic</string>
+	<string name="convertible">Convertible</string>
+	<string name="blue_tooth">Bluetooth</string>
+	<string name="gps">GPS</string>
+	<string name="show_map"><u>Show Map</u></string>
+	<string name="add_your_car">Add your Car</string>
+	<string name="instant_book_desc">Instant book allows renters to rent you car immediately without asking you for
+		availability, instead lister and renter will have a chat about renting a car.
+	</string>
+	<string name="must_not_be_empty">Fields must not be empty</string>
+	<string name="hooray">After Renkar cut, You can earn up to\n</string>
+	<string name="renkar_cut">After <b>Renkar cut</b> you will earn up to</string>
+	<string name="per_week">per week</string>
+	<string name="per_day">per day</string>
+	<string name="registered_in">registered in</string>
+	<string name="expires_in">expires in</string>
+	<string name="car_add_successfully">Car has been listed successfully</string>
+	<string name="permission_denied">Permission has been denied</string>
+	<string name="location_permission_warning">Location permissions must be granted to make better results</string>
+	<string name="two">2</string>
+	<string name="four">4</string>
+	<string name="five">5</string>
+	<string name="model_warning">only cars manufactured b/w 2000 and 2019 can be listed</string>
+	<string name="delivery_desc">Car must be delivered to renter place</string>
+	<string name="car_already_exists">Car already exists.Go to your cars list, if you want to update your car details.
+	</string>
+	<string name="must_contain_alpha_numeric">Must contain alphanumeric character and a hyphen.</string>
+    <string name="car_already_listed">Car has been listed already. Do you want to update your car with these details?
+    </string>
 </resources>

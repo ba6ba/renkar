@@ -1,0 +1,142 @@
+<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+	
+<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/normal_margin"
+		android:layout_marginEnd="@dimen/normal_margin"
+		app:cardCornerRadius="30dp"
+		app:cardUseCompatPadding="true"
+		android:elevation="@dimen/max_elevation"
+		app:contentPadding="@dimen/small_padding"
+		android:animateLayoutChanges="true"
+		android:layout_gravity="center"
+		>
+	
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="550dp"
+	>
+		
+		<View android:layout_width="match_parent" android:layout_height="300dp"
+		      android:layout_alignParentTop="true"
+		      android:rotation="180"
+		      android:backgroundTint="@color/white"
+		      android:background="@drawable/half_circle_accent"
+		/>
+		
+		<View android:layout_width="220dp" android:layout_height="180dp"
+		      android:layout_alignParentBottom="true"
+		      android:backgroundTint="@color/v_lightest_grey"
+		      android:rotation="0"
+		      android:layout_alignParentRight="true"
+		      android:background="@drawable/half_circle_accent"
+		/>
+		
+		<View android:layout_width="100dp" android:layout_height="150dp"
+		      android:layout_alignParentBottom="true"
+		      android:rotation="180"
+		      android:layout_alignParentRight="true"
+		      android:background="@drawable/renkar_dots"
+		/>
+		
+		<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/driving_license_layout"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="20dp"
+				app:cardElevation="@dimen/small_elevation"
+				app:contentPadding="@dimen/a_small_padding"
+				android:layout_below="@id/registration_details_layout"
+				app:cardUseCompatPadding="true"
+		>
+			<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+			>
+				
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				          android:text="DRIVING LICENSE"
+				          android:fontFamily="@font/gothamultra"
+				          android:textStyle="bold"
+				          android:textSize="@dimen/v_large_text_size"
+				          android:textColor="@color/black"
+				          android:id="@+id/header_license"
+				/>
+				
+				<View android:layout_width="match_parent" android:layout_height="1.5dp"
+				      android:background="@color/colorAccent"
+				      android:layout_below="@id/header_license"
+				      android:id="@+id/separator_license"
+				      android:layout_alignEnd="@id/header_license"
+				/>
+				
+				<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_below="@id/separator_license"
+						android:layout_marginVertical="@dimen/small_margin"
+						android:layout_alignParentStart="true"
+				>
+					
+					<com.google.android.material.textfield.TextInputEditText
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:background="@drawable/edit_text_background"
+							android:hint="License Number"
+							android:textColorHint="@color/lightest_grey"
+							android:fontFamily="@font/gothamultra"
+							android:textSize="@dimen/medium_text_size"
+							android:paddingStart="@dimen/small_padding"
+							android:paddingEnd="@dimen/small_padding"
+							android:textColor="@color/black"
+							android:ellipsize="end"
+							android:id="@+id/driving_license_number"
+							android:layout_toStartOf="@id/license_expiry"
+							android:layout_alignParentStart="true"
+							android:inputType="textCapCharacters"
+							android:layout_marginEnd="@dimen/medium_margin"
+					/>
+					
+					<androidx.appcompat.widget.AppCompatSpinner
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center"
+							android:layout_alignParentEnd="true"
+							android:id="@+id/license_expiry"
+							android:spinnerMode="dropdown"
+							android:layout_alignTop="@id/driving_license_number"
+							android:saveEnabled="true"
+					>
+					
+					</androidx.appcompat.widget.AppCompatSpinner>
+					
+					<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+					          android:text="@string/expires_in"
+					          android:layout_alignParentEnd="true"
+					          android:layout_below="@id/license_expiry"
+					          android:fontFamily="@font/gothamultra"
+					          android:textStyle="bold"
+					          android:textSize="@dimen/small_text_size"
+					          android:textColor="@color/light_grey"
+					          android:id="@+id/expires_in"
+					          android:layout_marginVertical="@dimen/small_margin"
+					/>
+				
+				</RelativeLayout>
+			
+			</RelativeLayout>
+		
+		</androidx.cardview.widget.CardView>
+		
+	</RelativeLayout>
+	
+</androidx.cardview.widget.CardView>
+</ScrollView>
+
