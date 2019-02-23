@@ -1,6 +1,8 @@
 package com.example.sarwan.renkar.model
 
 import android.net.Uri
+import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.model.location.Address
 import com.example.sarwan.renkar.modules.days.DaysData
 import com.google.firebase.Timestamp
 import com.google.firebase.database.FirebaseDatabase
@@ -19,15 +21,16 @@ class Cars : Serializable {
     var rating : Float ? = null
     var rentedBy : ArrayList<String> ? = null
     var nearestFrom : String ? = null
-    @ServerTimestamp
-    var createdAt = Timestamp(Date())
-    var owner : HashMap<String, Any> = hashMapOf()
-    var basic : HashMap<String, Any> = hashMapOf()
-    var address : HashMap<String, Any> ?= hashMapOf()
+    var createdAt = Calendar.getInstance().time.time
+//    @ServerTimestamp
+//    var createdAt = Timestamp(Date())
+    var owner = Owner()
+    var basic = Basic()
+    var address :Address?= Address()
     var price : String ? = null
 
-    @get:Exclude
     var number  : String ? =null
+
 
      class Basic : Serializable {
          var name : String ? = null
@@ -35,7 +38,7 @@ class Cars : Serializable {
          var description : String ? = ""
          var manufacturedBy : String ? = null
          var miles : String ? = ""
-         var coverImagePath : String? = null
+         var coverImagePath : String = ApplicationConstants.DEFAULT_CAR_IMAGE_URL
     }
 
     class Specifications : Serializable {

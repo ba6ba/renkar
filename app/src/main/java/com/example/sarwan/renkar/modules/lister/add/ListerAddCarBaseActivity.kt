@@ -155,10 +155,10 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                     addAddressChip(name + "," +it.compound_address_parents)
                 }
             }
-            car?.address?.let {map->
-                map[FirebaseExtras.ADDRESS] = address.address as String
-                map[FirebaseExtras.LATITUDE] = address.latitude as Double
-                map[FirebaseExtras.LONGITUDE] = address.longitude as Double
+            car?.address?.let {addres->
+                addres.address = address.address
+                addres.latitude = address.latitude
+                addres.longitude = address.longitude
             }
         }
     }
@@ -176,7 +176,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         chip.setOnCloseIconClickListener {
             val chipItem = it as Chip
             address_chip_group.removeView(chipItem)
-            car?.address = hashMapOf()
+            car?.address = null
             show(address_text_view)
         }
     }
@@ -235,11 +235,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     private fun makeCarBasicData() {
         car?.basic?.let {map->
-            map[FirebaseExtras.NAME] = name.text.toString()
-            map[FirebaseExtras.MANUFACTURED_BY] = manufactured_by?.text.toString()
-            map[FirebaseExtras.MODEL] = model?.text.toString()
-            map[FirebaseExtras.DESCRIPTION] = description?.text.toString()
-            map[FirebaseExtras.MILES] = miles?.text.toString()
+            map.name = name.text.toString()
+            map.manufacturedBy = manufactured_by?.text.toString()
+            map.model = model?.text.toString()
+            map.description = description?.text.toString()
+            map.miles = miles?.text.toString()
         }
         car?.number = number?.text?.toString()
     }
@@ -264,10 +264,10 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeOwnerData() {
-        car?.owner?.let {map->
-            map[FirebaseExtras.EMAIL] = user?.email.toString()
-            map[FirebaseExtras.NAME] = user?.name.toString()
-            map[FirebaseExtras.IMAGE] = user?.image_url.toString()
+        car?.owner?.let {owner->
+            owner.email = user?.email.toString()
+            owner.name = user?.name.toString()
+            owner.image = user?.image_url.toString()
         }
     }
 
@@ -344,12 +344,12 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeDataNodes() {
-        if(validateStepTwo() && car?.address?.isNotEmpty()!!){
+        if(validateStepTwo() && car?.address!=null){
             makeStepTwoFields()
             try {
                 car?.address?.let {
-                    it[FirebaseExtras.LATITUDE]?.let { lat->
-                        it[FirebaseExtras.LONGITUDE]?.let { lon->
+                    it.latitude?.let { lat->
+                        it.longitude?.let { lon->
                             makeNearestKms(lat.toString().toDouble(), lon.toString().toDouble())
                         }
                     }
@@ -394,11 +394,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         carSpecs?.color = colorHtml
     }
 
-    private fun uploadImageToFirebase() {
+    private fun uploadImageToFirebase(flag: Int) {
         selectedImage?.let {
-            toFirebaseStorage?.uploadFile(it)
+            toFirebaseStorage?.uploadFile(it, flag)
         }?:kotlin.run {
-            uploadCar()
+            uploadCar(flag)
         }
     }
 
@@ -473,10 +473,10 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         }
     }
 
-    override fun uploadDone(filePath: Uri) {
+    override fun uploadDone(filePath: Uri, flag: Int) {
         car?.basic?.let {
-            it[FirebaseExtras.COVER_IMAGE] = filePath.toString()
-            uploadCar()
+            it.coverImagePath = filePath.toString()
+            uploadCar(flag)
         }
     }
 
@@ -574,10 +574,21 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                 v.error = getString(R.string.must_contain_alpha_numeric) ; return true
         }
     }
-    private fun uploadCar() {
+    private fun uploadCar(flag: Int) {
         car?.let {car->
             car.number?.let {
-                FirestoreQueryCenter.batchWrite(it,car, carReg as Any, carSpecs as Any,this)
+                when(flag){
+                    FirebaseExtras.Companion.FLAG.SET.ordinal-> {
+                        FirestoreQueryCenter.batchWrite(it,car, carReg as Any, carSpecs as Any,this)
+                        user?.email?.let {email->
+                            FirestoreQueryCenter.addCarToListerNode(email,it)
+                        }
+                    }
+                    FirebaseExtras.Companion.FLAG.UPDATE.ordinal->{
+                        FirestoreQueryCenter.batchUpdate(it,car, carReg as Any, carSpecs as Any,this)
+                    }
+                    else -> {}
+                }
             }
         }
     }
@@ -586,7 +597,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     override fun onPutSuccess(code: Int) {
         when(code){
             FirebaseExtras.CAR_EXISTS->{
-                uploadImageToFirebase()
+                uploadImageToFirebase(FirebaseExtras.Companion.FLAG.SET.ordinal)
             }
             FirebaseExtras.UPLOAD_SUCCESS->{
                 showSummaryDialog()
@@ -627,7 +638,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     private fun updateCar() {
         showProgress()
-        uploadImageToFirebase()
+        uploadImageToFirebase(FirebaseExtras.Companion.FLAG.UPDATE.ordinal)
     }
 
     private fun finishScreen(){

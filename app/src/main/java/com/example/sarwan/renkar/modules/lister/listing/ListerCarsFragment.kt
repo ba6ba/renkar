@@ -12,14 +12,12 @@ import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.modules.lister.ListerActivity
+import com.example.sarwan.renkar.utils.StringUtility
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.lister_cars_fragment.*
-import com.amazonaws.auth.policy.Policy.fromJson
-import com.google.gson.Gson
-
 
 
 /**
@@ -35,6 +33,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     private var listerCarsAdapter: ListerCarsAdapter? = null
     private var pActivity : ParentActivity? = null
+    private var carsList : ArrayList<Cars> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +49,13 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRefreshLayouts()
+        userIconInitial()
         initializeLayoutView()
         fetchCars()
+    }
+
+    private fun userIconInitial() {
+        person_icon.text = StringUtility.makeInitials(pActivity?.user?.name)
     }
 
     override fun onRefresh() {
@@ -59,7 +63,6 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun checkEmptyRecyclerView() {
-
         if (listerCarsAdapter?.itemCount == 0) {
             swipeRefreshLayout?.visibility = View.GONE
             swipeRefreshLayoutEmpty?.visibility = View.VISIBLE
@@ -87,7 +90,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private fun initializeLayoutView() {
         pActivity?.let {
             lister_cars_recycler_view.layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            listerCarsAdapter = ListerCarsAdapter(it, ArrayList())
+            listerCarsAdapter = ListerCarsAdapter(it, carsList)
             lister_cars_recycler_view.adapter = listerCarsAdapter
         }
     }
@@ -95,11 +98,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private fun fetchCars() {
         try {
             pActivity?.user?.email?.let {
-                FirestoreQueryCenter.getCarById(it).addOnSuccessListener {querySnapshot ->
-                    val obje = querySnapshot.toObjects(Cars::class.java)
-                    obje.get(0)
-
-                }/*(queryListener)*/
+                FirestoreQueryCenter.getListerCars(it).addSnapshotListener(queryListener)
             }
         }catch (e: Exception){
             e.localizedMessage
@@ -113,7 +112,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
             }?:kotlin.run {
                 querySnapshot?.let {query->
                     when {
-                        listerCarsAdapter?.itemCount!! == 0 -> getCars(query.documents)
+                        listerCarsAdapter?.itemCount!! == 0 -> getCars(query.toObjects(Cars::class.java))
                         query.documentChanges.last().type == DocumentChange.Type.ADDED -> getNewCar(query.toObjects(Cars::class.java))
                         //query.documentChanges.last().type == DocumentChange.Type.REMOVED -> getCars(query.toObjects(Cars::class.java))
                         query.documentChanges.last().type == DocumentChange.Type.MODIFIED -> getUpdatedCar(query.toObjects(Cars::class.java))
@@ -125,8 +124,9 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         }
     }
 
-    private fun getCars(cars: MutableList<DocumentSnapshot>) {
-        listerCarsAdapter?.swap(cars as java.util.ArrayList<Cars>)
+    private fun getCars(cars: MutableList<Cars>) {
+        carsList = cars  as java.util.ArrayList<Cars>
+        listerCarsAdapter?.swap(carsList)
         checkEmptyRecyclerView()
     }
 
@@ -136,18 +136,36 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun getUpdatedCar(cars:  MutableList<Cars>) {
-        updateAdapter(cars.last(), cars.last().carBasic.number)
+        updateAdapter(cars.last(), cars.last().number)
         checkEmptyRecyclerView()
     }
 
     private fun addItemInAdapter(car: Cars) {
-        listerCarsAdapter?.addItem(car)
+        if (carsList.map { car.number }.isEmpty()){
+            carsList.add(car)
+            listerCarsAdapter?.addItem(car)
+        }
     }
 
     private fun updateAdapter(car: Cars, key: String?) {
-        listerCarsAdapter?.updateItem(car, key)
+            listerCarsAdapter?.updateItem(car, key)
     }
 
+    fun removeListener(){
+        pActivity?.user?.email?.let {
+            FirestoreQueryCenter.getListerCars(it).addSnapshotListener(queryListener).remove()
+        }
+    }
+
+    override fun onDestroy() {
+        removeListener()
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        removeListener()
+        super.onDetach()
+    }
 
     companion object {
         /**

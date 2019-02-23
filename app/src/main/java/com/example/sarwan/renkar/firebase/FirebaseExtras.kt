@@ -6,6 +6,8 @@ class FirebaseExtras {
         const val CAR_EXISTS : Int = 990
         const val UPLOAD_SUCCESS :Int = 910
 
+        enum class FLAG {UPDATE, SET, REMOVE}
+
         interface PutObjectCallBack{
             fun onPutSuccess(code : Int)
             fun onPutFailure(code : Int)

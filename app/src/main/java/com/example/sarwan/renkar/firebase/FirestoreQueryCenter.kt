@@ -70,8 +70,8 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
-    fun getCarById(email: String): Task<QuerySnapshot> {
-        return FirebaseFirestore.getInstance().collection(CARS).whereEqualTo("$OWNER.email", email).get()
+    fun getListerCars(email: String): Query {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).whereEqualTo("${FirebaseExtras.OWNER}.email", email)
     }
 
     fun checkIfCarExists(carNumber: String, callBack: FirebaseExtras.Companion.PutObjectCallBack){
@@ -122,6 +122,42 @@ object FirestoreQueryCenter {
                  }
          }
      }
+
+    fun batchUpdate(
+        carNumber: String,
+        data: Cars,
+        regData : Any,
+        specsData :Any,
+        callBack: FirebaseExtras.Companion.PutObjectCallBack
+    ) {
+
+        FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).apply {
+            update(mapOf(FirebaseExtras.CARS to data))
+                .addOnSuccessListener {
+                    collection(FirebaseExtras.REGISTRATION).document().update(mapOf(FirebaseExtras.REGISTRATION to regData))
+                        .addOnSuccessListener {regComplete->
+
+                            collection(FirebaseExtras.SPECS).document().set(mapOf(FirebaseExtras.SPECS to specsData))
+                                .addOnSuccessListener {specsComplete->
+                                    callBack.onPutSuccess(FirebaseExtras.UPLOAD_SUCCESS)
+                                }
+                                .addOnFailureListener{failure->
+                                    callBack.onPutFailure(FirebaseExtras.UPLOAD_FAILURE)
+                                }
+                        }
+                        .addOnFailureListener{failure->
+                            callBack.onPutFailure(FirebaseExtras.UPLOAD_FAILURE)
+                        }
+                }
+                .addOnFailureListener{failure->
+                    callBack.onPutFailure(FirebaseExtras.UPLOAD_FAILURE)
+                }
+        }
+    }
+
+    fun addCarToListerNode(email: String, data: Any){
+        FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).update(mapOf(FirebaseExtras.CARS to arrayListOf(data)))
+    }
 
     fun addDataToListerNode(email: String, data: Any) : Task<Void>{
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).set(data, SetOptions.merge())

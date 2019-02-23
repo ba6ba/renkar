@@ -25,7 +25,7 @@
 				android:textAlignment="center"
 				android:gravity="center"
 				android:textSize="@dimen/normal_text_size"
-				android:fontFamily="@font/gothamultra"
+				android:fontFamily="@font/gothamxlight"
 				android:textColor="@color/colorPrimaryDark"
 		/>
 		
