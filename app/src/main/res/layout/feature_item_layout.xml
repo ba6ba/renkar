@@ -23,7 +23,7 @@
 			android:text="@string/rent_a_car"
 			android:id="@+id/featureName"
 			android:padding="@dimen/small_padding"
-			android:fontFamily="@font/proximanovaregular"
+			android:fontFamily="@font/gothambook"
 			android:textColor="@color/black"
 			android:textSize="@dimen/small_text_size"
 	/>

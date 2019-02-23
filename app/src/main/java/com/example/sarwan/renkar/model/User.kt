@@ -20,6 +20,10 @@ class User : Serializable {
     @get:Exclude
     var password: String? = null
     @get:Exclude
+    var latitude : Double ? = null
+    @get:Exclude
+    var longitude : Double ? = null
+    @get:Exclude
     var name: String ? = null
         get() {
             return if (field == null) first_name?.capitalize() + " " + last_name?.capitalize() else field
@@ -34,6 +38,5 @@ class User : Serializable {
     var city : String ? = null
     var type : String ? = null
     var address : String ? = null
-    var latitude : Double ? = null
-    var longitude : Double ? = null
+    var image_url : String ? = ""
 }

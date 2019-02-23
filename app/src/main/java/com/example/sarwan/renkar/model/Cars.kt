@@ -14,7 +14,6 @@ import kotlin.collections.HashMap
 
 class Cars : Serializable {
 
-
     var features : ArrayList<Features> ? = null
     var days : ArrayList<String> ? = DaysData.populateDays().map { it.name } as ArrayList<String>
     var rating : Float ? = null
@@ -22,12 +21,13 @@ class Cars : Serializable {
     var nearestFrom : String ? = null
     @ServerTimestamp
     var createdAt = Timestamp(Date())
-    var carBasic = Cars.Basic()
-    var carSpecs = Cars.Specifications()
-    var carPrice = Cars.Price()
-    var carReg = Cars.Registration()
-    var carAddress : com.example.sarwan.renkar.model.location.Address ? = com.example.sarwan.renkar.model.location.Address()
     var owner : HashMap<String, Any> = hashMapOf()
+    var basic : HashMap<String, Any> = hashMapOf()
+    var address : HashMap<String, Any> ?= hashMapOf()
+    var price : String ? = null
+
+    @get:Exclude
+    var number  : String ? =null
 
      class Basic : Serializable {
          var name : String ? = null
@@ -36,10 +36,6 @@ class Cars : Serializable {
          var manufacturedBy : String ? = null
          var miles : String ? = ""
          var coverImagePath : String? = null
-
-         @get:Exclude
-         var number  : String ? = null
-
     }
 
     class Specifications : Serializable {
@@ -51,8 +47,11 @@ class Cars : Serializable {
         var vehicleType : String ? = ""
     }
 
-     class Price : Serializable {
-        var listerAmount : String ? = null
+
+    class Owner : Serializable{
+        var name : String ? = null
+        var email : String ? = null
+        var image : String ? = null
     }
 
      class Registration : Serializable{

@@ -49,9 +49,11 @@
 	<string name="two">2</string>
 	<string name="four">4</string>
 	<string name="five">5</string>
-	<string name="model_warning">only after 2000\'s</string>
+	<string name="model_warning">only cars manufactured b/w 2000 and 2019 can be listed</string>
 	<string name="delivery_desc">Car must be delivered to renter place</string>
 	<string name="car_already_exists">Car already exists.Go to your cars list, if you want to update your car details.
 	</string>
 	<string name="must_contain_alpha_numeric">Must contain alphanumeric character and a hyphen.</string>
+    <string name="car_already_listed">Car has been listed already. Do you want to update your car with these details?
+    </string>
 </resources>

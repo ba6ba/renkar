@@ -23,7 +23,7 @@
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/spinnerText"
 			android:gravity="center_vertical"
-			android:fontFamily="@font/proximanovaregular"
+			android:fontFamily="@font/gothambook"
 			android:textSize="@dimen/small_text_size"
 			android:textColor="@color/black"
 			android:maxLength="5"

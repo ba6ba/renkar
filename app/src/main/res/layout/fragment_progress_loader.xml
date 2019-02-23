@@ -21,7 +21,7 @@
 	          android:layout_height="wrap_content"
 	          android:layout_below="@id/progress_wheel"
 	          android:text="..."
-	          android:fontFamily="@font/proximanovalight"
+	          android:fontFamily="@font/gothambook"
 	          android:textSize="@dimen/abc_text_size_medium_material"
 	          android:layout_centerVertical="true"
 	          android:layout_centerHorizontal="true"

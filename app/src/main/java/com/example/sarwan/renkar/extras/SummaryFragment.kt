@@ -27,9 +27,6 @@ class SummaryFragment : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(0))
         dialog?.setCancelable(false)
         dialog?.setCanceledOnTouchOutside(false)
-        Handler().postDelayed({
-            dismissFragment()
-        }, ApplicationConstants.SUMMARY_TIMEOUT)
 
         toGo.setOnClickListener {
             dismissFragment()

@@ -25,7 +25,7 @@
 				android:textAlignment="center"
 				android:gravity="center"
 				android:textSize="@dimen/normal_text_size"
-				android:fontFamily="@font/proximanovaextracondensedbold"
+				android:fontFamily="@font/gothamultra"
 				android:textColor="@color/colorPrimaryDark"
 		/>
 		
@@ -61,15 +61,5 @@
 		
 	
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-	
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-			android:layout_width="wrap_content"
-			android:src="@drawable/add"
-			app:backgroundTint="@color/colorPrimaryDark"
-			android:layout_height="wrap_content"
-			android:layout_alignParentEnd="true"
-			android:layout_alignParentBottom="true"
-			android:layout_margin="@dimen/normal_margin"
-	/>
 
 </RelativeLayout>

@@ -24,8 +24,8 @@
 			android:textColor="@color/grey"
 			android:imeOptions="actionNext"
 			android:inputType="textCapCharacters"
-			android:fontFamily="@font/proximanovaslight"
-	
+			android:fontFamily="@font/gothambook"
+			style="@style/Renkar.TextField.Padding"
 	/>
 	
 	<LinearLayout android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 				android:hint="FORD"
 				android:textColorHint="@color/lightest_grey"
 				android:inputType="textCapCharacters"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
 				android:textSize="@dimen/medium_text_size"
 				android:paddingStart="@dimen/small_padding"
@@ -54,6 +54,7 @@
 				android:layout_marginEnd="@dimen/small_margin"
 				android:id="@+id/manufactured_by"
 				android:imeOptions="actionNext"
+				style="@style/Renkar.TextField.Padding"
 		/>
 		
 		<com.google.android.material.textfield.TextInputEditText
@@ -65,7 +66,7 @@
 				android:textColorHint="@color/lightest_grey"
 				android:textSize="@dimen/medium_text_size"
 				android:inputType="textCapCharacters"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
 				android:paddingStart="@dimen/small_padding"
 				android:paddingEnd="@dimen/small_padding"
@@ -75,6 +76,7 @@
 				android:ellipsize="end"
 				android:layout_gravity="center"
 				android:imeOptions="actionNext"
+				style="@style/Renkar.TextField.Padding"
 		/>
 		
 	</LinearLayout>
@@ -91,10 +93,10 @@
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:background="@drawable/edit_text_background"
-				android:hint="AOK - 00009"
+				android:hint="AOK - 009"
 				android:textColorHint="@color/lightest_grey"
 				android:inputType="textCapCharacters"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
 				android:textSize="@dimen/medium_text_size"
 				android:paddingStart="@dimen/small_padding"
@@ -104,6 +106,7 @@
 				android:maxLines="1"
 				android:ellipsize="end"
 				android:id="@+id/number"
+				style="@style/Renkar.TextField.Padding"
 				android:imeOptions="actionNext"
 		/>
 		<com.google.android.material.textfield.TextInputEditText
@@ -114,7 +117,7 @@
 				android:textColorHint="@color/lightest_grey"
 				android:textSize="@dimen/medium_text_size"
 				android:inputType="number"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
 				android:layout_marginEnd="@dimen/small_margin"
 				android:maxLines="1"
@@ -123,6 +126,7 @@
 				android:layout_gravity="center"
 				android:paddingStart="@dimen/small_padding"
 				android:paddingEnd="@dimen/small_padding"
+				style="@style/Renkar.TextField.Padding"
 				android:maxLength="4"
 				android:ellipsize="end"
 				android:imeOptions="actionNext"
@@ -136,12 +140,14 @@
 				android:hint="16000 KM"
 				android:textColorHint="@color/lightest_grey"
 				android:inputType="number"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
+				style="@style/Renkar.TextField.Padding"
 				android:textSize="@dimen/medium_text_size"
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:ellipsize="end"
+				android:maxLength="5"
 				android:id="@+id/miles"
 				android:imeOptions="actionNext"
 				android:paddingStart="@dimen/small_padding"
@@ -160,11 +166,10 @@
 				android:hint="Description"
 				android:textColorHint="@color/lightest_grey"
 				android:inputType="text"
-				android:fontFamily="@font/proximanovaslight"
+				android:fontFamily="@font/gothambook"
 				android:textColor="@color/black"
-				android:textSize="@dimen/small_text_size"
+				android:textSize="@dimen/medium_text_size"
 				android:padding="@dimen/small_padding"
-				android:layout_toStartOf="@id/color_picker_view"
 				android:layout_marginTop="@dimen/small_margin"
 				android:layout_marginBottom="@dimen/small_margin"
 				android:layout_marginEnd="@dimen/normal_margin"
@@ -172,28 +177,31 @@
 				android:textAllCaps="false"
 				android:ellipsize="end"
 				android:id="@+id/description"
-				android:minHeight="90dp"
+				android:minHeight="85dp"
+				android:layout_toStartOf="@id/color_picker_view"
 				android:gravity="top"
 				android:layout_alignParentStart="true"
 				android:imeOptions="actionDone"
 		/>
 		
-		<ImageView android:layout_width="wrap_content" android:layout_height="10dp"
+		<ImageView android:layout_width="wrap_content" android:layout_height="7dp"
 		           android:layout_centerVertical="true"
 		           android:layout_alignEnd="@id/color_picker_view"
 		           android:layout_alignStart="@id/color_picker_view"
 		           android:background="@color/colorAccent"
 		           android:id="@+id/selectedColor"
 		           android:layout_alignBottom="@id/description"
+				   android:layout_marginTop="@dimen/small_margin"
 		/>
 		
 		<com.skydoves.colorpickerpreference.ColorPickerView
 				android:id="@+id/color_picker_view"
-				android:layout_width="75dp"
-				android:layout_height="75dp"
+				android:layout_width="85dp"
+				android:layout_height="wrap_content"
 				app:palette="@drawable/palette"
 				app:selector="@drawable/wheel"
 				android:layout_alignParentEnd="true"
+				android:layout_above="@id/selectedColor"
 				android:layout_alignTop="@id/description"
 		/>
 	
@@ -216,9 +224,9 @@
 					android:layout_height="wrap_content"
 					android:text="Instant Book"
 					android:textColor="@color/colorPrimaryDark"
-					android:fontFamily="@font/proximanovaregular"
+					android:fontFamily="@font/gothambook"
 					android:textAllCaps="true"
-					android:textSize="@dimen/medium_text_size"
+					android:textSize="@dimen/small_text_size"
 					app:useMaterialThemeColors="true"
 					android:buttonTint="@color/colorAccent"
 					android:id="@+id/instantBook"
@@ -243,9 +251,9 @@
 					android:layout_height="wrap_content"
 					android:text="Delivery"
 					android:textColor="@color/colorPrimaryDark"
-					android:fontFamily="@font/proximanovaregular"
+					android:fontFamily="@font/gothambook"
 					android:textAllCaps="true"
-					android:textSize="@dimen/medium_text_size"
+					android:textSize="@dimen/small_text_size"
 					app:useMaterialThemeColors="true"
 					android:buttonTint="@color/colorAccent"
 					android:id="@+id/delivery"
@@ -284,11 +292,13 @@
 			
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			          android:text="CNG"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
 			          android:textAllCaps="true"
 			          android:id="@+id/gasText"
+					  android:layout_gravity="center_vertical"
+
 			/>
 			
 		</LinearLayout>
@@ -307,9 +317,11 @@
 			
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			          android:text="PETROL"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
+					  android:gravity="center_vertical"
+					  android:layout_gravity="center_vertical"
 			          android:textAllCaps="true"
 			          android:id="@+id/petrolText"
 			
@@ -331,12 +343,12 @@
 			
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			          android:text="DIESEL"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textSize="@dimen/medium_text_size"
 			          android:textColor="@color/dark_grey"
 			          android:textAllCaps="true"
 			          android:id="@+id/dieselText"
-			
+					  android:layout_gravity="center_vertical"
 			/>
 		
 		</LinearLayout>
@@ -379,7 +391,7 @@
 			          android:paddingBottom="@dimen/small_padding"
 			          android:layout_marginStart="@dimen/normal_margin"
 			          android:layout_marginEnd="@dimen/normal_margin"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:layout_alignParentBottom="true"
 			          android:id="@+id/heading"
 			/>
@@ -406,7 +418,7 @@
 			          android:textAlignment="center" android:gravity="center"
 			          android:textAllCaps="true" android:textColor="@color/dark_grey"
 			          android:textSize="@dimen/medium_text_size"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textStyle="bold"
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
@@ -421,7 +433,7 @@
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
 			          android:layout_marginBottom="@dimen/small_margin"
-			          android:fontFamily="@font/proximanovaslight"
+			          android:fontFamily="@font/gothambook"
 			/>
 		
 		
@@ -448,7 +460,7 @@
 			          android:textAlignment="center" android:gravity="center"
 			          android:textAllCaps="true" android:textColor="@color/dark_grey"
 			          android:textSize="@dimen/medium_text_size"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textStyle="bold"
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
@@ -463,7 +475,7 @@
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
 			          android:layout_marginBottom="@dimen/small_margin"
-			          android:fontFamily="@font/proximanovaslight"
+			          android:fontFamily="@font/gothambook"
 			/>
 		
 		
@@ -489,7 +501,7 @@
 			          android:textAlignment="center" android:gravity="center"
 			          android:textAllCaps="true" android:textColor="@color/dark_grey"
 			          android:textSize="@dimen/medium_text_size"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			          android:textStyle="bold"
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
@@ -504,7 +516,7 @@
 			          android:layout_gravity="center_horizontal"
 			          android:layout_marginTop="@dimen/small_margin"
 			          android:layout_marginBottom="@dimen/small_margin"
-			          android:fontFamily="@font/proximanovaslight"
+			          android:fontFamily="@font/gothambook"
 			/>
 		
 		
@@ -532,7 +544,7 @@
 		          android:textColor="@color/dark_grey"
 		          android:padding="@dimen/small_padding"
 		          android:textSize="@dimen/small_text_size"
-		          android:fontFamily="@font/proximanovaregular"
+		          android:fontFamily="@font/gothambook"
 		/>
 		
 		
@@ -566,7 +578,7 @@
 		          android:textColor="@color/dark_grey"
 		          android:padding="@dimen/small_padding"
 		          android:textSize="@dimen/small_text_size"
-		          android:fontFamily="@font/proximanovaregular"
+		          android:fontFamily="@font/gothambook"
 		/>
 		
 		<fragment

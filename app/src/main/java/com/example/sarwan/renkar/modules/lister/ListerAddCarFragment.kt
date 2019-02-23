@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.modules.lister
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,8 +42,12 @@ class ListerAddCarFragment : Fragment(){
 
     private fun onClickListeners() {
         addACar.setOnClickListener {
-            pActivity.openActivity(Intent(pActivity,ListerAddCarActivity::class.java))
+            openAddActivity()
         }
+    }
+
+    private fun openAddActivity() {
+        pActivity.openActivity(Intent(pActivity,ListerAddCarActivity::class.java))
     }
 
     companion object {

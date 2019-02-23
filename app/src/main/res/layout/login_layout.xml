@@ -43,13 +43,13 @@
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			          android:text="@string/welcome" android:textColor="@color/colorPrimaryDark"
 			          android:textSize="@dimen/v_v_large_text_size"
-			          android:fontFamily="@font/proximanovascondensedbold"
+			          android:fontFamily="@font/gothamultra"
 			/>
 			
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			          android:text="@string/sign_in_to_continue" android:textColor="@color/colorAccent"
 			          android:textSize="@dimen/normal_text_size"
-			          android:fontFamily="@font/proximanovaregular"
+			          android:fontFamily="@font/gothambook"
 			/>
 		
 		</LinearLayout>
@@ -79,7 +79,7 @@
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 				          android:text="@string/email_address" android:textSize="@dimen/medium_text_size"
 				          android:textColor="@color/colorPrimaryDark"
-				          android:fontFamily="@font/proximanovaregular"
+				          android:fontFamily="@font/gothambook"
 				/>
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 				          android:text="@string/password" android:textSize="@dimen/medium_text_size"
 				          android:textColor="@color/colorPrimaryDark"
-				          android:fontFamily="@font/proximanovaregular"
+				          android:fontFamily="@font/gothambook"
 				/>
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
 				          android:textColor="@color/colorPrimary"
 				          android:layout_gravity="end"
 				          android:id="@+id/forgotPassword"
-				          android:fontFamily="@font/proximanovaregular"
+				          android:fontFamily="@font/gothambook"
 				/>
 				
 				<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
 		          android:text="@string/no_account_text" android:textColor="@color/colorAccent"
 		          android:textSize="@dimen/medium_text_size"
 		          android:padding="@dimen/a_small_padding"
-		          android:fontFamily="@font/proximanovaregular"
+		          android:fontFamily="@font/gothambook"
 		          android:id="@+id/signupFromLogin"
 		/>
 		

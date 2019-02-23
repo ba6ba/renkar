@@ -11,11 +11,13 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.FragmentManager
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.*
 import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
+import com.example.sarwan.renkar.fragments.ConfirmationFragment
 import com.example.sarwan.renkar.model.AutoCompleteModel
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.Features
@@ -38,12 +40,13 @@ import kotlinx.android.synthetic.main.lister_add_car_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.FeaturesInteractionListener,
     DayFragment.DaysInteractionListener, ImageUpload.ImageUploadResponse,
         ToFirebaseStorage.ToFirebaseStorageListener, CustomTextWatcher.TextWatcherListener,
-    FirebaseExtras.Companion.PutObjectCallBack
+    FirebaseExtras.Companion.PutObjectCallBack, ConfirmationFragment.ConfirmationFragmentCallBack<Any>
 {
 
     protected var onStep : Int = 1
@@ -56,17 +59,14 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     protected var imageUpload : ImageUpload? = null
     private var toFirebaseStorage : ToFirebaseStorage ? = null
     protected var car : Cars? = null
-    private var carBasic : Cars.Basic? = null
     private var carSpecs : Cars.Specifications? = null
-    private var carPrice : Cars.Price? = null
     private var carReg : Cars.Registration? = null
     private var summaryFragment : SummaryFragment ? = null
+    private var confirmationFragment : ConfirmationFragment ? = null
 
     protected fun initializeClasses(){
         car = Cars()
         carSpecs = Cars.Specifications()
-        carBasic = Cars.Basic()
-        carPrice = Cars.Price()
         carReg = Cars.Registration()
         toFirebaseStorage = ToFirebaseStorage()
         imageUpload = ImageUpload(this)
@@ -97,8 +97,6 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
             previous.visibility = View.VISIBLE
             next.setImageResource(R.drawable.ic_check_black_24dp)
             onStep+=1
-        }else {
-            showMessage(getString(R.string.must_not_be_empty))
         }
     }
 
@@ -115,7 +113,15 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun validateStepOne() : Boolean {
-        return ValidationUtility.isNotEmptyField(name,manufactured_by,model,number)
+        var validated = (ValidationUtility.isNotEmptyField(name,manufactured_by,model,number))
+
+        (ValidationUtility.yearRangeValidation(model)).apply {
+            if (this)
+                validated = this
+            else
+                ValidationUtility.setErrors(this@ListerAddCarBaseActivity, getString(R.string.model_warning), model)
+        }
+        return validated
     }
 
     private fun validateStepTwo() : Boolean {
@@ -149,7 +155,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                     addAddressChip(name + "," +it.compound_address_parents)
                 }
             }
-            car?.carAddress = address
+            car?.address?.let {map->
+                map[FirebaseExtras.ADDRESS] = address.address as String
+                map[FirebaseExtras.LATITUDE] = address.latitude as Double
+                map[FirebaseExtras.LONGITUDE] = address.longitude as Double
+            }
         }
     }
 
@@ -166,7 +176,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         chip.setOnCloseIconClickListener {
             val chipItem = it as Chip
             address_chip_group.removeView(chipItem)
-            car?.carAddress = null
+            car?.address = hashMapOf()
             show(address_text_view)
         }
     }
@@ -187,7 +197,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         chip.isCheckable = false
     }
 
-    protected fun queryForAddress(text : String){
+    private fun queryForAddress(text : String){
         RestClient.getRestAdapter(NetworkConstants.TPL_MAPS_BASE_URL).getAddresses(text).enqueue(object :
             Callback<ArrayList<Locations>>{
             override fun onFailure(call: Call<ArrayList<Locations>>?, t: Throwable) {
@@ -203,16 +213,16 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         })
     }
 
-    protected fun hidePriceEstimationLayouts() {
+    private fun hidePriceEstimationLayouts() {
         priceEstimation.visibility = View.GONE
     }
 
-    protected fun showPriceEstimation(){
+    private fun showPriceEstimation(){
         hideKeyboard(daily_price)
         priceEstimation.visibility = View.VISIBLE
-        priceEstimation.text = "${getString(R.string.hooray)}" +
-                "${PriceUtility.weeklyEarning(daily_price.text.toString(), selectedDays?.count())} ${getString(R.string.per_week)}\n" +
-                "${PriceUtility.dailyEarning(daily_price.text.toString())} ${getString(R.string.per_day)}"
+        priceEstimation.text = "${getString(R.string.hooray)} ${PriceUtility.weeklyEarning(daily_price?.text?.toString()?.let { it }?:kotlin.run { "7" }
+            , selectedDays?.count())} " + "${getString(R.string.per_week)} | " +
+                "${PriceUtility.dailyEarning(daily_price?.text?.toString()?.let{it}?:kotlin.run { "1" })} ${getString(R.string.per_day)}"
     }
 
     private fun makeStepOneFields(){
@@ -224,18 +234,21 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarBasicData() {
-        car?.carBasic?.name = name.text.toString()
-        car?.carBasic?.manufacturedBy = manufactured_by?.text?.toString()
-        car?.carBasic?.model = model?.text?.toString()
-        car?.carBasic?.description = description?.text?.toString()
-        car?.carBasic?.number = number?.text?.toString()
-        car?.carBasic?.miles = miles?.text?.toString()
+        car?.basic?.let {map->
+            map[FirebaseExtras.NAME] = name.text.toString()
+            map[FirebaseExtras.MANUFACTURED_BY] = manufactured_by?.text.toString()
+            map[FirebaseExtras.MODEL] = model?.text.toString()
+            map[FirebaseExtras.DESCRIPTION] = description?.text.toString()
+            map[FirebaseExtras.MILES] = miles?.text.toString()
+        }
+        car?.number = number?.text?.toString()
     }
 
+
     private fun makeCarSpecifications() {
-        car?.carSpecs?.vehicleType = vehicle_type?.text?.toString()
-        car?.carSpecs?.instantBook = instantBook.isChecked
-        car?.carSpecs?.delivery = delivery.isChecked
+        carSpecs?.vehicleType = vehicle_type?.text?.toString()
+        carSpecs?.instantBook = instantBook.isChecked
+        carSpecs?.delivery = delivery.isChecked
     }
 
     private fun makeCarAvailabilityDays() {
@@ -247,20 +260,19 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     protected fun makeCarCapacity(value: String) {
-        car?.carSpecs?.capacity = value
+        carSpecs?.capacity = value
     }
 
     private fun makeOwnerData() {
-        car?.owner?.let {
-            it.apply {
-                this["email"] = user?.email as Any
-                this["name"] = user?.name as Any
-            }
+        car?.owner?.let {map->
+            map[FirebaseExtras.EMAIL] = user?.email.toString()
+            map[FirebaseExtras.NAME] = user?.name.toString()
+            map[FirebaseExtras.IMAGE] = user?.image_url.toString()
         }
     }
 
     protected fun makeCarFuel(fuel: String) {
-        car?.carSpecs?.fuelType = fuel
+        carSpecs?.fuelType = fuel
     }
 
     private fun makeStepTwoFields(){
@@ -269,15 +281,15 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarRegYear(year : String){
-        car?.carReg?.registeredIn = year
+        carReg?.registeredIn = year
     }
 
     private fun makeCarRegNumber(number : String?) {
-        car?.carReg?.number = number
+        carReg?.number = number
     }
 
     private fun makeCarPrice() {
-        car?.carPrice?.listerAmount = daily_price.text?.toString()
+        car?.price = daily_price.text?.toString()
     }
 
     private var years = DateTimeUtility.getYears()
@@ -332,19 +344,19 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeDataNodes() {
-        if(validateStepTwo() && car?.carAddress!=null){
+        if(validateStepTwo() && car?.address?.isNotEmpty()!!){
             makeStepTwoFields()
             try {
-                car?.carAddress?.latitude?.let { lat->
-                    car?.carAddress?.longitude?.let { lon->
-                        makeNearestKms(lat, lon)
+                car?.address?.let {
+                    it[FirebaseExtras.LATITUDE]?.let { lat->
+                        it[FirebaseExtras.LONGITUDE]?.let { lon->
+                            makeNearestKms(lat.toString().toDouble(), lon.toString().toDouble())
+                        }
                     }
                 }
             }catch (e: Exception){
                 e.localizedMessage
             }
-        }else{
-            showMessage(getString(R.string.must_not_be_empty))
         }
     }
 
@@ -356,17 +368,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     private fun checkForCarAvailability() {
         car?.let {
-            it.carBasic.number?.let {number->
+            it.number?.let {number->
                 showProgress()
                 FirestoreQueryCenter.checkIfCarExists(number, this)
             }
         }
-        
-    }
-
-    private fun carAlreadyExists() {
-        Toast.makeText(this, getString(R.string.car_already_exists),Toast.LENGTH_LONG).show()
-        finish()
     }
 
     protected fun changeViewWithAnimation(visibility: Int) {
@@ -385,7 +391,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     private fun makeCarColor(colorHtml: String) {
-        car?.carSpecs?.color = colorHtml
+        carSpecs?.color = colorHtml
     }
 
     private fun uploadImageToFirebase() {
@@ -398,24 +404,39 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
 
     private fun showSummaryDialog() {
-        hideProgress()
-        attachFragment()
+        attachFragment(SUMMARY_FRAGMENT)
     }
 
-    private fun attachFragment(){
-        val manager = supportFragmentManager.beginTransaction()
-        manager.run {
+    private fun attachFragment(fragment_tag: String) {
+        hideProgress()
+        when(fragment_tag){
+            SUMMARY_FRAGMENT->{
+                SummaryFragment().run {
+                    summaryFragment = this
+                    if (!isAdded)
+                        show(createManager(), fragment_tag)
+                }
+            }
+            CONFIRMATION_FRAGMENT->{
+                ConfirmationFragment.newInstance(ConfirmationFragment.Companion.ConfirmationType.CAR_UPDATE.ordinal).run {
+                    confirmationFragment = this
+                    confirmationFragment?.initListener(this@ListerAddCarBaseActivity)
+                    if (!isAdded)
+                        show(createManager(), fragment_tag)
+                }
+            }
+        }
+    }
+
+    private fun createManager(): FragmentManager {
+            supportFragmentManager.beginTransaction().run {
             run {
                 if ((supportFragmentManager.findFragmentByTag(SUMMARY_FRAGMENT) != null))
                     supportFragmentManager.findFragmentByTag(SUMMARY_FRAGMENT)?.let { this.remove(it) }
                 addToBackStack(null)
             }
         }
-
-        SummaryFragment().run {
-            summaryFragment = this
-            show(manager, SUMMARY_FRAGMENT)
-        }
+        return supportFragmentManager
     }
 
     protected fun showOptionsForImage() {
@@ -453,8 +474,10 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     }
 
     override fun uploadDone(filePath: Uri) {
-        car?.carBasic?.coverImagePath = filePath.toString()
-        uploadCar()
+        car?.basic?.let {
+            it[FirebaseExtras.COVER_IMAGE] = filePath.toString()
+            uploadCar()
+        }
     }
 
     override fun onSelect(selectedFeature: Features, flag: FeaturesFragment.Action) {
@@ -492,16 +515,16 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     private fun dailyPriceWatcher(s: CharSequence?) {
         s?.let {
-            if (it.length < 4)
+            if (it.length < 3)
                 hidePriceEstimationLayouts()
-            else if (it.length == 4)
+            else if (it.length == 3)
                 showPriceEstimation()
         }
     }
 
-    private fun carModelNumberVaidation(s: CharSequence?) {
+    private fun carModelNumberValidation(s: CharSequence?) {
         s?.apply {
-            if (startsWith("1"))
+            if (!startsWith("20"))
                 model.error = resources.getString(R.string.model_warning)
             else
                 model.error = null
@@ -518,7 +541,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                 dailyPriceWatcher(s)
             }
             model.id.toString()->{
-                carModelNumberVaidation(s)
+                carModelNumberValidation(s)
             }
 
         }
@@ -551,10 +574,18 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                 v.error = getString(R.string.must_contain_alpha_numeric) ; return true
         }
     }
+    private fun uploadCar() {
+        car?.let {car->
+            car.number?.let {
+                FirestoreQueryCenter.batchWrite(it,car, carReg as Any, carSpecs as Any,this)
+            }
+        }
+    }
+
 
     override fun onPutSuccess(code: Int) {
         when(code){
-            FirebaseExtras.CAR_EXISTS_SUCCESS->{
+            FirebaseExtras.CAR_EXISTS->{
                 uploadImageToFirebase()
             }
             FirebaseExtras.UPLOAD_SUCCESS->{
@@ -563,19 +594,11 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         }
     }
 
-    private fun uploadCar() {
-        car?.let {car->
-            car.carBasic.number?.let {
-                FirestoreQueryCenter.batchWrite(it,car, this)
-            }
-        }
-    }
-
     override fun onPutFailure(code: Int) {
         hideProgress()
         when(code){
-            FirebaseExtras.CAR_EXISTS_FAILURE ->{
-                carAlreadyExists()
+            FirebaseExtras.CAR_EXISTS ->{
+                attachFragment(CONFIRMATION_FRAGMENT)
             }
             FirebaseExtras.UPLOAD_FAILURE -> {
                 Toast.makeText(this, getString(R.string.some_thing_went_wrong),Toast.LENGTH_LONG).show()
@@ -583,9 +606,38 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         }
     }
 
+    override fun onAction(type: Any, option: Any) {
+        when(option){
+            ConfirmationFragment.Companion.ConfirmationOption.ALLOW.ordinal -> {
+                when(type){
+                    ConfirmationFragment.Companion.ConfirmationType.CAR_UPDATE.ordinal -> {
+                        updateCar()
+                    }
+                }
+            }
+            ConfirmationFragment.Companion.ConfirmationOption.DENY.ordinal -> {
+                when(type){
+                    ConfirmationFragment.Companion.ConfirmationType.CAR_UPDATE.ordinal -> {
+                        finishScreen()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateCar() {
+        showProgress()
+        uploadImageToFirebase()
+    }
+
+    private fun finishScreen(){
+        Toast.makeText(this, getString(R.string.car_already_exists),Toast.LENGTH_LONG).show()
+    }
+
 
     companion object {
         val TAG = "add-lister"
         val SUMMARY_FRAGMENT = "summary-fragment"
+        val CONFIRMATION_FRAGMENT = "confirmation-fragment"
     }
 }

@@ -47,5 +47,8 @@
 	<dimen name="small_elevation">5dp</dimen>
 	<dimen name="et_corner_radius">14dp</dimen>
 	<dimen name="cover_image_height">200dp</dimen>
+    <dimen name="card_corner_radius">30dp</dimen>
+    <dimen name="dialog_width">250dp</dimen>
+	<dimen name="dialog_height">300dp</dimen>
 
 </resources>

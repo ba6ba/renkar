@@ -6,6 +6,7 @@ import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.extras.CustomDialogs
+import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.ListerProfile
 import com.example.sarwan.renkar.model.RenterProfile
@@ -79,7 +80,7 @@ class LoginActivity : ParentActivity() {
         FirestoreQueryCenter.getUser(uid).addOnSuccessListener { it ->
             it?.data?.let { data->
                 user = it.toObject(User::class.java)
-                makeAppropriateRequest(data[FirestoreQueryCenter.TYPE] as? String)
+                makeAppropriateRequest(data[FirebaseExtras.TYPE] as? String)
             }
         }
     }

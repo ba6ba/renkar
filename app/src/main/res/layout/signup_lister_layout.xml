@@ -40,7 +40,7 @@
 		          android:paddingTop="@dimen/small_padding"
 		          android:paddingBottom="@dimen/small_padding"
 		          android:background="@drawable/white_round_corner_bg"
-		          android:fontFamily="@font/proximanovascondensedbold"
+		          android:fontFamily="@font/gothambook"
 		          android:textAllCaps="true"
 		          android:layout_gravity="end"
 		          android:layout_margin="@dimen/normal_margin"
@@ -63,7 +63,7 @@
 			              android:orientation="horizontal" android:layout_margin="@dimen/small_margin"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/email_address" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/email_address" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -72,7 +72,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/email_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionNext" android:maxLines="1"
 				          android:inputType="textEmailAddress"
 				          android:paddingTop="@dimen/normal_padding"
@@ -86,7 +86,7 @@
 			              android:paddingBottom="@dimen/normal_padding"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/user_name" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/user_name" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -94,7 +94,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/user_name_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionNext" android:maxLines="1"
 				          android:inputType="textCapWords"
 				          android:layout_marginEnd="@dimen/small_margin"
@@ -107,7 +107,7 @@
 			              android:paddingBottom="@dimen/normal_padding"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/first_name" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/first_name" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -115,7 +115,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/first_name_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionNext" android:maxLines="1"
 				          android:inputType="textCapWords" android:layout_marginEnd="@dimen/small_margin"
 				/>
@@ -127,7 +127,7 @@
 			              android:paddingBottom="@dimen/normal_padding"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/last_name" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/last_name" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -135,7 +135,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/last_name_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionNext" android:maxLines="1"
 				          android:inputType="textCapWords" android:layout_marginEnd="@dimen/small_margin"
 				/>
@@ -148,7 +148,7 @@
 			              android:paddingBottom="@dimen/normal_padding"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/phone_no" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/phone_no" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -156,7 +156,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/phone_no_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionNext" android:maxLines="1"
 				          android:inputType="phone" android:layout_marginEnd="@dimen/small_margin"
 				/>
@@ -168,7 +168,7 @@
 			              android:paddingBottom="@dimen/normal_padding"
 			>
 				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				          android:text="@string/password" android:fontFamily="@font/proximanovalight"
+				          android:text="@string/password" android:fontFamily="@font/gothambook"
 				          android:textColor="@color/white" android:textSize="@dimen/medium_text_size"
 				          android:textStyle="bold" android:maxLines="1"
 				          android:layout_gravity="center_vertical"
@@ -176,7 +176,7 @@
 				
 				<EditText android:layout_width="match_parent" android:layout_height="wrap_content"
 				          android:backgroundTint="@color/white" android:id="@+id/password_L"
-				          android:textColor="@color/white" android:fontFamily="@font/proximanovaregular"
+				          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 				          android:imeOptions="actionDone" android:maxLines="1"
 				          android:inputType="textPassword" android:layout_marginEnd="@dimen/small_margin"
 				/>
@@ -185,7 +185,7 @@
 			<CheckBox android:layout_width="match_parent" android:layout_height="wrap_content"
 			          android:checked="true" android:gravity="center_vertical"
 			          android:buttonTint="@color/white" android:text="@string/agree_to_terms_and_conditions"
-			          android:textColor="@color/white" android:fontFamily="@font/proximanovalight"
+			          android:textColor="@color/white" android:fontFamily="@font/gothambook"
 			          android:textStyle="bold" android:textSize="@dimen/medium_text_size"
 			          android:id="@+id/terms_L"
 			/>

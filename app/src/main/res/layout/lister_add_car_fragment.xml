@@ -43,7 +43,7 @@
 					android:elevation="@dimen/normal_elevation"
 					app:placeholderImage="@drawable/add_icon"
 					app:roundedCornerRadius="25dp"
-					app:actualImageScaleType="fitBottomStart"
+					app:actualImageScaleType="fitXY"
 					app:failureImage="@drawable/renkar_dots"
 					app:overlayImage="@drawable/light_shade"
 					app:roundWithOverlayColor="@color/white"
@@ -74,7 +74,7 @@
 			          android:textAlignment="textStart"
 			          android:id="@+id/addCarBar"
 			          android:textColor="@color/dark_grey"
-			          android:fontFamily="@font/proximanovalight"
+			          android:fontFamily="@font/gothambook"
 			          android:textAllCaps="true"
 			          android:visibility="invisible"
 			          
