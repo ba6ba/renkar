@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageView android:layout_width="match_parent" android:layout_height="70dp"
+               android:src="@drawable/renkar_dots"
+               android:rotation="90" android:contentDescription="@string/image"
+    />
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="RELATED CARS" android:textSize="@dimen/medium_text_size"
+              android:textColor="@color/dark_grey"
+              android:fontFamily="@font/gothambook"
+              android:padding="@dimen/normal_padding"
+    />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_sheet_rc_view"
+            android:padding="@dimen/small_padding"
+    >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

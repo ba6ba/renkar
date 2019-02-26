@@ -1,0 +1,44 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/v_large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/view_pager"
+        >
+
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.MaterialComponents.BottomSheet.Modal"
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/normal_elevation">
+
+        <include layout="@layout/bottom_sheet_layout"/>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

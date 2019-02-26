@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   app:cardElevation="@dimen/normal_elevation"
+                                   app:cardBackgroundColor="@color/white"
+                                   app:cardCornerRadius="@dimen/card_corner_radius"
+                                   app:contentPadding="@dimen/normal_padding"
+>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    >
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:backgroundImage="@drawable/car"
+                app:roundAsCircle="true"
+                app:roundingBorderColor="@color/light_grey"
+                app:roundingBorderWidth="1dp"
+                app:actualImageScaleType="fitXY"
+                android:id="@+id/icon_image"
+                android:layout_alignParentStart="true"
+
+        />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/icon_image"
+                android:paddingStart="@dimen/small_padding"
+                android:paddingEnd="@dimen/small_padding"
+                android:gravity="end"
+        >
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="PORSHCE" android:textSize="@dimen/large_text_size"
+                      android:fontFamily="@font/gothamultra"
+                      android:id="@+id/car_name"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="TOYOTA" android:textSize="@dimen/small_text_size"
+                      android:fontFamily="@font/gothammedium1"
+                      android:id="@+id/manufactured_by"
+            />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

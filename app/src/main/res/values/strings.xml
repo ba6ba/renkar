@@ -56,4 +56,5 @@
 	<string name="must_contain_alpha_numeric">Must contain alphanumeric character and a hyphen.</string>
     <string name="car_already_listed">Car has been listed already. Do you want to update your car with these details?
     </string>
+    <string name="image">image</string>
 </resources>

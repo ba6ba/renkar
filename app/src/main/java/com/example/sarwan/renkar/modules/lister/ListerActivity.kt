@@ -21,5 +21,6 @@ class ListerActivity : ParentActivity(){
         viewPager.adapter = navigationPager
         tabLayout.setOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        viewPager.currentItem = 1
     }
 }

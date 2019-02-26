@@ -38,8 +38,10 @@
 	<dimen name="sub_heading_text_size">36sp</dimen>
 	<dimen name="heading_text_size">40sp</dimen>
 	<dimen name="v_small_text_size">10sp</dimen>
-	
-	
+	<dimen name="v_v_small_text_size">8sp</dimen>
+
+
+
 	<!---->
 	<dimen name="custom_shape_size">25dp</dimen>
 	<dimen name="max_elevation">15dp</dimen>
@@ -50,5 +52,6 @@
     <dimen name="card_corner_radius">30dp</dimen>
     <dimen name="dialog_width">250dp</dimen>
 	<dimen name="dialog_height">300dp</dimen>
+    <dimen name="bottom_sheet_peek_height">60dp</dimen>
 
 </resources>
