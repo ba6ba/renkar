@@ -4,6 +4,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_gravity="end"
+                  android:layout_marginEnd="@dimen/large_margin"
+                  android:layout_marginTop="@dimen/normal_margin"
+    >
+
+        <View android:layout_width="12dp" android:layout_height="12dp"
+              android:background="@drawable/white_round_corner_bg"
+              android:backgroundTint="@color/lightest_grey"
+              android:layout_marginEnd="@dimen/small_margin"
+              android:id="@+id/dotZero"
+        />
+
+        <View android:layout_width="12dp" android:layout_height="12dp"
+              android:background="@drawable/white_round_corner_bg"
+              android:backgroundTint="@color/light_grey"
+              android:layout_marginStart="@dimen/small_margin"
+              android:id="@+id/dotOne"
+        />
+
+    </LinearLayout>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

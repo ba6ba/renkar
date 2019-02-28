@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.model.Features
-import com.example.sarwan.renkar.permissions.PermissionsAdapter
 import kotlinx.android.synthetic.main.feature_item_layout.view.*
 import kotlin.collections.ArrayList
 
@@ -17,8 +16,10 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v  = LayoutInflater.from(parent.context).inflate(R.layout.feature_item_layout, null)
-        return ViewHolder(v)
+        return if (FeaturesFragment.switchLayout)
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.feature_item_layout_vertical, null))
+        else
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.feature_item_layout, null))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -44,7 +45,13 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
             itemView.featureIcon.background = feature.icon?.let { activity?.resources?.getDrawable(it) }
             itemView.featureName.text = feature.name?.capitalize()
             selectedAppearance(feature.selected)
+            disableClickIfRequired()
             setOnClickListener(position)
+        }
+
+        private fun disableClickIfRequired() {
+            itemView.isClickable = FeaturesFragment.switchLayout
+            itemView.isEnabled = FeaturesFragment.switchLayout
         }
 
         private fun selectedAppearance(selected: Boolean) {

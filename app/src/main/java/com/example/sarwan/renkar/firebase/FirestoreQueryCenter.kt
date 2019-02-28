@@ -70,6 +70,14 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
+    fun getSpecifications(carNumber: String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS).document()
+    }
+
+    fun getRegistration(carNumber: String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.REGISTRATION).document()
+    }
+
     fun getListerCars(email: String): Query {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).whereEqualTo("${FirebaseExtras.OWNER}.email", email)
     }

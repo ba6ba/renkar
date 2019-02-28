@@ -30,7 +30,8 @@ class Cars : Serializable {
     var price : String ? = null
 
     var number  : String ? =null
-
+    var specifications : Specifications ? = Specifications()
+    var registration :Registration ? = Registration()
 
      class Basic : Serializable {
          var name : String ? = null

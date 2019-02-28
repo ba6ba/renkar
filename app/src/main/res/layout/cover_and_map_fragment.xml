@@ -29,11 +29,11 @@
                  android:visibility="gone"
     >
 
-        <com.here.android.mpa.mapping.MapView
+        <fragment
+                class="com.here.android.mpa.mapping.SupportMapFragment"
+                android:id="@+id/mapfragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/map"
-        />
+                android:layout_height="match_parent"/>
 
     </FrameLayout>
 

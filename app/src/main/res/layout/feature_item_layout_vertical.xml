@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardElevation="@dimen/normal_elevation"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/v_light_grey"
+        app:contentPadding="@dimen/small_padding"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/layout"
+    >
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/featureIcon"
+                android:padding="@dimen/small_padding"
+                android:background="@drawable/ic_alloy_rim"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/air_conditioned"
+                android:id="@+id/featureName"
+                android:padding="@dimen/small_padding"
+                android:fontFamily="@font/gothambook"
+                android:maxWidth="80dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+        />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

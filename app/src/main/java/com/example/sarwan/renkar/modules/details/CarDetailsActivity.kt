@@ -3,18 +3,30 @@ package com.example.sarwan.renkar.modules.details
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.ViewGroup
+import androidx.viewpager.widget.ViewPager
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.model.Cars
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.car_details_layout.*
 
 class CarDetailsActivity : ParentActivity() {
 
+    private lateinit var car : Cars
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.car_details_layout)
-        setPagerAdapter()
+        getIntentData()
         setBottomSheet()
+    }
+
+    private fun getIntentData() {
+        intent?.extras?.getSerializable(ApplicationConstants.CAR_DETAILS_KEY)?.let {
+            car = it as Cars
+            setPagerAdapter()
+        }
     }
 
     private fun setBottomSheet() {
@@ -28,8 +40,37 @@ class CarDetailsActivity : ParentActivity() {
     }
 
     private fun setPagerAdapter() {
-        view_pager.adapter = DetailsPagerAdapter(supportFragmentManager)
+        view_pager.adapter = DetailsPagerAdapter(supportFragmentManager, car)
+        view_pager.addOnPageChangeListener(pageChangeListener)
         fakeDrag()
+    }
+
+    private val pageChangeListener = object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) {
+
+        }
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+        }
+
+        override fun onPageSelected(position: Int) {
+            changeDots(position)
+        }
+
+    }
+
+    private fun changeDots(position: Int) {
+        when(position){
+            0->{
+                dotZero.backgroundTintList = resources.getColorStateList(R.color.light_grey)
+                dotOne.backgroundTintList = resources.getColorStateList(R.color.v_light_grey)
+            }
+            1->{
+                dotZero.backgroundTintList = resources.getColorStateList(R.color.v_light_grey)
+                dotOne.backgroundTintList = resources.getColorStateList(R.color.light_grey)
+            }
+        }
     }
 
     private fun fakeDrag() {
