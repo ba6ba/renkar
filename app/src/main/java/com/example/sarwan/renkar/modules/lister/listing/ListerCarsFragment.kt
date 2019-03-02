@@ -172,7 +172,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment ListerProfileFragment.
+         * @return A new instance of fragment ListerDashboardFragment.
          */
         @JvmStatic
         fun newInstance() = ListerCarsFragment()

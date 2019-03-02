@@ -17,5 +17,6 @@ open class ApplicationConstants {
         const val CAR_DETAILS_KEY = "CAR_DETAILS_KEY"
         const val ALL_CARS = "ALL_CARS"
         const val DEFAULT_CAR_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/renkar-android.appspot.com/o/images%2Fcar.jpg?alt=media&token=8e11fab4-1f58-4702-8bd5-fbbc60d53712"
+        const val DASHBOARD_FRAGMENT_KEY: String = "DASHBOARD_FRAGMENT_KEY"
     }
 }

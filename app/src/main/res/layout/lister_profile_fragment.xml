@@ -1,7 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:weightSum="2"
+    >
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="@dimen/a_small_margin"
+                        android:id="@+id/top"
+        >
+
+            <View android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:background="@drawable/ic_profile_header"
+                  android:layout_marginBottom="@dimen/large_margin"
+                  android:layout_alignBottom="@id/image_layout"
+            />
+
+
+            <FrameLayout android:layout_width="125dp" android:layout_height="125dp"
+                         android:layout_centerHorizontal="true"
+                         android:layout_marginBottom="@dimen/medium_margin"
+                         android:id="@+id/image_layout"
+                         android:layout_alignParentBottom="true"
+
+            >
+
+                <View android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:layout_gravity="center"
+                      android:background="@drawable/stroke_accent"
+                />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="match_parent" android:layout_height="match_parent"
+                        app:roundAsCircle="true"
+                        app:placeholderImage="@drawable/ic_boy"
+                        android:id="@+id/image"
+                        android:layout_margin="@dimen/a_small_margin"
+                        android:layout_gravity="center"
+
+                />
+
+            </FrameLayout>
+
+            <View android:layout_width="50dp" android:layout_height="50dp"
+                  android:background="@drawable/white_round_corner_bg"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:id="@+id/edit"
+            />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="0dp"
+                        android:layout_weight="1"
+        >
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/a_small_margin"
+                            android:layout_marginBottom="@dimen/a_small_margin"
+                            android:id="@+id/bottom"
+            >
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/colorAccent"
+                          android:textColor="@color/white"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/settings"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/settings"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                          android:layout_marginTop="@dimen/a_small_margin"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:textColor="@color/grey"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/account"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/account"
+                          android:layout_below="@id/settings"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/white"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:textColor="@color/grey"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/history"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/history"
+                          android:layout_below="@id/account"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/white"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                />
+
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:textColor="@color/grey"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/payment_method"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/payment_method"
+                          android:layout_below="@id/history"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/white"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:textColor="@color/grey"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/about"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/about"
+                          android:layout_below="@id/payment_method"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/white"
+                />
+
+
+            </RelativeLayout>
+
+            <View android:layout_width="10dp" android:layout_height="wrap_content"
+                  android:background="@drawable/white_rounded_bg_small_radius"
+                  android:backgroundTint="@color/colorAccent"
+                  android:layout_alignTop="@id/bottom"
+                  android:layout_alignBottom="@id/bottom"
+                  android:layout_marginStart="@dimen/a_small_margin"
+            />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
