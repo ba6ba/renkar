@@ -14,7 +14,9 @@
     <color name="v_light_grey">#ecf2f2f2</color>
     <color name="lightest_grey">#cacaca</color>
     <color name="v_lightest_grey">#f9f9f9</color>
-    
+    <color name="yellow">#fddd3b</color>
+
+
     <color name="transparent">#00ffffff</color>
     <color name="transparent_dark">#1f706f6f</color>
 

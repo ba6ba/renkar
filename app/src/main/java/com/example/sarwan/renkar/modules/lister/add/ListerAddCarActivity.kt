@@ -10,6 +10,7 @@ import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.AppBarStateChangeListener
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.extras.CustomTextWatcher
+import com.example.sarwan.renkar.modules.features.FeaturesFragment
 import com.example.sarwan.renkar.utils.ValidationUtility
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.lister_add_car_fragment.*
@@ -22,10 +23,15 @@ class ListerAddCarActivity : ListerAddCarBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lister_add_car_fragment)
+        initFragment()
         onClickListeners()
         viewChangeListeners()
         initializeClasses()
         initializeListeners()
+    }
+
+    private fun initFragment() {
+        supportFragmentManager.beginTransaction().add(R.id._features_fragment, FeaturesFragment()).commit()
     }
 
     private fun viewChangeListeners(){

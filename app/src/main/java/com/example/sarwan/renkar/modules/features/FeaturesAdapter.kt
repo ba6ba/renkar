@@ -10,13 +10,13 @@ import kotlinx.android.synthetic.main.feature_item_layout.view.*
 import kotlin.collections.ArrayList
 
 class FeaturesAdapter(private val activity : FragmentActivity?, private var featuresList: ArrayList<Features>,
-                      private var fragment : FeaturesFragment
+                      private var fragment : FeaturesFragment, private val switchLayout : Boolean
 )
     : androidx.recyclerview.widget.RecyclerView.Adapter<FeaturesAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (FeaturesFragment.switchLayout)
+        return if (switchLayout)
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.feature_item_layout_vertical, null))
         else
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.feature_item_layout, null))
@@ -50,8 +50,8 @@ class FeaturesAdapter(private val activity : FragmentActivity?, private var feat
         }
 
         private fun disableClickIfRequired() {
-            itemView.isClickable = FeaturesFragment.switchLayout
-            itemView.isEnabled = FeaturesFragment.switchLayout
+            itemView.isClickable = !switchLayout
+            itemView.isEnabled = !switchLayout
         }
 
         private fun selectedAppearance(selected: Boolean) {

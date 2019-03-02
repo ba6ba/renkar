@@ -2,8 +2,8 @@
 <resources>
 	
 	<!--margins-->
-	<dimen name="v_small_margin">3dp</dimen>
 	<dimen name="small_margin">5dp</dimen>
+	<dimen name="v_small_margin">3dp</dimen>
 	<dimen name="a_small_margin">10dp</dimen>
 	<dimen name="normal_margin">15dp</dimen>
 	<dimen name="a_normal_margin">20dp</dimen>
@@ -17,6 +17,7 @@
 	
 	<!--padding-->
 	<dimen name="small_padding">5dp</dimen>
+	<dimen name="v_small_padding">3dp</dimen>
 	<dimen name="a_small_padding">10dp</dimen>
 	<dimen name="normal_padding">15dp</dimen>
 	<dimen name="a_normal_padding">20dp</dimen>

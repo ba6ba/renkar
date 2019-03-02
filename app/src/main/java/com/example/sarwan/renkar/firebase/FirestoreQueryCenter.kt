@@ -70,6 +70,10 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
+    fun getCars(): Query {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).limit(10)
+    }
+
     fun getSpecifications(carNumber: String): CollectionReference {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS)
     }

@@ -31,15 +31,18 @@ class ValidationUtility {
         }
 
         fun yearRangeValidation(value: TextView): Boolean {
-            ((value.text.toString().toInt() <= Calendar.getInstance().get(Calendar.YEAR) &&
-                    (value.text.toString().toInt() >= Calendar.getInstance().get(Calendar.YEAR)-2000))).run {
-                return if (this) true
-                else {
-                    value.error = "Car model must be before or by ${Calendar.getInstance().get(Calendar.YEAR)}"
-                    false
-                }
+            return value.text.toString().isNotEmpty().apply {
+                if (this){
+                    ((value.text.toString().toInt() <= Calendar.getInstance().get(Calendar.YEAR) &&
+                            (value.text.toString().toInt() >= Calendar.getInstance().get(Calendar.YEAR)-2000))).run {
+                        if (this) true
+                        else {
+                            value.error = "Car model must be before or by ${Calendar.getInstance().get(Calendar.YEAR)}"
+                            false
+                        }
+                    }
+                }}
             }
-        }
 
         fun setErrors(activity : Activity, error: String ,vararg textView: TextView) {
             textView.forEach { it.background = activity.resources.getDrawable(R.drawable.edit_text_background_error) ; it.error = error}

@@ -7,28 +7,27 @@
         app:cardElevation="@dimen/small_elevation"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:contentPadding="@dimen/normal_padding"
+        android:layout_margin="@dimen/normal_margin"
 >
-
     <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/normal_padding"
+                android:layout_marginBottom="@dimen/a_normal_margin"
         >
 
 
             <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    app:backgroundImage="@drawable/car"
-                    app:roundAsCircle="true"
-                    app:roundingBorderColor="@color/light_grey"
-                    app:roundingBorderWidth="1dp"
-                    app:actualImageScaleType="fitXY"
+                    android:scaleType="fitXY"
                     android:id="@+id/icon_image"
-                    android:layout_alignParentStart="true"
-
+                    app:roundedCornerRadius="25dp"
+                    android:elevation="@dimen/small_elevation"
+                    android:layout_margin="@dimen/small_margin"
+                    app:roundAsCircle="true"
             />
 
             <LinearLayout
@@ -123,12 +122,12 @@
                       android:maxHeight="40dp"
                       android:maxLines="3"
                       android:layout_below="@id/car_name"
-                      android:layout_marginTop="@dimen/small_margin"
             />
 
             <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                          android:id="@+id/features_fragment"
                          android:layout_below="@id/description"
+                         android:layout_marginTop="@dimen/normal_margin"
             />
 
             <RelativeLayout
@@ -138,14 +137,29 @@
                     android:background="@drawable/rounded_bg_small_radius"
                     android:backgroundTint="@color/v_lightest_grey"
                     android:elevation="@dimen/small_elevation"
-                    android:layout_margin="@dimen/small_margin"
                     android:id="@+id/specs_layout"
+                    android:padding="@dimen/a_small_padding"
+                    android:layout_marginTop="@dimen/normal_margin"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
             >
+
+                <View android:layout_width="2dp" android:layout_height="wrap_content"
+                      android:background="@drawable/white_round_corner_bg"
+                      android:backgroundTint="@color/lightest_grey"
+                      android:layout_centerInParent="true"
+                      android:layout_alignTop="@id/first"
+                      android:layout_alignBottom="@id/second"
+                      android:layout_marginTop="@dimen/v_small_margin"
+                      android:layout_marginBottom="@dimen/v_small_margin"
+                />
+
+
                 <LinearLayout  android:orientation="horizontal"
-                               android:layout_width="wrap_content"
+                               android:layout_width="match_parent"
                                android:layout_height="wrap_content" android:layout_gravity="center"
                                android:gravity="center_vertical"
-                               android:weightSum="3"
+                               android:weightSum="2"
                                android:layout_marginTop="@dimen/small_margin"
                                android:layout_marginBottom="@dimen/small_margin"
                                android:id="@+id/first"
@@ -153,7 +167,7 @@
 
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="1.45"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:text="@string/rent_a_car"
                             android:id="@+id/fuel"
@@ -162,45 +176,42 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/small_text_size"
                             android:gravity="center_vertical"
+                            android:textAlignment="center"
                     />
 
-                    <View android:layout_height="8dp"
-                          android:background="@drawable/white_round_corner_bg"
-                          android:layout_width="0dp"
-                          android:layout_weight=".1"
-                          android:backgroundTint="@color/colorPrimaryDark"
-                          android:layout_gravity="center_vertical"
-                    />
 
                     <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/rent_a_car"
                             android:id="@+id/capacity"
-                            android:layout_weight="1.45"
+                            android:layout_weight="1"
                             android:padding="@dimen/small_padding"
                             android:fontFamily="@font/gothambook"
                             android:textColor="@color/black"
                             android:textSize="@dimen/small_text_size"
                             android:gravity="center_vertical"
+                            android:textAlignment="center"
+
                     />
 
 
                 </LinearLayout>
 
                 <LinearLayout  android:orientation="horizontal"
-                               android:layout_width="wrap_content"
+                               android:layout_width="match_parent"
                                android:layout_height="wrap_content" android:layout_gravity="center"
                                android:gravity="center_vertical"
-                               android:weightSum="3"
+                               android:weightSum="2"
                                android:layout_marginTop="@dimen/small_margin"
                                android:layout_marginBottom="@dimen/small_margin"
                                android:layout_below="@id/first"
+                               android:id="@+id/second"
                 >
 
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="1.45"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:text="@string/rent_a_car"
                             android:id="@+id/delivery"
@@ -209,14 +220,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/small_text_size"
                             android:gravity="center_vertical"
-                    />
-
-                    <View android:layout_height="8dp"
-                          android:background="@drawable/white_round_corner_bg"
-                          android:layout_width="0dp"
-                          android:layout_weight=".1"
-                          android:backgroundTint="@color/colorPrimaryDark"
-                          android:layout_gravity="center_vertical"
+                            android:textAlignment="center"
                     />
 
                     <TextView
@@ -224,12 +228,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/rent_a_car"
                             android:id="@+id/instant_book"
-                            android:layout_weight="1.45"
+                            android:layout_weight="1"
                             android:padding="@dimen/small_padding"
                             android:fontFamily="@font/gothambook"
                             android:textColor="@color/black"
                             android:textSize="@dimen/small_text_size"
                             android:gravity="center_vertical"
+                            android:textAlignment="center"
+
                     />
 
 
@@ -237,26 +243,39 @@
 
             </RelativeLayout>
 
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/show_map"
+                      android:fontFamily="@font/gothammedium"
+                      android:textSize="@dimen/small_text_size"
+                      android:layout_marginStart="@dimen/small_margin"
+                      android:layout_gravity="center_vertical"
+                      android:textColor="@color/colorAccent"
+                      android:id="@+id/view_on_map"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginTop="@dimen/normal_margin"
+                      android:layout_below="@id/specs_layout"
+            />
+
+
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:id="@+id/address_layout" android:orientation="horizontal"
-                          android:layout_below="@id/specs_layout"
-                          android:layout_marginTop="@dimen/normal_margin"
+                          android:layout_below="@id/view_on_map"
                           android:layout_marginBottom="@dimen/small_margin"
                           android:layout_alignParentStart="true">
 
-                <ImageView android:layout_width="35dp" android:layout_height="35dp"
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
                            android:background="@drawable/white_round_corner_bg"
                            android:elevation="@dimen/small_elevation"
                            android:backgroundTint="@color/v_lightest_grey"
                            android:src="@drawable/ic_pin"
-                           android:padding="@dimen/small_padding"
+                           android:padding="@dimen/a_small_padding"
                            android:layout_margin="@dimen/small_margin"
                 />
 
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:text="ADDRESS"
-                          android:fontFamily="@font/gothammedium"
-                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
                           android:layout_marginStart="@dimen/small_margin"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/dark_grey"
@@ -271,19 +290,19 @@
                           android:layout_marginTop="@dimen/small_margin"
                           android:layout_marginBottom="@dimen/small_margin"
             >
-                <ImageView android:layout_width="35dp" android:layout_height="35dp"
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
                            android:background="@drawable/white_round_corner_bg"
                            android:elevation="@dimen/small_elevation"
                            android:backgroundTint="@color/v_lightest_grey"
                            android:src="@drawable/ic_boy"
-                           android:padding="@dimen/small_padding"
+                           android:padding="@dimen/a_small_padding"
                            android:layout_margin="@dimen/small_margin"
                 />
 
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:text="ADDRESS"
-                          android:fontFamily="@font/gothammedium"
-                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
                           android:layout_marginStart="@dimen/small_margin"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/dark_grey"
@@ -298,7 +317,7 @@
                           android:layout_marginTop="@dimen/small_margin"
                           android:layout_marginBottom="@dimen/small_margin"
             >
-                <ImageView android:layout_width="35dp" android:layout_height="35dp"
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
                            android:background="@drawable/white_round_corner_bg"
                            android:elevation="@dimen/small_elevation"
                            android:backgroundTint="@color/v_lightest_grey"
@@ -309,8 +328,8 @@
 
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:text="ADDRESS"
-                          android:fontFamily="@font/gothammedium"
-                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
                           android:layout_marginStart="@dimen/small_margin"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/dark_grey"
@@ -318,7 +337,6 @@
                 />
 
             </LinearLayout>
-
 
         </RelativeLayout>
 
@@ -333,7 +351,7 @@
             android:id="@+id/bookNow"
             android:visibility="gone"
             android:padding="@dimen/small_padding"
-
+            android:background="@color/white"
     >
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -341,20 +359,40 @@
                   android:textColor="@color/light_grey"
                   android:fontFamily="@font/gothammedium1"
         />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:background="@drawable/book_now_button_bg"
+                      android:backgroundTint="@color/colorAccent"
+                      android:gravity="center"
+                      android:id="@+id/price_layout"
+                      android:paddingStart="@dimen/medium_padding"
+                      android:paddingEnd="@dimen/medium_padding"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/a_small_padding"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="124PKR/hour"
-            android:textColor="@color/colorAccent"
-            android:fontFamily="@font/gothambook"
-            android:textSize="@dimen/medium_text_size"
-            android:padding="@dimen/normal_padding"
-            android:elevation="@dimen/small_elevation"
-            android:background="@drawable/white_round_corner_bg"
-            android:id="@+id/price"
-    />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="150"
+                      android:textSize="@dimen/normal_text_size"
+                      android:textColor="@color/white"
+                      android:id="@+id/price"
+                      android:fontFamily="@font/gothamultra"
+                      android:gravity="center"
+            />
 
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="PER HOUR"
+                      android:textSize="@dimen/v_v_small_text_size"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothammedium1"
+            />
+
+        </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                 android:background="@color/white" android:id="@+id/temp_layout"
+                 android:visibility="gone"
+    />
 
 </androidx.cardview.widget.CardView>

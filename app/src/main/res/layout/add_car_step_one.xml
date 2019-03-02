@@ -580,13 +580,10 @@
 		          android:textSize="@dimen/small_text_size"
 		          android:fontFamily="@font/gothambook"
 		/>
-		
-		<fragment
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/featuresFragment"
-				class="com.example.sarwan.renkar.modules.features.FeaturesFragment"
-				android:layout_margin="@dimen/small_margin"
+
+		<FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+					 android:id="@+id/_features_fragment"
+					 android:layout_margin="@dimen/small_margin"
 		/>
 	</LinearLayout>
 	

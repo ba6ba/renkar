@@ -1,10 +1,9 @@
 package com.example.sarwan.renkar.utils
 
-import android.widget.TextView
 import com.example.sarwan.renkar.model.Cars
-import com.example.sarwan.renkar.model.ListerProfile
-import com.example.sarwan.renkar.model.RenterProfile
 import com.example.sarwan.renkar.model.User
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
 
 class ModelMappingUtility {
     companion object {
@@ -20,22 +19,11 @@ class ModelMappingUtility {
             user.type = type
             return user
         }
-        /*fun createChatRoom(members: ArrayList<ChatMembers>?, title: String?, message: String? = null,
-                           senderName: String? = null, senderId: Int? = null, messageTime : Long ? = null):
-                HashMap<String, Any?> {
-            val map : HashMap<String, Any?> = hashMapOf()
-            members?.let {member->
-                for (i in members){
-                    map[i.id.toString()] = ModelMappingUtility.mapOnChatRoomObject(i, false)
-                }
-            }
-            map[VFirestoreQueryManager.TITLE] = title
-            map[VFirestoreQueryManager.LAST_MESSAGE] = message
-            map[VFirestoreQueryManager.LAST_MESSAGE_SENDER] = senderName
-            map[VFirestoreQueryManager.LAST_MESSAGE_SENDER_ID] = senderId
-            map[VFirestoreQueryManager.LAST_MESSAGE_TIME] = messageTime ?:kotlin.run { Calendar.getInstance().timeInMillis / 1000 }
-            return map
+
+        fun allCars(documents: QuerySnapshot): ArrayList<Cars>{
+            val list : ArrayList<Cars> = ArrayList()
+            list.addAll(documents.toObjects(Cars::class.java))
+            return list
         }
-*/
     }
 }

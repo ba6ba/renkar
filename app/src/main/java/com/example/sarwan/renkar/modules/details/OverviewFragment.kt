@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.ApplicationConstants
-import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.Features
 import com.example.sarwan.renkar.modules.features.FeaturesData
@@ -17,7 +16,7 @@ import com.example.sarwan.renkar.utils.BooleanUtility
 import kotlinx.android.synthetic.main.overview_fragment.*
 
 class OverviewFragment : Fragment() {
-    private val DATA_KEY = "DATA_KEY"
+
     private var car : Cars ? = null
     private lateinit var pActivity: CarDetailsActivity
 
@@ -35,14 +34,11 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pActivity.showProgress()
         makeFragment()
     }
 
     private fun makeFragment() {
-        car?.let {
-            queryForData()
-        }
+        updateLayouts()
         checkForUser()
         onClickListener()
     }
@@ -58,29 +54,12 @@ class OverviewFragment : Fragment() {
     }
 
     private fun checkForUser() {
-        pActivity.user?.apply {
-            lister?.let {
+        pActivity.user?.let {
+            it.lister?.let {lister->
 
-            }
-
-            renter?.let {
-//                bookNow.visibility = View.VISIBLE
-//                ratingBar.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun queryForData() {
-        car?.run {
-            number?.let { it ->
-                FirestoreQueryCenter.getSpecifications(it).get().addOnCompleteListener {task->
-                    car?.specifications = task.result?.toObjects(Cars.Specifications::class.java)?.first()
-                    FirestoreQueryCenter.getRegistration(it).get().addOnCompleteListener {taskk->
-                        car?.registration = taskk.result?.toObjects(Cars.Registration::class.java)?.first()
-                        pActivity.runOnUiThread { updateLayouts() }
-                    }
-
-                }
+            }?:kotlin.run {
+                bookNow.visibility = View.VISIBLE
+                ratingBar.visibility = View.VISIBLE
             }
         }
     }
@@ -95,28 +74,27 @@ class OverviewFragment : Fragment() {
         setBasicDetails()
         setSpecifications()
         setPrice()
-        pActivity.hideProgress()
     }
 
     private fun setPrice() {
         price.text = "${car?.price}PKR/day"
+        updateView()
+    }
+
+    private fun updateView() {
+        temp_layout.visibility = View.GONE
+        pActivity.hideProgress()
     }
 
     private fun setSpecifications() {
-        fuel.text = car?.specifications?.fuelType
-        capacity.text = "${car?.specifications?.capacity} persons "
-        BooleanUtility.toMeaningfulString(car?.specifications?.delivery)?.let { delivery.text = it }
-        BooleanUtility.toMeaningfulString(car?.specifications?.instantBook)?.let { instant_book.text = it }
+        fuel.text = "Fuel Type : ${car?.specifications?.fuelType}"
+        capacity.text = "Capacity : ${car?.specifications?.capacity} persons "
+        BooleanUtility.toMeaningfulString(car?.specifications?.delivery)?.let { delivery.text = "Delivery : $it" }
+        BooleanUtility.toMeaningfulString(car?.specifications?.instantBook)?.let { instant_book.text = "Instant Book : $it" }
     }
 
     private fun addFeaturesFragment() {
-        Bundle().apply {
-            putSerializable(FeaturesFragment.FEATURES, getFeatures())
-            FeaturesFragment().also {it->
-                arguments = this@apply
-                childFragmentManager.beginTransaction().add(R.id.features_fragment, it).commit()
-            }
-        }
+        childFragmentManager.beginTransaction().add(R.id.features_fragment, FeaturesFragment.newInstance(getFeatures())).commit()
     }
 
     private fun getFeatures(): ArrayList<Features> {
@@ -136,12 +114,12 @@ class OverviewFragment : Fragment() {
         number.text = car?.number
         details.text = "${car?.basic?.manufacturedBy} - ${car?.basic?.model} - ${car?.specifications?.vehicleType}"
         car_name.text = car?.basic?.name
-//        color.setBackgroundColor(Color.parseColor("#${car?.specifications?.color}"))
+        color.setBackgroundColor(Color.parseColor("#${car?.specifications?.color}"))
         description.text = car?.basic?.description
     }
 
     private fun setRegistration() {
-        registration.text = "${car?.registration?.number}\n${car?.registration?.registeredIn}"
+        registration.text = "Reg # ${car?.registration?.number} in the year ${car?.registration?.registeredIn}"
     }
 
     private fun setOwner() {

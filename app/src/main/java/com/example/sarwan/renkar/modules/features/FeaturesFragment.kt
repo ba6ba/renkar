@@ -28,6 +28,8 @@ class FeaturesFragment : Fragment(){
     private var adapter: FeaturesAdapter? = null
     var interactionListener : FeaturesInteractionListener ? = null
     private lateinit var featuresList : ArrayList<Features>
+    private var switchLayout = false
+
     interface FeaturesInteractionListener{
         fun onSelect(selectedFeature: Features, flag: Action)
     }
@@ -69,7 +71,7 @@ class FeaturesFragment : Fragment(){
             activity,
             FeaturesData.populateFeatures(activity?.parent?.let { it }
                 ?: kotlin.run { activity as ParentActivity }),
-            this
+            this,switchLayout
         )
         recyclerView.layoutManager = GridLayoutManager(activity,2)
     }
@@ -78,7 +80,7 @@ class FeaturesFragment : Fragment(){
         adapter = FeaturesAdapter(
             activity,
             featuresList,
-            this
+            this,switchLayout
         )
         recyclerView.layoutManager = LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false)
     }
@@ -107,7 +109,6 @@ class FeaturesFragment : Fragment(){
             }
         }
         val FEATURES = "FEATURES"
-        var switchLayout = false
     }
 
     enum class Action {

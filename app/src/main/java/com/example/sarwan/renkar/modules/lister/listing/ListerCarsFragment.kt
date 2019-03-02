@@ -55,7 +55,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun userIconInitial() {
-        person_icon.text = StringUtility.makeInitials(pActivity?.user?.name)
+        person_icon.text = pActivity?.user?.name
     }
 
     override fun onRefresh() {
