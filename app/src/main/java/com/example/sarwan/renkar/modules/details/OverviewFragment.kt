@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.overview_fragment.*
 
 class OverviewFragment : Fragment() {
     private val DATA_KEY = "DATA_KEY"
-    private lateinit var car : Cars
+    private var car : Cars ? = null
     private lateinit var pActivity: CarDetailsActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +35,22 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        queryForData()
+        pActivity.showProgress()
+        makeFragment()
+    }
+
+    private fun makeFragment() {
+        car?.let {
+            queryForData()
+        }
         checkForUser()
         onClickListener()
     }
 
+    fun init(car: Cars){
+        this.car = car
+        makeFragment()
+    }
     private fun onClickListener() {
         bookNow.setOnClickListener {
             //TODO -- Booking flow
@@ -53,20 +64,20 @@ class OverviewFragment : Fragment() {
             }
 
             renter?.let {
-                bookNow.visibility = View.VISIBLE
-                ratingBar.visibility = View.VISIBLE
+//                bookNow.visibility = View.VISIBLE
+//                ratingBar.visibility = View.VISIBLE
             }
         }
     }
 
     private fun queryForData() {
-        car.run {
-            number?.let {
+        car?.run {
+            number?.let { it ->
                 FirestoreQueryCenter.getSpecifications(it).get().addOnCompleteListener {task->
-                    specifications = task.result?.toObject(Cars.Specifications::class.java)
-                    FirestoreQueryCenter.getSpecifications(it).get().addOnCompleteListener {taskk->
-                        registration = taskk.result?.toObject(Cars.Registration::class.java)
-                        updateLayouts()
+                    car?.specifications = task.result?.toObjects(Cars.Specifications::class.java)?.first()
+                    FirestoreQueryCenter.getRegistration(it).get().addOnCompleteListener {taskk->
+                        car?.registration = taskk.result?.toObjects(Cars.Registration::class.java)?.first()
+                        pActivity.runOnUiThread { updateLayouts() }
                     }
 
                 }
@@ -84,17 +95,18 @@ class OverviewFragment : Fragment() {
         setBasicDetails()
         setSpecifications()
         setPrice()
+        pActivity.hideProgress()
     }
 
     private fun setPrice() {
-        price.text = "${car.price}PKR/day"
+        price.text = "${car?.price}PKR/day"
     }
 
     private fun setSpecifications() {
-        fuel.text = car.specifications?.fuelType
-        capacity.text = "${car.specifications?.capacity} persons "
-        BooleanUtility.toMeaningfulString(car.specifications?.delivery)?.let { delivery.text = it }
-        BooleanUtility.toMeaningfulString(car.specifications?.instantBook)?.let { instant_book.text = it }
+        fuel.text = car?.specifications?.fuelType
+        capacity.text = "${car?.specifications?.capacity} persons "
+        BooleanUtility.toMeaningfulString(car?.specifications?.delivery)?.let { delivery.text = it }
+        BooleanUtility.toMeaningfulString(car?.specifications?.instantBook)?.let { instant_book.text = it }
     }
 
     private fun addFeaturesFragment() {
@@ -109,7 +121,7 @@ class OverviewFragment : Fragment() {
 
     private fun getFeatures(): ArrayList<Features> {
         val features : ArrayList<Features> = ArrayList()
-        car.features?.apply {
+        car?.features?.apply {
             for (i in this)
                 FeaturesData.populateFeatures(pActivity).find { it.name == i.name }?.let { features.add(it) }
         }
@@ -117,38 +129,38 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setRating() {
-        ratingBar.rating = car.rating?.let { it }?:kotlin.run { 3f }
+        ratingBar.rating = car?.rating?.let { it }?:kotlin.run { 3f }
     }
 
     private fun setBasicDetails() {
-        number.text = car.number
-        details.text = "${car.basic.manufacturedBy} - ${car.basic.model} - ${car.specifications?.vehicleType}"
-        car_name.text = car.basic.name
-        color.setBackgroundColor(Color.parseColor("#${car.specifications?.color}"))
-        description.text = car.basic.description
+        number.text = car?.number
+        details.text = "${car?.basic?.manufacturedBy} - ${car?.basic?.model} - ${car?.specifications?.vehicleType}"
+        car_name.text = car?.basic?.name
+//        color.setBackgroundColor(Color.parseColor("#${car?.specifications?.color}"))
+        description.text = car?.basic?.description
     }
 
     private fun setRegistration() {
-        registration.text = "${car.registration?.number}\n${car.registration?.registeredIn}"
+        registration.text = "${car?.registration?.number}\n${car?.registration?.registeredIn}"
     }
 
     private fun setOwner() {
-        owner.text = "${car.owner.name} (${car.owner.email})"
+        owner.text = "${car?.owner?.name} (${car?.owner?.email})"
     }
 
     private fun setAddress() {
-        address.text = car.address?.address
+        address.text = car?.address?.address
     }
 
     private fun setImage() {
-        icon_image.setImageURI(car.basic.coverImagePath)
+        icon_image.setImageURI(car?.basic?.coverImagePath)
     }
 
     companion object {
         @JvmStatic
         fun newInstance(car: Cars) = OverviewFragment().apply {
-            arguments?.apply {
-                putSerializable(DATA_KEY, car)
+            arguments= Bundle().apply {
+                putSerializable(ApplicationConstants.CAR_DETAILS_KEY, car)
             }
         }
     }

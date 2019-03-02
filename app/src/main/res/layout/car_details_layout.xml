@@ -31,16 +31,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="@dimen/large_margin"
-            android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginBottom="@dimen/v_large_margin"
-            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:elevation="@dimen/max_elevation"
             android:orientation="vertical">
+
 
         <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/view_pager"
+                android:layout_margin="@dimen/normal_margin"
         >
 
 
@@ -57,7 +60,7 @@
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/normal_elevation">
+            app:cardElevation="@dimen/max_elevation">
 
         <include layout="@layout/bottom_sheet_layout"/>
 

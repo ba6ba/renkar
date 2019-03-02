@@ -70,12 +70,12 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
-    fun getSpecifications(carNumber: String): DocumentReference {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS).document()
+    fun getSpecifications(carNumber: String): CollectionReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS)
     }
 
-    fun getRegistration(carNumber: String): DocumentReference {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.REGISTRATION).document()
+    fun getRegistration(carNumber: String): CollectionReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.REGISTRATION)
     }
 
     fun getListerCars(email: String): Query {

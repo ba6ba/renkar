@@ -3,15 +3,22 @@ package com.example.sarwan.renkar.modules.details
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.model.Features
+import com.example.sarwan.renkar.modules.features.FeaturesFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.car_details_layout.*
 
-class CarDetailsActivity : ParentActivity() {
+class CarDetailsActivity : ParentActivity(), FeaturesFragment.FeaturesInteractionListener {
+
+    override fun onSelect(selectedFeature: Features, flag: FeaturesFragment.Action) {
+
+    }
 
     private lateinit var car : Cars
 
@@ -31,18 +38,17 @@ class CarDetailsActivity : ParentActivity() {
 
     private fun setBottomSheet() {
         BottomSheetBehavior.from(bottomSheet).isHideable = false
-        val displayMetrics = DisplayMetrics()
+        /*val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         bottomSheet.apply {
             layoutParams.height = displayMetrics.heightPixels
-            layoutParams = ViewGroup.LayoutParams(width, height)
-        }
+            layoutParams = CoordinatorLayout.LayoutParams(width, height)
+        }*/
     }
 
     private fun setPagerAdapter() {
         view_pager.adapter = DetailsPagerAdapter(supportFragmentManager, car)
         view_pager.addOnPageChangeListener(pageChangeListener)
-        fakeDrag()
     }
 
     private val pageChangeListener = object : ViewPager.OnPageChangeListener {
@@ -70,13 +76,6 @@ class CarDetailsActivity : ParentActivity() {
                 dotZero.backgroundTintList = resources.getColorStateList(R.color.v_light_grey)
                 dotOne.backgroundTintList = resources.getColorStateList(R.color.light_grey)
             }
-        }
-    }
-
-    private fun fakeDrag() {
-        view_pager.apply {
-            if (!isFakeDragging)
-                fakeDragBy(4F)
         }
     }
 

@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.days_layout.*
  * Activities that contain this fragment must implement the
  * [FeaturesFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ContactFragment.newInstance] factory method to
+ * Use the [FeaturesFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
@@ -55,16 +55,16 @@ class FeaturesFragment : Fragment(){
     private fun initializeViews() {
         when(switchLayout){
             true->{
-                verticalView()
+                horizontalView()
             }
             false->{
-                horizontalView()
+                gridView()
             }
         }
         recyclerView.adapter = adapter
     }
 
-    private fun horizontalView() {
+    private fun gridView() {
         adapter = FeaturesAdapter(
             activity,
             FeaturesData.populateFeatures(activity?.parent?.let { it }
@@ -74,7 +74,7 @@ class FeaturesFragment : Fragment(){
         recyclerView.layoutManager = GridLayoutManager(activity,2)
     }
 
-    private fun verticalView() {
+    private fun horizontalView() {
         adapter = FeaturesAdapter(
             activity,
             featuresList,
@@ -102,7 +102,7 @@ class FeaturesFragment : Fragment(){
          */
         @JvmStatic
         fun newInstance(features: ArrayList<Features>) = FeaturesFragment().apply {
-            arguments?.apply {
+            arguments = Bundle().apply {
                 putSerializable(FEATURES, features)
             }
         }

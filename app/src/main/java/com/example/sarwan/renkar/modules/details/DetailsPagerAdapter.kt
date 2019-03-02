@@ -10,8 +10,8 @@ class DetailsPagerAdapter(fm: FragmentManager, val car: Cars) : FragmentPagerAda
     private val noOfPages = 2
     override fun getItem(position: Int): Fragment {
         return when(position){
-            0->{ CoverAndMapFragment.newInstance(car)}
-            1->{ OverviewFragment.newInstance(car) }
+            0->{ OverviewFragment.newInstance(car)}
+            1->{ CoverAndMapFragment.newInstance(car) }
             else -> OverviewFragment.newInstance(car)
         }
     }

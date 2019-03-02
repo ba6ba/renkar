@@ -15,15 +15,14 @@ import com.here.android.mpa.common.OnEngineInitListener
 import com.here.android.mpa.mapping.MapGesture
 import com.here.android.mpa.mapping.MapMarker
 import com.here.android.mpa.mapping.SupportMapFragment
-import kotlinx.android.synthetic.main.cover_and_map_fragment.*
 
 class CoverAndMapFragment : Fragment() {
-    private val DATA_KEY = "DATA_KEY"
     private lateinit var mapFragment : SupportMapFragment
     private lateinit var map : com.here.android.mpa.mapping.Map
     private lateinit var marker: MapMarker
     private lateinit var car : Cars
     private lateinit var pActivity: CarDetailsActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pActivity = activity as CarDetailsActivity
@@ -39,30 +38,8 @@ class CoverAndMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getMapInstance()
-        setCoverImage()
-        clickListener()
     }
 
-    private fun clickListener() {
-        pActivity.apply {
-            toggle.setOnClickListener {
-                when(cover.visibility){
-                    View.VISIBLE -> {
-                        hide(cover)
-                        show(map_layout)
-                    }
-                    View.GONE -> {
-                        show(cover)
-                        hide(map_layout)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setCoverImage() {
-        cover.setImageURI(car.basic.coverImagePath)
-    }
 
     private fun getMapInstance() {
         mapFragment = childFragmentManager.findFragmentById(R.id.mapfragment) as SupportMapFragment
@@ -109,12 +86,11 @@ class CoverAndMapFragment : Fragment() {
         }
     }
 
-
     companion object {
         @JvmStatic
         fun newInstance(car: Cars) = CoverAndMapFragment().apply {
-            arguments?.apply {
-                putSerializable(DATA_KEY, car)
+            arguments = Bundle().apply {
+                putSerializable(ApplicationConstants.CAR_DETAILS_KEY, car)
             }
         }
     }

@@ -7,45 +7,11 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:id="@+id/cover_layout"
-    >
+    <fragment
+            class="com.here.android.mpa.mapping.SupportMapFragment"
+            android:id="@+id/mapfragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-        <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:backgroundImage="@drawable/car"
-                app:actualImageScaleType="fitXY"
-                app:overlayImage="@drawable/light_grey_shade"
-                android:id="@+id/cover"
-        />
-
-    </FrameLayout>
-
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:id="@+id/map_layout"
-                 android:visibility="gone"
-    >
-
-        <fragment
-                class="com.here.android.mpa.mapping.SupportMapFragment"
-                android:id="@+id/mapfragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-    </FrameLayout>
-
-
-    <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_map_black_24dp"
-            android:backgroundTint="@color/dark_grey"
-            android:layout_margin="@dimen/normal_margin"
-            android:id="@+id/toggle"
-            android:layout_gravity="end"
-    />
 
 </androidx.cardview.widget.CardView>
