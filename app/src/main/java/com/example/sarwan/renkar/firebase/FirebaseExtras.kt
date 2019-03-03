@@ -25,6 +25,8 @@ class FirebaseExtras {
         const val OWNER = "owner"
         const val SPECS = "specifications"
         const val TYPE = "type"
+        const val PAYMENT_METHOD = "paymentMethod"
+
 
         /*
         *

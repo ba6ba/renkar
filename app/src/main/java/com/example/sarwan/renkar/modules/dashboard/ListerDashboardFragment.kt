@@ -44,50 +44,31 @@ class ListerDashboardFragment : Fragment(){
 
     private fun onClickListener() {
         settings.setOnClickListener {
-            checkForClickAction(it.id.toString().plus(clickNo), it as TextView)
+            checkForClickAction(it as TextView)
         }
 
         account.setOnClickListener {
-            checkForClickAction(it.id.toString().plus(clickNo), it as TextView)
+            checkForClickAction(it as TextView)
         }
 
         payment_method.setOnClickListener {
-            checkForClickAction(it.id.toString().plus(clickNo), it as TextView)
+            checkForClickAction(it as TextView)
         }
 
         about.setOnClickListener {
-            checkForClickAction(it.id.toString().plus(clickNo), it as TextView)
+            checkForClickAction(it as TextView)
         }
 
         history.setOnClickListener {
-            checkForClickAction(it.id.toString().plus(clickNo), it as TextView)
+            checkForClickAction(it as TextView)
         }
     }
 
-    private fun checkForClickAction(pattern: String, textView: TextView) {
-        when(textView.id.toString().plus(clickNo) == pattern){
-            true -> {
-                changeLayoutAppearance(clickNo++, textView)
-            }
-            false -> {
-                changeLayoutAppearance(1, textView)
-            }
-        }
+    private fun checkForClickAction(textView: TextView) {
+        unSelectLayouts(settings, account, about, payment_method, history)
+        selectLayout(textView)
     }
 
-    private fun changeLayoutAppearance(clickValue : Int, textView: TextView) {
-        when(clickValue){
-            1->{
-                clickNo = clickValue
-                unSelectLayouts(settings, account, about, payment_method, history)
-                selectLayout(textView)
-            }
-            2->{
-                clickNo = 0
-                openActivity(textView)
-            }
-        }
-    }
 
     private fun openActivity(textView: TextView) {
         pActivity.openActivity(Intent(pActivity, DashboardActivity::class.java).
@@ -97,6 +78,7 @@ class ListerDashboardFragment : Fragment(){
     private fun selectLayout(textView: TextView) {
         textView.backgroundTintList = pActivity.resources.getColorStateList(R.color.colorAccent)
         textView.setTextColor(pActivity.resources.getColor(R.color.white))
+        openActivity(textView)
     }
 
     private fun unSelectLayouts(vararg textViews: TextView) {

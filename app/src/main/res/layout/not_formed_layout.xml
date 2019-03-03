@@ -8,27 +8,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/white_round_corner_bg"
-            android:layout_margin="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/large_margin"
             android:backgroundTint="@color/colorAccent"
-            android:paddingStart="@dimen/large_padding"
-            android:paddingEnd="@dimen/large_padding"
-            android:id="@+id/fragment_title"
-            android:text="Abdul Basit"
-            android:layout_gravity="center_horizontal"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            android:id="@+id/back"
+            android:text="GO BACK"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:gravity="center"
             android:textSize="@dimen/small_text_size"
             android:fontFamily="@font/gothambook"
             android:paddingTop="@dimen/a_small_padding"
             android:paddingBottom="@dimen/a_small_padding"
-            android:layout_centerHorizontal="true"
             android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
     />
 
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                 android:id="@+id/fragment_container"
-                 android:layout_marginTop="@dimen/small_margin"
-                 android:layout_below="@id/fragment_title"
+    <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+               android:src="@drawable/not_formed_bg"
     />
+
 </RelativeLayout>

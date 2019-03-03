@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.modules.details
 
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
@@ -75,8 +76,28 @@ class CarDetailsActivity : ParentActivity(), FeaturesFragment.FeaturesInteractio
 
 
     private fun setBottomSheet() {
-        BottomSheetBehavior.from(bottomSheet).isHideable = false
-        BottomSheetBehavior.from(bottomSheet).isFitToContents = true
+        BottomSheetBehavior.from(bottomSheet).apply {
+            isHideable = false
+            isFitToContents = true
+            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+                }
+
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    when(newState){
+                        BottomSheetBehavior.STATE_EXPANDED->{
+                            com.example.sarwan.renkar.extras.BottomSheetBehavior.setStatusBarDim(this@CarDetailsActivity,true)
+                        }
+                        BottomSheetBehavior.STATE_HIDDEN->{}
+                        BottomSheetBehavior.STATE_COLLAPSED->{}
+                        BottomSheetBehavior.STATE_HALF_EXPANDED->{}
+                        BottomSheetBehavior.STATE_DRAGGING->{}
+                        BottomSheetBehavior.STATE_SETTLING->{}
+                    }
+                }
+            })
+        }
     }
 
     override fun onBackPressed() {

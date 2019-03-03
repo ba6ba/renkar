@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.modules.about.AboutFragment
+import com.example.sarwan.renkar.modules.account.AccountFragment
+import com.example.sarwan.renkar.modules.history.HistoryFragment
+import com.example.sarwan.renkar.modules.payment_method.PaymentMethodFragment
+import com.example.sarwan.renkar.modules.settings.SettingsFragment
 import kotlinx.android.synthetic.main.dashboard_activity.*
 
 class DashboardActivity : ParentActivity() {
@@ -34,12 +39,6 @@ class DashboardActivity : ParentActivity() {
     }
 
     private fun appropriateFragment(): Fragment {
-        return map[toInflate]?.let { it }?:kotlin.run { SettingsFragment() }
+        return DashboardFragments.get(this)[toInflate]?.let { it }?:kotlin.run { SettingsFragment() }
     }
-
-    val map = hashMapOf(getString(R.string.settings) to SettingsFragment(),
-        getString(R.string.account) to AccountFragment(),
-        getString(R.string.history) to HistoryFragment(),
-        getString(R.string.payment_method) to PaymentMethodFragment(),
-        getString(R.string.about) to AboutFragment())
 }

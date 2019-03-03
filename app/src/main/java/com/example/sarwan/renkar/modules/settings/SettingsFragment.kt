@@ -1,23 +1,14 @@
-package com.example.sarwan.renkar.modules.dashboard
+package com.example.sarwan.renkar.modules.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
-import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
-import com.example.sarwan.renkar.model.Cars
-import com.example.sarwan.renkar.modules.lister.ListerActivity
-import com.example.sarwan.renkar.utils.StringUtility
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.QuerySnapshot
-import kotlinx.android.synthetic.main.lister_cars_fragment.*
+import com.example.sarwan.renkar.modules.dashboard.DashboardActivity
+import kotlinx.android.synthetic.main.not_formed_layout.*
 
 
 /**
@@ -46,6 +37,13 @@ class SettingsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onClickListener()
+    }
+
+    private fun onClickListener() {
+        back.setOnClickListener {
+            pActivity?.finish()
+        }
     }
 
 

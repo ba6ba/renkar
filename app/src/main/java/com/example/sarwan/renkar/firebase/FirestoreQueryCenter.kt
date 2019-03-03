@@ -70,6 +70,10 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
+    fun getPaymentMethods(email: String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email)
+    }
+
     fun getCars(): Query {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).limit(10)
     }
@@ -165,6 +169,10 @@ object FirestoreQueryCenter {
                     callBack.onPutFailure(FirebaseExtras.UPLOAD_FAILURE)
                 }
         }
+    }
+
+    fun addPaymentMethodToListerNode(email: String, data: Any){
+        FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).update(mapOf(FirebaseExtras.PAYMENT_METHOD to arrayListOf(data)))
     }
 
     fun addCarToListerNode(email: String, data: Any){

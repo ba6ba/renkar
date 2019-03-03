@@ -1,7 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/first_name"
+            android:textColor="@color/grey"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:fontFamily="@font/gothambook"
+            android:backgroundTint="@color/white"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back"
+            android:drawableEnd="@drawable/ic_highlighter"
+            android:drawableTint="@color/light_grey"
+            android:drawablePadding="@dimen/small_padding"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            android:layout_marginTop="@dimen/normal_margin"
+    />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/last_name"
+            android:textColor="@color/grey"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:fontFamily="@font/gothambook"
+            android:backgroundTint="@color/white"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_highlighter"
+            android:drawableTint="@color/light_grey"
+            android:drawablePadding="@dimen/small_padding"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/first_name"
+            android:layout_marginTop="@dimen/normal_margin"
+    />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/phone_no"
+            android:textColor="@color/grey"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+
+            android:fontFamily="@font/gothambook"
+            android:backgroundTint="@color/white"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_highlighter"
+            android:drawableTint="@color/light_grey"
+            android:drawablePadding="@dimen/small_padding"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/last_name"
+            android:layout_marginTop="@dimen/normal_margin"
+    />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@+id/phone_no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:gravity="center_vertical"
+            android:id="@+id/city_dob_layout"
+    >
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text_size"
+                android:ellipsize="end"
+                android:layout_weight="1"
+                android:id="@+id/d_o_b"
+                android:textColor="@color/grey"
+                android:imeOptions="actionNext"
+                android:inputType="textCapCharacters"
+                android:fontFamily="@font/gothambook"
+                android:backgroundTint="@color/white"
+                style="@style/Renkar.TextField.Padding"
+                android:drawableEnd="@drawable/ic_highlighter"
+                android:drawableTint="@color/light_grey"
+                android:drawablePadding="@dimen/small_padding"
+                android:padding="@dimen/normal_padding"
+                android:enabled="false"
+        />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/city"
+                android:spinnerMode="dropdown"
+                android:padding="@dimen/normal_padding"
+        >
+
+
+        </androidx.appcompat.widget.AppCompatSpinner>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/address"
+            android:textColor="@color/grey"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:fontFamily="@font/gothambook"
+            android:backgroundTint="@color/white"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_highlighter"
+            android:drawableTint="@color/light_grey"
+            android:drawablePadding="@dimen/small_padding"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/city_dob_layout"
+            android:layout_marginTop="@dimen/normal_margin"
+    />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/email"
+            android:textColor="@color/grey"
+            android:imeOptions="actionNext"
+            android:inputType="textCapCharacters"
+            android:fontFamily="@font/gothambook"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/edit_text_background"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/address"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+    />
+    
+</androidx.constraintlayout.widget.ConstraintLayout>

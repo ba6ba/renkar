@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:elevation="@dimen/normal_elevation"
+              android:layout_margin="@dimen/small_margin"
+>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="90dp"
+                 android:id="@+id/card_view"
+                 android:padding="@dimen/small_padding"
+
+
+    >
+
+        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       app:cardCornerRadius="20dp"
+    >
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:padding="@dimen/small_padding"
+                        android:id="@+id/ground"
+        >
+
+            <ImageView android:layout_width="30dp" android:layout_height="match_parent"
+                       android:src="@drawable/distance_covered"
+                       android:id="@+id/ic"
+                       android:layout_alignParentStart="true"
+                       android:layout_marginEnd="@dimen/normal_margin"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/name"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothambook"
+                      android:textSize="@dimen/medium_text_size"
+                      android:layout_marginTop="@dimen/small_margin"
+                      android:layout_toEndOf="@id/ic"
+                      android:text="aosjgag"
+            />
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/details"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothambook"
+                      android:textSize="@dimen/small_text_size"
+                      android:layout_toEndOf="@id/ic"
+                      android:layout_below="@id/name"
+                      android:text="aosjgag"
+            />
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/duration"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothambook"
+                      android:textSize="@dimen/small_text_size"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginBottom="@dimen/normal_margin"
+                      android:layout_marginEnd="@dimen/normal_margin"
+                      android:layout_alignBottom="@id/ic"
+                      android:text="aosjgag"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/renter"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothambook"
+                      android:textSize="@dimen/small_text_size"
+                      android:layout_alignBottom="@id/ic"
+                      android:text="with : Shaikh Al Jabair"
+                      android:layout_toEndOf="@id/ic"
+            />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <View android:layout_width="15dp" android:layout_height="15dp"
+          android:background="@drawable/green_status_round_corner_bg"
+          android:layout_alignEnd="@id/card_view"
+          android:layout_marginEnd="@dimen/normal_margin"
+          android:layout_alignParentBottom="true"
+          android:layout_marginBottom="@dimen/a_small_margin"
+          android:id="@+id/status"
+    />
+</RelativeLayout>
