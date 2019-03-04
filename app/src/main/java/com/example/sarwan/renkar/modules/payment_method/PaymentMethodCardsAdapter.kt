@@ -84,12 +84,7 @@ class PaymentMethodCardsAdapter(private val activity: ParentActivity,
         }
 
         private fun setData(position: Int) {
-            cardsList[position]?.name?.let { name-> itemView.card_icon.background = activity.resources.getDrawable(
-                CardsList.getIcon(
-                    activity,
-                    name
-                )
-            )}
+            cardsList[position]?.name?.let { name-> itemView.card_icon.setImageURI(CardsList.getIcon(activity, name))}
             itemView.card_name.text = cardsList[position]?.name
             itemView.card_number.text = cardsList[position]?.number
             (cardsList[position]?.active)?.let { itemView.active_card.visibility = if (it) View.VISIBLE else View.GONE }

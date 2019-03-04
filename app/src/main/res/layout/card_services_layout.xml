@@ -1,15 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   app:cardElevation="@dimen/normal_elevation"
+                                   android:layout_marginStart="@dimen/large_margin"
+                                   android:layout_marginEnd="@dimen/large_margin"
+                                   android:layout_marginTop="@dimen/large_margin"
+                                   android:layout_marginBottom="@dimen/large_margin"
+                                   app:cardMaxElevation="@dimen/max_elevation"
+                                   app:cardCornerRadius="@dimen/card_corner_radius"
+                                   app:cardBackgroundColor="@color/white"
+>
 
-    <ListView
-            android:id="@+id/cards_list_view"
-            android:visibility="visible"
-            android:dividerHeight="0dp"
-            android:divider="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+    >
 
-</LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/warning" android:textSize="@dimen/medium_text_size"
+                  android:fontFamily="@font/gothambook"
+                  android:textColor="@color/colorAccent"
+                  android:text="SELECT ANY SERVICE PROVIDER"
+                  android:textAlignment="center"
+                  android:layout_centerHorizontal="true"
+                  android:padding="@dimen/small_padding"
+                  android:layout_marginTop="@dimen/small_margin"
+                  android:layout_marginBottom="@dimen/small_margin"
+                  android:layout_above="@id/options_layout"
+        />
+
+        <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="3"
+                android:id="@+id/options_layout"
+                android:layout_centerInParent="true"
+        >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/master_card"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:tag="@string/master_card"
+                    app:roundingBorderWidth="1dp"
+                    app:roundingBorderColor="@color/v_light_grey"
+                    app:actualImageScaleType="fitCenter"
+                    app:roundAsCircle="true"
+            />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:id="@+id/ubl"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:tag="@string/ubl"
+                    app:actualImageScaleType="fitCenter"
+                    app:roundingBorderWidth="1dp"
+                    app:roundingBorderColor="@color/v_light_grey"
+                    app:roundAsCircle="true"
+            />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:id="@+id/visa"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:tag="@string/visa"
+                    app:actualImageScaleType="fitCenter"
+                    app:roundAsCircle="true"
+                    app:roundingBorderWidth="1dp"
+                    app:roundingBorderColor="@color/v_light_grey"
+            />
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:id="@+id/bank_al_habib"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:tag="@string/bank_al_habib"
+                    app:actualImageScaleType="fitCenter"
+                    app:roundingBorderWidth="1dp"
+                    app:roundingBorderColor="@color/v_light_grey"
+                    app:roundAsCircle="true"
+            />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:id="@+id/faysal_bank"
+                    android:layout_margin="@dimen/normal_margin"
+                    android:tag="@string/faysal_bank"
+                    app:actualImageScaleType="fitCenter"
+                    app:roundAsCircle="true"
+                    app:roundingBorderWidth="1dp"
+                    app:roundingBorderColor="@color/v_light_grey"
+            />
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

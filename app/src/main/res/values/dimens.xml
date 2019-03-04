@@ -54,5 +54,7 @@
     <dimen name="dialog_width">250dp</dimen>
 	<dimen name="dialog_height">300dp</dimen>
     <dimen name="bottom_sheet_peek_height">60dp</dimen>
+    <dimen name="dialog_width_large">325dp</dimen>
+	<dimen name="dialog_height_large">400dp</dimen>
 
 </resources>

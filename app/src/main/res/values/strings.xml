@@ -67,4 +67,6 @@
 	<string name="faysal_bank">Faysal Bank</string>
 	<string name="bank_al_habib">Bank Al Habib</string>
 	<string name="ubl">United Bank Limited</string>
+    <string name="city">City</string>
+	<string name="address">Address</string>
 </resources>

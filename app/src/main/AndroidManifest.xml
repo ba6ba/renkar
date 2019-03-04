@@ -129,6 +129,7 @@
                 android:name=".modules.dashboard.DashboardActivity"
                 android:theme="@style/renkarTheme"
                 android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
                 android:screenOrientation="sensorPortrait"/>
     </application>
 </manifest>

@@ -42,6 +42,20 @@
         <item name="android:paddingBottom">@dimen/small_padding</item>
     </style>
 
+    <style name="Renkar.TextInputLayout.Hint" parent="TextAppearance.Design.Hint">
+        <item name="android:textColorHint">@color/light_grey</item>
+        <item name="hintTextColor">@color/light_grey</item>
+    </style>
+
+    <style name="Renkar.TextInputLayout" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/light_grey</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="hintTextColor">@color/light_grey</item>
+    </style>
+
     <style name="BottomSheet" parent="@style/Widget.MaterialComponents.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
     </style>

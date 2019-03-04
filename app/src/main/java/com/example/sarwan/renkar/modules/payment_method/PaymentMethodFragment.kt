@@ -145,31 +145,26 @@ class PaymentMethodFragment : Fragment(),
         }
     }
 
-    override fun itemSelected(position: Int) {
-        setNewCardFields(position)
+    override fun itemSelected(tag: String) {
+        setNewCardFields(tag)
     }
 
     private var selectedCard : Cards ? = null
     private var selectedMethod : PaymentMethods ? = null
 
-    private fun setNewCardFields(position: Int) {
+    private fun setNewCardFields(tag: String) {
         pActivity?.let { activity->
-            selectedCard = allAvailableCards[position]
+            selectedCard = allAvailableCards.find { it.name==tag }
             selectedMethod = null
-            showBottomLayout(activity, allAvailableCards[position])
+            showBottomLayout(activity, selectedCard)
         }
     }
 
 
-    private fun showBottomLayout(activity: ParentActivity, card: Cards) {
-        card.name?.let {name->
+    private fun showBottomLayout(activity: ParentActivity, card: Cards?) {
+        card?.name?.let {name->
             pActivity?.show(bottom_view)
-            card_icon.background = activity.resources.getDrawable(
-                CardsList.getIcon(
-                    activity,
-                    name
-                )
-            )
+            card_icon.setImageURI(CardsList.getIcon(activity, name))
         }
     }
 
@@ -177,12 +172,7 @@ class PaymentMethodFragment : Fragment(),
     private fun showBottomLayout(activity: ParentActivity, paymentMethod: PaymentMethods?) {
         paymentMethod?.name?.let {name->
             pActivity?.show(bottom_view)
-            card_icon.background = activity.resources.getDrawable(
-                CardsList.getIcon(
-                    activity,
-                    name
-                )
-            )
+            card_icon.setImageURI(CardsList.getIcon(activity, name))
             card_holder.setText(paymentMethod.holderName)
             card_number.setText(paymentMethod.number)
             expiry.setText(paymentMethod.expiryDate)
@@ -197,7 +187,7 @@ class PaymentMethodFragment : Fragment(),
 
     private fun showAllCards() {
         pActivity?.let {
-            AllCardsFragment.newInstance(allAvailableCards).run {
+            AllCardsFragment().run {
                 allCardsFragment = this
                 allCardsFragment?.initCallBack(this@PaymentMethodFragment)
                 if (!isAdded)
