@@ -13,6 +13,7 @@ import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.utils.StringUtility
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -52,6 +53,13 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         userIconInitial()
         initializeLayoutView()
         fetchCars()
+        clickListener()
+    }
+
+    private fun clickListener() {
+        person_icon.setOnClickListener {
+
+        }
     }
 
     private fun userIconInitial() {

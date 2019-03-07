@@ -26,17 +26,17 @@ class User : Serializable {
     @get:Exclude
     var name: String ? = null
         get() {
-            return if (field == null) first_name?.capitalize() + " " + last_name?.capitalize() else field
+            return if (field == null) firstName?.capitalize() + " " + lastName?.capitalize() else field
         }
 
+    var userName: String? = null
     var email: String? = null
-    var first_name: String? = null
-    var last_name: String? = null
-    var user_name: String? = null
-    var date_of_birth: String? = null
-    var phone_no: String? = null
+    var firstName: String? = null
+    var lastName: String? = null
+    var licenseNo: String? = null
+    var phoneNo: String? = null
     var city : String ? = null
     var type : String ? = null
     var address : String ? = null
-    var image_url : String ? = ""
+    var imageUrl : String ? = ""
 }

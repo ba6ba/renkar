@@ -40,6 +40,11 @@ class ListerDashboardFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClickListener()
+        setProfileImage()
+    }
+
+    private fun setProfileImage() {
+        image.background = resources.getDrawable(R.drawable.ic_boy)
     }
 
     private fun onClickListener() {
@@ -62,6 +67,10 @@ class ListerDashboardFragment : Fragment(){
         history.setOnClickListener {
             checkForClickAction(it as TextView)
         }
+
+        sign_out.setOnClickListener {
+            checkForClickAction(it as TextView)
+        }
     }
 
     private fun checkForClickAction(textView: TextView) {
@@ -78,7 +87,7 @@ class ListerDashboardFragment : Fragment(){
     private fun selectLayout(textView: TextView) {
         textView.backgroundTintList = pActivity.resources.getColorStateList(R.color.colorAccent)
         textView.setTextColor(pActivity.resources.getColor(R.color.white))
-        openActivity(textView)
+        if (textView.text!=resources.getString(R.string.sign_out)) openActivity(textView) else pActivity.performLogout()
     }
 
     private fun unSelectLayouts(vararg textViews: TextView) {

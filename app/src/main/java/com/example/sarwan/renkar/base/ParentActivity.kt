@@ -1,13 +1,10 @@
 package com.example.sarwan.renkar.base
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,16 +14,12 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import java.io.IOException
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.example.sarwan.renkar.R
-import com.example.sarwan.renkar.extras.ApplicationConstants
-import com.example.sarwan.renkar.extras.MyLocation
 import com.example.sarwan.renkar.extras.ProgressLoader
 import com.example.sarwan.renkar.extras.SharedPreferences
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.authentication.LoginActivity
-import com.example.sarwan.renkar.permissions.Permissions
-import com.example.sarwan.renkar.utils.LocationUtility
+import com.google.firebase.auth.FirebaseAuth
 
 abstract class ParentActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -87,7 +80,7 @@ abstract class ParentActivity : AppCompatActivity() {
      * @usage it opens the activity receives in parameter and finish  the current activity running
      * @param activity
      */
-    fun openMainActivity(activity: Class<*>) {
+    fun openActivityByFinishAll(activity: Class<*>) {
         val intent = Intent(this, activity)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -317,11 +310,18 @@ abstract class ParentActivity : AppCompatActivity() {
         user?.isFirst = temp_isFirst
         appropriateEmail(temp_email)
         saveUserInSharedPreferences()
-        openMainActivity(LoginActivity::class.java)
+        openActivityByFinishAll(LoginActivity::class.java)
     }
 */
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    fun performLogout() {
+        user = null
+        saveUserInSharedPreferences()
+        FirebaseAuth.getInstance().signOut()
+        openActivityByFinishAll(LoginActivity::class.java)
     }
 }

@@ -16,14 +16,17 @@
                                        app:cardCornerRadius="20dp"
                                        app:cardBackgroundColor="@color/white"
                                        android:layout_margin="@dimen/small_margin"
-                                       app:contentPadding="@dimen/small_padding"
+                                       app:contentPadding="@dimen/a_small_padding"
     >
         <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                        android:background="@drawable/white_round_corner_bg"
         >
-            <com.facebook.drawee.view.SimpleDraweeView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="60dp" android:layout_height="30dp"
                        android:id="@+id/card_icon"
-                       android:layout_alignParentEnd="true"
-                       android:layout_alignParentTop="true"
+                       android:layout_alignParentStart="true"
+                    app:actualImageScaleType="fitCenter"
+                    android:layout_alignParentBottom="true"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -33,11 +36,11 @@
                       android:textAllCaps="true"
                       android:fontFamily="@font/gothammedium"
                       android:textColor="@color/grey"
-                      android:layout_below="@id/card_icon"
+                      android:layout_alignParentTop="true"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/card_number"
+                      android:id="@+id/payment_method_card_number"
                       android:text="1111 **** 0000 ****"
                       android:textSize="@dimen/small_text_size"
                       android:textAllCaps="true"
@@ -57,6 +60,6 @@
                android:id="@+id/active_card"
                android:layout_alignEnd="@id/main"
                android:layout_alignBottom="@id/main"
-               android:src="@drawable/tick_black"
+               android:background="@drawable/tick_black"
     />
 </RelativeLayout>

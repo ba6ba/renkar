@@ -23,4 +23,11 @@ class ListerActivity : ParentActivity(){
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         viewPager.currentItem = 1
     }
+
+    override fun onBackPressed() {
+        if (viewPager.currentItem==0)
+            super.onBackPressed()
+        else
+            viewPager.setCurrentItem(0, true)
+    }
 }

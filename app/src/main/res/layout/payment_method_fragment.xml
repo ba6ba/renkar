@@ -45,7 +45,8 @@
         <com.facebook.drawee.view.SimpleDraweeView
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:id="@+id/card_icon"
+                android:id="@+id/card_icon_main"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
                 app:actualImageScaleType="fitCenter"
         />
@@ -57,11 +58,12 @@
                 app:hintAnimationEnabled="true"
                 android:hint="Card Holder"
                 android:layout_marginBottom="@dimen/normal_margin"
-                android:layout_below="@id/card_icon"
+                android:layout_below="@id/card_icon_main"
                 android:id="@+id/card_holder_layout"
                 style="@style/Renkar.TextInputLayout"
                 app:hintTextAppearance="@style/Renkar.TextInputLayout.Hint"
         >
+
 
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -73,10 +75,12 @@
                     android:layout_gravity="center"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:id="@+id/card_holder"
+                    android:inputType="textCapSentences"
                     android:backgroundTint="@color/white"
-                    android:imeOptions="actionNext"
-            />
+                    android:id="@+id/card_holder"
+                    android:maxLength="20"
+                    android:imeOptions="actionNext"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,6 +94,9 @@
                 android:layout_below="@id/card_holder_layout"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
+                app:helperText="must be of 13 characters"
+                app:helperTextTextColor="@color/light_grey"
+                app:helperTextEnabled="true"
                 android:id="@+id/card_number_layout"
         >
 
@@ -105,9 +112,11 @@
                     android:ellipsize="end"
                     android:inputType="number"
                     android:backgroundTint="@color/white"
-                    android:id="@+id/card_number"
+                    android:id="@+id/payment_method_card_number"
+                    android:maxLength="13"
                     android:imeOptions="actionNext"
             />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -141,7 +150,7 @@
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        android:inputType="number"
+                        android:inputType="date"
                         android:id="@+id/expiry"
                         android:imeOptions="actionNext"
                         android:backgroundTint="@color/white"
@@ -158,6 +167,9 @@
                     style="@style/Renkar.TextInputLayout"
                     app:hintTextAppearance="@style/Renkar.TextInputLayout.Hint"
                     android:gravity="center_vertical"
+                    app:helperText="must be of 3 characters"
+                    app:helperTextTextColor="@color/light_grey"
+                    app:helperTextEnabled="true"
                     android:id="@+id/ccv_layout"
                     android:layout_marginStart="@dimen/small_margin"
             >
@@ -174,6 +186,7 @@
                         android:ellipsize="end"
                         android:inputType="number"
                         android:id="@+id/ccv"
+                        android:maxLength="3"
                         android:backgroundTint="@color/white"
                         android:imeOptions="actionDone"
                 />

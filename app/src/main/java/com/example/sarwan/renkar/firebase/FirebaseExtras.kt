@@ -44,5 +44,13 @@ class FirebaseExtras {
         const val ADDRESS = "address"
         const val LATITUDE = "latitude"
         const val LONGITUDE = "longitude"
+
+        const val HOLDER_NAME = "holderName"
+        const val EXPIRY_DATE = "expiryDate"
+        const val CCV = "ccv"
+        const val ID = "id"
+        const val NUMBER = "number"
+        const val CREATED_AT = "createdAt"
+
     }
 }

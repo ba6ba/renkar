@@ -127,7 +127,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setAddress() {
-        address.text = car?.address?.address
+        address_tv.text = car?.address?.address
     }
 
     private fun setImage() {

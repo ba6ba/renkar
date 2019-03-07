@@ -1,9 +1,7 @@
 package com.example.sarwan.renkar.modules.details
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
@@ -12,7 +10,6 @@ import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.Features
 import com.example.sarwan.renkar.modules.cars.AllCarsFragment
 import com.example.sarwan.renkar.modules.features.FeaturesFragment
-import com.example.sarwan.renkar.utils.ModelMappingUtility
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.car_details_layout.*
 

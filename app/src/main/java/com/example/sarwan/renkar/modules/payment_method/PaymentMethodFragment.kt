@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,12 +13,15 @@ import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cards
+import com.example.sarwan.renkar.model.ListerProfile
 import com.example.sarwan.renkar.model.PaymentMethods
 import com.example.sarwan.renkar.modules.dashboard.DashboardActivity
 import com.example.sarwan.renkar.utils.ValidationUtility
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import kotlinx.android.synthetic.main.payment_method_fragment.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -70,24 +74,44 @@ class PaymentMethodFragment : Fragment(),
     private fun addPaymentMethod() {
         pActivity?.let {
             it.user?.email?.let {email->
-                FirestoreQueryCenter.addPaymentMethodToListerNode(email, makePaymentMethodObject())
+                pActivity?.showProgress()
+                FirestoreQueryCenter.addPaymentMethodToListerNode(email, makePaymentMethodObject()).
+                        addOnCompleteListener { task->
+                            if (task.isSuccessful){
+                                paymentMethodAdded()
+                            }
+                            else {
+                                pActivity?.hideProgress()
+                            }
+                        }
             }
 
         }
     }
 
-    private fun makePaymentMethodObject(): Any {
-        val obj = PaymentMethods()
-        obj.ccv = ccv.text.toString()
-        obj.expiryDate = expiry.text.toString()
-        obj.number = card_number.text.toString()
-        obj.holderName = card_holder.text.toString()
-        obj.name = selectedCard?.name ?:kotlin.run { selectedMethod?.name }
-        return obj
+    private fun paymentMethodAdded() {
+        pActivity?.hideProgress()
+        Toast.makeText(pActivity, getString(R.string.payment_method_added_successfully), Toast.LENGTH_LONG).show()
+        hideBottomLayout()
+    }
+
+    private fun hideBottomLayout() {
+        pActivity?.hide(bottom_view)
+    }
+
+    private fun makePaymentMethodObject(): Map<String, Any> {
+        return mapOf(FirebaseExtras.HOLDER_NAME to card_holder_layout.editText?.text.toString(),FirebaseExtras.EXPIRY_DATE to expiry_layout.editText?.text.toString()
+            ,FirebaseExtras.CCV to ccv_layout.editText?.text.toString(), FirebaseExtras.ID to UUID.randomUUID().toString(),
+            FirebaseExtras.NAME to getCardName()
+            ,FirebaseExtras.NUMBER to card_number_layout.editText?.text.toString(),FirebaseExtras.CREATED_AT to Calendar.getInstance().time.time)
+    }
+
+    private fun getCardName(): String {
+        return (selectedCard?.name ?: selectedMethod?.name ?: "" )
     }
 
     private fun validateData(): Boolean {
-        return ValidationUtility.isNotEmptyField(card_holder,card_number,ccv,expiry)
+        return ValidationUtility.isNotEmptyField(card_holder_layout.editText,card_number_layout.editText,ccv_layout.editText,expiry_layout.editText)
     }
 
     private fun getAllCards() {
@@ -96,11 +120,10 @@ class PaymentMethodFragment : Fragment(),
         }
     }
 
-
     private fun initializeLayoutView() {
         pActivity?.let {
-            payment_method_rc_view.layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            adapter = PaymentMethodCardsAdapter(it, myCards, this)
+            payment_method_rc_view.layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            adapter = PaymentMethodCardsAdapter(it, ArrayList(), this)
             payment_method_rc_view.adapter = adapter
         }
     }
@@ -122,7 +145,7 @@ class PaymentMethodFragment : Fragment(),
             }?:kotlin.run {
                 querySnapshot?.let {query->
                     when {
-                        adapter?.itemCount!! == 0 -> getPaymentMethod(query[FirebaseExtras.PAYMENT_METHOD] as ArrayList<PaymentMethods>?)
+                        adapter?.itemCount!! == 0 -> getPaymentMethod(query.toObject(ListerProfile::class.java))
                     }
                 }
             }
@@ -131,8 +154,9 @@ class PaymentMethodFragment : Fragment(),
         }
     }
 
-    private fun getPaymentMethod(pMethods: MutableList<PaymentMethods>?) {
-        pMethods?.let { myCards = it as ArrayList<PaymentMethods?> }
+    private fun getPaymentMethod(pMethods: ListerProfile?) {
+        pMethods?.let { myCards = pMethods.paymentMethod as ArrayList<PaymentMethods?>}
+        myCards.sortByDescending { it?.createdAt }
         adapter?.swap(myCards)
     }
 
@@ -163,29 +187,38 @@ class PaymentMethodFragment : Fragment(),
 
     private fun showBottomLayout(activity: ParentActivity, card: Cards?) {
         card?.name?.let {name->
-            pActivity?.show(bottom_view)
-            card_icon.setImageURI(CardsList.getIcon(activity, name))
+            setLayoutViews(activity, null, card)
         }
     }
 
 
     private fun showBottomLayout(activity: ParentActivity, paymentMethod: PaymentMethods?) {
         paymentMethod?.name?.let {name->
-            pActivity?.show(bottom_view)
-            card_icon.setImageURI(CardsList.getIcon(activity, name))
-            card_holder.setText(paymentMethod.holderName)
-            card_number.setText(paymentMethod.number)
-            expiry.setText(paymentMethod.expiryDate)
-            ccv.setText(paymentMethod.ccv)
+            paymentMethod.apply {
+                setLayoutViews(activity, this, null)
+            }
         }
     }
 
+    private fun setLayoutViews(
+        activity: ParentActivity,
+        paymentMethods: PaymentMethods?,
+        card: Cards?
+    ) {
+        pActivity?.show(bottom_view)
+        card_icon_main.setImageURI(CardsList.getIcon(activity, paymentMethods?.name?:card?.name?:""))
+        card_holder.setText(paymentMethods?.holderName?:"")
+        card_number_layout.editText?.setText(paymentMethods?.number?:"")
+        expiry.setText(paymentMethods?.expiryDate?:"")
+        ccv.setText(paymentMethods?.ccv?:"")
+    }
+
     override fun onEmptyCardSelection() {
-        showAllCards()
+        showCardsFragment()
     }
 
 
-    private fun showAllCards() {
+    private fun showCardsFragment() {
         pActivity?.let {
             AllCardsFragment().run {
                 allCardsFragment = this

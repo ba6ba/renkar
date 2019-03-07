@@ -69,4 +69,8 @@
 	<string name="ubl">United Bank Limited</string>
     <string name="city">City</string>
 	<string name="address">Address</string>
+	<string name="profile_updated">Profile updated successfully</string>
+	<string name="license">License Number</string>
+    <string name="payment_method_added_successfully">Payment method added</string>
+    <string name="sign_out">Signout</string>
 </resources>

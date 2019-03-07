@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                      xmlns:app="http://schemas.android.com/apk/res-auto"
                                                      android:orientation="vertical"
@@ -6,50 +10,47 @@
                                                      android:layout_height="match_parent"
 >
 
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/white_round_corner_bg"
+			android:layout_margin="@dimen/small_margin"
+			android:backgroundTint="@color/colorAccent"
+			android:paddingStart="@dimen/large_padding"
+			android:paddingEnd="@dimen/large_padding"
+			android:id="@+id/person_icon"
+			android:layout_centerHorizontal="true"
+			android:text="Abdul Basit"
+			android:textAlignment="center"
+			android:textAllCaps="true"
+			android:gravity="center"
+			android:textSize="@dimen/small_text_size"
+			android:fontFamily="@font/gothambook"
+			android:paddingTop="@dimen/a_small_padding"
+			android:paddingBottom="@dimen/a_small_padding"
+			android:textColor="@color/white"
+	/>
+
+
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:id="@+id/swipeRefreshLayout"
 			android:animateLayoutChanges="true"
+			android:layout_below="@id/person_icon"
 	>
-		<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
-		
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:background="@drawable/white_round_corner_bg"
-				android:layout_margin="@dimen/small_margin"
-				android:backgroundTint="@color/colorAccent"
-				android:paddingStart="@dimen/large_padding"
-				android:paddingEnd="@dimen/large_padding"
-				android:id="@+id/person_icon"
-				android:layout_centerHorizontal="true"
-				android:text="Abdul Basit"
-				android:textAlignment="center"
-				android:textAllCaps="true"
-				android:gravity="center"
-				android:textSize="@dimen/small_text_size"
-				android:fontFamily="@font/gothambook"
-				android:paddingTop="@dimen/a_small_padding"
-				android:paddingBottom="@dimen/a_small_padding"
-				android:textColor="@color/white"
-		/>
-		
 		<androidx.recyclerview.widget.RecyclerView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-		        android:id="@+id/lister_cars_recycler_view"
+				android:id="@+id/lister_cars_recycler_view"
 				android:scrollbars="vertical"
 				android:scrollbarFadeDuration="@integer/progress_bar_duration"
 				android:scrollbarSize="3dp"
 				android:scrollbarStyle="outsideInset"
-				android:layout_below="@id/person_icon"
 		>
-		
-		
+
+
 		</androidx.recyclerview.widget.RecyclerView>
-		
-		</RelativeLayout>
 		
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 	
@@ -59,6 +60,7 @@
 			android:id="@+id/swipeRefreshLayoutEmpty"
 			android:animateLayoutChanges="true"
 			android:visibility="gone"
+			android:layout_below="@id/person_icon"
 	>
 		
 		<include
@@ -69,3 +71,5 @@
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

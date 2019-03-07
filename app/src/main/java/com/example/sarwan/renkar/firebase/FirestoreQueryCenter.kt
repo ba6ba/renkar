@@ -2,8 +2,9 @@ package com.example.sarwan.renkar.firebase
 
 import com.example.sarwan.renkar.model.Cars
 import com.google.android.gms.tasks.Task
-import com.google.android.libraries.places.internal.it
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -171,8 +172,9 @@ object FirestoreQueryCenter {
         }
     }
 
-    fun addPaymentMethodToListerNode(email: String, data: Any){
-        FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).update(mapOf(FirebaseExtras.PAYMENT_METHOD to arrayListOf(data)))
+    fun addPaymentMethodToListerNode(email: String, map: Map<String,Any>): Task<Void> {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).
+            update(mapOf(FirebaseExtras.PAYMENT_METHOD to FieldValue.arrayUnion(map)))
     }
 
     fun addCarToListerNode(email: String, data: Any){
@@ -200,6 +202,10 @@ object FirestoreQueryCenter {
     }
 
     fun addUserInDB(email: String, map : Any) : Task<Void> {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(email).set(map)
+    }
+
+    fun updateUserInDB(email: String, map : Any) : Task<Void> {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(email).set(map)
     }
 }

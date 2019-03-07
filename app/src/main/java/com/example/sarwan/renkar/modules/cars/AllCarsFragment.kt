@@ -40,9 +40,13 @@ class AllCarsFragment : Fragment() {
     private fun initializeLayoutView() {
         pActivity.let {
             all_cars_rc_view.layoutManager  = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-            adapter = AllCarsAdapter(it, carsList)
+            adapter = AllCarsAdapter(it, filterCars())
             all_cars_rc_view.adapter = adapter
         }
+    }
+
+    private fun filterCars(): ArrayList<Cars> {
+        return carsList.filter { it.owner.email!=pActivity.user?.email } as ArrayList<Cars>
     }
 
     companion object {

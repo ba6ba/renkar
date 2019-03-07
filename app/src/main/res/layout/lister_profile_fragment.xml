@@ -33,7 +33,6 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                         android:layout_width="match_parent" android:layout_height="match_parent"
                         app:roundAsCircle="true"
-                        app:actualImageResource="@drawable/ic_boy"
                         android:id="@+id/image"
                         android:layout_margin="@dimen/a_small_margin"
                 />
@@ -128,6 +127,19 @@
                           android:backgroundTint="@color/white"
                 />
 
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:textColor="@color/grey"
+                          android:layout_marginEnd="@dimen/a_small_margin"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:text="@string/sign_out"
+                          android:padding="@dimen/normal_padding"
+                          android:id="@+id/sign_out"
+                          android:layout_below="@id/payment_method"
+                          android:layout_marginBottom="@dimen/a_small_margin"
+                          android:background="@drawable/profile_white_rounded_bg"
+                          android:backgroundTint="@color/white"
+                />
 
             </RelativeLayout>
 

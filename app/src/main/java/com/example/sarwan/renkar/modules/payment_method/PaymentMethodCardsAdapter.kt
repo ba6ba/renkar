@@ -56,7 +56,6 @@ class PaymentMethodCardsAdapter(private val activity: ParentActivity,
         records?.let { it ->
             cardsList.clear()
             cardsList.addAll(it)
-            cardsList.sortByDescending { it?.createdAt }
             addNullItem()
         }
     }
@@ -86,8 +85,10 @@ class PaymentMethodCardsAdapter(private val activity: ParentActivity,
         private fun setData(position: Int) {
             cardsList[position]?.name?.let { name-> itemView.card_icon.setImageURI(CardsList.getIcon(activity, name))}
             itemView.card_name.text = cardsList[position]?.name
-            itemView.card_number.text = cardsList[position]?.number
-            (cardsList[position]?.active)?.let { itemView.active_card.visibility = if (it) View.VISIBLE else View.GONE }
+            itemView.payment_method_card_number.text = cardsList[position]?.number
+            (cardsList[position]?.active)?.let { itemView.active_card.backgroundTintList =
+                    if (it) activity.resources.getColorStateList(R.color.colorAccent) else
+                        activity.resources.getColorStateList(R.color.light_grey) }
         }
 
         private fun clickListener(position: Int) {

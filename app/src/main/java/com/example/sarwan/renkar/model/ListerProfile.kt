@@ -4,7 +4,7 @@ import java.io.Serializable
 
 class ListerProfile : Serializable {
 
-    var paymentMethod : ArrayList<PaymentMethods> ? = null
-    var cars : ArrayList<Cars> ? = null
+    var paymentMethod : ArrayList<PaymentMethods> ? = ArrayList()
+    var cars : ArrayList<String> ? = null
 
 }
