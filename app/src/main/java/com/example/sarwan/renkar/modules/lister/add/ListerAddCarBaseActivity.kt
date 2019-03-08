@@ -267,7 +267,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         car?.owner?.let {owner->
             owner.email = user?.email.toString()
             owner.name = user?.name.toString()
-            owner.image = user?.image_url.toString()
+            owner.image = user?.imageUrl.toString()
         }
     }
 

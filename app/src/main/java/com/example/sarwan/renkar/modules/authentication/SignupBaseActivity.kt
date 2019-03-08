@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.modules.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +12,7 @@ import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.ListerProfile
 import com.example.sarwan.renkar.model.RenterProfile
 import com.example.sarwan.renkar.utils.ModelMappingUtility
+import com.google.android.gms.tasks.RuntimeExecutionException
 
 open class SignupBaseActivity : ParentActivity() {
 
@@ -30,8 +32,14 @@ open class SignupBaseActivity : ParentActivity() {
         auth?.createUserWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener { task: Task<AuthResult> ->
                     if (auth != null) {
-                        task.result?.user?.uid?.let {
-                            createUserNodeOnFireBase(email,phoneNo, firstName, lastName, username, type)
+                        try {
+                            task.result?.user?.uid?.let {
+                                createUserNodeOnFireBase(email,phoneNo, firstName, lastName, username, type)
+                            }
+                        }
+                        catch (e: RuntimeExecutionException){
+                            hideProgress()
+                            Toast.makeText(this,e.cause?.localizedMessage,Toast.LENGTH_LONG).show()
                         }
                     }
                 }

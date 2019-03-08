@@ -88,6 +88,9 @@ dependencies {
 
     /*color swatches*/
     implementation 'com.github.skydoves:colorpickerpreference:1.0.2'
+
+    /*animation bottom bar*//*
+    implementation 'com.tenclouds.fluidbottomnavigation:fluid-bottom-navigation:{last_release_version}'*/
 }
 
 /*Google places library*/

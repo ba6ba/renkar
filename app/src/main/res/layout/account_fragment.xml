@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:ellipsize="end"
+            android:id="@+id/email"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:inputType="textCapCharacters"
+            android:fontFamily="@font/gothambook"
+            style="@style/Renkar.TextField.Padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/edit_text_background"
+            android:backgroundTint="@color/dark_grey"
+            android:padding="@dimen/normal_padding"
+            android:enabled="false"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/address_tv"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+    />
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/first_name_layout"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:paddingStart="@dimen/a_small_padding"
+                        android:paddingEnd="@dimen/a_small_padding"
+
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/first_name"
+                      android:fontFamily="@font/gothambook"
+                      android:padding="@dimen/a_small_padding"
+                      android:textColor="@color/light_grey"
+                      android:textSize="@dimen/small_text_size"
+                      android:id="@+id/f_name"
+            />
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/medium_text_size"
+                    android:ellipsize="end"
+                    android:id="@+id/first_name"
+                    android:textColor="@color/light_grey"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:fontFamily="@font/gothambook"
+                    android:backgroundTint="@color/white"
+                    style="@style/Renkar.TextField.Padding"
+                    android:padding="@dimen/a_small_padding"
+                    android:enabled="false"
+                    android:layout_below="@id/f_name"
+                    android:layout_toStartOf="@id/first_name_edit"
+                    android:layout_alignParentStart="true"
+            />
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/ic_highlighter"
+                       android:layout_alignTop="@id/first_name"
+                       android:layout_alignBottom="@id/first_name"
+                       android:layout_alignParentEnd="true"
+                       android:id="@+id/first_name_edit"
+                       android:paddingStart="@dimen/normal_padding"
+                       android:paddingEnd="@dimen/normal_padding"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/last_name_layout"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:paddingStart="@dimen/a_small_padding"
+                        android:paddingEnd="@dimen/a_small_padding"
+
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/last_name"
+                      android:fontFamily="@font/gothambook"
+                      android:padding="@dimen/a_small_padding"
+                      android:textColor="@color/light_grey"
+                      android:textSize="@dimen/small_text_size"
+                      android:id="@+id/l_name"
+            />
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/medium_text_size"
+                    android:ellipsize="end"
+                    android:id="@+id/last_name"
+                    android:textColor="@color/light_grey"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:fontFamily="@font/gothambook"
+                    android:backgroundTint="@color/white"
+                    style="@style/Renkar.TextField.Padding"
+                    android:padding="@dimen/normal_padding"
+                    android:enabled="false"
+                    android:layout_below="@id/l_name"
+                    android:layout_toStartOf="@id/last_name_edit"
+                    android:layout_alignParentStart="true"
+            />
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/ic_highlighter"
+                       android:layout_alignTop="@id/last_name"
+                       android:layout_alignBottom="@id/last_name"
+                       android:layout_alignParentEnd="true"
+                       android:id="@+id/last_name_edit"
+                       android:paddingStart="@dimen/normal_padding"
+                       android:paddingEnd="@dimen/normal_padding"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/address_layout"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:paddingStart="@dimen/a_small_padding"
+                        android:paddingEnd="@dimen/a_small_padding"
+
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/address"
+                      android:fontFamily="@font/gothambook"
+                      android:padding="@dimen/a_small_padding"
+                      android:textColor="@color/light_grey"
+                      android:textSize="@dimen/small_text_size"
+                      android:id="@+id/address_heading"
+            />
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/medium_text_size"
+                    android:ellipsize="end"
+                    android:id="@+id/address_tv"
+                    android:textColor="@color/light_grey"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:fontFamily="@font/gothambook"
+                    android:backgroundTint="@color/white"
+                    style="@style/Renkar.TextField.Padding"
+                    android:padding="@dimen/normal_padding"
+                    android:enabled="false"
+                    android:layout_below="@id/address_heading"
+                    android:layout_toStartOf="@id/address_edit"
+                    android:layout_alignParentStart="true"
+            />
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/ic_highlighter"
+                       android:layout_alignTop="@id/address_tv"
+                       android:layout_alignBottom="@id/address_tv"
+                       android:layout_alignParentEnd="true"
+                       android:id="@+id/address_edit"
+                       android:paddingStart="@dimen/normal_padding"
+                       android:paddingEnd="@dimen/normal_padding"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/phone_no_layout"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:paddingStart="@dimen/a_small_padding"
+                        android:paddingEnd="@dimen/a_small_padding"
+
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/phone_no"
+                      android:fontFamily="@font/gothambook"
+                      android:padding="@dimen/a_small_padding"
+                      android:textColor="@color/light_grey"
+                      android:textSize="@dimen/small_text_size"
+                      android:id="@+id/phone_no_heading"
+            />
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/medium_text_size"
+                    android:ellipsize="end"
+                    android:id="@+id/phone_no"
+                    android:textColor="@color/light_grey"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:fontFamily="@font/gothambook"
+                    android:backgroundTint="@color/white"
+                    style="@style/Renkar.TextField.Padding"
+                    android:padding="@dimen/normal_padding"
+                    android:enabled="false"
+                    android:layout_below="@id/phone_no_heading"
+                    android:layout_toStartOf="@id/phone_no_edit"
+                    android:layout_alignParentStart="true"
+            />
+
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/ic_highlighter"
+                       android:layout_alignTop="@id/phone_no"
+                       android:layout_alignBottom="@id/phone_no"
+                       android:layout_alignParentEnd="true"
+                       android:id="@+id/phone_no_edit"
+                       android:paddingStart="@dimen/normal_padding"
+                       android:paddingEnd="@dimen/normal_padding"
+            />
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/phone_no"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:gravity="center_vertical"
+                android:id="@+id/city_dob_layout"
+        >
+
+            <RelativeLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/license_layout"
+                            android:paddingStart="@dimen/a_small_padding"
+                            android:paddingEnd="@dimen/a_small_padding"
+
+            >
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/license"
+                          android:fontFamily="@font/gothambook"
+                          android:padding="@dimen/a_small_padding"
+                          android:textColor="@color/light_grey"
+                          android:textSize="@dimen/small_text_size"
+                          android:id="@+id/license_heading"
+                />
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/medium_text_size"
+                        android:ellipsize="end"
+                        android:id="@+id/license"
+                        android:textColor="@color/light_grey"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapSentences"
+                        android:fontFamily="@font/gothambook"
+                        android:backgroundTint="@color/white"
+                        style="@style/Renkar.TextField.Padding"
+                        android:padding="@dimen/normal_padding"
+                        android:enabled="false"
+                        android:layout_below="@id/license_heading"
+                        android:layout_toStartOf="@id/license_edit"
+                        android:layout_alignParentStart="true"
+                />
+
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/ic_highlighter"
+                           android:layout_alignTop="@id/license"
+                           android:layout_alignBottom="@id/license"
+                           android:layout_alignParentEnd="true"
+                           android:id="@+id/license_edit"
+                           android:paddingStart="@dimen/normal_padding"
+                           android:paddingEnd="@dimen/normal_padding"
+                />
+            </RelativeLayout>
+
+
+            <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/small_margin"
+                            android:layout_gravity="top"
+                            android:id="@+id/city__layout"
+                            android:paddingStart="@dimen/a_small_padding"
+                            android:paddingEnd="@dimen/a_small_padding"
+
+            >
+                
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/city"
+                          android:fontFamily="@font/gothambook"
+                          android:padding="@dimen/a_small_padding"
+                          android:textColor="@color/light_grey"
+                          android:textSize="@dimen/small_text_size"
+                          android:id="@+id/city_tv"
+                />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:id="@+id/city"
+                        android:layout_below="@id/city_tv"
+                        android:spinnerMode="dialog"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                     android:background="@drawable/white_round_corner_bg"
+                     android:backgroundTint="@color/colorAccent"
+                     android:padding="@dimen/v_small_padding"
+                     android:layout_margin="@dimen/normal_margin"
+                     android:id="@+id/update"
+        >
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="UPDATE" android:textSize="@dimen/medium_text_size"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothammedium1"
+                      android:layout_gravity="center"
+            />
+
+            <ImageView android:layout_width="50dp" android:layout_height="50dp"
+                       android:background="@drawable/white_round_corner_bg"
+                       android:backgroundTint="@color/white"
+                       android:src="@drawable/ic_next"
+                       android:layout_gravity="center_vertical|end"
+            />
+
+        </FrameLayout>
+
+</LinearLayout>
+
+</ScrollView>

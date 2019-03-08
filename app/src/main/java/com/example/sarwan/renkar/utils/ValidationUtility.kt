@@ -2,20 +2,39 @@ package com.example.sarwan.renkar.utils
 
 import android.app.Activity
 import android.text.TextUtils
+import android.widget.EditText
 import android.widget.TextView
 import com.example.sarwan.renkar.R
+import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
 class ValidationUtility {
     companion object {
-        fun isNotEmptyField(vararg textView: TextView) : Boolean{
+        /*fun isNotEmptyField(vararg textView: TextView) : Boolean{
             return textView.any {
                 return if (TextUtils.isEmpty(it.text)) {
                     it.error="must not be empty"
                     !true
                 }else !false
             }
-//            return (!textView.any { TextUtils.isEmpty(it.text) })
+        }*/
+
+        fun isNotEmptyField(vararg textInputEditText: TextInputEditText) : Boolean{
+            return textInputEditText.any {
+                return if (TextUtils.isEmpty(it.text)) {
+                    it.error="must not be empty"
+                    !true
+                }else !false
+            }
+        }
+
+        fun isNotEmptyField(vararg textInputEditText: EditText?) : Boolean{
+            return textInputEditText.any {
+                return if (TextUtils.isEmpty(it?.text)) {
+                    it?.error="must not be empty"
+                    !true
+                }else !false
+            }
         }
 
         fun isValidPassword(textView: TextView) : Boolean{
@@ -31,15 +50,18 @@ class ValidationUtility {
         }
 
         fun yearRangeValidation(value: TextView): Boolean {
-            ((value.text.toString().toInt() <= Calendar.getInstance().get(Calendar.YEAR) &&
-                    (value.text.toString().toInt() >= Calendar.getInstance().get(Calendar.YEAR)-2000))).run {
-                return if (this) true
-                else {
-                    value.error = "Car model must be before or by ${Calendar.getInstance().get(Calendar.YEAR)}"
-                    false
-                }
+            return value.text.toString().isNotEmpty().apply {
+                if (this){
+                    ((value.text.toString().toInt() <= Calendar.getInstance().get(Calendar.YEAR) &&
+                            (value.text.toString().toInt() >= Calendar.getInstance().get(Calendar.YEAR)-2000))).run {
+                        if (this) true
+                        else {
+                            value.error = "Car model must be before or by ${Calendar.getInstance().get(Calendar.YEAR)}"
+                            false
+                        }
+                    }
+                }}
             }
-        }
 
         fun setErrors(activity : Activity, error: String ,vararg textView: TextView) {
             textView.forEach { it.background = activity.resources.getDrawable(R.drawable.edit_text_background_error) ; it.error = error}

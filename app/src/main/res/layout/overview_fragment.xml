@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardElevation="@dimen/small_elevation"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        android:layout_margin="@dimen/normal_margin"
+>
+    <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/normal_padding"
+                android:layout_marginBottom="@dimen/a_normal_margin"
+        >
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/icon_image"
+                    app:roundedCornerRadius="25dp"
+                    android:elevation="@dimen/small_elevation"
+                    android:layout_margin="@dimen/small_margin"
+                    app:roundAsCircle="true"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:layout_toEndOf="@id/icon_image"
+                    android:paddingStart="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    android:layout_alignBottom="@id/icon_image"
+                    android:layout_alignTop="@id/icon_image"
+                    android:gravity="end|center_vertical"
+            >
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="AJG-420" android:textSize="@dimen/sub_heading_text_size"
+                          android:fontFamily="@font/gothamultra"
+                          android:id="@+id/number"
+                />
+
+
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="TOYOTA" android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothammedium1"
+                          android:id="@+id/details"
+                />
+
+
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                              android:gravity="center_vertical"
+                              android:layout_marginTop="@dimen/small_margin"
+                >
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="Color  " android:textSize="@dimen/small_text_size"
+                              android:fontFamily="@font/gothambook"
+                    />
+
+
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="10dp"
+                                  android:orientation="horizontal"
+                                  android:layout_marginStart="@dimen/small_margin"
+                                  android:layout_marginEnd="@dimen/small_margin"
+                    >
+                        <View android:layout_width="50dp" android:layout_height="match_parent"
+                              android:background="@drawable/white_round_corner_bg"
+                              android:backgroundTint="@color/colorAccent"
+                              android:id="@+id/color"
+                        />
+
+                        <View android:layout_width="8dp" android:layout_height="8dp"
+                              android:background="@drawable/white_round_corner_bg"
+                              android:backgroundTint="@color/colorPrimaryDark"
+                              android:layout_gravity="center_vertical"
+                              android:layout_marginStart="@dimen/small_margin"
+                        />
+
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatRatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ratingBar"
+                            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:layout_marginStart="@dimen/small_margin"
+                            android:rating="5"
+                            android:visibility="gone"
+                    />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="PORSHCE" android:textSize="@dimen/sub_heading_text_size"
+                      android:fontFamily="@font/gothamultra"
+                      android:id="@+id/car_name"
+                      android:layout_below="@id/icon_image"
+            />
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="" android:textSize="@dimen/small_text_size"
+                      android:fontFamily="@font/gothambook"
+                      android:id="@+id/description"
+                      android:ellipsize="end"
+                      android:maxHeight="40dp"
+                      android:maxLines="3"
+                      android:layout_below="@id/car_name"
+            />
+
+            <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                         android:id="@+id/features_fragment"
+                         android:layout_below="@id/description"
+                         android:layout_marginTop="@dimen/normal_margin"
+            />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/features_fragment"
+                    android:background="@drawable/rounded_bg_small_radius"
+                    android:backgroundTint="@color/v_lightest_grey"
+                    android:elevation="@dimen/small_elevation"
+                    android:id="@+id/specs_layout"
+                    android:padding="@dimen/a_small_padding"
+                    android:layout_marginTop="@dimen/normal_margin"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+            >
+
+                <View android:layout_width="2dp" android:layout_height="wrap_content"
+                      android:background="@drawable/white_round_corner_bg"
+                      android:backgroundTint="@color/lightest_grey"
+                      android:layout_centerInParent="true"
+                      android:layout_alignTop="@id/first"
+                      android:layout_alignBottom="@id/second"
+                      android:layout_marginTop="@dimen/v_small_margin"
+                      android:layout_marginBottom="@dimen/v_small_margin"
+                />
+
+
+                <LinearLayout  android:orientation="horizontal"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content" android:layout_gravity="center"
+                               android:gravity="center_vertical"
+                               android:weightSum="2"
+                               android:layout_marginTop="@dimen/small_margin"
+                               android:layout_marginBottom="@dimen/small_margin"
+                               android:id="@+id/first"
+                >
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rent_a_car"
+                            android:id="@+id/fuel"
+                            android:padding="@dimen/small_padding"
+                            android:fontFamily="@font/gothambook"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/small_text_size"
+                            android:gravity="center_vertical"
+                            android:textAlignment="center"
+                    />
+
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rent_a_car"
+                            android:id="@+id/capacity"
+                            android:layout_weight="1"
+                            android:padding="@dimen/small_padding"
+                            android:fontFamily="@font/gothambook"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/small_text_size"
+                            android:gravity="center_vertical"
+                            android:textAlignment="center"
+
+                    />
+
+
+                </LinearLayout>
+
+                <LinearLayout  android:orientation="horizontal"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content" android:layout_gravity="center"
+                               android:gravity="center_vertical"
+                               android:weightSum="2"
+                               android:layout_marginTop="@dimen/small_margin"
+                               android:layout_marginBottom="@dimen/small_margin"
+                               android:layout_below="@id/first"
+                               android:id="@+id/second"
+                >
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rent_a_car"
+                            android:id="@+id/delivery"
+                            android:padding="@dimen/small_padding"
+                            android:fontFamily="@font/gothambook"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/small_text_size"
+                            android:gravity="center_vertical"
+                            android:textAlignment="center"
+                    />
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rent_a_car"
+                            android:id="@+id/instant_book"
+                            android:layout_weight="1"
+                            android:padding="@dimen/small_padding"
+                            android:fontFamily="@font/gothambook"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/small_text_size"
+                            android:gravity="center_vertical"
+                            android:textAlignment="center"
+
+                    />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/show_map"
+                      android:fontFamily="@font/gothammedium"
+                      android:textSize="@dimen/small_text_size"
+                      android:layout_marginStart="@dimen/small_margin"
+                      android:layout_gravity="center_vertical"
+                      android:textColor="@color/colorAccent"
+                      android:id="@+id/view_on_map"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginTop="@dimen/normal_margin"
+                      android:layout_below="@id/specs_layout"
+            />
+
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:id="@+id/address_layout" android:orientation="horizontal"
+                          android:layout_below="@id/view_on_map"
+                          android:layout_marginBottom="@dimen/small_margin"
+                          android:layout_alignParentStart="true">
+
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
+                           android:background="@drawable/white_round_corner_bg"
+                           android:elevation="@dimen/small_elevation"
+                           android:backgroundTint="@color/v_lightest_grey"
+                           android:src="@drawable/ic_pin"
+                           android:padding="@dimen/a_small_padding"
+                           android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:text="ADDRESS"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
+                          android:layout_marginStart="@dimen/small_margin"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/dark_grey"
+                          android:id="@+id/address_tv"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:id="@+id/owner_layout" android:orientation="horizontal"
+                          android:layout_below="@id/address_layout"
+                          android:layout_marginTop="@dimen/small_margin"
+                          android:layout_marginBottom="@dimen/small_margin"
+            >
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
+                           android:background="@drawable/white_round_corner_bg"
+                           android:elevation="@dimen/small_elevation"
+                           android:backgroundTint="@color/v_lightest_grey"
+                           android:src="@drawable/ic_boy"
+                           android:padding="@dimen/a_small_padding"
+                           android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:text="ADDRESS"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
+                          android:layout_marginStart="@dimen/small_margin"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/dark_grey"
+                          android:id="@+id/owner"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:id="@+id/reg_layout" android:orientation="horizontal"
+                          android:layout_below="@id/owner_layout"
+                          android:layout_marginTop="@dimen/small_margin"
+                          android:layout_marginBottom="@dimen/small_margin"
+            >
+                <ImageView android:layout_width="50dp" android:layout_height="50dp"
+                           android:background="@drawable/white_round_corner_bg"
+                           android:elevation="@dimen/small_elevation"
+                           android:backgroundTint="@color/v_lightest_grey"
+                           android:src="@drawable/ic_registration"
+                           android:padding="@dimen/a_small_padding"
+                           android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:text="ADDRESS"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
+                          android:layout_marginStart="@dimen/small_margin"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/dark_grey"
+                          android:id="@+id/registration"
+                />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:id="@+id/bookNow"
+            android:visibility="gone"
+            android:padding="@dimen/small_padding"
+            android:background="@color/white"
+    >
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="BOOK NOW" android:textSize="@dimen/small_text_size"
+                  android:textColor="@color/light_grey"
+                  android:fontFamily="@font/gothammedium1"
+        />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:background="@drawable/book_now_button_bg"
+                      android:backgroundTint="@color/colorAccent"
+                      android:gravity="center"
+                      android:id="@+id/price_layout"
+                      android:paddingStart="@dimen/medium_padding"
+                      android:paddingEnd="@dimen/medium_padding"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/a_small_padding"
+        >
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="150"
+                      android:textSize="@dimen/normal_text_size"
+                      android:textColor="@color/white"
+                      android:id="@+id/price"
+                      android:fontFamily="@font/gothamultra"
+                      android:gravity="center"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="PER HOUR"
+                      android:textSize="@dimen/v_v_small_text_size"
+                      android:textColor="@color/white"
+                      android:fontFamily="@font/gothammedium1"
+            />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                 android:background="@color/white" android:id="@+id/temp_layout"
+                 android:visibility="gone"
+    />
+
+</androidx.cardview.widget.CardView>

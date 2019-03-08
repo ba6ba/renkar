@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.modules.lister.listing
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.modules.details.CarDetailsActivity
 import kotlinx.android.synthetic.main.car_list_item.view.*
 import java.util.*
 
@@ -50,6 +52,15 @@ class ListerCarsAdapter(private val activity: ParentActivity,
             setCarDetails(position)
             setPrice(position)
             setRating(position)
+            clickListener(position)
+        }
+
+        private fun clickListener(position: Int) {
+            itemView.tag = position
+            itemView.setOnClickListener {
+                activity.openActivity(Intent(activity,CarDetailsActivity::class.java)
+                    .putExtra(ApplicationConstants.CAR_DETAILS_KEY, carsList[it.tag as Int]))
+            }
         }
 
         private fun setRating(position: Int) {

@@ -17,7 +17,6 @@
             android:supportsRtl="true"
             android:name="com.example.sarwan.renkar.modules.base.VApplication"
             tools:ignore="GoogleAppIndexingWarning"
-            android:largeHeap="true"
             android:theme="@style/AppTheme">
         <activity
             android:name=".modules.splash.SplashActivity"
@@ -120,6 +119,18 @@
                     android:resource="@xml/provider_paths" />
         </provider>
 
-        
+        <activity
+                android:name=".modules.details.CarDetailsActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:screenOrientation="sensorPortrait"/>
+
+        <activity
+                android:name=".modules.dashboard.DashboardActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="sensorPortrait"/>
     </application>
 </manifest>
+<!--GetWheels is a suite of apps that connects vehicle renters and owners, automates the process, from search through rent and lease payments, all in one place-->

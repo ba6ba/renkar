@@ -2,8 +2,8 @@
 <resources>
 	
 	<!--margins-->
-	<dimen name="v_small_margin">3dp</dimen>
 	<dimen name="small_margin">5dp</dimen>
+	<dimen name="v_small_margin">3dp</dimen>
 	<dimen name="a_small_margin">10dp</dimen>
 	<dimen name="normal_margin">15dp</dimen>
 	<dimen name="a_normal_margin">20dp</dimen>
@@ -17,6 +17,7 @@
 	
 	<!--padding-->
 	<dimen name="small_padding">5dp</dimen>
+	<dimen name="v_small_padding">3dp</dimen>
 	<dimen name="a_small_padding">10dp</dimen>
 	<dimen name="normal_padding">15dp</dimen>
 	<dimen name="a_normal_padding">20dp</dimen>
@@ -38,8 +39,10 @@
 	<dimen name="sub_heading_text_size">36sp</dimen>
 	<dimen name="heading_text_size">40sp</dimen>
 	<dimen name="v_small_text_size">10sp</dimen>
-	
-	
+	<dimen name="v_v_small_text_size">8sp</dimen>
+
+
+
 	<!---->
 	<dimen name="custom_shape_size">25dp</dimen>
 	<dimen name="max_elevation">15dp</dimen>
@@ -50,5 +53,8 @@
     <dimen name="card_corner_radius">30dp</dimen>
     <dimen name="dialog_width">250dp</dimen>
 	<dimen name="dialog_height">300dp</dimen>
+    <dimen name="bottom_sheet_peek_height">60dp</dimen>
+    <dimen name="dialog_width_large">325dp</dimen>
+	<dimen name="dialog_height_large">400dp</dimen>
 
 </resources>

@@ -2,8 +2,9 @@ package com.example.sarwan.renkar.firebase
 
 import com.example.sarwan.renkar.model.Cars
 import com.google.android.gms.tasks.Task
-import com.google.android.libraries.places.internal.it
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -68,6 +69,22 @@ object FirestoreQueryCenter {
 
     fun getGroupConversation(chatRoom: String): DocumentReference {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
+    }
+
+    fun getPaymentMethods(email: String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email)
+    }
+
+    fun getCars(): Query {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).limit(10)
+    }
+
+    fun getSpecifications(carNumber: String): CollectionReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS)
+    }
+
+    fun getRegistration(carNumber: String): CollectionReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.REGISTRATION)
     }
 
     fun getListerCars(email: String): Query {
@@ -155,6 +172,11 @@ object FirestoreQueryCenter {
         }
     }
 
+    fun addPaymentMethodToListerNode(email: String, map: Map<String,Any>): Task<Void> {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).
+            update(mapOf(FirebaseExtras.PAYMENT_METHOD to FieldValue.arrayUnion(map)))
+    }
+
     fun addCarToListerNode(email: String, data: Any){
         FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).update(mapOf(FirebaseExtras.CARS to arrayListOf(data)))
     }
@@ -180,6 +202,10 @@ object FirestoreQueryCenter {
     }
 
     fun addUserInDB(email: String, map : Any) : Task<Void> {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(email).set(map)
+    }
+
+    fun updateUserInDB(email: String, map : Any) : Task<Void> {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(email).set(map)
     }
 }

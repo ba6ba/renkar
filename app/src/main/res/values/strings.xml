@@ -56,4 +56,21 @@
 	<string name="must_contain_alpha_numeric">Must contain alphanumeric character and a hyphen.</string>
     <string name="car_already_listed">Car has been listed already. Do you want to update your car with these details?
     </string>
+    <string name="image">image</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+	<string name="payment_method">Payment Method</string>
+	<string name="about">About</string>
+    <string name="history">History</string>
+    <string name="master_card">Master Card</string>
+	<string name="visa">Visa</string>
+	<string name="faysal_bank">Faysal Bank</string>
+	<string name="bank_al_habib">Bank Al Habib</string>
+	<string name="ubl">United Bank Limited</string>
+    <string name="city">City</string>
+	<string name="address">Address</string>
+	<string name="profile_updated">Profile updated successfully</string>
+	<string name="license">License Number</string>
+    <string name="payment_method_added_successfully">Payment method added</string>
+    <string name="sign_out">Signout</string>
 </resources>

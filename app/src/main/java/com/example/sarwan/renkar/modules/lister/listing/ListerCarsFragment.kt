@@ -13,6 +13,7 @@ import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.utils.StringUtility
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -52,10 +53,17 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         userIconInitial()
         initializeLayoutView()
         fetchCars()
+        clickListener()
+    }
+
+    private fun clickListener() {
+        person_icon.setOnClickListener {
+
+        }
     }
 
     private fun userIconInitial() {
-        person_icon.text = StringUtility.makeInitials(pActivity?.user?.name)
+        person_icon.text = pActivity?.user?.name
     }
 
     override fun onRefresh() {
@@ -172,7 +180,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment ListerProfileFragment.
+         * @return A new instance of fragment ListerDashboardFragment.
          */
         @JvmStatic
         fun newInstance() = ListerCarsFragment()

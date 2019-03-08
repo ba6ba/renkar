@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.model.Features
@@ -15,9 +17,9 @@ import kotlinx.android.synthetic.main.days_layout.*
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ContactFragment.OnFragmentInteractionListener] interface
+ * [FeaturesFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ContactFragment.newInstance] factory method to
+ * Use the [FeaturesFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
@@ -25,6 +27,8 @@ class FeaturesFragment : Fragment(){
 
     private var adapter: FeaturesAdapter? = null
     var interactionListener : FeaturesInteractionListener ? = null
+    private lateinit var featuresList : ArrayList<Features>
+    private var switchLayout = false
 
     interface FeaturesInteractionListener{
         fun onSelect(selectedFeature: Features, flag: Action)
@@ -32,6 +36,10 @@ class FeaturesFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.apply {
+            featuresList = getSerializable(FEATURES) as ArrayList<Features>
+            switchLayout = true
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +53,38 @@ class FeaturesFragment : Fragment(){
         initializeViews()
     }
 
+
     private fun initializeViews() {
+        when(switchLayout){
+            true->{
+                horizontalView()
+            }
+            false->{
+                gridView()
+            }
+        }
+        recyclerView.adapter = adapter
+    }
+
+    private fun gridView() {
         adapter = FeaturesAdapter(
             activity,
             FeaturesData.populateFeatures(activity?.parent?.let { it }
                 ?: kotlin.run { activity as ParentActivity }),
-            this
+            this,switchLayout
         )
         recyclerView.layoutManager = GridLayoutManager(activity,2)
-        recyclerView.adapter = adapter
     }
 
-    fun initFeatures(features : ArrayList<Features>){
-        adapter?.swap(features)
+    private fun horizontalView() {
+        adapter = FeaturesAdapter(
+            activity,
+            featuresList,
+            this,switchLayout
+        )
+        recyclerView.layoutManager = LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false)
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -74,10 +100,15 @@ class FeaturesFragment : Fragment(){
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment ListerProfileFragment.
+         * @return A new instance of fragment ListerDashboardFragment.
          */
         @JvmStatic
-        fun newInstance() = FeaturesFragment()
+        fun newInstance(features: ArrayList<Features>) = FeaturesFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(FEATURES, features)
+            }
+        }
+        val FEATURES = "FEATURES"
     }
 
     enum class Action {
