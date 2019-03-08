@@ -187,7 +187,7 @@ class PaymentMethodFragment : Fragment(),
 
     private fun showBottomLayout(activity: ParentActivity, card: Cards?) {
         card?.name?.let {name->
-            setLayoutViews(activity, null, card)
+            setLayoutViews(activity, null, card, false)
         }
     }
 
@@ -195,7 +195,7 @@ class PaymentMethodFragment : Fragment(),
     private fun showBottomLayout(activity: ParentActivity, paymentMethod: PaymentMethods?) {
         paymentMethod?.name?.let {name->
             paymentMethod.apply {
-                setLayoutViews(activity, this, null)
+                setLayoutViews(activity, this, null, true)
             }
         }
     }
@@ -203,14 +203,28 @@ class PaymentMethodFragment : Fragment(),
     private fun setLayoutViews(
         activity: ParentActivity,
         paymentMethods: PaymentMethods?,
-        card: Cards?
+        card: Cards?,
+        flag: Boolean
     ) {
         pActivity?.show(bottom_view)
         card_icon_main.setImageURI(CardsList.getIcon(activity, paymentMethods?.name?:card?.name?:""))
-        card_holder.setText(paymentMethods?.holderName?:"")
-        card_number_layout.editText?.setText(paymentMethods?.number?:"")
-        expiry.setText(paymentMethods?.expiryDate?:"")
-        ccv.setText(paymentMethods?.ccv?:"")
+        card_holder.apply {
+            setText(paymentMethods?.holderName?:"")
+            isEnabled = !flag
+        }
+        card_number_layout.editText?.apply {
+            setText(paymentMethods?.number?:"")
+            isEnabled = !flag
+        }
+        expiry.apply {
+            isEnabled = !flag
+            setText(paymentMethods?.expiryDate?:"")
+        }
+        ccv.apply {
+            isEnabled = !flag
+            setText(paymentMethods?.ccv?:"")
+        }
+        confirm.visibility = if (!flag) View.VISIBLE else View.GONE
     }
 
     override fun onEmptyCardSelection() {

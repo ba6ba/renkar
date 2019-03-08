@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -319,9 +320,14 @@ abstract class ParentActivity : AppCompatActivity() {
     }
 
     fun performLogout() {
-        user = null
-        saveUserInSharedPreferences()
-        FirebaseAuth.getInstance().signOut()
-        openActivityByFinishAll(LoginActivity::class.java)
+        showProgress()
+        Handler().postDelayed({
+            user = null
+            saveUserInSharedPreferences()
+            FirebaseAuth.getInstance().signOut()
+            openActivityByFinishAll(LoginActivity::class.java)
+            hideProgress()
+        },
+            2000L)
     }
 }
