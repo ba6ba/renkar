@@ -26,6 +26,10 @@ class FirebaseExtras {
         const val SPECS = "specifications"
         const val TYPE = "type"
         const val PAYMENT_METHOD = "paymentMethod"
+        const val NEAREST_FROM = "nearestFrom"
+        const val RATING = "rating"
+
+
 
 
         /*
@@ -51,6 +55,27 @@ class FirebaseExtras {
         const val ID = "id"
         const val NUMBER = "number"
         const val CREATED_AT = "createdAt"
+
+        const val CHAT_USER_NAME = "name"
+        const val CHAT_USER_IMAGE = "image"
+        const val CHAT_USER_EMAIL = "email"
+
+        val CONVERSATION = "chat-rooms"
+        val BLOCK_USER = "block_user"
+        val CHAT = "chat-room-messages"
+        val LAST_MESSAGE= "last_message"
+        val UPDATED_TIME= "last_message_time"
+        val LAST_MESSAGE_SENDER = "last_message_sender"
+        val LAST_MESSAGE_SENDER_ID = "last_message_sender_id"
+        val STATUSES = "statuses"
+        val ONLINE = "online"
+        val ONLINE_USERS = "online"
+        val ARRAY = "array"
+        val READ  = "read"
+        val LAST_MESSAGE_TIME = "last_message_time"
+        val TITLE = "title"
+        val MESSAGES = "messages"
+
 
     }
 }

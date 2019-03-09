@@ -12,7 +12,7 @@ import android.widget.Filterable
 import android.widget.TextView
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.extras.ApplicationConstants
-import com.mobitribe.qulabro.models.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.modules.chat.chat.ChatActivity
 import kotlinx.android.synthetic.main.conversation_list_item.view.*

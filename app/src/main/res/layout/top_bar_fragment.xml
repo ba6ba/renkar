@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/renter_top_bar"
+            android:visibility="gone"
+
+    >
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search"
+                android:layout_below="@id/add_separator"
+                android:background="@drawable/white_round_corner_bg"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/a_small_padding"
+                android:layout_margin="@dimen/normal_margin"
+                android:drawableStart="@drawable/quantum_ic_search_grey600_24"
+                android:drawableTint="@color/light_grey"
+                android:drawablePadding="@dimen/small_padding"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:maxLines="2"
+                android:inputType="text"
+                android:elevation="@dimen/max_elevation"
+                android:fontFamily="@font/gothambook"
+                android:textColor="@color/black"
+                android:hint="@string/enter_you_location"
+                android:textSize="@dimen/medium_text_size"
+                android:textColorHint="@color/light_grey"
+                android:layout_toStartOf="@id/user_image_view"
+        />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/normal_margin"
+                app:roundAsCircle="true"
+                android:elevation="@dimen/max_elevation"
+                app:placeholderImage="@drawable/ic_boy"
+                android:id="@+id/user_image_view"
+        />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/lister_top_bar"
+                    android:visibility="gone"
+
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_round_corner_bg"
+                android:layout_margin="@dimen/small_margin"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingStart="@dimen/large_padding"
+                android:paddingEnd="@dimen/large_padding"
+                android:id="@+id/user_text_view"
+                android:text="Abdul Basit"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="@dimen/small_text_size"
+                android:fontFamily="@font/gothambook"
+                android:paddingTop="@dimen/a_small_padding"
+                android:paddingBottom="@dimen/a_small_padding"
+                android:textColor="@color/white"
+        />
+    </RelativeLayout>
+
+</FrameLayout>

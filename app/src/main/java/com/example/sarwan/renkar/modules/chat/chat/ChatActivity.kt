@@ -12,7 +12,7 @@ import com.google.firebase.firestore.EventListener
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.extras.ApplicationConstants
 import com.mobitribe.qulabro.models.FCMProfile
-import com.mobitribe.qulabro.models.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.base.ParentActivity
 import com.mobitribe.qulabro.utils.DateTimeUtility
 import firebase.VFirebaseQueryManager

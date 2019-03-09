@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.dialogs.BaseDialog
 import com.mobitribe.qulabro.models.chat.ChatRoom
-import com.mobitribe.qulabro.models.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.mobitribe.qulabro.utils.DateTimeUtility
 import kotlinx.android.synthetic.main.dialog_recent_message.*
 

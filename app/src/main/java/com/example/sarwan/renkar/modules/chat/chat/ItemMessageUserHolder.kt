@@ -12,15 +12,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.models.UserProfile
-import com.mobitribe.qulabro.models.chat.ChatMembers
-import com.mobitribe.qulabro.models.chat.ChatRooms
-import com.mobitribe.qulabro.models.chat.Message
+import com.example.sarwan.renkar.model.chat.ChatMembers
+import com.example.sarwan.renkar.model.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.Message
 import com.mobitribe.qulabro.utils.DateTimeUtility
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ItemMessageUserHolder(itemView: View, private val profile: UserProfile,
-                            private val activity: Context, private val listMessageAdapter: ListMessageAdapter,
+class MessageViewHolder(itemView: View, private val profile: UserProfile,
+                            private val activity: Context, private val listMessageAdapter: MessagesAdapter,
                             private val chatRoom: ChatRooms) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     var messageText: TextView
     var username: TextView? = null

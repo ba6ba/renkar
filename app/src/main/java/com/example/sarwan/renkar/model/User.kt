@@ -39,4 +39,6 @@ class User : Serializable {
     var type : String ? = null
     var address : String ? = null
     var imageUrl : String ? = ""
+
+    enum class TYPE {LISTER, RENTER}
 }

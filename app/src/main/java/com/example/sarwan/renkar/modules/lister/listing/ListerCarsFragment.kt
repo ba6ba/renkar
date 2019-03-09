@@ -11,11 +11,9 @@ import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.lister.ListerActivity
-import com.example.sarwan.renkar.utils.StringUtility
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.lister_cars_fragment.*
@@ -98,7 +96,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private fun initializeLayoutView() {
         pActivity?.let {
             lister_cars_recycler_view.layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            listerCarsAdapter = ListerCarsAdapter(it, carsList)
+            listerCarsAdapter = ListerCarsAdapter(it, carsList, User.TYPE.LISTER.ordinal)
             lister_cars_recycler_view.adapter = listerCarsAdapter
         }
     }

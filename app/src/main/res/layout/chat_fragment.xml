@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/half_rounded_bg"
+            android:backgroundTint="@color/colorAccent"
+            android:id="@+id/toolbar"
+            
+    >
+        
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chat_title"
+                android:text="Abdul Basit"
+                android:textSize="@dimen/medium_text_size"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gothammedium1"
+                android:padding="@dimen/normal_padding"
+
+                android:layout_centerInParent="true"
+                android:textAllCaps="true"
+        />
+        
+        <View android:layout_width="15dp" android:layout_height="15dp"
+              android:background="@drawable/green_status_round_corner_bg"
+              android:layout_centerInParent="true"
+              android:layout_toEndOf="@id/chat_title"
+              android:id="@+id/online"
+        />
+        
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/responses_layout"
+    >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <HorizontalScrollView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/responses_layout"
+                          android:layout_above="@id/bottom"
+    >
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Renkar.TextInputLayout.Responses"
+                android:text="@string/sorry"
+                android:id="@+id/sorry"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Renkar.TextInputLayout.Responses"
+                android:text="@string/ok"
+                android:id="@+id/ok"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Renkar.TextInputLayout.Responses"
+                android:text="@string/available_days"
+                android:id="@+id/available_days"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Renkar.TextInputLayout.Responses"
+                android:text="@string/negotiable"
+                android:id="@+id/negotiable"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Renkar.TextInputLayout.Responses"
+                android:text="@string/done"
+                android:id="@+id/done"
+        />
+
+
+    </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/normal_margin"
+            android:background="@drawable/rounded_bg_small_radius"
+            android:backgroundTint="@color/lightest_grey"
+            android:layout_height="50dp">
+
+        <EditText
+                android:id="@+id/editWriteMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/type_message_here"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/lightest_grey"
+                android:inputType="textLongMessage"
+                android:maxLines="1"
+                android:layout_toStartOf="@id/btnSend"
+                android:textColorHint="@color/light_grey"
+                android:textSize="@dimen/small_text_size"
+                android:layout_alignTop="@id/btnSend"
+                android:layout_alignBottom="@id/btnSend"
+                android:paddingStart="@dimen/a_small_padding"
+                android:paddingEnd="@dimen/a_small_padding"
+        />
+
+        <ImageView
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_send"
+                android:layout_alignParentEnd="true"
+                android:scaleType="fitCenter"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/normal_padding"
+        />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

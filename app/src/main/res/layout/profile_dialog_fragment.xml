@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   app:cardElevation="@dimen/normal_elevation"
+                                   android:layout_marginStart="@dimen/large_margin"
+                                   android:layout_marginEnd="@dimen/large_margin"
+                                   android:layout_marginTop="@dimen/large_margin"
+                                   android:layout_marginBottom="@dimen/large_margin"
+                                   app:cardMaxElevation="@dimen/max_elevation"
+                                   app:cardCornerRadius="@dimen/card_corner_radius"
+                                   app:cardBackgroundColor="@color/white"
+>
+
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:padding="@dimen/normal_padding"
+>
+    <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="100dp" android:layout_height="100dp"
+            app:roundAsCircle="true"
+            android:id="@+id/my_image"
+            app:placeholderImage="@drawable/ic_boy"
+
+    />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/my_image"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
+            android:layout_alignBottom="@id/my_image"
+            android:layout_alignTop="@id/my_image"
+            android:gravity="end|center_vertical"
+    >
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="ABDUL BASIT" android:textSize="@dimen/medium_text_size"
+                  android:fontFamily="@font/gothamultra"
+                  android:id="@+id/name"
+        />
+
+
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="malikbasit12345@gmail.com" android:textSize="@dimen/v_small_text_size"
+                  android:fontFamily="@font/gothammedium1"
+                  android:id="@+id/email"
+        />
+
+
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:layout_marginStart="@dimen/small_margin"
+                android:rating="5"
+        />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:layout_below="@id/my_image"
+                                       android:layout_marginTop="@dimen/normal_margin"
+                                       android:layout_alignParentStart="true"
+                                       app:cardBackgroundColor="@color/v_light_grey"
+                                       app:cardCornerRadius="15dp"
+                                       app:contentPadding="@dimen/small_padding"
+                                       android:elevation="@dimen/normal_elevation"
+    >
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_margin="@dimen/small_margin"
+
+    >
+
+        <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                   android:elevation="@dimen/small_elevation"
+                   android:src="@drawable/ic_chat"
+                   android:layout_margin="@dimen/small_margin"
+        />
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="@string/messages"
+                  android:fontFamily="@font/gothambook"
+                  android:textSize="@dimen/small_text_size"
+                  android:layout_marginStart="@dimen/small_margin"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/dark_grey"
+                  android:textAllCaps="true"
+                  android:id="@+id/messages"
+        />
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

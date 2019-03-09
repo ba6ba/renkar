@@ -7,9 +7,9 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import com.mobitribe.qulabro.extras.AlertDialogBuilder
 import com.mobitribe.qulabro.extras.DialogListener
-import com.mobitribe.qulabro.models.chat.Message
+import com.example.sarwan.renkar.model.chat.Message
 import com.example.sarwan.renkar.base.ParentActivity
-import com.mobitribe.qulabro.models.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.mobitribe.qulabro.utils.ModelMappingUtility
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import kotlinx.android.synthetic.main.chat_fragment.*
@@ -18,9 +18,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, EventListener<QuerySnapshot> {
+open class ChattingBaseFragment : androidx.fragment.app.Fragment(), DialogListener, EventListener<QuerySnapshot> {
 
-    protected var adapter: ListMessageAdapter? = null
+    protected var adapter: MessagesAdapter? = null
     protected var chatModel: ChatRooms? = null
     protected var linearLayoutManager: androidx.recyclerview.widget.LinearLayoutManager? = null
     protected var roomId = ""
@@ -64,7 +64,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
         // Initialize recycler view
         linearLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(pActivity)
         recyclerChat?.layoutManager = linearLayoutManager!!
-        adapter = ListMessageAdapter(pActivity, java.util.ArrayList(), pActivity.profile!!, chatModel!!)
+        adapter = MessagesAdapter(pActivity, java.util.ArrayList(), pActivity.profile!!, chatModel!!)
         recyclerChat?.adapter = adapter
 
         //Request focus
@@ -144,7 +144,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     *//*
 
     protected fun checkMembersReadStatus() {
-        FirestoreQueryCenter.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener)
+        FirestoreQueryCenter.getReadStatus(roomId).addSnapshotListener(statusDocumentListener)
     }
 
     private val statusDocumentListener = EventListener<DocumentSnapshot> { documentSnapshot, fireStoreException ->
@@ -168,7 +168,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
                 if(data[i] !is String && data[i] !is Long && data[i]!=null && i!=pActivity.profile?.id.toString()){
                     data[i]?.let {member->
                         val isRead = (member as HashMap<String, String>)[FirestoreQueryCenter.CHAT_USER_READ].toString().toBoolean()
-                        val memberId = (member)[FirestoreQueryCenter.CHAT_USER_ID].toString().toInt()
+                        val memberId = (member)[FirestoreQueryCenter.CHAT_USER_EMAIL].toString().toInt()
                         isRead.let { read ->
                             if (isRead)
                                 readStatus.add(memberId)
@@ -218,7 +218,7 @@ open class ChatBaseFragment : androidx.fragment.app.Fragment(), DialogListener, 
     }
 
     private fun removeMessageHasBeenReadByMemberStatus(){
-        FirestoreQueryCenter.getMembersReadStatus(roomId).addSnapshotListener(statusDocumentListener).remove()
+        FirestoreQueryCenter.getReadStatus(roomId).addSnapshotListener(statusDocumentListener).remove()
     }
 
     private val myStatusListener = EventListener<DocumentSnapshot> { documentSnapshot, fireStoreException ->

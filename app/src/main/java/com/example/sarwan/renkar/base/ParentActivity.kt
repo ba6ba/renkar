@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.ProgressLoader
 import com.example.sarwan.renkar.extras.SharedPreferences
+import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.authentication.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -321,6 +322,7 @@ abstract class ParentActivity : AppCompatActivity() {
 
     fun performLogout() {
         showProgress()
+        goOffline()
         Handler().postDelayed({
             user = null
             saveUserInSharedPreferences()
@@ -329,5 +331,17 @@ abstract class ParentActivity : AppCompatActivity() {
             hideProgress()
         },
             2000L)
+    }
+
+    fun goOnline() {
+        user?.email?.let {
+            FirestoreQueryCenter.setOnline(it)
+        }
+    }
+
+    fun goOffline() {
+        user?.email?.let {
+            FirestoreQueryCenter.setOffline(it)
+        }
     }
 }

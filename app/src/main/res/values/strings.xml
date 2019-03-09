@@ -73,4 +73,16 @@
 	<string name="license">License Number</string>
     <string name="payment_method_added_successfully">Payment method added</string>
     <string name="sign_out">Signout</string>
+    <string name="enter_you_location">Enter you location</string>
+    <string name="messages">Messages</string>
+    <string name="type_message_here">Type your message here....</string>
+	<string name="sorry">Sorry</string>
+	<string name="ok">OK</string>
+	<string name="available_days">Available days?</string>
+	<string name="negotiable">Price negotiable?</string>
+	<string name="done">Done</string>
+    <string name="done_chat_msg">Renter is ready to book your car. Do you want to make this booking?</string>
+	<string name="ok_chat_msg">Are you sure to book this car?</string>
+	<string name="ok_end_msg">End conversation</string>
+	<string name="done_end_msg">Cancel</string>
 </resources>

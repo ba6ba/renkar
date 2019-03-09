@@ -27,10 +27,7 @@ import com.example.sarwan.renkar.modules.days.DayFragment
 import com.example.sarwan.renkar.modules.features.FeaturesFragment
 import com.example.sarwan.renkar.network.NetworkConstants
 import com.example.sarwan.renkar.network.RestClient
-import com.example.sarwan.renkar.utils.DateTimeUtility
-import com.example.sarwan.renkar.utils.LocationUtility
-import com.example.sarwan.renkar.utils.PriceUtility
-import com.example.sarwan.renkar.utils.ValidationUtility
+import com.example.sarwan.renkar.utils.*
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.android.material.chip.Chip
 import com.skydoves.colorpickerpreference.ColorEnvelope
@@ -362,6 +359,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
 
     private fun makeNearestKms(lat: Double, lon: Double) {
         car?.nearestFrom = LocationUtility.getNearest(lat,lon)
+        car?.rating = car?.price?.let { RatingUtililty.getDefaultRating(it) }
         checkForCarAvailability()
 
     }

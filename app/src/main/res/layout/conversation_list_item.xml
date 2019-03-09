@@ -1,0 +1,93 @@
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/v_small_margin"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 android:id="@+id/card_view"
+    >
+        
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="@dimen/small_elevation"
+            app:contentPadding="@dimen/small_padding"
+            android:layout_margin="@dimen/small_margin"
+            android:id="@+id/card"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="A"
+                      android:fontFamily="@font/gothamultra"
+                      android:textSize="@dimen/large_text_size"
+                      android:textColor="@color/grey"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/a_small_padding"
+                      android:paddingStart="@dimen/normal_padding"
+                      android:paddingEnd="@dimen/normal_padding"
+                      android:layout_centerVertical="true"
+                      android:id="@+id/icon"
+            />
+
+            <View android:layout_width="1dp" android:layout_height="wrap_content"
+                  android:background="@color/light_grey"
+                  android:layout_toEndOf="@id/icon"
+                  android:layout_alignTop="@id/icon"
+                  android:layout_alignBottom="@id/icon"
+                  android:layout_marginTop="@dimen/small_margin"
+                  android:layout_centerVertical="true"
+                  android:id="@+id/separator"
+                  android:layout_marginBottom="@dimen/small_margin"
+            />
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="Abdul Basit"
+                      android:fontFamily="@font/gothammedium"
+                      android:textSize="@dimen/medium_text_size"
+                      android:textColor="@color/light_grey"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/small_padding"
+                      android:paddingStart="@dimen/normal_padding"
+                      android:layout_toEndOf="@id/separator"
+                      android:paddingEnd="@dimen/normal_padding"
+                      android:id="@+id/contact_name"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="Hey, how are you?"
+                      android:fontFamily="@font/gothammedium"
+                      android:textSize="@dimen/small_text_size"
+                      android:textColor="@color/light_grey"
+                      android:paddingBottom="@dimen/a_small_padding"
+                      android:paddingStart="@dimen/normal_padding"
+                      android:layout_toEndOf="@id/separator"
+                      android:paddingEnd="@dimen/normal_padding"
+                      android:id="@+id/message"
+                      android:layout_below="@id/contact_name"
+            />
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+        
+    </FrameLayout>
+    
+    <View android:layout_width="40dp" android:layout_height="wrap_content"
+          android:layout_alignEnd="@id/card_view"
+          android:layout_alignBottom="@id/card_view"
+          android:layout_marginTop="@dimen/medium_margin"
+          android:background="@drawable/white_round_corner_bg"
+          android:backgroundTint="@color/colorAccent"
+          android:id="@+id/read"
+    />
+    
+</RelativeLayout>
+

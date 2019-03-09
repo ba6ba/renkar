@@ -27,7 +27,7 @@ class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityStarted(activity: Activity?) {
     if (numStarted == 0) {
       // app went to foreground
-      //(activity as? ParentActivity)?.goOnline()
+      (activity as? ParentActivity)?.goOnline()
     }
     numStarted++
   }
@@ -35,7 +35,7 @@ class AppLifecycleTracker : Application.ActivityLifecycleCallbacks  {
   override fun onActivityStopped(activity: Activity?) {
     numStarted--
     if (numStarted == 0) {
-      //(activity as? ParentActivity)?.goOffline()
+      (activity as? ParentActivity)?.goOffline()
     }
   }
 

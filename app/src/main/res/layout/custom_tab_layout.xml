@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <HorizontalScrollView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="@dimen/small_padding"
+    >
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+        >
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/popular"
+                      android:text="Popular"
+                      android:paddingStart="@dimen/normal_padding"
+                      android:paddingEnd="@dimen/normal_padding"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/a_small_padding"
+                      android:textSize="@dimen/large_text_size"
+                      android:fontFamily="@font/gothambold"
+                      android:textColor="@color/black"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/nearby_you"
+                      android:text="Nearby You"
+                      android:paddingStart="@dimen/normal_padding"
+                      android:paddingEnd="@dimen/normal_padding"
+                      android:paddingTop="@dimen/a_small_padding"
+                      android:paddingBottom="@dimen/a_small_padding"
+                      android:textSize="@dimen/medium_text_size"
+                      android:fontFamily="@font/gothambold"
+                      android:textColor="@color/light_grey"
+            />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 android:id="@+id/fragment_container_tabs"
+    >
+
+
+    </FrameLayout>
+
+</LinearLayout>

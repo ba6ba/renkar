@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   app:cardElevation="@dimen/normal_elevation"
+                                   android:layout_marginStart="@dimen/large_margin"
+                                   android:layout_marginEnd="@dimen/large_margin"
+                                   android:layout_marginTop="@dimen/large_margin"
+                                   android:layout_marginBottom="@dimen/large_margin"
+                                   app:cardMaxElevation="@dimen/max_elevation"
+                                   app:cardCornerRadius="@dimen/card_corner_radius"
+                                   app:cardBackgroundColor="@color/white"
+>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+    >
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/chat_option_text" android:textSize="@dimen/medium_text_size"
+                  android:fontFamily="@font/gothambook"
+                  android:textColor="@color/colorAccent"
+                  android:padding="@dimen/normal_padding"
+                  android:text="@string/fab_transformation_scrim_behavior"
+                  android:textAlignment="center"
+                  android:layout_marginTop="@dimen/small_margin"
+                  android:layout_marginBottom="@dimen/small_margin"
+                  android:layout_alignParentTop="true"
+        />
+
+        <ImageView android:layout_width="150dp" android:layout_height="wrap_content"
+                   android:layout_centerInParent="true"
+                   android:src="@drawable/ic_chat"
+                   android:layout_above="@id/options_layout"
+                   android:id="@+id/chat"
+                   android:layout_marginTop="@dimen/small_margin"
+                   android:layout_marginBottom="@dimen/small_margin"
+                   android:layout_below="@id/chat_option_text"
+                   android:visibility="gone"
+        />
+
+        <ImageView android:layout_width="150dp" android:layout_height="wrap_content"
+                   android:layout_centerInParent="true"
+                   android:src="@drawable/car_illustrative"
+                   android:layout_above="@id/options_layout"
+                   android:id="@+id/car"
+                   android:layout_marginTop="@dimen/small_margin"
+                   android:layout_marginBottom="@dimen/small_margin"
+                   android:layout_below="@id/chat_option_text"
+                   android:visibility="gone"
+        />
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:id="@+id/options_layout"
+                android:layout_alignParentBottom="true"
+        >
+
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                       android:layout_weight="1" android:text="End conversation"
+                       android:padding="@dimen/normal_padding" android:id="@+id/end"
+                      android:layout_margin="@dimen/a_small_margin"
+                      style="@style/Renkar.TextInputLayout.Responses"
+                      android:backgroundTint="@color/colorPrimaryDark"
+            />
+
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="1" android:text="Book Car"
+                      android:padding="@dimen/normal_padding" android:id="@+id/book"
+                      android:layout_margin="@dimen/a_small_margin"
+                      style="@style/Renkar.TextInputLayout.Responses"
+            />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

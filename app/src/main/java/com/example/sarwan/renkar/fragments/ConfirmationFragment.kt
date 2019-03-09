@@ -9,23 +9,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.base.ParentActivity
 import kotlinx.android.synthetic.main.confirmation_dialog.*
+import kotlinx.android.synthetic.main.confirmation_dialog_chat.*
 
 class ConfirmationFragment : DialogFragment() {
 
     val CONFIRMATION_DIALOG_TYPE = "CONFIRMATION_DIALOG_TYPE"
     var type : Int ? = null
     var listener : ConfirmationFragmentCallBack<Any> ? = null
+    private lateinit var pActivity :ParentActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pActivity = activity as ParentActivity
         arguments?.let {
             type = it.getInt(CONFIRMATION_DIALOG_TYPE)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.confirmation_dialog, container, false)
+        return when(type){
+            ConfirmationType.CAR_UPDATE.ordinal->{
+                inflater.inflate(R.layout.confirmation_dialog, container, false)
+            }
+            else -> inflater.inflate(R.layout.confirmation_dialog_chat, container, false)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,14 +44,40 @@ class ConfirmationFragment : DialogFragment() {
         dialog?.setCanceledOnTouchOutside(false)
 
         updateScreen()
+        clickListeners()
+    }
 
-        allow.setOnClickListener {
-            takeAppropriateAllowAction()
-        }
+    private fun clickListeners() {
+        when(type){
+            ConfirmationType.CAR_UPDATE.ordinal->{
+                allow.setOnClickListener {
+                    takeAppropriateAllowAction()
+                }
 
-        deny.setOnClickListener {
-            takeAppropriateDenyAction()
+                deny.setOnClickListener {
+                    takeAppropriateDenyAction()
+                }
+            }
+            else->{
+                end.setOnClickListener {
+                    takeEndAction()
+                }
+
+                book.setOnClickListener {
+                    takeBookAction()
+                }
+            }
         }
+    }
+
+    private fun takeBookAction() {
+        listener?.onAction(type as Any, ConfirmationOption.BOOK.ordinal)
+        dismissFragment(ConfirmationOption.BOOK.ordinal)
+    }
+
+    private fun takeEndAction() {
+        listener?.onAction(type as Any, ConfirmationOption.END.ordinal)
+        dismissFragment(ConfirmationOption.END.ordinal)
     }
 
     override fun onResume() {
@@ -72,7 +107,25 @@ class ConfirmationFragment : DialogFragment() {
                 carUpdateScreen()
             }
             ConfirmationType.DATE_TIME.ordinal ->{}
+            ConfirmationType.OK.ordinal ->{
+                okUpdateScreen()
+            }
+            ConfirmationType.DONE.ordinal ->{
+                doneUpdateScreen()
+            }
         }
+    }
+
+    private fun doneUpdateScreen() {
+        chat_option_text.text = getString(R.string.done_chat_msg)
+        end.text = getString(R.string.done_end_msg)
+        pActivity.show(car)
+    }
+
+    private fun okUpdateScreen() {
+        chat_option_text.text = getString(R.string.ok_chat_msg)
+        end.text = getString(R.string.ok_end_msg)
+        pActivity.show(chat)
     }
 
     private fun carUpdateScreen() {
@@ -96,13 +149,12 @@ class ConfirmationFragment : DialogFragment() {
 
     private fun dismissFragment(ordinal: Int) {
         when(ordinal){
-            ConfirmationOption.ALLOW.ordinal->{
-                dismissAllowingStateLoss()
-            }
             ConfirmationOption.DENY.ordinal->{
                 dismissAllowingStateLoss()
                 activity?.finish()
             }
+            else->{
+                dismissAllowingStateLoss() }
         }
     }
 
@@ -128,7 +180,7 @@ class ConfirmationFragment : DialogFragment() {
             }
         }
 
-        enum class ConfirmationType {CAR_UPDATE, DATE_TIME}
-        enum class ConfirmationOption {ALLOW, DENY}
+        enum class ConfirmationType {CAR_UPDATE, DATE_TIME, OK, DONE}
+        enum class ConfirmationOption {ALLOW, DENY, BOOK, END}
     }
 }

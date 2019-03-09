@@ -1,9 +1,10 @@
-package com.example.sarwan.renkar.modules.base
+package com.example.sarwan.renkar.base
 
 import android.app.Application
+import com.example.sarwan.renkar.modules.base.AppLifecycleTracker
 import com.facebook.drawee.backends.pipeline.Fresco
 
-class VApplication : Application() {
+class RenkarApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initializeFresco()

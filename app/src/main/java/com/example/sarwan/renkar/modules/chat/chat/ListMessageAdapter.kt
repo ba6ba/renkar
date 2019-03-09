@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.models.UserProfile
-import com.mobitribe.qulabro.models.chat.ChatRooms
-import com.mobitribe.qulabro.models.chat.Message
+import com.example.sarwan.renkar.model.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.Message
 
 import java.util.ArrayList
 
-class ListMessageAdapter(private val context: Context, private val messages: ArrayList<Message>,
-                         private val profile: UserProfile, private val chatRooms: ChatRooms) : androidx.recyclerview.widget.RecyclerView.Adapter<ItemMessageUserHolder>() {
+class MessagesAdapter(private val context: Context, private val messages: ArrayList<Message>,
+                         private val profile: UserProfile, private val chatRooms: ChatRooms) : androidx.recyclerview.widget.RecyclerView.Adapter<MessageViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMessageUserHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val view: View
         if (viewType == ChatFragment.VIEW_TYPE_USER_MESSAGE) {
             view = LayoutInflater.from(context).inflate(R.layout.message_right, parent, false)
@@ -24,10 +24,10 @@ class ListMessageAdapter(private val context: Context, private val messages: Arr
             view = LayoutInflater.from(context).inflate(R.layout.message_left, parent, false)
 
         }
-        return ItemMessageUserHolder(view, profile, context,this,chatRooms)
+        return MessageViewHolder(view, profile, context,this,chatRooms)
     }
 
-    override fun onBindViewHolder(holder: ItemMessageUserHolder, position: Int) {
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         holder.loadData(messages[position], position)
     }
 

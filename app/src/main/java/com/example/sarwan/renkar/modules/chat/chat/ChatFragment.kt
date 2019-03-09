@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.*
 import com.mobitribe.qulabro.R
 import com.mobitribe.qulabro.models.FCMMessage
-import com.mobitribe.qulabro.models.chat.ChatRooms
-import com.mobitribe.qulabro.models.chat.Message
+import com.example.sarwan.renkar.model.chat.ChatRooms
+import com.example.sarwan.renkar.model.chat.Message
 import com.mobitribe.qulabro.models.response.GeneralResponse
 import com.example.sarwan.renkar.base.ParentActivity.Companion.currentChatUserId
 import com.mobitribe.qulabro.network.RestClient
@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ChatFragment : ChatBaseFragment(), View.OnClickListener {
+class ChatFragment : ChattingBaseFragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

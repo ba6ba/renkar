@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                                                     android:background="@color/white"
+                android:layout_height="match_parent"
+>
 
-</LinearLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
+
+    >
+
+        <fragment android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/top_bar_fragment"
+                  class="com.example.sarwan.renkar.modules.renter.CustomTabLayoutFragment"
+        />
+
+        <fragment android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:layout_below="@id/top_bar_fragment"
+                  android:id="@+id/customTabFragment"
+                  class="com.example.sarwan.renkar.modules.renter.CustomTabLayoutFragment"
+        />
+
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+            style="@style/BottomSheetDialogTheme"
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+            app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/max_elevation">
+
+        <fragment android:layout_width="match_parent" android:layout_height="match_parent"
+                  class="com.example.sarwan.renkar.modules.dashboard.ListerDashboardFragment"
+                  android:id="@+id/dashboardFragment"
+        />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

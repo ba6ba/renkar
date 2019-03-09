@@ -1,28 +1,36 @@
 package com.example.sarwan.renkar.modules.lister.listing
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
-import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.details.CarDetailsActivity
 import kotlinx.android.synthetic.main.car_list_item.view.*
 import java.util.*
 
-class ListerCarsAdapter(private val activity: ParentActivity,
-                          internal var carsList: ArrayList<Cars>)
+class ListerCarsAdapter(
+    private val activity: ParentActivity,
+    internal var carsList: ArrayList<Cars>,
+    private val type: Int
+)
     : androidx.recyclerview.widget.RecyclerView.Adapter<ListerCarsAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v  = LayoutInflater.from(parent.context).inflate(R.layout.car_list_item, null)
-        return ViewHolder(v)
+        return when(type){
+            User.TYPE.RENTER.ordinal->{
+                ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.renter_car_list_item, null))
+            }
+            User.TYPE.LISTER.ordinal->{
+                ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.car_list_item, null))
+            }
+            else-> ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.car_list_item, null))
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,9 +55,11 @@ class ListerCarsAdapter(private val activity: ParentActivity,
     inner class ViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         fun loadData(position: Int){
-            setListedByDetails(position)
+            if (type == User.TYPE.LISTER.ordinal){
+                setCarDetails(position)
+                setListedByDetails(position)
+            }
             setCoverImage(position)
-            setCarDetails(position)
             setPrice(position)
             setRating(position)
             clickListener(position)
