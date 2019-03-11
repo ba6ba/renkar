@@ -44,7 +44,7 @@
                    android:padding="@dimen/small_padding"
                    android:layout_marginEnd="@dimen/small_margin"
                    android:layout_marginStart="@dimen/small_margin"
-                   android:visibility="visible"
+                   android:visibility="gone"
         />
 
     </LinearLayout>

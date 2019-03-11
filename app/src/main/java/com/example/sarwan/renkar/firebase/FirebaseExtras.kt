@@ -3,8 +3,11 @@ package com.example.sarwan.renkar.firebase
 class FirebaseExtras {
     companion object {
         const val UPLOAD_FAILURE : Int = 901
+        const val UPDATED_FAILURE : Int = 902
         const val CAR_EXISTS : Int = 990
         const val UPLOAD_SUCCESS :Int = 910
+        const val UPDATED_SUCESS :Int = 911
+        const val SET_SUCCESS :Int = 912
 
         enum class FLAG {UPDATE, SET, REMOVE}
 

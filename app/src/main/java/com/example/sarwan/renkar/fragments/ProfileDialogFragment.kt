@@ -53,7 +53,7 @@ class ProfileDialogFragment : DialogFragment() {
 
         }
 
-        messages.setOnClickListener {
+        messages_cell.setOnClickListener {
             dismissFragment()
         }
     }

@@ -142,7 +142,7 @@ class ModelMappingUtility {
         fun createHistory(
             chatRoom: ChatRooms?,
             user: User?,
-            status : History.TYPES
+            status : History.STATUS
         ): History {
             return History().apply {
                 chatRoom?.let {

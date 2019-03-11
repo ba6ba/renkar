@@ -14,7 +14,10 @@ import kotlinx.android.synthetic.main.opponent_message_layout.view.*
 import java.util.ArrayList
 
 class MessagesAdapter(private val context: Context, private val messages: ArrayList<Message>,
-                      private val user: User, private val chatRooms: ChatRooms) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
+                      private val user: User, private val chatRooms: ChatRooms,
+                      private val listener : MessagesAdapterCallBack) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
+
+    private var sizeOfList : Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return when(viewType){
@@ -27,7 +30,7 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        holder.loadData(messages[position])
+        holder.loadData(position)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -39,6 +42,7 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
         if (messageArrayList != null){
             messages.clear()
             messages.addAll(messageArrayList)
+            setSizeOfList(messages.size)
             messages.sortBy { it.timestamp }
             notifyDataSetChanged()
         }
@@ -47,6 +51,10 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
     fun addItem(message: Message) {
         messages.add(itemCount, message)
         notifyDataSetChanged()
+    }
+
+    private fun setSizeOfList(size : Int){
+        sizeOfList = size
     }
 
     override fun getItemCount(): Int {
@@ -61,9 +69,12 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
 
     inner class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun loadData(message: Message) {
-            setReadStatus(message)
-            setMessage(message)
+        fun loadData(position: Int) {
+            setMessage(messages[position])
+            if (position == sizeOfList -1){
+                listener.onLastMessage(messages[position],position)
+                setReadStatus(messages[position])
+            }
         }
 
         private fun setMessage(message: Message) {
@@ -71,10 +82,13 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
         }
 
         private fun setReadStatus(message: Message) {
-            if (message.timestamp==messages[messages.size-1].timestamp)
-                itemView.read_message.visibility = if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true) View.VISIBLE else View.GONE
-
-            itemView.read_message.visibility = if (message.sender_email==user.email) View.GONE else View.VISIBLE
+            itemView.read_message.visibility =
+                    if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true
+                        && message.sender_email!=user.email) View.VISIBLE else View.GONE
         }
+    }
+
+    interface MessagesAdapterCallBack{
+        fun onLastMessage(message: Message, position: Int)
     }
 }

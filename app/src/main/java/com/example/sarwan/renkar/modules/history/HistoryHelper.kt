@@ -6,7 +6,7 @@ import com.example.sarwan.renkar.model.History
 import com.google.firebase.firestore.*
 
 object HistoryHelper {
-    fun create(data : History){
+    fun create(data : History, callBack: FirebaseExtras.Companion.PutObjectCallBack ? =null){
         val ref = FirebaseFirestore.getInstance().collection(FirebaseExtras.HISTORY).document(data.name.toString())
         FirebaseFirestore.getInstance().runTransaction {
             if (it.get(ref).exists()){
@@ -18,6 +18,7 @@ object HistoryHelper {
                 ref.update(mapOf(FirebaseExtras.ID to data.id))
                 ref.update(mapOf(FirebaseExtras.DETAILS to data.details.toString()))
                 ref.update(mapOf(FirebaseExtras.STATUS to data.status.toString()))
+                callBack?.onPutSuccess(FirebaseExtras.UPDATED_SUCESS)
             }else{
                 ref.set(mapOf(FirebaseExtras.LISTED_BY to data.listedBy))
                 ref.set(mapOf(FirebaseExtras.RENTED_BY to data.rentedBy))
@@ -27,6 +28,7 @@ object HistoryHelper {
                 ref.set(mapOf(FirebaseExtras.ID to data.id))
                 ref.set(mapOf(FirebaseExtras.DETAILS to data.details.toString()))
                 ref.set(mapOf(FirebaseExtras.STATUS to data.status.toString()))
+                callBack?.onPutSuccess(FirebaseExtras.SET_SUCCESS)
             }
         }
     }

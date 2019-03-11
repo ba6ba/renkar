@@ -87,8 +87,8 @@
 	<string name="done_end_msg">Cancel</string>
     <string name="rides">Rides</string>
 	<string name="notification">Notifications</string>
-    <string name="book_car">Book\nCar</string>
-	<string name="end_conversation">End\nConversation</string>
+    <string name="book_car">Book Car</string>
+	<string name="end_conversation">End Conversation</string>
 	<string name="cancel">Cancel</string>
 	<string name="ok_msg">Request to book a car has been sent to lister, you can checkout lister response in History
 		tab
@@ -103,4 +103,12 @@
 	<string name="below_are_days">You can rent this car on these days only</string>
 	<string name="rent_from">Rent from</string>
 	<string name="rent_to">Rent to</string>
+    <string name="request_approved_message">Your request to book car has bee approved. Click on OK to complete further
+        process to rent a car.
+    </string>
+	<string name="request_declined_message">You declined to book your car. You can book your car by clicking OK.
+	</string>
+	<string name="request_pending_message">Request to book your car is on pending, click on OK to complete this request
+		and book you car instantly.
+	</string>
 </resources>

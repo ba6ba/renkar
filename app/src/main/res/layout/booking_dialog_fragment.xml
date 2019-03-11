@@ -21,7 +21,7 @@
     >
 
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/chat_option_text" android:textSize="@dimen/medium_text_size"
+                  android:id="@+id/message" android:textSize="@dimen/medium_text_size"
                   android:fontFamily="@font/gothambook"
                   android:textColor="@color/colorAccent"
                   android:padding="@dimen/normal_padding"
@@ -32,26 +32,14 @@
                   android:layout_alignParentTop="true"
         />
 
-        <ImageView android:layout_width="150dp" android:layout_height="wrap_content"
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
                    android:layout_centerInParent="true"
-                   android:src="@drawable/ic_chat"
+                   android:src="@drawable/ic_website"
                    android:layout_above="@id/options_layout"
-                   android:id="@+id/chat"
+                   android:id="@+id/image"
                    android:layout_marginTop="@dimen/small_margin"
                    android:layout_marginBottom="@dimen/small_margin"
-                   android:layout_below="@id/chat_option_text"
-                   android:visibility="gone"
-        />
-
-        <ImageView android:layout_width="150dp" android:layout_height="wrap_content"
-                   android:layout_centerInParent="true"
-                   android:src="@drawable/car_illustrative_1"
-                   android:layout_above="@id/options_layout"
-                   android:id="@+id/car"
-                   android:layout_marginTop="@dimen/small_margin"
-                   android:layout_marginBottom="@dimen/small_margin"
-                   android:layout_below="@id/chat_option_text"
-                   android:visibility="gone"
+                   android:layout_below="@id/message"
         />
 
 
@@ -60,48 +48,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:visibility="gone"
-                android:id="@+id/renter_options_layout"
+                android:id="@+id/options_layout"
                 android:layout_alignParentBottom="true"
         >
 
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                      android:layout_weight="1" android:text="@string/cancel" android:id="@+id/renter_end"
-                      android:padding="@dimen/normal_padding"
+                       android:layout_weight="1" android:text="@string/cancel"
+                       android:padding="@dimen/normal_padding" android:id="@+id/reject"
                       style="@style/Renkar.TextInputLayout.Responses"
                       android:backgroundTint="@color/colorPrimaryDark"
             />
 
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                      android:layout_weight="1" android:text="@string/book_car" android:id="@+id/renter_book"
+                       android:layout_weight="1" android:text="@string/ok"
                       style="@style/Renkar.TextInputLayout.Responses"
-                      android:padding="@dimen/normal_padding"
-            />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:visibility="gone"
-                android:id="@+id/lister_options_layout"
-                android:layout_alignParentBottom="true"
-        >
-
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                      android:layout_weight="1" android:text="@string/cancel" android:id="@+id/lister_end"
-                      android:padding="@dimen/normal_padding"
-                      style="@style/Renkar.TextInputLayout.Responses"
-                      android:backgroundTint="@color/colorPrimaryDark"
-            />
-
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                      android:layout_weight="1" android:text="@string/book_car" android:id="@+id/lister_book"
-                      style="@style/Renkar.TextInputLayout.Responses"
-                      android:padding="@dimen/normal_padding"
+                       android:padding="@dimen/normal_padding" android:id="@+id/accept"
             />
 
         </LinearLayout>

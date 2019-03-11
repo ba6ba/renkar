@@ -10,12 +10,12 @@ import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.modules.booking.BookingActivity
 import com.example.sarwan.renkar.utils.ModelMappingUtility
-import com.example.sarwan.renkar.utils.RandomUtility
 import kotlinx.android.synthetic.main.history_list_item.view.*
 import java.util.*
 
 class HistoryAdapter(private val activity: ParentActivity,
-                     internal var historyList: ArrayList<History>)
+                     internal var historyList: ArrayList<History>,
+                     private val listener : HistoryAdapterCallBack)
     : androidx.recyclerview.widget.RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
 
@@ -69,19 +69,19 @@ class HistoryAdapter(private val activity: ParentActivity,
         private fun clickListener(position: Int) {
             itemView.tag = position
             itemView.setOnClickListener {
-                activity.openActivity(Intent(activity, BookingActivity::class.java).
-                putExtra(ApplicationConstants.BOOKING_OBJECT,
-                    historyList[position].apply {
-                        ModelMappingUtility.makeBookingObject(car_number, listedBy,rentedBy, period)
-                    }
-                ))
+                listener.onHistoryItemClick(historyList[position])
             }
         }
     }
 
-    val map = hashMapOf(History.TYPES.ON_BOOKING.name to R.drawable.green_status_round_corner_bg,
-        History.TYPES.REQUEST_PENDING.name to R.drawable.yellow_status_round_corner_bg,
-        History.TYPES.REQUEST_DECLINED.name to R.drawable.red_status_round_corner_bg,
-        History.TYPES.BOOKING_DONE.name to R.drawable.blue_status_round_corner_bg)
+    interface HistoryAdapterCallBack{
+        fun onHistoryItemClick(history: History)
+    }
+
+    val map = hashMapOf(History.STATUS.ON_BOOKING.name to R.drawable.green_status_round_corner_bg,
+        History.STATUS.REQUEST_APPROVED.name to R.drawable.grey_status_round_corner_bg,
+        History.STATUS.REQUEST_PENDING.name to R.drawable.yellow_status_round_corner_bg,
+        History.STATUS.REQUEST_DECLINED.name to R.drawable.red_status_round_corner_bg,
+        History.STATUS.BOOKING_DONE.name to R.drawable.blue_status_round_corner_bg)
 
 }

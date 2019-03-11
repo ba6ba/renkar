@@ -16,7 +16,6 @@ import com.example.sarwan.renkar.fragments.ConfirmationFragment
 import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.model.chat.Message
-import com.example.sarwan.renkar.modules.booking.BookingActivity
 import com.example.sarwan.renkar.modules.history.HistoryHelper
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.modules.renter.PeriodFragment
@@ -28,7 +27,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
-    ConfirmationFragment.ConfirmationFragmentCallBack<Any>, PeriodFragment.PeriodFragmentCallBack{
+    ConfirmationFragment.ConfirmationFragmentCallBack<Any>, PeriodFragment.PeriodFragmentCallBack, MessagesAdapter.MessagesAdapterCallBack{
 
     protected var adapter: MessagesAdapter? = null
     protected var chatRoom: ChatRooms ? = null
@@ -76,7 +75,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
         recyclerChat?.layoutManager = LinearLayoutManager(pActivity)
         pActivity.user?.let {
             chatRoom?.let {chatRoom->
-                adapter = MessagesAdapter(pActivity, java.util.ArrayList(), it, chatRoom)
+                adapter = MessagesAdapter(pActivity, java.util.ArrayList(), it, chatRoom, this)
                 recyclerChat?.adapter = adapter
             }
         }
@@ -111,16 +110,10 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                 checkReceivingMessageType(list.first())
             }
         }
-        /*adapter?.let {adapter->
-            if (it.size() > adapter.itemCount) {
-                val list = it.toObjects(Message::class.java)
-                list.sortByDescending { it.timestamp }
-                if (list.first().sender_email!=pActivity.user?.email){
-                    adapter.addItem(list.first())
-                    recyclerChat?.scrollToPosition(adapter.itemCount - 1)
-                }
-            }
-        }*/
+    }
+
+    override fun onLastMessage(message: Message, position: Int) {
+        checkReceivingMessageType(message)
     }
 
     private fun checkReceivingMessageType(message: Message) {
@@ -306,8 +299,9 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
         ConfirmationFragment.newInstance(type.ordinal).run {
             confirmationFragment = this
             confirmationFragment?.initListener(this@ChattingBaseFragment)
-            if (!isAdded)
-                show(createManager(), type.name)
+            if (!isAdded){
+                createManager()?.let { manager->confirmationFragment?.show(manager, type.name) }
+            }
         }
     }
 
@@ -316,7 +310,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
             periodFragment = this
             periodFragment?.initListener(this@ChattingBaseFragment)
             if (!isAdded)
-                show(createManager(), periodFragment.toString())
+                createManager()?.let { show(it, periodFragment.toString()) }
         }
     }
 
@@ -324,17 +318,16 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
         chatRoom?.timePeriod = period
     }
 
-    private fun createManager(): FragmentManager {
-        childFragmentManager.beginTransaction().run {
-            run {
-                if ((childFragmentManager.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.OK.name) != null))
-                    childFragmentManager.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.OK.name)?.let { this.remove(it) }
-                else if ((childFragmentManager.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.DONE.name) != null))
-                    childFragmentManager.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.DONE.name)?.let { this.remove(it) }
-                addToBackStack(null)
-            }
+    private fun createManager(): FragmentManager? {
+         return fragmentManager?.beginTransaction().run {
+                    fragmentManager?.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.OK.name)?.let { this?.remove(it) }
+                    fragmentManager?.findFragmentByTag(ConfirmationFragment.Companion.ConfirmationType.DONE.name)?.let { this?.remove(it) }
+                /*run {
+
+//                    addToBackStack(null)
+                }*/
+            fragmentManager
         }
-        return childFragmentManager
     }
 
 
@@ -365,14 +358,11 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
         }
     }
 
-    private fun sendConfirmationMessageToFirebase(typeName : String, typeOrdinal: Int, optionOrdinal: Int) {
-        pActivity.user?.apply {
-            name?.let { name->
-                email?.let {email->
-                    performMessageSendingTasks(Message((typeName), email, name, typeOrdinal, optionOrdinal))
-                }
-            }
-        }
+    fun sendConfirmationMessageToFirebase(typeName : String, typeOrdinal: Int, optionOrdinal: Int,
+                                          name : String = pActivity.user?.name?.let { it }?:"" , email : String = pActivity.user?.email?.let { it }?:"") {
+
+        if (name.isNotEmpty() && email.isNotEmpty())
+            performMessageSendingTasks(Message((typeName), email, name, typeOrdinal, optionOrdinal))
     }
 
     /*
@@ -393,7 +383,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                 ConfirmationFragment.Companion.ConfirmationType.DONE.ordinal->{
                     when(confirmation_option){
                         ConfirmationFragment.Companion.ConfirmationOption.LISTER_BOOK.ordinal->{
-                            Toast.makeText(pActivity, "Renter's request to book a car has been accepted", Toast.LENGTH_LONG).show()
+                            pActivity.showMessage("Renter's request to book a car has been accepted")
                             Handler().postDelayed({
                                 pActivity.openActivityWithFinish(Intent(pActivity, ListerActivity::class.java)
                                     .putExtra(ApplicationConstants.PAGER_NUMBER, 2))
@@ -402,9 +392,9 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
 
                         ConfirmationFragment.Companion.ConfirmationOption.LISTER_END.ordinal->{
                             if (pActivity.user?.type == ApplicationConstants.RENTER){
-                                Toast.makeText(pActivity, "Lister denied for booking",Toast.LENGTH_LONG).show()
-                            }
-                            pActivity.finish()
+                                pActivity.showMessage("Lister denied for booking")
+                            }else
+                                pActivity.showMessage("You denied for booking")
                         }
                     }
                 }
@@ -422,7 +412,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                     ConfirmationFragment.Companion.ConfirmationOption.RENTER_BOOK.ordinal->{
                         Toast.makeText(pActivity, getString(R.string.ok_msg), Toast.LENGTH_LONG).show()
                         sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationType.OK.name, type, option)
-                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.TYPES.REQUEST_PENDING))
+                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.STATUS.REQUEST_PENDING))
                     }
                     ConfirmationFragment.Companion.ConfirmationOption.RENTER_END.ordinal->{
                         pActivity.finish()
@@ -433,11 +423,11 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                 when(option as Int){
                     ConfirmationFragment.Companion.ConfirmationOption.LISTER_BOOK.ordinal->{
                         sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationType.DONE.name, type, option)
-                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.TYPES.ON_BOOKING))
+                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.STATUS.REQUEST_APPROVED))
                     }
                     ConfirmationFragment.Companion.ConfirmationOption.LISTER_END.ordinal->{
                         sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationOption.DENY.name, type, option)
-                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.TYPES.REQUEST_DECLINED))
+                        HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.STATUS.REQUEST_DECLINED))
                     }
                 }
             }
