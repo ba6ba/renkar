@@ -10,26 +10,14 @@
                                                      android:layout_height="match_parent"
 >
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/white_round_corner_bg"
-			android:layout_margin="@dimen/small_margin"
-			android:backgroundTint="@color/colorAccent"
-			android:paddingStart="@dimen/large_padding"
-			android:paddingEnd="@dimen/large_padding"
-			android:id="@+id/person_icon"
-			android:layout_centerHorizontal="true"
-			android:text="Abdul Basit"
-			android:textAlignment="center"
-			android:textAllCaps="true"
-			android:gravity="center"
-			android:textSize="@dimen/small_text_size"
-			android:fontFamily="@font/gothambook"
-			android:paddingTop="@dimen/a_small_padding"
-			android:paddingBottom="@dimen/a_small_padding"
-			android:textColor="@color/white"
-	/>
+	<FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+				 android:id="@+id/top_bar_fragment"
+	>
+
+		<fragment android:layout_width="match_parent" android:layout_height="wrap_content"
+			  android:id="@+id/top_fragment"
+			  android:name="com.example.sarwan.renkar.modules.renter.TopBarFragment"/>
+	</FrameLayout>
 
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -37,7 +25,7 @@
 			android:layout_height="match_parent"
 			android:id="@+id/swipeRefreshLayout"
 			android:animateLayoutChanges="true"
-			android:layout_below="@id/person_icon"
+			android:layout_below="@id/top_bar_fragment"
 	>
 		<androidx.recyclerview.widget.RecyclerView
 				android:layout_width="match_parent"
@@ -60,7 +48,7 @@
 			android:id="@+id/swipeRefreshLayoutEmpty"
 			android:animateLayoutChanges="true"
 			android:visibility="gone"
-			android:layout_below="@id/person_icon"
+			android:layout_below="@id/top_bar_fragment"
 	>
 		
 		<include

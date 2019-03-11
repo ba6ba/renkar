@@ -1,5 +1,6 @@
 package com.example.sarwan.renkar.modules.details
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +11,11 @@ import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.Features
+import com.example.sarwan.renkar.modules.chat.messaging.MessagesActivity
 import com.example.sarwan.renkar.modules.features.FeaturesData
 import com.example.sarwan.renkar.modules.features.FeaturesFragment
 import com.example.sarwan.renkar.utils.BooleanUtility
+import com.example.sarwan.renkar.utils.ModelMappingUtility
 import kotlinx.android.synthetic.main.overview_fragment.*
 
 class OverviewFragment : Fragment() {
@@ -49,15 +52,15 @@ class OverviewFragment : Fragment() {
     }
     private fun onClickListener() {
         bookNow.setOnClickListener {
-            //TODO -- Booking flow
+            pActivity.openActivity(Intent(pActivity, MessagesActivity::class.java).
+                putExtra(ApplicationConstants.IS_CHAT, true).putExtra(ApplicationConstants.CHAT_ROOM,
+                ModelMappingUtility.makeChatRoom(ModelMappingUtility.mapCarOwnerToUser(car?.owner), pActivity.user , car)))
         }
     }
 
     private fun checkForUser() {
         pActivity.user?.let {
-            it.lister?.let {lister->
-
-            }?:kotlin.run {
+            if (it.type == ApplicationConstants.RENTER){
                 bookNow.visibility = View.VISIBLE
                 ratingBar.visibility = View.VISIBLE
             }
@@ -86,13 +89,6 @@ class OverviewFragment : Fragment() {
         pActivity.hideProgress()
     }
 
-    private fun setSpecifications() {
-        fuel.text = "Fuel Type : ${car?.specifications?.fuelType}"
-        capacity.text = "Capacity : ${car?.specifications?.capacity} persons "
-        BooleanUtility.toMeaningfulString(car?.specifications?.delivery)?.let { delivery.text = "Delivery : $it" }
-        BooleanUtility.toMeaningfulString(car?.specifications?.instantBook)?.let { instant_book.text = "Instant Book : $it" }
-    }
-
     private fun addFeaturesFragment() {
         childFragmentManager.beginTransaction().add(R.id.features_fragment, FeaturesFragment.newInstance(getFeatures())).commit()
     }
@@ -107,7 +103,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setRating() {
-        ratingBar.rating = car?.rating?.let { it }?:kotlin.run { 3f }
+        ratingBar.rating = car?.rating?.let { it }?:kotlin.run { ApplicationConstants.DEFAULT_RATING }
     }
 
     private fun setBasicDetails() {
@@ -120,6 +116,15 @@ class OverviewFragment : Fragment() {
 
     private fun setRegistration() {
         registration.text = "Reg # ${car?.registration?.number} in the year ${car?.registration?.registeredIn}"
+    }
+
+    private fun setSpecifications() {
+        car?.specifications?.apply {
+            fuel.text = "Fuel Type : $fuelType"
+            this@OverviewFragment.capacity.text = "Capacity : $capacity persons "
+            BooleanUtility.toMeaningfulString(delivery)?.let { this@OverviewFragment.delivery.text = "Delivery : $it" }
+            BooleanUtility.toMeaningfulString(instantBook)?.let { instant_book.text = "Instant Book : $it" }
+        }
     }
 
     private fun setOwner() {

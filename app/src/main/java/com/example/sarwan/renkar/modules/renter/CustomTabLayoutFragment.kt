@@ -24,6 +24,7 @@ class CustomTabLayoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setChildFragment(popular)
         onClickListener()
     }
 
@@ -48,12 +49,12 @@ class CustomTabLayoutFragment : Fragment() {
         for (textView in textViews){
             textView?.apply {
                 setTextColor(pActivity.resources.getColor(R.color.light_grey))
-                textSize = pActivity.resources.getDimension(R.dimen.medium_text_size)
+                textSize = pActivity.resources.getDimension(R.dimen.v_v_small_text_size)
             }
         }
         currentTextView.apply {
             setTextColor(pActivity.resources.getColor(R.color.black))
-            textSize = pActivity.resources.getDimension(R.dimen.large_text_size)
+            textSize = pActivity.resources.getDimension(R.dimen.v_small_text_size)
         }
     }
 

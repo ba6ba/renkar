@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.modules.dashboard.DashboardActivity
 import com.google.firebase.firestore.EventListener
@@ -88,8 +89,12 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     private fun fetchHistory() {
         try {
-            pActivity?.user?.email?.let {
-                //FirestoreQueryCenter.getListerCars(it).addSnapshotListener(queryListener)
+            pActivity?.user?.apply {
+                email?.let {email->
+                    type?.let { type->
+                        HistoryHelper.get(email,type).addSnapshotListener(queryListener)
+                    }
+                }
             }
         }catch (e: Exception){
             e.localizedMessage
@@ -103,9 +108,7 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
                 return@EventListener
             }?:kotlin.run {
                 querySnapshot?.let {query->
-                    when {
-                        adapter?.itemCount!! == 0 -> getHistory(query.toObjects(History::class.java))
-                    }
+                    getHistory(query.toObjects(History::class.java))
                 }
             }
         }catch (e : Exception){
@@ -113,8 +116,8 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         }
     }
 
-    private fun getHistory(cars: MutableList<History>) {
-        historyList = cars  as java.util.ArrayList<History>
+    private fun getHistory(history: MutableList<History>) {
+        historyList = history  as java.util.ArrayList<History>
         adapter?.swap(historyList)
         checkEmptyRecyclerView()
     }

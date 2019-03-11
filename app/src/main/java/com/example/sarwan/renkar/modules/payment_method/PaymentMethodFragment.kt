@@ -75,7 +75,7 @@ class PaymentMethodFragment : Fragment(),
         pActivity?.let {
             it.user?.email?.let {email->
                 pActivity?.showProgress()
-                FirestoreQueryCenter.addPaymentMethodToListerNode(email, makePaymentMethodObject()).
+                FirestoreQueryCenter.addPaymentMethod(it.user?.type, email, makePaymentMethodObject()).
                         addOnCompleteListener { task->
                             if (task.isSuccessful){
                                 paymentMethodAdded()
@@ -130,8 +130,10 @@ class PaymentMethodFragment : Fragment(),
 
     private fun fetchPaymentMethods() {
         try {
-            pActivity?.user?.email?.let {
-                FirestoreQueryCenter.getPaymentMethods(it).addSnapshotListener(queryListener)
+            pActivity?.let {
+                it.user?.email?.let { email ->
+                    FirestoreQueryCenter.getPaymentMethods(it.user?.type, email).addSnapshotListener(queryListener)
+                }
             }
         }catch (e: Exception){
             e.localizedMessage
@@ -155,7 +157,7 @@ class PaymentMethodFragment : Fragment(),
     }
 
     private fun getPaymentMethod(pMethods: ListerProfile?) {
-        pMethods?.let { myCards = pMethods.paymentMethod as ArrayList<PaymentMethods?>}
+        pMethods?.paymentMethod?.let { list-> myCards = list as ArrayList<PaymentMethods?> }
         myCards.sortByDescending { it?.createdAt }
         adapter?.swap(myCards)
     }

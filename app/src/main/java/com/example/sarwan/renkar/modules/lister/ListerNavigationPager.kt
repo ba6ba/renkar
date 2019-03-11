@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.modules.lister
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.dashboard.ListerDashboardFragment
 import com.example.sarwan.renkar.modules.lister.add.ListerAddCarFragment
 import com.example.sarwan.renkar.modules.lister.listing.ListerCarsFragment
@@ -14,7 +15,7 @@ class ListerNavigationPager(fragmentManager: FragmentManager) : FragmentPagerAda
         return when (position) {
             0 -> ListerCarsFragment.newInstance()
             1 -> ListerAddCarFragment.newInstance()
-            else -> ListerDashboardFragment.newInstance()
+            else -> ListerDashboardFragment.newInstance(User.TYPE.LISTER.ordinal)
         }
     }
 

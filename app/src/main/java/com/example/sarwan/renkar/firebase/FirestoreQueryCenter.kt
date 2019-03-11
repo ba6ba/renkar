@@ -1,6 +1,8 @@
 package com.example.sarwan.renkar.firebase
 
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.utils.HashUtility
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
@@ -14,7 +16,7 @@ object FirestoreQueryCenter {
     private var callBack : FirebaseExtras.Companion.PutObjectCallBack ? = null
 
     fun setOnline(email: String){
-        val ref = FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(FirebaseExtras.ONLINE_USERS)
+        val ref = FirebaseFirestore.getInstance().collection(FirebaseExtras.ONLINE_USERS).document(FirebaseExtras.USER)
         FirebaseFirestore.getInstance().runTransaction {
             if (!it.get(ref).exists()){
                 it.set(ref, mapOf(FirebaseExtras.ONLINE to FieldValue.arrayUnion(email)))
@@ -25,12 +27,12 @@ object FirestoreQueryCenter {
     }
 
     fun setOffline(email: String){
-        FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(FirebaseExtras.ONLINE_USERS)
+        FirebaseFirestore.getInstance().collection(FirebaseExtras.ONLINE_USERS).document(FirebaseExtras.USER)
             .update(mapOf(FirebaseExtras.ONLINE to FieldValue.arrayRemove(email)))
     }
 
     fun getOnline(): DocumentReference {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(FirebaseExtras.ONLINE_USERS)
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.ONLINE_USERS).document(FirebaseExtras.USER)
     }
 
 
@@ -50,7 +52,7 @@ object FirestoreQueryCenter {
     }
 
     fun getMessageQuery(conversationId: String) : CollectionReference {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CONVERSATION).document(conversationId).collection(FirebaseExtras.CARS)
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CHAT).document(conversationId).collection(FirebaseExtras.MESSAGES)
     }
 
     fun addChatRoom(conversationId: String, map : HashMap<String, Any?>){
@@ -67,13 +69,9 @@ object FirestoreQueryCenter {
         }
     }
 
-    private fun unReadConversation(conversationId: String, usersId: ArrayList<Int>, senderId: Int){
-        val ref = FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(conversationId)
-        FirebaseFirestore.getInstance().runTransaction {
-        for (i in usersId) { it.update(ref, "$i.$FirebaseExtras.CARS",false) }
-            it.update(ref, "$senderId.$FirebaseExtras.CARS",true)
-            null
-        }
+    private fun unReadConversation(conversationId: String, senderEmail: String?){
+        FirebaseFirestore.getInstance().collection(FirebaseExtras.CONVERSATION).document(conversationId).
+                update(mapOf(FirebaseExtras.READ to arrayListOf(senderEmail)))
     }
 
     fun myStatusListener(conversationId: String) : DocumentReference{
@@ -97,21 +95,21 @@ object FirestoreQueryCenter {
         lastMessageData[FirebaseExtras.LAST_MESSAGE_SENDER_ID] = senderEmail ?: kotlin.run { -1 }
         lastMessageData[FirebaseExtras.TITLE] = title ?: kotlin.run { "" }
         FirebaseFirestore.getInstance().collection(FirebaseExtras.CONVERSATION).document(conversationId).update(lastMessageData)
-        //unReadConversation(conversationId, senderEmail ?: kotlin.run { "" })
+        unReadConversation(conversationId, senderEmail ?: kotlin.run { "" })
     }
 
 
 
     fun getConversationById(email: String): com.google.firebase.firestore.Query {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CONVERSATION).whereEqualTo("""$email.email""", email)
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CONVERSATION).whereEqualTo("""${HashUtility.md5New(email)}.email""", email)
     }
 
     fun getGroupConversation(chatRoom: String): DocumentReference {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(chatRoom)
     }
 
-    fun getPaymentMethods(email: String): DocumentReference {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email)
+    fun getPaymentMethods(type: String?, email: String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(if (type==ApplicationConstants.LISTER) FirebaseExtras.LISTER else FirebaseExtras.RENTER).document(email)
     }
 
     fun getCars(): Query {
@@ -135,7 +133,7 @@ object FirestoreQueryCenter {
     }
 
     fun getPopularCars(rating: Float): Query {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).whereEqualTo(FirebaseExtras.RATING, rating)
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).whereGreaterThanOrEqualTo(FirebaseExtras.RATING, rating)
     }
 
     fun checkIfCarExists(carNumber: String, callBack: FirebaseExtras.Companion.PutObjectCallBack){
@@ -219,8 +217,8 @@ object FirestoreQueryCenter {
         }
     }
 
-    fun addPaymentMethodToListerNode(email: String, map: Map<String,Any>): Task<Void> {
-        return FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).
+    fun addPaymentMethod(type : String?, email: String, map: Map<String,Any>): Task<Void> {
+        return FirebaseFirestore.getInstance().collection(if (type==ApplicationConstants.LISTER) FirebaseExtras.LISTER else FirebaseExtras.RENTER).document(email).
             update(mapOf(FirebaseExtras.PAYMENT_METHOD to FieldValue.arrayUnion(map)))
     }
 

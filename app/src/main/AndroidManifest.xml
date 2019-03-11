@@ -138,6 +138,20 @@
                 android:configChanges="orientation|screenSize"
                 android:windowSoftInputMode="adjustPan"
                 android:screenOrientation="sensorPortrait"/>
+
+        <activity
+                android:name=".modules.booking.BookingActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="sensorPortrait"/>
+
+        <activity
+                android:name=".modules.renter.RenterDashBoardActivity"
+                android:theme="@style/renkarTheme"
+                android:configChanges="orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="sensorPortrait"/>
     </application>
 </manifest>
 <!--GetWheels is a suite of apps that connects vehicle renters and owners, automates the process, from search through rent and lease payments, all in one place-->

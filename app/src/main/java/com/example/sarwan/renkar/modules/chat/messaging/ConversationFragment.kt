@@ -31,6 +31,7 @@ class ConversationFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pActivity = activity as ParentActivity
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

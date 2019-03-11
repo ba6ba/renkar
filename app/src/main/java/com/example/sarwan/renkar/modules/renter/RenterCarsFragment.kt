@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.User
@@ -28,6 +29,7 @@ class RenterCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pActivity = activity as ParentActivity
         arguments?.let {
             fragmentType = it.getString(TYPE, POPULAR)
         }
@@ -41,11 +43,11 @@ class RenterCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onViewCreated(view, savedInstanceState)
         setupRefreshLayouts()
         initializeLayoutView()
-        fetchCars()
+        fetchNearByCars()
     }
 
     override fun onRefresh() {
-        fetchCars()
+        fetchNearByCars()
     }
 
     private fun checkEmptyRecyclerView() {
@@ -81,7 +83,7 @@ class RenterCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
-    private fun fetchCars() {
+    private fun fetchNearByCars() {
         try {
             fireStoreListener(false)
         }catch (e: Exception){
@@ -93,11 +95,18 @@ class RenterCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         pActivity?.user?.apply {
             latitude?.let { latitude->
                 longitude?.let {longitude->
-                    FirestoreQueryCenter.getNearestCars(LocationUtility.getNearest(latitude,longitude)?:LocationUtility.CENTRAL)
-                        .addSnapshotListener(queryListener).apply {
-                            if (remove)
-                                remove()
+                    when(fragmentType){
+                        NEARBY_YOU->{
+                            FirestoreQueryCenter.getNearestCars(LocationUtility.getNearest(latitude,longitude)?:LocationUtility.CENTRAL)
                         }
+                        POPULAR->{
+                            FirestoreQueryCenter.getPopularCars(ApplicationConstants.DEFAULT_RATING)
+                        }
+                        else -> FirestoreQueryCenter.getNearestCars(LocationUtility.getNearest(latitude,longitude)?:LocationUtility.CENTRAL)
+                    }.addSnapshotListener(queryListener).apply {
+                        if (remove)
+                            remove()
+                    }
                 }
             }
         }

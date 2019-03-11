@@ -72,6 +72,20 @@
                       android:layout_below="@id/contact_name"
             />
 
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="AJH-120"
+                      android:fontFamily="@font/gothammedium"
+                      android:textSize="@dimen/small_text_size"
+                      android:textColor="@color/light_grey"
+                      android:padding="@dimen/small_padding"
+                      android:id="@+id/car_number"
+                      android:gravity="center"
+                      android:layout_below="@id/contact_name"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginEnd="40dp"
+            />
+
 
         </RelativeLayout>
 

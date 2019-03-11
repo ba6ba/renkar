@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
@@ -59,25 +60,33 @@ class ConfirmationFragment : DialogFragment() {
                 }
             }
             else->{
-                end.setOnClickListener {
-                    takeEndAction()
+                lister_end.setOnClickListener {
+                    takeEndAction(ConfirmationOption.LISTER_END)
                 }
 
-                book.setOnClickListener {
-                    takeBookAction()
+                lister_book.setOnClickListener {
+                    takeBookAction(ConfirmationOption.LISTER_BOOK)
+                }
+
+                renter_end.setOnClickListener {
+                    takeEndAction(ConfirmationOption.RENTER_END)
+                }
+
+                renter_book.setOnClickListener {
+                    takeBookAction(ConfirmationOption.RENTER_BOOK)
                 }
             }
         }
     }
 
-    private fun takeBookAction() {
-        listener?.onAction(type as Any, ConfirmationOption.BOOK.ordinal)
-        dismissFragment(ConfirmationOption.BOOK.ordinal)
+    private fun takeBookAction(option: ConfirmationOption) {
+        listener?.onAction(type as Int, option.ordinal)
+        dismissFragment(option.ordinal)
     }
 
-    private fun takeEndAction() {
-        listener?.onAction(type as Any, ConfirmationOption.END.ordinal)
-        dismissFragment(ConfirmationOption.END.ordinal)
+    private fun takeEndAction(option: ConfirmationOption) {
+        listener?.onAction(type as Int, option.ordinal)
+        dismissFragment(option.ordinal)
     }
 
     override fun onResume() {
@@ -118,14 +127,12 @@ class ConfirmationFragment : DialogFragment() {
 
     private fun doneUpdateScreen() {
         chat_option_text.text = getString(R.string.done_chat_msg)
-        end.text = getString(R.string.done_end_msg)
-        pActivity.show(car)
+        pActivity.show(car, lister_options_layout)
     }
 
     private fun okUpdateScreen() {
         chat_option_text.text = getString(R.string.ok_chat_msg)
-        end.text = getString(R.string.ok_end_msg)
-        pActivity.show(chat)
+        pActivity.show(chat, renter_options_layout)
     }
 
     private fun carUpdateScreen() {
@@ -181,6 +188,6 @@ class ConfirmationFragment : DialogFragment() {
         }
 
         enum class ConfirmationType {CAR_UPDATE, DATE_TIME, OK, DONE}
-        enum class ConfirmationOption {ALLOW, DENY, BOOK, END}
+        enum class ConfirmationOption {ALLOW, DENY, LISTER_BOOK, LISTER_END , RENTER_BOOK, RENTER_END}
     }
 }

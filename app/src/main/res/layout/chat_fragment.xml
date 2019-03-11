@@ -21,8 +21,7 @@
                 android:textSize="@dimen/medium_text_size"
                 android:textColor="@color/white"
                 android:fontFamily="@font/gothammedium1"
-                android:padding="@dimen/normal_padding"
-
+                android:padding="@dimen/a_normal_padding"
                 android:layout_centerInParent="true"
                 android:textAllCaps="true"
         />
@@ -50,6 +49,8 @@
                           android:layout_height="wrap_content"
                           android:id="@+id/responses_layout"
                           android:layout_above="@id/bottom"
+                          android:scrollIndicators="none"
+                          android:scrollbarSize="0dp"
     >
 
     <LinearLayout

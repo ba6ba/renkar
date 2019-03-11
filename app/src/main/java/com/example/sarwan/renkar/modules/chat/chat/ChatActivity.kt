@@ -176,7 +176,7 @@ class ChatActivity : ParentActivity()  {
     }
 
     private fun onlineDate(last_online: Long): String {
-        return if((Date(last_online).date.equals(Date().date))
+        return if((Date(last_online).rentFromDate.equals(Date().rentFromDate))
                 && (Date(last_online).month.plus(1).equals(Date().month.plus(1)))
                 && (Date(last_online).year.equals(Date().year))){
             DateTimeUtility.timeFormat.format(last_online)

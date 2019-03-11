@@ -11,6 +11,7 @@ class MessagesActivity : ParentActivity(), ConversationAdapter.ConversationFragm
 
     var isChat = false
     private var chatRoom : ChatRooms ? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.messages_activity)
@@ -19,25 +20,36 @@ class MessagesActivity : ParentActivity(), ConversationAdapter.ConversationFragm
 
     private fun getIntentData() {
         isChat = intent?.extras?.getBoolean(ApplicationConstants.IS_CHAT)?:false
-        chatRoom = intent?.extras?.getSerializable(ApplicationConstants.CHAT_ROOM) as ChatRooms
+        chatRoom = intent?.extras?.getSerializable(ApplicationConstants.CHAT_ROOM) as? ChatRooms
         attachAppropriateFragment()
     }
 
     private fun attachAppropriateFragment() {
-            attachFragment(if (isChat) ChattingFragment.newInstance(chatRoom?.let { it }?: ChatRooms()
-            ) else ConversationFragment.newInstance())
+        attachFragment(if (isChat) chatFragment() else chatListFragment())
+    }
+
+    private fun chatListFragment() : ConversationFragment{
+        return ConversationFragment.newInstance()
+    }
+
+    private fun chatFragment() :ChattingFragment {
+        return ChattingFragment.newInstance(chatRoom?.let { it }?: ChatRooms())
     }
 
     private fun attachFragment(fragment: Fragment) {
         supportFragmentManager.apply {
             beginTransaction().replace(R.id.messages_fragment_container, fragment)
                 .setCustomAnimations(R.anim.popup_enter, R.anim.pop_up_exit).
-                    addToBackStack(null).commit()
+                    addToBackStack(fragment.id.toString()).commit()
         }
     }
 
     override fun onCellClick(chatRooms: ChatRooms) {
         attachFragment(ChattingFragment.newInstance(chatRooms))
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
 }

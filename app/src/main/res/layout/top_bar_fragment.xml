@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -29,10 +28,11 @@
                 android:layout_marginTop="@dimen/normal_margin"
                 android:maxLines="2"
                 android:inputType="text"
-                android:elevation="@dimen/max_elevation"
+                android:elevation="@dimen/small_elevation"
                 android:fontFamily="@font/gothambook"
                 android:textColor="@color/black"
                 android:hint="@string/enter_you_location"
+                android:imeOptions="actionSearch"
                 android:textSize="@dimen/medium_text_size"
                 android:textColorHint="@color/light_grey"
                 android:layout_toStartOf="@id/user_image_view"
@@ -45,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/normal_margin"
                 app:roundAsCircle="true"
-                android:elevation="@dimen/max_elevation"
+                android:elevation="@dimen/normal_elevation"
                 app:placeholderImage="@drawable/ic_boy"
                 android:id="@+id/user_image_view"
         />

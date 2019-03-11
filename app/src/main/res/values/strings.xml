@@ -82,7 +82,25 @@
 	<string name="negotiable">Price negotiable?</string>
 	<string name="done">Done</string>
     <string name="done_chat_msg">Renter is ready to book your car. Do you want to make this booking?</string>
-	<string name="ok_chat_msg">Are you sure to book this car?</string>
+	<string name="ok_chat_msg">Are you sure to book this car? By clicking <i> OK </i> lister will get requested. </string>
 	<string name="ok_end_msg">End conversation</string>
 	<string name="done_end_msg">Cancel</string>
+    <string name="rides">Rides</string>
+	<string name="notification">Notifications</string>
+    <string name="book_car">Book\nCar</string>
+	<string name="end_conversation">End\nConversation</string>
+	<string name="cancel">Cancel</string>
+	<string name="ok_msg">Request to book a car has been sent to lister, you can checkout lister response in History
+		tab
+	</string>
+	<string name="monday">MO</string>
+	<string name="tuesday">TU</string>
+	<string name="wednesday">WED</string>
+    <string name="thursday">TH</string>
+	<string name="friday">FR</string>
+	<string name="saturday">SA</string>
+	<string name="sunday">SU</string>
+	<string name="below_are_days">You can rent this car on these days only</string>
+	<string name="rent_from">Rent from</string>
+	<string name="rent_to">Rent to</string>
 </resources>

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.lister.ListerActivity
 import kotlinx.android.synthetic.main.lister_profile_fragment.*
 
@@ -23,12 +25,13 @@ import kotlinx.android.synthetic.main.lister_profile_fragment.*
  */
 class ListerDashboardFragment : Fragment(){
 
-    private var clickNo = 0
-    private lateinit var pActivity: ListerActivity
+    private lateinit var pActivity: ParentActivity
+    private var type : Int ? = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pActivity = activity as ListerActivity
+        pActivity = activity as ParentActivity
+        type = arguments?.getInt(LAYOUT_TYPE, User.TYPE.LISTER.ordinal)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +43,32 @@ class ListerDashboardFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClickListener()
-        setProfileImage()
+        updateScreen()
+    }
+
+    fun init(type: Int){
+        this.type = type
+        updateScreen()
+    }
+
+    private fun updateScreen() {
+        when(type){
+            User.TYPE.LISTER.ordinal->{
+                pActivity.show(lister_top)
+                setProfileImage()
+            }
+            User.TYPE.RENTER.ordinal->{
+                pActivity.show(renter_top)
+                setRides()
+            }
+        }
+    }
+
+    private fun setRides() {
+        pActivity.user?.apply {
+            renter_rides.text = renter?.cars?.count().toString()
+            my_name.text = name
+        }
     }
 
     private fun setProfileImage() {
@@ -105,6 +133,11 @@ class ListerDashboardFragment : Fragment(){
          * @return A new instance of fragment ListerDashboardFragment.
          */
         @JvmStatic
-        fun newInstance() = ListerDashboardFragment()
+        fun newInstance(type : Int) = ListerDashboardFragment().apply {
+            arguments = Bundle().apply {
+                putInt(LAYOUT_TYPE, type)
+            }
+        }
+        val LAYOUT_TYPE = "TYPE"
     }
 }

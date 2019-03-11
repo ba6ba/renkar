@@ -4,6 +4,7 @@ import com.example.sarwan.renkar.utils.StringUtility
 import java.io.Serializable
 
 class Days :Serializable {
+    var id : Int ? = null
     var name : String ? = null
     var initial : String ? = StringUtility.makeInitials(name)
     var colorResource : Int ? = null

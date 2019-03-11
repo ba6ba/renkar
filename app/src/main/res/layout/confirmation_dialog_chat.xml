@@ -60,21 +60,50 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:id="@+id/options_layout"
+                android:visibility="gone"
+                android:id="@+id/renter_options_layout"
                 android:layout_alignParentBottom="true"
         >
 
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                       android:layout_weight="1" android:text="End conversation"
-                       android:padding="@dimen/normal_padding" android:id="@+id/end"
+                      android:layout_weight="1" android:text="@string/end_conversation"
+                      android:padding="@dimen/normal_padding" android:id="@+id/renter_end"
                       android:layout_margin="@dimen/a_small_margin"
                       style="@style/Renkar.TextInputLayout.Responses"
                       android:backgroundTint="@color/colorPrimaryDark"
             />
 
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                      android:layout_weight="1" android:text="Book Car"
-                      android:padding="@dimen/normal_padding" android:id="@+id/book"
+                      android:layout_weight="1" android:text="@string/book_car"
+                      android:padding="@dimen/normal_padding" android:id="@+id/renter_book"
+                      android:layout_margin="@dimen/a_small_margin"
+                      style="@style/Renkar.TextInputLayout.Responses"
+            />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:id="@+id/lister_options_layout"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+        >
+
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                       android:layout_weight="1" android:text="@string/cancel"
+                       android:padding="@dimen/normal_padding" android:id="@+id/lister_end"
+                      android:layout_margin="@dimen/a_small_margin"
+                      style="@style/Renkar.TextInputLayout.Responses"
+                      android:backgroundTint="@color/colorPrimaryDark"
+            />
+
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                      android:layout_weight="1" android:text="@string/book_car"
+                      android:padding="@dimen/normal_padding" android:id="@+id/lister_book"
                       android:layout_margin="@dimen/a_small_margin"
                       style="@style/Renkar.TextInputLayout.Responses"
             />

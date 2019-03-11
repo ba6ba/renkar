@@ -17,8 +17,8 @@ import kotlin.collections.HashMap
 class Cars : Serializable {
 
     var features : ArrayList<Features> ? = null
-    var days : ArrayList<String> ? = DaysData.populateDays().map { it.name } as ArrayList<String>
-    var rating : Float ? = null
+    var days : ArrayList<Int> ? = DaysData.populateDays().map { it.id } as ArrayList<Int>
+    var rating : Float ? = ApplicationConstants.DEFAULT_RATING
     var rentedBy : ArrayList<String> ? = null
     var nearestFrom : String ? = null
     var createdAt = Calendar.getInstance().time.time
@@ -30,8 +30,8 @@ class Cars : Serializable {
     var price : String ? = null
 
     var number  : String ? =null
-    var specifications : Specifications ? = Specifications()
-    var registration :Registration ? = Registration()
+    var specifications : Specifications ? = null
+    var registration :Registration ? = null
 
      class Basic : Serializable {
          var name : String ? = null

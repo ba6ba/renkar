@@ -11,5 +11,8 @@ class History : Serializable {
     var details : String ? = null
     var period : String ? = null
     var status : String ? = null
+    var car_number : String ?  =null
     var createdAt = Calendar.getInstance().time.time
+
+    enum class TYPES {REQUEST_PENDING, REQUEST_DECLINED ,ON_BOOKING, BOOKING_DONE}
 }

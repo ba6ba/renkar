@@ -75,7 +75,7 @@ class ListerCarsAdapter(
 
         private fun setRating(position: Int) {
             itemView.ratingBar.visibility = if (carsList[position].owner.email!=activity.user?.email) View.VISIBLE else View.INVISIBLE
-            itemView.ratingBar.rating = carsList[position].rating?.let { it }?:kotlin.run { 3f }
+            itemView.ratingBar.rating = carsList[position].rating?.let { it }?:kotlin.run { ApplicationConstants.DEFAULT_RATING }
         }
 
         private fun setCarDetails(position: Int) {

@@ -20,9 +20,9 @@ class User : Serializable {
     @get:Exclude
     var password: String? = null
     @get:Exclude
-    var latitude : Double ? = null
+    var latitude : Double ? = 24.860735
     @get:Exclude
-    var longitude : Double ? = null
+    var longitude : Double ? = 67.001137
     @get:Exclude
     var name: String ? = null
         get() {

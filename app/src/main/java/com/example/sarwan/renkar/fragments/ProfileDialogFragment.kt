@@ -36,14 +36,21 @@ class ProfileDialogFragment : DialogFragment() {
         updateScreen()
     }
 
+    fun init(listener: ProfileDialogFragmentListener) : ProfileDialogFragment{
+        this.listener = listener
+        return this
+    }
+
     private fun updateScreen() {
-        pActivity.user?.imageUrl?.apply {
-            if (this.isNotEmpty())
-                my_image.setImageURI(this)
-        }
         pActivity.user?.apply {
             this@ProfileDialogFragment.name.text = name
             this@ProfileDialogFragment.email.text = email
+
+            imageUrl?.let {
+                if (it.isNotEmpty())
+                    my_image?.setImageURI(it)
+            }
+
         }
 
         messages.setOnClickListener {
@@ -59,7 +66,7 @@ class ProfileDialogFragment : DialogFragment() {
     override fun onResume() {
         super.onResume()
         activity?.resources?.let {
-            dialog?.window?.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, it.getDimension(R.dimen.dialog_height_large).toInt())
+            dialog?.window?.setLayout(it.getDimension(R.dimen.dialog_width_large).toInt(),it.getDimension(R.dimen.dialog_height_large).toInt())
             dialog?.window?.setGravity(Gravity.CENTER)
         }
     }

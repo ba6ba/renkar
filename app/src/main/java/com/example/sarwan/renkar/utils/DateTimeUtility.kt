@@ -1,9 +1,8 @@
 package com.example.sarwan.renkar.utils
 
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
-import android.widget.Spinner
-import android.widget.ArrayAdapter
 import kotlin.collections.ArrayList
 
 
@@ -18,6 +17,18 @@ class DateTimeUtility {
                 years.add(Integer.toString(i))
             }
             return years
+        }
+
+        fun getNextAvailableDayFromToday(days: java.util.ArrayList<Int>?): String {
+            days?.sortedDescending()
+            val currentDate = Calendar.getInstance().apply {
+                set(Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DATE))
+            }
+            while (currentDate[Calendar.DAY_OF_WEEK] != days?.first())
+                currentDate.add(Calendar.DATE,1)
+
+            return format.format(currentDate.time)
         }
     }
 }

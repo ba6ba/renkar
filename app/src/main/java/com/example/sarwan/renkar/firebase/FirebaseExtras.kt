@@ -69,12 +69,21 @@ class FirebaseExtras {
         val LAST_MESSAGE_SENDER_ID = "last_message_sender_id"
         val STATUSES = "statuses"
         val ONLINE = "online"
-        val ONLINE_USERS = "online"
+        val ONLINE_USERS = "online_users"
         val ARRAY = "array"
         val READ  = "read"
         val LAST_MESSAGE_TIME = "last_message_time"
         val TITLE = "title"
         val MESSAGES = "messages"
+        const val CAR_NUMBER = "car_number"
+        const val CAR_AVAILABILITY_DAYS= "carAvailabilityDays"
+        const val HISTORY = "history"
+        const val RENTED_BY = "rentedBy"
+        const val LISTED_BY = "listedBy"
+        const val BOOKING_HISTORY = "bookingHistory"
+        const val PERIOD = "period"
+        const val DETAILS = "details"
+        const val STATUS = "status"
 
 
     }

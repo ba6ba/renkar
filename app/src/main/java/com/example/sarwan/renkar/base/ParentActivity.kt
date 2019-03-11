@@ -21,6 +21,8 @@ import com.example.sarwan.renkar.extras.SharedPreferences
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.authentication.LoginActivity
+import com.example.sarwan.renkar.modules.location.Location
+import com.example.sarwan.renkar.utils.LocationUtility
 import com.google.firebase.auth.FirebaseAuth
 
 abstract class ParentActivity : AppCompatActivity() {
@@ -45,6 +47,8 @@ abstract class ParentActivity : AppCompatActivity() {
         user = sharedPreferences.userProfile
         if(user == null)
             user = User()
+        goOnline()
+        Location(this).get()
     }
 
     fun saveUserInSharedPreferences(){
@@ -344,4 +348,15 @@ abstract class ParentActivity : AppCompatActivity() {
             FirestoreQueryCenter.setOffline(it)
         }
     }
+
+    override fun onResume() {
+        goOnline()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        goOffline()
+        super.onDestroy()
+    }
+
 }

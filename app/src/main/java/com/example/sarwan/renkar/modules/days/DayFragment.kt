@@ -27,7 +27,7 @@ class DayFragment : Fragment() {
     var interactionListener : DayFragment.DaysInteractionListener? = null
 
     interface DaysInteractionListener{
-        fun onSelect(selectedDay : String?, flag : DayFragment.Action)
+        fun onSelect(selectedDay : Int?, flag : DayFragment.Action)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

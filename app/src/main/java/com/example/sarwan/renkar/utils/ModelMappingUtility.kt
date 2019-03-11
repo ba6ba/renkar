@@ -1,11 +1,16 @@
 package com.example.sarwan.renkar.utils
 
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.firebase.FirebaseExtras
+import com.example.sarwan.renkar.model.Booking
+import com.example.sarwan.renkar.model.Cars
+import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.model.chat.ChatMembers
 import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.google.firebase.firestore.DocumentSnapshot
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ModelMappingUtility {
     companion object {
@@ -55,7 +60,7 @@ class ModelMappingUtility {
             val chatMembers : ArrayList<ChatMembers> = ArrayList()
             try {
                 for (i in keys){
-                    if(snapshot[i] !is String && snapshot[i] !is Long && snapshot[i]!=null){
+                    if(snapshot[i] !is String && snapshot[i] !is Long && snapshot[i]!=null && i!=FirebaseExtras.READ){
                         chatMembers.add(mapOnChatMembers(snapshot[i] as (MutableMap<String, Any>)))
                     }
                 }
@@ -83,33 +88,93 @@ class ModelMappingUtility {
             return chatMember
         }
 
-        fun makeChatRoom(i: User?): ChatRooms {
+        fun makeChatRoom(
+            i: User?,
+            me: User?,
+            car: Cars?
+        ): ChatRooms {
             val chatRoom = ChatRooms()
             i?.let {
-                chatRoom.title = i.userName
+                chatRoom.title = """${i.name}-${me?.name}"""
                 chatRoom.chat_members.add(makeChatMember(i))
-                chatRoom.key = null
+                chatRoom.chat_members.add(makeChatMember(me))
+                chatRoom.key = makeChatRoomId(me?.email, i.email,car?.number)
+                chatRoom.carAvailabilityDays = car?.days
+                chatRoom.car_number = car?.number
             }
             return chatRoom
         }
 
+        private fun makeChatRoomId(myEmail: String?, opponentEmail: String?, number: String?) : String{
+            return """cr-$myEmail-$opponentEmail-$number"""
+        }
+
         fun createChatRoom(members: ArrayList<ChatMembers>?, title: String?, message: String? = null,
-                           senderName: String? = null, senderEmail: String? = null, messageTime : Long ? = null):
+                           senderName: String? = null, senderEmail: String? = null, messageTime : Long ? = null, carNumber : String?=null,
+                           carAvailabilityDays : ArrayList<Int>?=null):
                 HashMap<String, Any?> {
             val map : HashMap<String, Any?> = hashMapOf()
             members?.let {member->
                 for (i in members){
-                    map[i.email.toString()] = ModelMappingUtility.mapOnChatRoomObject(i)
+                    map[HashUtility.md5New(i.email.toString())] = ModelMappingUtility.mapOnChatRoomObject(i)
                 }
             }
             map[FirebaseExtras.TITLE] = title
             map[FirebaseExtras.LAST_MESSAGE] = message
             map[FirebaseExtras.LAST_MESSAGE_SENDER] = senderName
             map[FirebaseExtras.LAST_MESSAGE_SENDER_ID] = senderEmail
+            map[FirebaseExtras.CAR_NUMBER] = carNumber
+            map[FirebaseExtras.CAR_AVAILABILITY_DAYS] = carAvailabilityDays
             map[FirebaseExtras.LAST_MESSAGE_TIME] = messageTime ?:kotlin.run { Calendar.getInstance().timeInMillis / 1000 }
             return map
         }
 
+        fun mapCarOwnerToUser(owner: Cars.Owner?): User? {
+            return User().apply {
+                owner?.let {
+                    imageUrl = it.image
+                    name = it.name
+                    email = it.email
+                }
+            }
+        }
+
+        fun createHistory(
+            chatRoom: ChatRooms?,
+            user: User?,
+            status : History.TYPES
+        ): History {
+            return History().apply {
+                chatRoom?.let {
+
+                    when(user?.type){
+                        ApplicationConstants.RENTER->{
+                            rentedBy = user.email
+                            listedBy = it.chat_members.find {find-> find.email!=user?.email }?.email
+                        }
+                        ApplicationConstants.LISTER->{
+                            listedBy = user.email
+                            rentedBy = it.chat_members.find {find-> find.email!=user?.email }?.email
+                        }
+                    }
+
+                    name = it.key
+                    details = it.title
+                    car_number = it.car_number
+                    period = it.timePeriod
+                    this.status = status.name
+                }
+            }
+        }
+
+        fun makeBookingObject(carNumber: String?, listedBy : String?, rentedBy : String?, period : String?) : Booking{
+            return Booking().apply {
+                this.carNumber = carNumber?:""
+                this.listedBy = listedBy?:""
+                this.rentedBy = rentedBy?:""
+                this.period = period?:""
+            }
+        }
 
 
     }

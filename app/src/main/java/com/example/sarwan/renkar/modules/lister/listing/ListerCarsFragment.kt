@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.base.BottomOffsetDecoration
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.modules.lister.ListerActivity
+import com.example.sarwan.renkar.modules.renter.TopBarFragment
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
@@ -33,7 +35,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private var listerCarsAdapter: ListerCarsAdapter? = null
     private var pActivity : ParentActivity? = null
     private var carsList : ArrayList<Cars> = ArrayList()
-
+    private lateinit var topBarFragment : TopBarFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pActivity = activity as ListerActivity
@@ -48,20 +50,19 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRefreshLayouts()
-        userIconInitial()
+        getFragmentReference()
         initializeLayoutView()
         fetchCars()
-        clickListener()
     }
 
-    private fun clickListener() {
-        person_icon.setOnClickListener {
-
-        }
+    private fun getFragmentReference(){
+        topBarFragment = childFragmentManager.findFragmentById(R.id.top_fragment) as TopBarFragment
+        initFragment()
     }
 
-    private fun userIconInitial() {
-        person_icon.text = pActivity?.user?.name
+
+    private fun initFragment() {
+    topBarFragment.init(com.example.sarwan.renkar.model.User.TYPE.LISTER.name)
     }
 
     override fun onRefresh() {
@@ -98,6 +99,7 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
             lister_cars_recycler_view.layoutManager  = androidx.recyclerview.widget.LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             listerCarsAdapter = ListerCarsAdapter(it, carsList, User.TYPE.LISTER.ordinal)
             lister_cars_recycler_view.adapter = listerCarsAdapter
+            lister_cars_recycler_view.addItemDecoration(BottomOffsetDecoration(200))
         }
     }
 
@@ -147,14 +149,14 @@ class ListerCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun addItemInAdapter(car: Cars) {
-        if (carsList.map { car.number }.isEmpty()){
+        carsList.find { it.number==car.number }?.let {  }?:kotlin.run {
             carsList.add(car)
             listerCarsAdapter?.addItem(car)
         }
     }
 
     private fun updateAdapter(car: Cars, key: String?) {
-            listerCarsAdapter?.updateItem(car, key)
+        listerCarsAdapter?.updateItem(car, key)
     }
 
     fun removeListener(){

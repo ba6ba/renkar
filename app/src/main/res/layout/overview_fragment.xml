@@ -315,7 +315,7 @@
                           android:id="@+id/reg_layout" android:orientation="horizontal"
                           android:layout_below="@id/owner_layout"
                           android:layout_marginTop="@dimen/small_margin"
-                          android:layout_marginBottom="@dimen/small_margin"
+                          android:layout_marginBottom="@dimen/v_large_margin"
             >
                 <ImageView android:layout_width="50dp" android:layout_height="50dp"
                            android:background="@drawable/white_round_corner_bg"
@@ -350,8 +350,11 @@
             android:layout_gravity="bottom|center_horizontal"
             android:id="@+id/bookNow"
             android:visibility="gone"
-            android:padding="@dimen/small_padding"
-            android:background="@color/white"
+            android:paddingStart="@dimen/normal_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingBottom="@dimen/small_padding"
+            android:background="@android:color/transparent"
     >
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

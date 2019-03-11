@@ -3,7 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="100dp"
+              android:layout_height="wrap_content"
               android:elevation="@dimen/normal_elevation"
               android:layout_margin="@dimen/small_margin"
 >
@@ -18,18 +18,18 @@
         <androidx.cardview.widget.CardView android:layout_width="match_parent"
                                        android:layout_height="wrap_content"
                                        app:cardCornerRadius="20dp"
+                                           app:cardBackgroundColor="@color/colorAccent"
     >
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:background="@color/colorAccent"
                         android:padding="@dimen/small_padding"
                         android:id="@+id/ground"
         >
 
-            <ImageView android:layout_width="30dp" android:layout_height="match_parent"
-                       android:src="@drawable/distance_covered"
+            <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
                        android:id="@+id/ic"
                        android:layout_alignParentStart="true"
                        android:layout_marginEnd="@dimen/normal_margin"
+                       android:src="@drawable/ic_history_button"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -59,15 +59,14 @@
                       android:textColor="@color/white"
                       android:fontFamily="@font/gothambook"
                       android:textSize="@dimen/small_text_size"
-                      android:layout_alignParentEnd="true"
-                      android:layout_marginBottom="@dimen/normal_margin"
-                      android:layout_marginEnd="@dimen/normal_margin"
-                      android:layout_alignBottom="@id/ic"
+                      android:layout_toEndOf="@id/ic"
+                      android:layout_above="@id/opponent"
+                      android:layout_marginBottom="@dimen/small_margin"
                       android:text="aosjgag"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/renter"
+                      android:id="@+id/opponent"
                       android:textColor="@color/white"
                       android:fontFamily="@font/gothambook"
                       android:textSize="@dimen/small_text_size"
@@ -82,12 +81,29 @@
 
     </FrameLayout>
 
-    <View android:layout_width="15dp" android:layout_height="15dp"
-          android:background="@drawable/green_status_round_corner_bg"
-          android:layout_alignEnd="@id/card_view"
-          android:layout_marginEnd="@dimen/normal_margin"
-          android:layout_alignParentBottom="true"
-          android:layout_marginBottom="@dimen/a_small_margin"
-          android:id="@+id/status"
-    />
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_alignEnd="@id/card_view"
+                  android:background="@drawable/edit_text_background_rounded"
+                  android:backgroundTint="@color/white"
+                  android:paddingStart="@dimen/normal_padding"
+                  android:paddingEnd="@dimen/normal_padding"
+                  android:layout_marginTop="70dp"
+                  android:paddingTop="@dimen/a_small_padding"
+                  android:paddingBottom="@dimen/a_small_padding"
+                  android:gravity="center_vertical"
+    >
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Declined"
+                  android:layout_marginEnd="@dimen/small_margin"
+                  android:id="@+id/status_name"
+                  android:fontFamily="@font/gothambook"
+                  android:textColor="@color/grey"
+                  android:textSize="@dimen/small_text_size"
+        />
+        <View android:layout_width="15dp" android:layout_height="15dp"
+              android:background="@drawable/blue_status_round_corner_bg"
+              android:id="@+id/status"
+        />
+
+    </LinearLayout>
 </RelativeLayout>

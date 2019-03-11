@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="60dp">
+        <View android:layout_width="60dp"
+              android:layout_height="3dp"
+              android:layout_gravity="center"
+              android:background="@drawable/divider"
+              android:backgroundTint="@color/light_grey"
+        />
+    </FrameLayout>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:id="@+id/renter_top"
+                    android:layout_marginBottom="@dimen/normal_margin"
+                    android:gravity="center"
+                    android:visibility="visible"
+    >
+
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="ABDUL BASIT"
+                  android:fontFamily="@font/gothamultra"
+                  android:textSize="@dimen/sub_heading_text_size"
+                  android:textColor="@color/dark_grey"
+                  android:layout_centerHorizontal="true"
+                  android:id="@+id/my_name"
+                  android:layout_margin="@dimen/normal_margin"
+        />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="100dp"
+                      android:weightSum="2"
+                      android:layout_below="@id/my_name"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginStart="@dimen/small_margin"
+                      android:layout_marginEnd="@dimen/small_margin"
+        >
+
+            <LinearLayout
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background_rounded"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/small_margin"
+                    android:gravity="center"
+                    android:orientation="vertical"
+            >
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="100"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/large_text_size"
+                          android:textColor="@color/dark_grey"
+                          android:textAlignment="center"
+                          android:id="@+id/renter_rides"
+                          android:paddingTop="@dimen/small_padding"
+                          android:paddingBottom="@dimen/small_padding"
+
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="Your Rides"
+                          android:fontFamily="@font/gothambook"
+                          android:textSize="@dimen/small_text_size"
+                          android:textColor="@color/dark_grey"
+                          android:textAlignment="center"
+                          android:paddingTop="@dimen/small_padding"
+                          android:paddingBottom="@dimen/small_padding"
+
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background_rounded"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/small_margin"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:backgroundTint="@color/colorAccent"
+                    android:id="@+id/dashboard"
+            >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Dashboard"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_text_size"
+                        android:fontFamily="@font/gothambook"
+                        android:textColor="@color/white"
+                />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

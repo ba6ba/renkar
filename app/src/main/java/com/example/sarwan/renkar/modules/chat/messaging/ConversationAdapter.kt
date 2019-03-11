@@ -52,7 +52,9 @@ class ConversationAdapter(private val activity: ParentActivity,
         fun loadData(position: Int){
 
             itemView.contact_name.text = conversationsList[position].chat_members.find { it.email!=activity.user?.email }?.name
+            itemView.message.text = conversationsList[position].last_message
             itemView.icon.text = StringUtility.makeInitials(itemView.contact_name.text.toString())
+            itemView.car_number.text = conversationsList[position].car_number
             itemView.read.visibility = if (conversationsList[position].read?.contains(activity.user?.email) == true) View.GONE else View.VISIBLE
             itemView.tag = position
             itemView.setOnClickListener {

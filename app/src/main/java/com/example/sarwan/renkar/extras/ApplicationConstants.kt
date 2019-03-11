@@ -20,5 +20,7 @@ open class ApplicationConstants {
         const val DASHBOARD_FRAGMENT_KEY: String = "DASHBOARD_FRAGMENT_KEY"
         const val IS_CHAT: String = "IS_CHAT"
         const val CHAT_ROOM: String = "CHAT_ROOM"
+        const val DEFAULT_RATING: Float = 3f
+        const val BOOKING_OBJECT = "BOOKING_OBJECT"
     }
 }

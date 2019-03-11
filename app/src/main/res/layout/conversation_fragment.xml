@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_round_corner_bg"
+            android:layout_margin="@dimen/small_margin"
+            android:backgroundTint="@color/colorAccent"
+            android:paddingStart="@dimen/large_padding"
+            android:paddingEnd="@dimen/large_padding"
+            android:id="@+id/fragment_title"
+            android:text="Conversations"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:textSize="@dimen/small_text_size"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/gothambook"
+            android:paddingTop="@dimen/a_small_padding"
+            android:paddingBottom="@dimen/a_small_padding"
+            android:textColor="@color/white"
+    />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/swipeRefreshLayout"
             android:animateLayoutChanges="true"
+            android:layout_below="@id/fragment_title"
     >
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -31,6 +53,7 @@
             android:id="@+id/swipeRefreshLayoutEmpty"
             android:animateLayoutChanges="true"
             android:visibility="gone"
+            android:layout_below="@id/fragment_title"
     >
 
         <include
@@ -39,4 +62,4 @@
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

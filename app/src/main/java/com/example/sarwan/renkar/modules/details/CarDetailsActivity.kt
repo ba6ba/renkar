@@ -86,9 +86,14 @@ class CarDetailsActivity : ParentActivity(), FeaturesFragment.FeaturesInteractio
                         BottomSheetBehavior.STATE_EXPANDED->{
                             com.example.sarwan.renkar.extras.BottomSheetBehavior.setStatusBarDim(this@CarDetailsActivity,true)
                         }
-                        BottomSheetBehavior.STATE_HIDDEN->{}
-                        BottomSheetBehavior.STATE_COLLAPSED->{}
-                        BottomSheetBehavior.STATE_HALF_EXPANDED->{}
+                        BottomSheetBehavior.STATE_HIDDEN->{
+                        }
+                        BottomSheetBehavior.STATE_COLLAPSED->{
+                            com.example.sarwan.renkar.extras.BottomSheetBehavior.setStatusBarDim(this@CarDetailsActivity,false)
+                        }
+                        BottomSheetBehavior.STATE_HALF_EXPANDED->{
+                            com.example.sarwan.renkar.extras.BottomSheetBehavior.setStatusBarDim(this@CarDetailsActivity,false)
+                        }
                         BottomSheetBehavior.STATE_DRAGGING->{}
                         BottomSheetBehavior.STATE_SETTLING->{}
                     }

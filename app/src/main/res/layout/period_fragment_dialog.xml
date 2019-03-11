@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="match_parent"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   app:cardElevation="@dimen/normal_elevation"
+                                   android:layout_marginStart="@dimen/large_margin"
+                                   android:layout_marginEnd="@dimen/large_margin"
+                                   android:layout_marginTop="@dimen/large_margin"
+                                   android:layout_marginBottom="@dimen/large_margin"
+                                   app:cardMaxElevation="@dimen/max_elevation"
+                                   app:cardCornerRadius="@dimen/card_corner_radius"
+                                   app:cardBackgroundColor="@color/white"
+>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+    >
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/text" android:textSize="@dimen/medium_text_size"
+                  android:fontFamily="@font/gothambook"
+                  android:textColor="@color/colorAccent"
+                  android:padding="@dimen/normal_padding"
+                  android:text="@string/below_are_days"
+                  android:textAlignment="center"
+                  android:layout_marginTop="@dimen/small_margin"
+                  android:layout_marginBottom="@dimen/small_margin"
+                  android:layout_alignParentTop="true"
+        />
+
+
+
+        <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:scrollbarSize="0dp"
+                              android:scrollIndicators="none"
+                              android:id="@+id/available_days"
+                              android:layout_below="@id/text"
+        >
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/monday"
+                        android:id="@+id/monday"
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                        android:visibility="gone"
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/tuesday"
+                        android:id="@+id/tuesday"
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                        android:visibility="gone"
+
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/wednesday"
+                        android:id="@+id/wednesday"
+                        android:visibility="gone"
+
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/thursday"
+                        android:id="@+id/thursday"
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:visibility="gone"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/friday"
+                        android:id="@+id/friday"
+                        android:padding="@dimen/small_padding"
+                        android:visibility="gone"
+
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/saturday"
+                        android:visibility="gone"
+                        android:id="@+id/saturday"
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                />
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:text="@string/sunday"
+                        android:id="@+id/sunday"
+                        android:visibility="gone"
+                        android:padding="@dimen/small_padding"
+                        android:fontFamily="@font/gothambook"
+                        android:gravity="center"
+                        android:background="@drawable/edit_text_background"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_margin="@dimen/small_margin"
+                />
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:weightSum="2"
+                      android:layout_below="@id/available_days"
+                      android:layout_marginTop="@dimen/large_margin"
+                      android:layout_marginStart="@dimen/small_margin"
+                      android:layout_marginEnd="@dimen/small_margin"
+        >
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:gravity="center"
+                          android:orientation="vertical"
+            >
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/rent_from"
+                          android:textSize="@dimen/small_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textColor="@color/dark_grey"
+                          android:paddingEnd="@dimen/a_small_padding"
+                          android:paddingStart="@dimen/a_small_padding"
+                />
+
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="10/10/2019"
+                          android:textSize="@dimen/medium_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textColor="@color/dark_grey"
+                          android:id="@+id/rent_from"
+                          android:background="@drawable/edit_text_background_rounded"
+                          android:backgroundTint="@color/lightest_grey"
+                          android:padding="@dimen/a_small_padding"
+                />
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center"
+
+            >
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/rent_to"
+                          android:textSize="@dimen/small_text_size"
+                          android:fontFamily="@font/gothambook"
+                          android:textColor="@color/dark_grey"
+                          android:paddingStart="@dimen/a_small_padding"
+                          android:paddingEnd="@dimen/a_small_padding"
+                />
+
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="15/10/2019"
+                          android:textSize="@dimen/medium_text_size"
+                          android:id="@+id/rent_to"
+                          android:fontFamily="@font/gothambook"
+                          android:textColor="@color/dark_grey"
+                          android:background="@drawable/edit_text_background_rounded"
+                          android:backgroundTint="@color/lightest_grey"
+                          android:padding="@dimen/a_small_padding"
+                />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

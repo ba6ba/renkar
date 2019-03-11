@@ -51,7 +51,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
     protected var adapter: CustomListAdapter? = null
     protected var autoCompleteModelList : ArrayList<AutoCompleteModel> = ArrayList()
     private var selectedFeatures : ArrayList<Features> ? = ArrayList()
-    private var selectedDays : ArrayList<String> ? = ArrayList()
+    private var selectedDays : ArrayList<Int> ? = ArrayList()
     protected var selectedImage : Uri ? = null
     protected var imageUpload : ImageUpload? = null
     private var toFirebaseStorage : ToFirebaseStorage ? = null
@@ -485,7 +485,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
         }
     }
 
-    override fun onSelect(selectedDay: String?, flag: DayFragment.Action) {
+    override fun onSelect(selectedDay: Int?, flag: DayFragment.Action) {
         when(flag){
             DayFragment.Action.ADDED -> selectedDay?.let { selectedDays?.add(it) }
             DayFragment.Action.REMOVED -> selectedDay?.let { selectedDays?.remove(it) }

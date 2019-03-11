@@ -65,9 +65,9 @@ class DaysAdapter(private val activity : FragmentActivity? , private var daysLis
 
         private fun changeViewsAccordingly(pos: Int) {
             if (daysList[pos].selected){
-                fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.ADDED)
+                fragment.interactionListener?.onSelect(daysList[pos].id, DayFragment.Action.ADDED)
             }else{
-                fragment.interactionListener?.onSelect(daysList[pos].name, DayFragment.Action.REMOVED)
+                fragment.interactionListener?.onSelect(daysList[pos].id, DayFragment.Action.REMOVED)
             }
 
         }
