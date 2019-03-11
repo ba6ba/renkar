@@ -17,7 +17,7 @@ class Message(){
     var confirmation_option : Int ? = null
     var confirmation_type : Int ? = null
 
-    constructor(message: String, sender_email : String,sender_name : String,  confirmation_option : Int,confirmation_type : Int ) : this(){
+    constructor(message: String, sender_email : String,sender_name : String,  confirmation_type : Int,confirmation_option : Int ) : this(){
         this.message = message
         this.sender_email = sender_email
         this.sender_name = sender_name

@@ -9,7 +9,7 @@ import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.model.chat.Message
-import kotlinx.android.synthetic.main.my_message_layout.view.*
+import kotlinx.android.synthetic.main.opponent_message_layout.view.*
 
 import java.util.ArrayList
 
@@ -71,10 +71,10 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
         }
 
         private fun setReadStatus(message: Message) {
-            messages[itemCount -1].apply {
-                if (sender_email==user.email)
-                    itemView.read_message.visibility = if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true) View.VISIBLE else View.GONE
-            }
+            if (message.timestamp==messages[messages.size-1].timestamp)
+                itemView.read_message.visibility = if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true) View.VISIBLE else View.GONE
+
+            itemView.read_message.visibility = if (message.sender_email==user.email) View.GONE else View.VISIBLE
         }
     }
 }

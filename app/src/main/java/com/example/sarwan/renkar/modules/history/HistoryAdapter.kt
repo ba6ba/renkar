@@ -50,7 +50,7 @@ class HistoryAdapter(private val activity: ParentActivity,
         }
 
         private fun setData(position: Int) {
-            itemView.name.text = historyList[position].name
+            itemView.name.text = """Booking of ${historyList[position].car_number}"""
             itemView.details.text = historyList[position].details
             itemView.duration.text = historyList[position].period
             itemView.opponent.text = """with ${when(activity.user?.type){

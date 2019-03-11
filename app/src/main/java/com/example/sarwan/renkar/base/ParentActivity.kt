@@ -45,10 +45,21 @@ abstract class ParentActivity : AppCompatActivity() {
         animationNeeded = true
         forwardTransition = true
         user = sharedPreferences.userProfile
-        if(user == null)
+        if(user == null){
             user = User()
+            Location(this).get()
+        }else {
+            user?.latitude?.let { lat->
+                user?.longitude?.let {lon->
+
+                }?:kotlin.run {
+                    Location(this).get()
+                }
+            }?:kotlin.run {
+                Location(this).get()
+            }
+        }
         goOnline()
-        Location(this).get()
     }
 
     fun saveUserInSharedPreferences(){

@@ -3,6 +3,7 @@ package com.example.sarwan.renkar.modules.lister
 import android.os.Bundle
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.lister_activity.*
 
@@ -21,7 +22,7 @@ class ListerActivity : ParentActivity(){
         viewPager.adapter = navigationPager
         tabLayout.setOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        viewPager.currentItem = 1
+        viewPager.currentItem = intent?.extras?.getInt(ApplicationConstants.PAGER_NUMBER)?:1
     }
 
     override fun onBackPressed() {

@@ -45,7 +45,7 @@
 
         <ImageView android:layout_width="150dp" android:layout_height="wrap_content"
                    android:layout_centerInParent="true"
-                   android:src="@drawable/car_illustrative"
+                   android:src="@drawable/car_illustrative_1"
                    android:layout_above="@id/options_layout"
                    android:id="@+id/car"
                    android:layout_marginTop="@dimen/small_margin"

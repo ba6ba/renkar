@@ -92,7 +92,7 @@ class ConfirmationFragment : DialogFragment() {
     override fun onResume() {
         super.onResume()
         activity?.resources?.let {
-            dialog?.window?.setLayout(it.getDimension(R.dimen.dialog_width).toInt() , it.getDimension(R.dimen.dialog_height).toInt())
+            dialog?.window?.setLayout(it.getDimension(R.dimen.dialog_width_large).toInt() , it.getDimension(R.dimen.dialog_height_large).toInt())
             dialog?.window?.setGravity(Gravity.CENTER)
         }
     }

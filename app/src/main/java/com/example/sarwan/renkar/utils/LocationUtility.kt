@@ -48,9 +48,13 @@ class LocationUtility {
         var regionsMap = hashMapOf(saddar()to SOUTH ,nipa() to EAST ,fiveStar() to CENTRAL, metroville() to WEST, malir() to MALIR)
 
         fun getAddress(activity: Activity , lat : Double, lon : Double) : String {
-            val gcd = Geocoder(activity, Locale.getDefault())
-            val addresses = gcd.getFromLocation(lat, lon, 1)
-            return addresses[0].locality
+            return try {
+                val gcd = Geocoder(activity, Locale.getDefault())
+                val addresses = gcd.getFromLocation(lat, lon, 1)
+                addresses[0].locality
+            }catch (e: Exception){
+                "Karachi"
+            }
         }
 
         fun calculateDistance(userLat : Double, userLon : Double , lat : Double,lon : Double): Long {

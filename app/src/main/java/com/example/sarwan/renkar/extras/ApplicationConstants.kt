@@ -22,5 +22,6 @@ open class ApplicationConstants {
         const val CHAT_ROOM: String = "CHAT_ROOM"
         const val DEFAULT_RATING: Float = 3f
         const val BOOKING_OBJECT = "BOOKING_OBJECT"
+        const val PAGER_NUMBER = "PAGER_NUMBER"
     }
 }

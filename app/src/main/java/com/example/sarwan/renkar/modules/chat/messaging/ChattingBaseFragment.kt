@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.firebase.FirebaseExtras
 import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.fragments.ConfirmationFragment
@@ -17,6 +18,7 @@ import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.model.chat.Message
 import com.example.sarwan.renkar.modules.booking.BookingActivity
 import com.example.sarwan.renkar.modules.history.HistoryHelper
+import com.example.sarwan.renkar.modules.lister.ListerActivity
 import com.example.sarwan.renkar.modules.renter.PeriodFragment
 import com.example.sarwan.renkar.utils.ModelMappingUtility
 import com.google.firebase.firestore.*
@@ -382,7 +384,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                 ConfirmationFragment.Companion.ConfirmationType.OK.ordinal->{
                     when(confirmation_option){
                         ConfirmationFragment.Companion.ConfirmationOption.RENTER_BOOK.ordinal->{
-                            pActivity.user?.lister?.let {
+                            if (pActivity.user?.type == ApplicationConstants.LISTER){
                                 attachDialogFragment(ConfirmationFragment.Companion.ConfirmationType.DONE)
                             }
                         }
@@ -391,14 +393,15 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                 ConfirmationFragment.Companion.ConfirmationType.DONE.ordinal->{
                     when(confirmation_option){
                         ConfirmationFragment.Companion.ConfirmationOption.LISTER_BOOK.ordinal->{
-                            Toast.makeText(pActivity, "Your request to book a car has been accepted", Toast.LENGTH_LONG).show()
+                            Toast.makeText(pActivity, "Renter's request to book a car has been accepted", Toast.LENGTH_LONG).show()
                             Handler().postDelayed({
-                                pActivity.openActivityWithFinish(Intent(pActivity, BookingActivity::class.java))
+                                pActivity.openActivityWithFinish(Intent(pActivity, ListerActivity::class.java)
+                                    .putExtra(ApplicationConstants.PAGER_NUMBER, 2))
                             },2000L)
                         }
 
                         ConfirmationFragment.Companion.ConfirmationOption.LISTER_END.ordinal->{
-                            pActivity.user?.renter?.let {
+                            if (pActivity.user?.type == ApplicationConstants.RENTER){
                                 Toast.makeText(pActivity, "Lister denied for booking",Toast.LENGTH_LONG).show()
                             }
                             pActivity.finish()
@@ -433,7 +436,7 @@ open class ChattingBaseFragment : Fragment(), EventListener<QuerySnapshot> ,
                         HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.TYPES.ON_BOOKING))
                     }
                     ConfirmationFragment.Companion.ConfirmationOption.LISTER_END.ordinal->{
-                        sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationType.DONE.name, type, option)
+                        sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationOption.DENY.name, type, option)
                         HistoryHelper.create(ModelMappingUtility.createHistory(chatRoom, pActivity.user, History.TYPES.REQUEST_DECLINED))
                     }
                 }

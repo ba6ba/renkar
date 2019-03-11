@@ -119,9 +119,9 @@ class PeriodFragment : DialogFragment() {
                 if (i==7) pActivity.show(saturday)
             }
         }
-
-        rent_from.text = String.format(/*"%1\$tA,*/"%1\$td-%1\$tb-%1\$tY", DateTimeUtility.getNextAvailableDayFromToday(days))
-        rent_to.text = String.format(/*"%1\$tA,*/"%1\$td-%1\$tb-%1\$tY", DateTimeUtility.getNextAvailableDayFromToday(days))
+/*DateTimeUtility.getNextAvailableDayFromToday(days)*/
+        rent_from.text = String.format(/*"%1\$tA,*/"%1\$td-%1\$tb-%1\$tY",rentFrom )
+        rent_to.text = String.format(/*"%1\$tA,*/"%1\$td-%1\$tb-%1\$tY", rentTo)
     }
 
     fun initListener(listener : PeriodFragmentCallBack){

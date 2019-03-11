@@ -60,7 +60,7 @@ class ModelMappingUtility {
             val chatMembers : ArrayList<ChatMembers> = ArrayList()
             try {
                 for (i in keys){
-                    if(snapshot[i] !is String && snapshot[i] !is Long && snapshot[i]!=null && i!=FirebaseExtras.READ){
+                    if(snapshot[i] !is String && snapshot[i] !is Long && snapshot[i]!=null && i!=FirebaseExtras.READ && i!=FirebaseExtras.CAR_AVAILABILITY_DAYS){
                         chatMembers.add(mapOnChatMembers(snapshot[i] as (MutableMap<String, Any>)))
                     }
                 }
