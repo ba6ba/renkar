@@ -64,8 +64,8 @@ class SendMessage(private val pActivity : ParentActivity,var listener : SendMess
     }
 
     private fun takeDoneBookMessageAction() {
-        pActivity.showMessage("Renter's request to book a car has been accepted")
-        openListerActivity()
+        pActivity.showMessage("Renter's request to book a car has been accepted. To view go to your history tab")
+        //openListerActivity()
     }
 
     private fun openListerActivity() {

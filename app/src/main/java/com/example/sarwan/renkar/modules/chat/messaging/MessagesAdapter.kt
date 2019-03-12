@@ -17,7 +17,7 @@ import java.util.ArrayList
 
 class MessagesAdapter(private val activity: ParentActivity, private val messages: ArrayList<Message>,
                       private val user: User, private val chatRooms: ChatRooms,
-                      private val listener : MessagesAdapterCallBack) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
+                      private var listener : MessagesAdapterCallBack?) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
     private var sizeOfList : Int = -1
 
@@ -75,7 +75,8 @@ class MessagesAdapter(private val activity: ParentActivity, private val messages
             setMessage(messages[position])
             checkForConfirmationMessages(messages[position])
             if (position == sizeOfList -1){
-                listener.onLastMessage(messages[position],position)
+                listener?.onLastMessage(messages[position],position)
+                listener = null
                 setReadStatus(messages[position])
             }
         }

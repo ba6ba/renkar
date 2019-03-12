@@ -10,6 +10,6 @@
     />
 
     <solid
-            android:color="@color/colorAccent"
+            android:color="@color/black"
     />
 </shape>

@@ -1,7 +1,6 @@
 package com.example.sarwan.renkar.model.chat
 
 import com.google.firebase.firestore.Exclude
-import java.util.*
 
 
 class Message(){
@@ -14,7 +13,7 @@ class Message(){
     var message: String? = null
     var sender_email: String? = null
     var sender_name: String? = null
-    var timestamp: Long = Calendar.getInstance().timeInMillis
+    var timestamp: Long = System.currentTimeMillis() / 1000
     var confirmation_option : Int ? = null
     var confirmation_type : Int ? = null
 
@@ -24,6 +23,6 @@ class Message(){
         this.sender_name = sender_name
         this.confirmation_option = confirmation_option
         this.confirmation_type = confirmation_type
-        timestamp = Calendar.getInstance().timeInMillis
+        timestamp = System.currentTimeMillis() / 1000
     }
 }
