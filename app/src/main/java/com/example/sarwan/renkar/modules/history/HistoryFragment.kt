@@ -19,6 +19,7 @@ import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.modules.booking.BookingActivity
 import com.example.sarwan.renkar.modules.chat.messaging.ChattingBaseFragment
 import com.example.sarwan.renkar.modules.dashboard.DashboardActivity
+import com.example.sarwan.renkar.modules.send.message.SendMessage
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.history_fragment.*
@@ -40,11 +41,14 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     private var pActivity : ParentActivity? = null
     private var adapter: HistoryAdapter? = null
     private var historyList : ArrayList<History> = ArrayList()
-    private var bookingDialogFragment : BookingDialogFragment ? = null
+    private var sendMessage : SendMessage ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pActivity = activity as DashboardActivity
+        pActivity?.let {
+            sendMessage = SendMessage(it)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -184,7 +188,7 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
             showProgress()
             selectedHistory?.let { HistoryHelper.create(it) }
             user?.let {
-                ChattingBaseFragment().sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationType.DONE.name,
+                sendMessage?.sendConfirmationMessageToFirebase(ConfirmationFragment.Companion.ConfirmationType.DONE.name,
                     ConfirmationFragment.Companion.ConfirmationType.DONE.ordinal, ConfirmationFragment.Companion.ConfirmationOption.LISTER_BOOK.ordinal,
                     it.name?:"", it.email?:"")
             }
@@ -206,25 +210,10 @@ class HistoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
     private fun attachDialogFragment(status: String?) {
         status?.let {
-            BookingDialogFragment.newInstance(status).run {
-                bookingDialogFragment = this
-                bookingDialogFragment?.initListener(this@HistoryFragment)
-                if (!isAdded)
-                    show(createManager(status), status)
+            fragmentManager?.let { fragmentManager ->
+                BookingDialogFragment.getInstance(it)?.initListener(this)?.show(fragmentManager, BookingDialogFragment::class.java.simpleName)
             }
         }
-    }
-
-
-    private fun createManager(status: String): FragmentManager {
-        childFragmentManager.beginTransaction().run {
-            run {
-                if ((childFragmentManager.findFragmentByTag(status) != null))
-                    childFragmentManager.findFragmentByTag(status)?.let { this.remove(it) }
-                addToBackStack(null)
-            }
-        }
-        return childFragmentManager
     }
 
 

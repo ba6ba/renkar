@@ -14,12 +14,13 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.BaseDialog
 import com.example.sarwan.renkar.fragments.ConfirmationFragment
 import com.example.sarwan.renkar.utils.DateTimeUtility
 import kotlinx.android.synthetic.main.period_fragment_dialog.*
 import java.util.*
 
-class PeriodFragment : DialogFragment() {
+class PeriodFragment : BaseDialog() {
 
     var days : ArrayList<Int> ? = null
     var listener : PeriodFragmentCallBack? = null
@@ -90,6 +91,7 @@ class PeriodFragment : DialogFragment() {
     private fun dismissFragment() {
         Toast.makeText(pActivity, "Our system will remove days that are not mentioned above from selected range", Toast.LENGTH_LONG).show()
         listener?.onSelection( """${rent_from.text} - ${rent_to.text}""")
+        instance = null
         dismissAllowingStateLoss()
     }
 
@@ -124,8 +126,9 @@ class PeriodFragment : DialogFragment() {
         rent_to.text = String.format(/*"%1\$tA,*/"%1\$td-%1\$tb-%1\$tY", rentTo)
     }
 
-    fun initListener(listener : PeriodFragmentCallBack){
+    fun initListener(listener : PeriodFragmentCallBack) : PeriodFragment{
         this.listener = listener
+        return this
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -146,15 +149,39 @@ class PeriodFragment : DialogFragment() {
         }
     }
 
+    override fun onDestroy() {
+        instance = null
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        instance = null
+        super.onDetach()
+    }
+
+
     interface PeriodFragmentCallBack{
         fun onSelection(period : String)
     }
 
     companion object {
+        private var instance : PeriodFragment? = null
+
         @JvmStatic
         fun newInstance(days : ArrayList<Int>) = PeriodFragment().apply {
+            instance = this
             arguments = Bundle().apply {
                 putIntegerArrayList(DAYS, days)
+            }
+            return instance!! // It can't be null at this time
+        }
+
+        @JvmStatic
+        fun getInstance(days : ArrayList<Int>): PeriodFragment? {
+            instance?.let {
+                return null
+            } ?: kotlin.run {
+                return newInstance(days)
             }
         }
 

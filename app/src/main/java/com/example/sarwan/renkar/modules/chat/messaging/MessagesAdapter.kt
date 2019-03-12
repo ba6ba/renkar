@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sarwan.renkar.R
+import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.fragments.ConfirmationFragment
 import com.example.sarwan.renkar.model.User
 import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.model.chat.Message
-import kotlinx.android.synthetic.main.opponent_message_layout.view.*
+import kotlinx.android.synthetic.main.my_message_layout.view.*
 
 import java.util.ArrayList
 
-class MessagesAdapter(private val context: Context, private val messages: ArrayList<Message>,
+class MessagesAdapter(private val activity: ParentActivity, private val messages: ArrayList<Message>,
                       private val user: User, private val chatRooms: ChatRooms,
                       private val listener : MessagesAdapterCallBack) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
 
@@ -23,9 +25,9 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
         return when(viewType){
             ChattingFragment.Companion.MESSAGE_TYPE.MY_MESSAGE.ordinal->{
                 MessageViewHolder(
-                    LayoutInflater.from(context).inflate(R.layout.my_message_layout, parent, false))
+                    LayoutInflater.from(activity).inflate(R.layout.my_message_layout, parent, false))
             }
-            else -> MessageViewHolder(LayoutInflater.from(context).inflate(R.layout.opponent_message_layout, parent, false))
+            else -> MessageViewHolder(LayoutInflater.from(activity).inflate(R.layout.opponent_message_layout, parent, false))
         }
     }
 
@@ -71,10 +73,17 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
 
         fun loadData(position: Int) {
             setMessage(messages[position])
+            checkForConfirmationMessages(messages[position])
             if (position == sizeOfList -1){
                 listener.onLastMessage(messages[position],position)
                 setReadStatus(messages[position])
             }
+        }
+
+        private fun checkForConfirmationMessages(message: Message) {
+            itemView.chatCardView.background = map[message.message]?.let {
+                activity.resources.getDrawable(it) }?:
+                    itemView.chatCardView.background
         }
 
         private fun setMessage(message: Message) {
@@ -82,11 +91,15 @@ class MessagesAdapter(private val context: Context, private val messages: ArrayL
         }
 
         private fun setReadStatus(message: Message) {
-            itemView.read_message.visibility =
-                    if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true
-                        && message.sender_email!=user.email) View.VISIBLE else View.GONE
+            if (message.sender_email==user.email)
+                itemView.read_message.visibility =
+                        if (message.readBy?.contains(chatRooms.chat_members.find { it.email != user.email }?.email) == true) View.VISIBLE else View.GONE
         }
     }
+
+    val map = hashMapOf(ConfirmationFragment.Companion.ConfirmationOption.DENY.name to R.drawable.deny_message_bg,
+        ConfirmationFragment.Companion.ConfirmationType.OK.name to R.drawable.ok_message_bg,
+        ConfirmationFragment.Companion.ConfirmationType.DONE.name to R.drawable.done_message_bg)
 
     interface MessagesAdapterCallBack{
         fun onLastMessage(message: Message, position: Int)

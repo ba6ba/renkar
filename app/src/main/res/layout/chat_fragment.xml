@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/chat_title"
                 android:text="Abdul Basit"
-                android:textSize="@dimen/medium_text_size"
+                android:textSize="@dimen/small_text_size"
                 android:textColor="@color/white"
                 android:fontFamily="@font/gothammedium1"
                 android:padding="@dimen/a_normal_padding"
@@ -93,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Renkar.TextInputLayout.Responses"
-                android:text="@string/done"
-                android:id="@+id/done"
+                android:text="@string/do_you_have_more_cars"
+                android:id="@+id/have_more_cars"
         />
 
 

@@ -10,6 +10,7 @@ import com.example.sarwan.renkar.extras.ApplicationConstants
 import com.example.sarwan.renkar.model.History
 import com.example.sarwan.renkar.modules.booking.BookingActivity
 import com.example.sarwan.renkar.utils.ModelMappingUtility
+import com.example.sarwan.renkar.utils.RandomUtility
 import kotlinx.android.synthetic.main.history_list_item.view.*
 import java.util.*
 

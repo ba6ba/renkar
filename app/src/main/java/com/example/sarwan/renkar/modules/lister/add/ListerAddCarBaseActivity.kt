@@ -416,12 +416,8 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                 }
             }
             CONFIRMATION_FRAGMENT->{
-                ConfirmationFragment.newInstance(ConfirmationFragment.Companion.ConfirmationType.CAR_UPDATE.ordinal).run {
-                    confirmationFragment = this
-                    confirmationFragment?.initListener(this@ListerAddCarBaseActivity)
-                    if (!isAdded)
-                        show(createManager(), fragment_tag)
-                }
+                ConfirmationFragment.getInstance(ConfirmationFragment.Companion.ConfirmationType.CAR_UPDATE.ordinal)?.
+                    initListener(this)?.show(supportFragmentManager, fragment_tag)
             }
         }
     }

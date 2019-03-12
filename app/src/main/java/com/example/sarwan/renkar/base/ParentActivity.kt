@@ -114,6 +114,15 @@ abstract class ParentActivity : AppCompatActivity() {
     }
 
     /**
+     * @usage it opens the activity with provide intent and finish  the current activity running
+     * @param intent
+     */
+    fun openActivityWithFinish(intent: Intent, flag : Int) {
+        startActivity(intent.addFlags(flag))
+        finish()
+    }
+
+    /**
      * @usage it opens the activity with provide intent
      * @param intent
      */

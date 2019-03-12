@@ -149,7 +149,7 @@ class RenterCarsFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun addItemInAdapter(car: Cars) {
-        if (carsList.map { car.number }.isEmpty()){
+        carsList.find { it.number==car.number }?.let {  }?:kotlin.run {
             carsList.add(car)
             renterCarsAdapter?.addItem(car)
         }

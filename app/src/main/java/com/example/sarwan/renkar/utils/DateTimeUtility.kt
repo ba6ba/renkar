@@ -30,5 +30,15 @@ class DateTimeUtility {
 
             return format.format(currentDate.time)
         }
+
+        fun compareWithNextDay(lastMessageTime: Long?): Boolean {
+            return (getSplit(format.format(Calendar.getInstance().time))[1].toInt() >= getSplit(format.format(lastMessageTime))[1].toInt()
+                    && getSplit(format.format(Calendar.getInstance().time))[0].toInt() > getSplit(format.format(lastMessageTime))[0].toInt()
+                    )
+        }
+
+        private fun getSplit(string : String): List<String> {
+            return string.split('/')
+        }
     }
 }

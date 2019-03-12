@@ -11,7 +11,10 @@ import com.example.sarwan.renkar.firebase.FirestoreQueryCenter
 import com.example.sarwan.renkar.fragments.ConfirmationFragment
 import com.example.sarwan.renkar.model.chat.ChatRooms
 import com.example.sarwan.renkar.model.chat.Message
+import com.example.sarwan.renkar.utils.DateTimeUtility
 import kotlinx.android.synthetic.main.chat_fragment.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChattingFragment : ChattingBaseFragment(){
 
@@ -60,12 +63,8 @@ class ChattingFragment : ChattingBaseFragment(){
             }
         }
 
-        done.setOnClickListener {
-            chatRoom?.timePeriod?.let { days->
-                checkSendingMessageType(done.text.toString())
-            }?:kotlin.run {
-                attachDaysFragment()
-            }
+        have_more_cars.setOnClickListener {
+            checkSendingMessageType(have_more_cars.text.toString())
         }
 
         negotiable.setOnClickListener {
@@ -81,12 +80,24 @@ class ChattingFragment : ChattingBaseFragment(){
     private fun checkSendingMessageType(text: String) {
         when (text) {
             getString(R.string.ok) -> {
-                attachDialogFragment(ConfirmationFragment.Companion.ConfirmationType.OK)
+                checkIfDayLimitExists()
             }
             getString(R.string.available_days) -> {
                 attachDaysFragment()
             }
-            else -> performMessageSendingTasks(makeMessageObject(text))
+            else -> sendMessage.setAdapterCount(adapter?.itemCount == 0).performMessageSendingTasks(makeMessageObject(text))
+        }
+    }
+
+    private fun checkIfDayLimitExists() {
+        ConfirmationFragment.Companion.ConfirmationType.OK.apply {
+            if ((lastMessage == name || lastMessage == ConfirmationFragment.Companion.ConfirmationType.DONE.name ||
+                    lastMessage == ConfirmationFragment.Companion.ConfirmationOption.DENY.name)
+            ){
+                pActivity.showMessage("Lister denied for booking, to continue you need to chat with lister first")
+            }else {
+                attachDialogFragment(this)
+            }
         }
     }
 

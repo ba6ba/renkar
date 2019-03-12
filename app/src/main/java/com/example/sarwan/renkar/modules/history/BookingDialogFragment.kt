@@ -10,10 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.BaseDialog
 import com.example.sarwan.renkar.model.History
 import kotlinx.android.synthetic.main.booking_dialog_fragment.*
 
-class BookingDialogFragment : DialogFragment() {
+class BookingDialogFragment : BaseDialog() {
 
     var listener : BookingDialogFragmentCallBack? = null
     private var status : String ? = null
@@ -54,13 +55,18 @@ class BookingDialogFragment : DialogFragment() {
     private fun buttonAction(action: BookingDialogFragment.Companion.BUTTON_ACTION) {
         when(action){
             BUTTON_ACTION.REJECT->{
-                dismissAllowingStateLoss()
+                dismissFragment()
             }
             BUTTON_ACTION.ACCEPT->{
                 listener?.onBookingDialogClick(status)
-                dismissAllowingStateLoss()
+                dismissFragment()
             }
         }
+    }
+
+    private fun dismissFragment() {
+        dismissAllowingStateLoss()
+        instance = null
     }
 
     private fun updateScreen() {
@@ -85,8 +91,9 @@ class BookingDialogFragment : DialogFragment() {
         }
     }
 
-    fun initListener(listener : BookingDialogFragmentCallBack){
+    fun initListener(listener : BookingDialogFragmentCallBack) : BookingDialogFragment{
         this.listener = listener
+        return this
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -99,17 +106,42 @@ class BookingDialogFragment : DialogFragment() {
         }
     }
 
+    override fun onDestroy() {
+        instance = null
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        instance = null
+        super.onDetach()
+    }
+
     interface BookingDialogFragmentCallBack{
         fun onBookingDialogClick(status: String?)
     }
 
     companion object {
+        private var instance : BookingDialogFragment? = null
+
         @JvmStatic
         fun newInstance(status : String) = BookingDialogFragment().apply {
+            instance = this
             arguments = Bundle().apply {
                 putString(STATUS, status)
             }
+            return instance!! // It can't be null at this time
         }
+
+
+        @JvmStatic
+        fun getInstance(status : String): BookingDialogFragment? {
+            instance?.let {
+                return null
+            } ?: kotlin.run {
+                return newInstance(status)
+            }
+        }
+
         val STATUS = "STATUS"
 
         enum class BUTTON_ACTION {ACCEPT, REJECT}

@@ -2,6 +2,7 @@ package com.example.sarwan.renkar.modules.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
 import com.example.sarwan.renkar.extras.ApplicationConstants
@@ -17,6 +18,7 @@ import com.example.sarwan.renkar.modules.welcome.WelcomeActivity
 import com.example.sarwan.renkar.permissions.PermissionActivity
 import com.example.sarwan.renkar.permissions.Permissions
 import com.example.sarwan.renkar.utils.ValidationUtility
+import com.google.android.gms.tasks.RuntimeExecutionException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.android.synthetic.main.login_layout.*
@@ -62,11 +64,17 @@ class LoginActivity : ParentActivity() {
     private fun makeLoginRequestOnFireBase() {
         showProgress()
         mAuth?.signInWithEmailAndPassword(email.text.toString(), password.text.toString())?.addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                //Login successfully
-                fetchUserDataFromFireBase(email.text.toString())
-            }else
+            try {
+                if (task.isSuccessful) {
+                    //Login successfully
+                    fetchUserDataFromFireBase(email.text.toString())
+                }else
+                    task.result
+            }
+            catch (e: RuntimeExecutionException){
                 hideProgress()
+                Toast.makeText(this,e.cause?.localizedMessage, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

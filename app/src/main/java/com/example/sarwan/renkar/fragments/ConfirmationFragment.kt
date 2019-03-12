@@ -11,10 +11,11 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.sarwan.renkar.R
 import com.example.sarwan.renkar.base.ParentActivity
+import com.example.sarwan.renkar.extras.BaseDialog
 import kotlinx.android.synthetic.main.confirmation_dialog.*
 import kotlinx.android.synthetic.main.confirmation_dialog_chat.*
 
-class ConfirmationFragment : DialogFragment() {
+class ConfirmationFragment : BaseDialog() {
 
     val CONFIRMATION_DIALOG_TYPE = "CONFIRMATION_DIALOG_TYPE"
     var type : Int ? = null
@@ -97,8 +98,9 @@ class ConfirmationFragment : DialogFragment() {
         }
     }
 
-    fun initListener(listener : ConfirmationFragment.ConfirmationFragmentCallBack<Any>){
+    fun initListener(listener : ConfirmationFragment.ConfirmationFragmentCallBack<Any>) : ConfirmationFragment{
         this.listener = listener
+        return this
     }
 
     private fun takeAppropriateDenyAction() {
@@ -155,13 +157,15 @@ class ConfirmationFragment : DialogFragment() {
     }
 
     private fun dismissFragment(ordinal: Int) {
+        instance = null
         when(ordinal){
             ConfirmationOption.DENY.ordinal->{
                 dismissAllowingStateLoss()
                 activity?.finish()
             }
             else->{
-                dismissAllowingStateLoss() }
+                dismissAllowingStateLoss()
+            }
         }
     }
 
@@ -175,19 +179,44 @@ class ConfirmationFragment : DialogFragment() {
         }
     }
 
+    override fun onDestroy() {
+        instance = null
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        instance = null
+        super.onDetach()
+    }
+
+
     interface ConfirmationFragmentCallBack<T>{
         fun onAction(type : T, option : T)
     }
 
     companion object {
+        private var instance : ConfirmationFragment? = null
         @JvmStatic
         fun newInstance(type : Int) = ConfirmationFragment().apply {
+            instance = this
             arguments = Bundle().apply {
                 putInt(CONFIRMATION_DIALOG_TYPE,type)
+            }
+            return instance!! // It can't be null at this time
+        }
+
+
+        @JvmStatic
+        fun getInstance(type: Int): ConfirmationFragment? {
+            instance?.let {
+                return null
+            } ?: kotlin.run {
+                return newInstance(type)
             }
         }
 
         enum class ConfirmationType {CAR_UPDATE, DATE_TIME, OK, DONE}
         enum class ConfirmationOption {ALLOW, DENY, LISTER_BOOK, LISTER_END , RENTER_BOOK, RENTER_END}
     }
+
 }
