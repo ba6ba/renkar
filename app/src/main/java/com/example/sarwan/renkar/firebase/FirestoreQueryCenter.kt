@@ -1,6 +1,7 @@
 package com.example.sarwan.renkar.firebase
 
 import com.example.sarwan.renkar.extras.ApplicationConstants
+import com.example.sarwan.renkar.model.Booking
 import com.example.sarwan.renkar.model.Cars
 import com.example.sarwan.renkar.utils.HashUtility
 import com.google.android.gms.tasks.Task
@@ -116,6 +117,11 @@ object FirestoreQueryCenter {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).limit(10)
     }
 
+    fun getCar(car : String): DocumentReference {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(car)
+    }
+
+
     fun getSpecifications(carNumber: String): CollectionReference {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.CARS).document(carNumber).collection(FirebaseExtras.SPECS)
     }
@@ -222,8 +228,8 @@ object FirestoreQueryCenter {
             update(mapOf(FirebaseExtras.PAYMENT_METHOD to FieldValue.arrayUnion(map)))
     }
 
-    fun addCarToListerNode(email: String, data: Any){
-        FirebaseFirestore.getInstance().collection(FirebaseExtras.LISTER).document(email).update(mapOf(FirebaseExtras.CARS to arrayListOf(data)))
+    fun addCarToNode(type: String?, email: String, data: Any){
+        FirebaseFirestore.getInstance().collection(if (type==ApplicationConstants.LISTER) FirebaseExtras.LISTER else FirebaseExtras.RENTER).document(email).update(mapOf(FirebaseExtras.CARS to arrayListOf(data)))
     }
 
     fun addDataToListerNode(email: String, data: Any) : Task<Void>{
@@ -252,5 +258,9 @@ object FirestoreQueryCenter {
 
     fun updateUserInDB(email: String, map : Any) : Task<Void> {
         return FirebaseFirestore.getInstance().collection(FirebaseExtras.USER).document(email).set(map)
+    }
+
+    fun makeBooking(bookingId : String, data : Booking): Task<Void> {
+        return FirebaseFirestore.getInstance().collection(FirebaseExtras.BOOKING).document(bookingId).set(data)
     }
 }

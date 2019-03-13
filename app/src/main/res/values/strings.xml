@@ -112,4 +112,5 @@
 		and book you car instantly.
 	</string>
     <string name="do_you_have_more_cars">Do you have more Cars?</string>
+    <string name="are_you_sure">Are you sure to book this car?</string>
 </resources>

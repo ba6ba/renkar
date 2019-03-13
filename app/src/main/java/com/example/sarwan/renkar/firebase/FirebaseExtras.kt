@@ -31,6 +31,7 @@ class FirebaseExtras {
         const val PAYMENT_METHOD = "paymentMethod"
         const val NEAREST_FROM = "nearestFrom"
         const val RATING = "rating"
+        const val BOOKING = "booking"
 
 
 

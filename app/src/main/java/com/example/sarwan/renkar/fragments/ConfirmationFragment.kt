@@ -35,6 +35,9 @@ class ConfirmationFragment : BaseDialog() {
             ConfirmationType.CAR_UPDATE.ordinal->{
                 inflater.inflate(R.layout.confirmation_dialog, container, false)
             }
+            ConfirmationType.BOOKING.ordinal->{
+                inflater.inflate(R.layout.confirmation_dialog, container, false)
+            }
             else -> inflater.inflate(R.layout.confirmation_dialog_chat, container, false)
         }
     }
@@ -52,6 +55,15 @@ class ConfirmationFragment : BaseDialog() {
     private fun clickListeners() {
         when(type){
             ConfirmationType.CAR_UPDATE.ordinal->{
+                allow.setOnClickListener {
+                    takeAppropriateAllowAction()
+                }
+
+                deny.setOnClickListener {
+                    takeAppropriateDenyAction()
+                }
+            }
+            ConfirmationType.BOOKING.ordinal->{
                 allow.setOnClickListener {
                     takeAppropriateAllowAction()
                 }
@@ -108,7 +120,9 @@ class ConfirmationFragment : BaseDialog() {
             ConfirmationType.CAR_UPDATE.ordinal ->{
                 carUpdateAction(ConfirmationOption.DENY)
             }
-            ConfirmationType.DATE_TIME.ordinal ->{}
+            ConfirmationType.BOOKING.ordinal ->{
+                carBookAction(ConfirmationOption.DENY)
+            }
         }
     }
 
@@ -117,7 +131,9 @@ class ConfirmationFragment : BaseDialog() {
             ConfirmationType.CAR_UPDATE.ordinal ->{
                 carUpdateScreen()
             }
-            ConfirmationType.DATE_TIME.ordinal ->{}
+            ConfirmationType.BOOKING.ordinal ->{
+                bookingUpdateScreen()
+            }
             ConfirmationType.OK.ordinal ->{
                 okUpdateScreen()
             }
@@ -125,6 +141,10 @@ class ConfirmationFragment : BaseDialog() {
                 doneUpdateScreen()
             }
         }
+    }
+
+    private fun bookingUpdateScreen() {
+        warning.text = getString(R.string.are_you_sure)
     }
 
     private fun doneUpdateScreen() {
@@ -147,8 +167,15 @@ class ConfirmationFragment : BaseDialog() {
             ConfirmationType.CAR_UPDATE.ordinal ->{
                 carUpdateAction(ConfirmationOption.ALLOW)
             }
-            ConfirmationType.DATE_TIME.ordinal ->{}
+            ConfirmationType.BOOKING.ordinal ->{
+                carBookAction(ConfirmationOption.ALLOW)
+            }
         }
+    }
+
+    private fun carBookAction(option: ConfirmationFragment.Companion.ConfirmationOption) {
+        listener?.onAction(ConfirmationType.BOOKING.ordinal, option.ordinal)
+        dismissFragment(option.ordinal)
     }
 
     private fun carUpdateAction(option: ConfirmationOption) {
@@ -215,7 +242,7 @@ class ConfirmationFragment : BaseDialog() {
             }
         }
 
-        enum class ConfirmationType {CAR_UPDATE, DATE_TIME, OK, DONE}
+        enum class ConfirmationType {CAR_UPDATE, DATE_TIME, OK, DONE, BOOKING}
         enum class ConfirmationOption {ALLOW, DENY, LISTER_BOOK, LISTER_END , RENTER_BOOK, RENTER_END}
     }
 

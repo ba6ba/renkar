@@ -193,7 +193,7 @@
 		</LinearLayout>
 	
 	</androidx.core.widget.NestedScrollView>
-	<Button
+	<ImageView
 			android:layout_width="100dp" android:layout_height="100dp"
 			android:id="@+id/signup_L" android:background="@drawable/signup_button_blue"
 			android:layout_gravity="end|bottom" android:padding="@dimen/small_padding"

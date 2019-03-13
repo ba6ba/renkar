@@ -575,7 +575,7 @@ open class ListerAddCarBaseActivity : ParentActivity(), FeaturesFragment.Feature
                     FirebaseExtras.Companion.FLAG.SET.ordinal-> {
                         FirestoreQueryCenter.batchWrite(it,car, carReg as Any, carSpecs as Any,this)
                         user?.email?.let {email->
-                            FirestoreQueryCenter.addCarToListerNode(email,it)
+                            FirestoreQueryCenter.addCarToNode(user?.type,email,it)
                         }
                     }
                     FirebaseExtras.Companion.FLAG.UPDATE.ordinal->{

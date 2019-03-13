@@ -167,12 +167,13 @@ class ModelMappingUtility {
             }
         }
 
-        fun makeBookingObject(carNumber: String?, listedBy : String?, rentedBy : String?, period : String?) : Booking{
+        fun makeBookingObject(carNumber: String?, listedBy : String?, rentedBy : String?, period : String?, price : String?) : Booking{
             return Booking().apply {
                 this.carNumber = carNumber?:""
                 this.listedBy = listedBy?:""
                 this.rentedBy = rentedBy?:""
                 this.period = period?:""
+                this.price = price?:""
             }
         }
 
